@@ -17,10 +17,8 @@
     </head>
     <body>
         <header>
-            <div id="logo">
-                <img src="../img/">
-            </div>
-            <h1>RAFASE</h1>
+            <img id="logo" src="../img/Logo.png">
+            <h1 id="nombre">RAFASE</h1>
         </header>
         <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
                 <a class="navbar-brand" href="#">Inicio</a>

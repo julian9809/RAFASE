@@ -20,15 +20,27 @@ header{
     background: -ms-linear-gradient(45deg, rgba(127,163,240,1) 0%, rgba(76,40,130,1) 100%);
     background: linear-gradient(45deg, rgba(127,163,240,1) 0%, rgba(76,40,130,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7fa3f0', endColorstr='#4c2882', GradientType=1 );
-    padding-top: 3%;
-    padding-bottom: 3%;
+    padding-top: 1rem;
+    padding-bottom: 7rem;
     z-index: 100;
 }
 
-div#logo{
-    border: 6px solid #fff;
-    border-radius: 10px;
-    width: 120px;
-    height: 120px;
+img#logo{
+    position: absolute;
+    left: 1rem;
+    display: block;
+    max-width : 6rem;
+    width: 100%;
+    border: 0.3rem solid #fff;
+    border-radius: 0.8rem;
+}
+h1#nombre{
+    position: absolute;
+    right: 0rem;
+    text-align: center;
+    display: block;
+    max-width : 10rem;
+    width: 100%;
+    padding-top: 1.5rem;
 }
 
