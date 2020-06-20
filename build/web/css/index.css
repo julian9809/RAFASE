@@ -25,6 +25,10 @@ header{
     z-index: 100;
 }
 
+body{
+    background-color: #000000;
+}
+
 img#logo{
     position: absolute;
     left: 1rem;
@@ -34,10 +38,21 @@ img#logo{
     border: 0.3rem solid #fff;
     border-radius: 0.8rem;
 }
+img#logo2{
+    position: static;
+    left: 1rem;
+    display: block;
+    max-width : 3rem;
+    width: 100%;
+    border: 0.1rem solid #fff;
+    border-radius: 0.3rem;
+    margin-right: 0.4rem;
+}
 h1#nombre{
     position: absolute;
     right: 0rem;
     text-align: center;
+    color: ghostwhite;
     display: block;
     max-width : 10rem;
     width: 100%;

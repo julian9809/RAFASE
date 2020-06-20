@@ -12,16 +12,16 @@
         <title>JSP Page</title>
         <link rel="stylesheet" href="../css/bootstrap.min.css">
         <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="../css/index.css">
+        <link rel="stylesheet" href="../css/index_1.css">
         <script src="../js/bootstrap.min.js"></script>
     </head>
     <body>
-        <header>
+        <!--<header>
             <img id="logo" src="../img/Logo.png">
             <h1 id="nombre">RAFASE</h1>
-        </header>
+        </header>-->
         <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-            <img id="logo2" src="../img/Logo.png">
+            <img id="logo" src="../img/Logo.png">
                 <a class="navbar-brand" href="#">Inicio</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>

@@ -21,6 +21,7 @@
             <h1 id="nombre">RAFASE</h1>
         </header>
         <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+            <img id="logo2" src="../img/Logo.png">
                 <a class="navbar-brand" href="#">Inicio</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
