@@ -13,24 +13,21 @@
         <link rel="stylesheet" href="../css/bootstrap.min.css">
         <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="../css/index.css">
+        <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/averia" type="text/css"/>
         <script src="../js/bootstrap.min.js"></script>
     </head>
     <body>
         <header>
             <div class="container-fluid">
 		<div class="row">
-                    <div class="col-md-6 ">
+                    <div class="col-md-5 ">
 			<div class="row">
-                            <div class="col-md-4 text-center">
-				<br>
-				<img id="logo" src="../img/Logo.png">
-				<br><br>
+                            <div class="col-md-2 text-center">
+				<img id="logo" src="../img/Logo.png">				
                             </div>
                             <div class="col-md-8 text-center">
-                                <br><br>
                                 <h2 class="text-left" id="titulo">RAFASE</h2>
                                 <h5 class="text-left">Rapido, Facil y Seguro</h5>
-                                <br>
                             </div>
 			</div>
                     </div>
@@ -38,9 +35,7 @@
 			<span></span>
                     </div>
                     <div class="col-md-2 text-left">
-			<br><br><br>
-			<button class="btn btn-primary">Iniciar sesión</button>
-                        <button class="btn btn-primary">Registrarse</button>
+			
                     </div>
 		</div>
             </div>
@@ -61,8 +56,10 @@
               </ul>
               <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Buscar producto" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>                
               </form>
+                <button class="btn btn-outline-info iniciar_sesion">Iniciar sesión</button>
+                <button class="btn btn-outline-primary">Registrarse</button>
             </div>
           </nav>
     </body>
