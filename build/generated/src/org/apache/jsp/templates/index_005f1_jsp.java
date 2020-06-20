@@ -4,7 +4,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 
-public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class index_005f1_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -48,26 +48,27 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<html>\r\n");
       out.write("    <head>\r\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\r\n");
-      out.write("        <title>RAFASE</title>\r\n");
+      out.write("        <title>JSP Page</title>\r\n");
       out.write("        <link rel=\"stylesheet\" href=\"../css/bootstrap.min.css\">\r\n");
       out.write("        <link rel=\"stylesheet\" href=\"../css/bootstrap-theme.min.css\">\r\n");
-      out.write("        <link rel=\"stylesheet\" href=\"../css/index.css\">\r\n");
+      out.write("        <link rel=\"stylesheet\" href=\"../css/index_1.css\">\r\n");
       out.write("        <script src=\"../js/bootstrap.min.js\"></script>\r\n");
       out.write("    </head>\r\n");
       out.write("    <body>\r\n");
-      out.write("        <header>\r\n");
+      out.write("        <!--<header>\r\n");
       out.write("            <img id=\"logo\" src=\"../img/Logo.png\">\r\n");
       out.write("            <h1 id=\"nombre\">RAFASE</h1>\r\n");
-      out.write("        </header>\r\n");
-      out.write("        <nav class=\"navbar navbar-expand-lg navbar navbar-light bg-light\">\r\n");
-      out.write("            <a class=\"navbar-brand\" href=\"#\">Inicio</a>\r\n");
+      out.write("        </header>-->\r\n");
+      out.write("        <nav class=\"navbar navbar-expand-lg navbar navbar-dark bg-dark\">\r\n");
+      out.write("            <img id=\"logo\" src=\"../img/Logo.png\">\r\n");
+      out.write("                <a class=\"navbar-brand\" href=\"#\">Inicio</a>\r\n");
       out.write("            <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n");
       out.write("              <span class=\"navbar-toggler-icon\"></span>\r\n");
       out.write("            </button>\r\n");
       out.write("            <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\r\n");
       out.write("              <ul class=\"navbar-nav mr-auto\">\r\n");
       out.write("                <li class=\"nav-item active\">\r\n");
-      out.write("                  <a class=\"nav-link\" href=\"#\">Ir a Pagar<span class=\"sr-only\">(current)</span></a>\r\n");
+      out.write("                  <a class=\"nav-link\" href=\"#\">Seguir comprando<span class=\"sr-only\">(current)</span></a>\r\n");
       out.write("                </li>\r\n");
       out.write("                <li class=\"nav-item\">\r\n");
       out.write("                  <a class=\"nav-link\" href=\"#\">Control</a>\r\n");
