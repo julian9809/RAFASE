@@ -35,13 +35,13 @@ body{
 }
 
 img#logo{
+    max-width: 5rem;
     width: 100%;
     border: 0.3rem solid #fff;
     border-radius: 0.8rem;
 }
 
-.iniciar_sesion{
-    margin-left: 0.4rem;
+.buscar{
     margin-right: 0.4rem;
 }
 
