@@ -97,7 +97,7 @@ img#logo{
 
 /* Fallback for Edge
 -------------------------------------------------- */
-@supports (-ms-ime-align: auto) {
+@supports (-ms-ime-align: auto){
     .form-label-group > label {
         display: none;
     }

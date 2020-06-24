@@ -38,7 +38,7 @@
         </header>
         <!------------------------------Barra de navegacion-------------------------------------------->
         <nav class="navbar navbar-expand-lg navbar navbar-light bg-light">
-            <a class="navbar-brand" href="#">Inicio</a>
+            <a class="navbar-brand" href="index.jsp">Inicio</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -120,7 +120,7 @@
                             </svg>
                         </h5>
                         <center>
-                            <button type="button" class="btn btn-light">Ver articulos</button>
+                            <a class="btn btn-light" href="productos.jsp" role="button">Ver articulos</a>
                         </center>                        
                     </div>
                 </div>
@@ -134,7 +134,7 @@
                             </svg>
                         </h5>
                         <center>
-                            <button type="button" class="btn btn-light">Ver articulos</button>
+                            <a class="btn btn-light" href="productos.jsp" role="button">Ver articulos</a>
                         </center> 
                     </div>
                 </div>
@@ -149,7 +149,7 @@
                             </svg>
                         </h5>
                         <center>
-                            <button type="button" class="btn btn-light">Ver articulos</button>
+                            <a class="btn btn-light" href="productos.jsp" role="button">Ver articulos</a>
                         </center> 
                     </div>
                 </div>
@@ -159,6 +159,7 @@
             </div>
         </div>
     </div>
+    <!-------------------------------Scripts--------------------------------->
     <script src="../js/jquery.js"></script>
     <script src="../js/bootstrap.min.js"></script>
 </body>
