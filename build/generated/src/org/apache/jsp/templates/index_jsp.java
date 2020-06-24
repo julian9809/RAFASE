@@ -77,7 +77,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        </header>\r\n");
       out.write("        <!------------------------------Barra de navegacion-------------------------------------------->\r\n");
       out.write("        <nav class=\"navbar navbar-expand-lg navbar navbar-light bg-light\">\r\n");
-      out.write("            <a class=\"navbar-brand\" href=\"#\">Inicio</a>\r\n");
+      out.write("            <a class=\"navbar-brand\" href=\"index.jsp\">Inicio</a>\r\n");
       out.write("            <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n");
       out.write("                <span class=\"navbar-toggler-icon\"></span>\r\n");
       out.write("            </button>\r\n");
@@ -159,7 +159,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            </svg>\r\n");
       out.write("                        </h5>\r\n");
       out.write("                        <center>\r\n");
-      out.write("                            <button type=\"button\" class=\"btn btn-light\">Ver articulos</button>\r\n");
+      out.write("                            <a class=\"btn btn-light\" href=\"productos.jsp\" role=\"button\">Ver articulos</a>\r\n");
       out.write("                        </center>                        \r\n");
       out.write("                    </div>\r\n");
       out.write("                </div>\r\n");
@@ -173,7 +173,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            </svg>\r\n");
       out.write("                        </h5>\r\n");
       out.write("                        <center>\r\n");
-      out.write("                            <button type=\"button\" class=\"btn btn-light\">Ver articulos</button>\r\n");
+      out.write("                            <a class=\"btn btn-light\" href=\"productos.jsp\" role=\"button\">Ver articulos</a>\r\n");
       out.write("                        </center> \r\n");
       out.write("                    </div>\r\n");
       out.write("                </div>\r\n");
@@ -188,7 +188,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            </svg>\r\n");
       out.write("                        </h5>\r\n");
       out.write("                        <center>\r\n");
-      out.write("                            <button type=\"button\" class=\"btn btn-light\">Ver articulos</button>\r\n");
+      out.write("                            <a class=\"btn btn-light\" href=\"productos.jsp\" role=\"button\">Ver articulos</a>\r\n");
       out.write("                        </center> \r\n");
       out.write("                    </div>\r\n");
       out.write("                </div>\r\n");
@@ -198,6 +198,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            </div>\r\n");
       out.write("        </div>\r\n");
       out.write("    </div>\r\n");
+      out.write("    <!-------------------------------Scripts--------------------------------->\r\n");
       out.write("    <script src=\"../js/jquery.js\"></script>\r\n");
       out.write("    <script src=\"../js/bootstrap.min.js\"></script>\r\n");
       out.write("</body>\r\n");

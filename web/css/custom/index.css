@@ -45,14 +45,3 @@ img#logo{
     margin-right: 0.4rem;
 }
 
-img#logo2{
-    position: static;
-    left: 1rem;
-    display: block;
-    max-width : 3rem;
-    width: 100%;
-    border: 0.1rem solid #fff;
-    border-radius: 0.3rem;
-    margin-right: 0.4rem;
-}
-
