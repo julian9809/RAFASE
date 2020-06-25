@@ -17,7 +17,6 @@
         <link href="../css/bootstrap/bootstrap.css" rel="stylesheet">
         <!-- Custom styles for this template -->
         <link href="../css/custom/sign.css" rel="stylesheet">
-        <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/averia" type="text/css"/>
     </head>
     <body>
         <form class="form-signin">
@@ -28,8 +27,8 @@
             </div>
 
             <div class="form-label-group">
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                <label for="inputEmail">Dirección Email</label>
+                <input type="text" id="username" class="form-control" placeholder="Username" required autofocus>
+                <label for="username">Nombre de Usuario</label>
             </div>
 
             <div class="form-label-group">
@@ -45,5 +44,8 @@
             <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar Sesión</button>
             <p class="mt-5 mb-3 text-muted text-center"><a href="#">Administrador</a> &copy; 2020</p>
         </form>
+        <!-------------------------------Scripts--------------------------------->
+        <script src="../js/jquery.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
     </body>
 </html>
