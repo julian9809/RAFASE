@@ -21,7 +21,7 @@
         <div class="container register">
             <div class="row">
                 <div class="col-md-3 register-left">
-                    <img src="../img/LogoCheems.png" alt=""/>
+                    <img src="../img/Logo_blanco.png" alt=""/>
                     <h3>Bienvenido</h3>
                     <p class="texto_img">¡Te toma 30 segundos registrarse y empezar a comprar!</p>
                     <p class="texto_btn">¿Ya estas registrado?</p>
