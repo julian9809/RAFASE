@@ -14,9 +14,10 @@
         <!-- Bootstrap core CSS -->
         <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap/bootstrap-theme.min.css">
-        <!-- Custom styles for this template -->
+        <!-- Customs styles for this template -->
         <link rel="stylesheet" href="css/custom/index.css">
-        <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/averia" type="text/css"/>        
+        <!-- Customs fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Averia+Libre&display=swap" rel="stylesheet">     
         <script src="http://code.jquery.com/jquery-latest.js"></script>
     </head>
     <body>

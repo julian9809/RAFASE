@@ -18,9 +18,7 @@ header{
     background: linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(46,100,254,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#2e64fe', GradientType=1 );
     padding-top: 0.1rem;
-    font-family: 'AveriaRegular';
-    font-weight: normal;
-    font-style: normal;
+    font-family: 'Averia Libre', cursive;
 }
 
 h2#titulo{

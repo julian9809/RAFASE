@@ -17,6 +17,8 @@
         <link href="../css/bootstrap/bootstrap.css" rel="stylesheet">
         <!-- Custom styles for this template -->
         <link href="../css/custom/sign.css" rel="stylesheet">
+        <!-- Customs fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Averia+Libre&display=swap" rel="stylesheet">
     </head>
     <body>
         <form class="form-signin">
