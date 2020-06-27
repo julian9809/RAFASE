@@ -3,14 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Documentos/David/U.DISTRITAL/Semestres/Semestre11/Bases%20de%20datos%20II/Proyecto/RAFASE/web/templates/index_1.jsp</file>
-            <file>file:/D:/Documentos/David/U.DISTRITAL/Semestres/Semestre11/Bases%20de%20datos%20II/Proyecto/RAFASE/web/templates/perfil_user.jsp</file>
-            <file>file:/D:/Documentos/David/U.DISTRITAL/Semestres/Semestre11/Bases%20de%20datos%20II/Proyecto/RAFASE/web/css/custom/perfil_user.css</file>
-            <file>file:/D:/Documentos/David/U.DISTRITAL/Semestres/Semestre11/Bases%20de%20datos%20II/Proyecto/RAFASE/web/templates/registro_user.jsp</file>
-            <file>file:/D:/Documentos/David/U.DISTRITAL/Semestres/Semestre11/Bases%20de%20datos%20II/Proyecto/RAFASE/src/java/control/PedidoDAO.java</file>
-            <file>file:/D:/Documentos/David/U.DISTRITAL/Semestres/Semestre11/Bases%20de%20datos%20II/Proyecto/RAFASE/web/templates/sign.jsp</file>
-            <file>file:/D:/Documentos/David/U.DISTRITAL/Semestres/Semestre11/Bases%20de%20datos%20II/Proyecto/RAFASE/web/templates/productos.jsp</file>
-            <file>file:/D:/Documentos/David/U.DISTRITAL/Semestres/Semestre11/Bases%20de%20datos%20II/Proyecto/RAFASE/web/index.jsp</file>
+            <file>file:/C:/Users/julia/OneDrive%20-%20correo.udistrital.edu.co/2020-1/Bases%202/Profe%20Consuelo/Proyecto/RAFASE/web/css/custom/index_1.css</file>
+            <file>file:/C:/Users/julia/OneDrive%20-%20correo.udistrital.edu.co/2020-1/Bases%202/Profe%20Consuelo/Proyecto/RAFASE/src/java/util/ServiceLocator.java</file>
+            <file>file:/C:/Users/julia/OneDrive%20-%20correo.udistrital.edu.co/2020-1/Bases%202/Profe%20Consuelo/Proyecto/RAFASE/src/java/control/ProductosDAO.java</file>
+            <file>file:/C:/Users/julia/OneDrive%20-%20correo.udistrital.edu.co/2020-1/Bases%202/Profe%20Consuelo/Proyecto/RAFASE/src/java/modelo/Subcategoria.java</file>
+            <file>file:/C:/Users/julia/OneDrive%20-%20correo.udistrital.edu.co/2020-1/Bases%202/Profe%20Consuelo/Proyecto/RAFASE/web/css/custom/index.css</file>
+            <file>file:/C:/Users/julia/OneDrive%20-%20correo.udistrital.edu.co/2020-1/Bases%202/Profe%20Consuelo/Proyecto/RAFASE/web/js/jquery.js</file>
+            <file>file:/C:/Users/julia/OneDrive%20-%20correo.udistrital.edu.co/2020-1/Bases%202/Profe%20Consuelo/Proyecto/RAFASE/web/css/custom/productos.css</file>
+            <file>file:/C:/Users/julia/OneDrive%20-%20correo.udistrital.edu.co/2020-1/Bases%202/Profe%20Consuelo/Proyecto/RAFASE/src/java/util/ConexionBD.java</file>
+            <file>file:/C:/Users/julia/OneDrive%20-%20correo.udistrital.edu.co/2020-1/Bases%202/Profe%20Consuelo/Proyecto/RAFASE/web/templates/index_1.jsp</file>
+            <file>file:/C:/Users/julia/OneDrive%20-%20correo.udistrital.edu.co/2020-1/Bases%202/Profe%20Consuelo/Proyecto/RAFASE/web/css/custom/sign.css</file>
+            <file>file:/C:/Users/julia/OneDrive%20-%20correo.udistrital.edu.co/2020-1/Bases%202/Profe%20Consuelo/Proyecto/RAFASE/src/java/modelo/Producto.java</file>
+            <file>file:/C:/Users/julia/OneDrive%20-%20correo.udistrital.edu.co/2020-1/Bases%202/Profe%20Consuelo/Proyecto/RAFASE/src/java/modelo/Categoria.java</file>
+            <file>file:/C:/Users/julia/OneDrive%20-%20correo.udistrital.edu.co/2020-1/Bases%202/Profe%20Consuelo/Proyecto/RAFASE/web/templates/productos.jsp</file>
         </group>
     </open-files>
 </project-private>

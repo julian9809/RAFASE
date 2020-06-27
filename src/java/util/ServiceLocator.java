@@ -29,10 +29,12 @@ public class ServiceLocator {
     /**
      * @return instancia del ServiceLocator para el manejo de la conexion
      */
-    public static ServiceLocator getInstance() {
+    public static ServiceLocator getInstance(String usuario,String password) {
         if (instance == null) {
             try {
-                instance = new ServiceLocator();
+                System.out.println("instance");
+                instance = new ServiceLocator(usuario,password);
+                System.out.println(usuario + password);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -44,7 +46,7 @@ public class ServiceLocator {
     /**
      * @throws Exception dice si no se pudo crear la conexion
      */
-    private ServiceLocator() throws Exception {
+    /*private ServiceLocator() throws Exception {
         try {
             // Se registra el Driver y se crea la conexion
             String url = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -56,7 +58,22 @@ public class ServiceLocator {
         } catch (Exception e) {
             throw new CaException("ServiceLocator", "ERROR_CONEXION_BD " + e);
         }
+    }*/
+    
+    private ServiceLocator(String usuario, String password) throws Exception {
+        try {            
+            // Se registra el Driver y se crea la conexion
+            String url = "jdbc:oracle:thin:@localhost:1521:xe";
+            System.out.println(url);
+            Class.forName("oracle.jdbc.driver.OracleDriver").newInstance();
+            conexion = DriverManager.getConnection(url, usuario, password);
+            conexion.setAutoCommit(false);
+            System.out.println("termino");
+        } catch (Exception e) {
+            throw new CaException("ServiceLocator", "ERROR_CONEXION_BD " + e);
+        }
     }
+
 
     /**
      * Toma la conexion para que ningun otro proceso la puedan utilizar
@@ -64,7 +81,9 @@ public class ServiceLocator {
      * @return da la conexion a la base de datos
      */
     public synchronized Connection tomarConexion() {
+        System.out.println("entro");
         while (!conexionLibre) {
+            System.out.println("entro while");
             try {
                 wait();
             } catch (InterruptedException e) {

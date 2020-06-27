@@ -39,10 +39,10 @@ public class PedidoDAO {
 
     }
 
-    public void consultarPedido() throws CaException {
+    public void consultarPedido(String usuario, String password) throws CaException {
         try {
             String strSQL = "SELECT c.ID_PEDIDO,c.p_descuento,c.p_mora,c.k_codigo,c.n_conjunto,c.f_descuento,a.k_numApto,a.v_coeficiente,cu.k_idCuota,cu.i_estado,cu.o_mes,cu.o_ano,cu.v_cuota from conjunto c, bloque b, apartamento a, cuota cu where c.k_codigo=b.k_codigo and b.k_numbloque=a.k_numbloque and a.k_numapto=cu.k_numapto order by k_idcuota";
-            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            Connection conexion = ServiceLocator.getInstance(usuario,password).tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 ResultSet rs = prepStmt.executeQuery();
                 while (rs.next()) {
@@ -52,12 +52,12 @@ public class PedidoDAO {
         } catch (SQLException e) {
             throw new CaException("No pudo recuperar las cuotas\n " + e.getMessage());
         } finally {
-            ServiceLocator.getInstance().liberarConexion();
+            ServiceLocator.getInstance(usuario,password).liberarConexion();
         }
 
     }
 
-    public void crearCarrito() throws CaException {
+    public void crearCarrito(String usuario,String password) throws CaException {
 
         try {
             String prueba = "CREATE MATERIALIZED VIEW vista_materializada"
@@ -70,7 +70,7 @@ public class PedidoDAO {
                     + "FROM tabla1 , tabla2"
                     + "WHERE tabla1.campo_a = tabla2.campo_a...";
             String strSQL = "INSERT INTO Pedido (ID_PEDIDO, ESTADO_PEDIDO, FECHA_PEDIDO, TOTAL_PEDIDO, ID_CEDULA, ID_CIUDAD) VALUES(?,?,?,?,?,?)";
-            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            Connection conexion = ServiceLocator.getInstance(usuario,password).tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 for (int i = 0; i < kIdCuotaArrayNuevo.size(); i++) {
                     prepStmt.setLong(1, Long.parseLong(String.valueOf(kIdCuotaArrayNuevo.get(i))));
@@ -82,11 +82,11 @@ public class PedidoDAO {
                     prepStmt.executeUpdate();
                 }
             }
-            ServiceLocator.getInstance().commit();
+            ServiceLocator.getInstance(usuario,password).commit();
         } catch (SQLException e) {
             throw new CaException("PedidoDAO", "No pudo crear el carrito\n" + e.getMessage());
         } finally {
-            ServiceLocator.getInstance().liberarConexion();
+            ServiceLocator.getInstance(usuario,password).liberarConexion();
         }
 
     }
