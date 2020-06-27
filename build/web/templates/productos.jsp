@@ -19,7 +19,7 @@
         <!-------------------------------Barra de navegación--------------------------------->
         <nav class="navbar navbar-expand-lg navbar navbar-light bg-light">
             <img id="logo" src="../img/Logo.png">
-            <a class="navbar-brand" href="index.jsp">Inicio</a>
+            <a class="navbar-brand" href="../index.jsp">Inicio</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -36,12 +36,12 @@
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0 buscar" type="submit">Search</button>
+                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar productos" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0 buscar" type="submit">Buscar</button>
                 </form>
                 <div class="btn-group" role="group">
                     <a class="btn btn-outline-info"  href="sign.jsp" role="button">Iniciar sesión</a>
-                    <a class="btn btn-outline-primary"  href="#" role="button">Registrarse</a>
+                    <a class="btn btn-outline-primary"  href="registro_user.jsp" role="button">Registrarse</a>
                 </div>
             </div>
         </nav>

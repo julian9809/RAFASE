@@ -10,12 +10,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>RAFASE</title>
-        <link rel="icon" href="../img/Logo.png" type="image/png">
+        <link rel="icon" href="img/Logo.png" type="image/png">
         <!-- Bootstrap core CSS -->
-        <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
-        <link rel="stylesheet" href="../css/bootstrap/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap/bootstrap-theme.min.css">
         <!-- Custom styles for this template -->
-        <link rel="stylesheet" href="../css/custom/index.css">
+        <link rel="stylesheet" href="css/custom/index.css">
         <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/averia" type="text/css"/>        
         <script src="http://code.jquery.com/jquery-latest.js"></script>
     </head>
@@ -26,7 +26,7 @@
                     <div class="col-md-6 ">
                         <div class="row">
                             <div class="col-md-2">
-                                <img id="logo" src="../img/rafase.gif">				
+                                <img id="logo" src="img/rafase.gif">				
                             </div>
                             <div class="col-md-8 text-center">
                                 <h2 class="text-left" id="titulo">RAFASE</h2>
@@ -46,7 +46,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="productos.jsp">Productos<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="templates/productos.jsp">Productos<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="#">Ir a Pagar<span class="sr-only">(current)</span></a>
@@ -56,12 +56,12 @@
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar producto" aria-label="Search">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar productos" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0 buscar" type="submit">Buscar</button>                
                 </form>
                 <div class="btn-group" role="group">
-                    <a class="btn btn-outline-info iniciar_sesion"  href="sign.jsp" role="button">Iniciar sesión</a>
-                    <a class="btn btn-outline-primary"  href="registro_user.jsp" role="button">Registrarse</a>
+                    <a class="btn btn-outline-info iniciar_sesion"  href="templates/sign.jsp" role="button">Iniciar sesión</a>
+                    <a class="btn btn-outline-primary"  href="templates/registro_user.jsp" role="button">Registrarse</a>
                 </div>
             </div>
         </nav>
@@ -74,21 +74,21 @@
             </ol>
             <div class="carousel-inner" role="listbox">
                 <div class="carousel-item active" style="height: 40vh">
-                    <img src="../img/Granel.jpg" class="d-block w-100" alt="granel">
+                    <img src="img/Granel.jpg" class="d-block w-100" alt="granel">
                     <div class="carousel-caption d-none d-md-block">
                         <h5 style="text-shadow:5px 5px 7px #000000">Mercado</h5>
                         <p style="text-shadow:5px 5px 7px #000000">Todo lo que necesitas para tu hogar.</p>
                     </div>
                 </div>
                 <div class="carousel-item"  style="height: 40vh">
-                    <img src="../img/Celulares.jpg" class="d-block w-100" alt="celulares">
+                    <img src="img/Celulares.jpg" class="d-block w-100" alt="celulares">
                     <div class="carousel-caption d-none d-md-block">
                         <h5 style="text-shadow:5px 5px 7px #000000">Tecnología</h5>
                         <p style="text-shadow:5px 5px 7px #000000">Encuentra todos los articulos tecnologicos.</p>
                     </div>
                 </div>
                 <div class="carousel-item"  style="height: 40vh">
-                    <img src="../img/Libros.jpg" class="d-block w-100" alt="libros">
+                    <img src="img/Libros.jpg" class="d-block w-100" alt="libros">
                     <div class="carousel-caption d-none d-md-block">
                         <h5 style="text-shadow:5px 5px 7px #000000">Libros</h5>
                         <p style="text-shadow:5px 5px 7px #000000">Encuentra variedad de libros de todas categorias.</p>
@@ -124,7 +124,7 @@
                                 </svg>
                             </h5>
                             <center>
-                                <a class="btn btn-light" href="productos.jsp" role="button">Ver articulos</a>
+                                <a class="btn btn-light" href="templates/productos.jsp" role="button">Ver articulos</a>
                             </center>                        
                         </div>
                     </div>
@@ -138,7 +138,7 @@
                                 </svg>
                             </h5>
                             <center>
-                                <a class="btn btn-light" href="productos.jsp" role="button">Ver articulos</a>
+                                <a class="btn btn-light" href="templates/productos.jsp" role="button">Ver articulos</a>
                             </center> 
                         </div>
                     </div>
@@ -153,7 +153,7 @@
                                 </svg>
                             </h5>
                             <center>
-                                <a class="btn btn-light" href="productos.jsp" role="button">Ver articulos</a>
+                                <a class="btn btn-light" href="templates/productos.jsp" role="button">Ver articulos</a>
                             </center> 
                         </div>
                     </div>
@@ -164,7 +164,7 @@
             </div>
         </div>
         <!-------------------------------Scripts--------------------------------->
-        <script src="../js/jquery.js"></script>
-        <script src="../js/bootstrap.min.js"></script>
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.min.js"></script>
     </body>
 </html>
