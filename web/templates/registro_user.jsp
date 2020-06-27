@@ -16,6 +16,8 @@
         <link rel="stylesheet" href="../css/bootstrap/bootstrap-theme.min.css">
         <!-- Custom styles for this template -->
         <link rel="stylesheet" href="../css/custom/registro_user.css">
+        <!-- Customs fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Averia+Libre&display=swap" rel="stylesheet">
     </head>
     <body>
         <div class="container register">

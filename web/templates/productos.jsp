@@ -11,9 +11,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Productos</title>
         <link rel="icon" href="../img/Logo.png" type="image/png">
+        <!-- Bootstrap core CSS -->
         <link rel="stylesheet" href="../css/bootstrap.min.css">
         <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+        <!-- Customs styles for this template -->
         <link rel="stylesheet" href="../css/custom/productos.css">
+        <!-- Customs fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Averia+Libre&display=swap" rel="stylesheet">
     </head>
     <body>
         <!-------------------------------Barra de navegación--------------------------------->
