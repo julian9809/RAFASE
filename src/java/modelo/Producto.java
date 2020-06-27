@@ -20,7 +20,19 @@ public class Producto {
     private String unidad_medida;
     private double id_subcategoria;
     
-    
+    public Producto(double id_producto,String nombre_producto,String marca_producto,
+            String referencia_producto,String caracteristicas_producto,String foto,double precio_base,String unidad_medida,double id_subcategoria){
+        this.id_producto = id_producto;
+        this.nombre_producto = nombre_producto;
+        this.marca_producto = marca_producto;
+        this.referencia_producto = referencia_producto;
+        this.caracteristicas_producto = caracteristicas_producto;
+        this.foto = foto;
+        this.precio_base = precio_base;
+        this.unidad_medida = unidad_medida;
+        this.id_subcategoria = id_subcategoria;
+        
+    }
 
     public double getId_producto() {
         return id_producto;
