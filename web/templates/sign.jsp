@@ -13,6 +13,7 @@
         <meta name="description" content="">
         <meta name="author" content="Nosotros tenemos que poner eso xd">
         <title>Iniciar Sesión</title>
+        <link rel="icon" href="../img/Logo.png" type="image/png">
         <!-- Bootstrap core CSS -->
         <link href="../css/bootstrap/bootstrap.css" rel="stylesheet">
         <!-- Custom styles for this template -->

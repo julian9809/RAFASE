@@ -31,10 +31,10 @@ public class ClienteDAO {
     /**
      * @throws CaException
      */
-    public void insertarCliente() throws CaException {
+    public void insertarCliente(String usuario,String password) throws CaException {
         try {
             String strSQL = "INSERT INTO Usuario(ID_CEDULA, PRIMER_NOMB, SEGUNDO_NOMB, PRIMER_APELL, SEGUNDO_APELL, PASSWORD, FECH_NAC, TIPO_ID, GENERO, EMAIL, NICKNAME) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            Connection conexion = ServiceLocator.getInstance(usuario,password).tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.setLong(1, cliente.getId_cedula());
                 prepStmt.setString(2, cliente.getPrimer_nombre());
@@ -49,11 +49,11 @@ public class ClienteDAO {
                 prepStmt.setString(2, cliente.getNickname());
                 prepStmt.executeUpdate();
             }
-            ServiceLocator.getInstance().commit();
+            ServiceLocator.getInstance(usuario,password).commit();
         } catch (SQLException e) {
             throw new CaException("ConjuntoDAO", "No pudo crear el conjunto\n" + e.getMessage());
         } finally {
-            ServiceLocator.getInstance().liberarConexion();
+            ServiceLocator.getInstance(usuario,password).liberarConexion();
         }
     }}
 
