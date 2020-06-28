@@ -125,7 +125,7 @@
                                 </svg>
                             </h5>
                             <center>
-                                <a class="btn btn-light" href="templates/productos.jsp" role="button">Ver articulos</a>
+                                <a class="btn btn-light" href="templates/productos.jsp" role="button" id="categoria" name="categoria" value="Entretenimento">Ver articulos</a>
                             </center>                        
                         </div>
                     </div>

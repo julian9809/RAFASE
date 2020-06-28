@@ -37,17 +37,23 @@ public class ProductosDAO {
             PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
             ResultSet rs = prepStmt.executeQuery();
             while (rs.next()) {
-                p.setId_producto(rs.getDouble(1));
-                p.setNombre_producto(rs.getString(2));
-                p.setMarca_producto(rs.getString(3));
-                p.setReferencia_producto(rs.getString(4));
-                p.setCaracteristicas_producto(rs.getString(5));
-                p.setFoto(rs.getString(6));
-                p.setPrecio_base(rs.getDouble(7));
-                p.setUnidad_medida(rs.getString(8));
-                p.setId_subcategoria(rs.getDouble(9));
+                System.out.println("objeto");
+                this.p.setId_producto(rs.getDouble(1));
+                this.p.setNombre_producto(rs.getString(2));
+                this.p.setMarca_producto(rs.getString(3));
+                this.p.setReferencia_producto(rs.getString(4));
+                this.p.setCaracteristicas_producto(rs.getString(5));
+                this.p.setFoto(rs.getString(6));
+                this.p.setPrecio_base(rs.getDouble(7));
+                this.p.setUnidad_medida(rs.getString(8));
+                this.p.setId_subcategoria(rs.getDouble(9));
+                System.out.println("ID"+this.p.getId_producto());
+                productos.add(this.p);
+                System.out.println("guardo"); 
                 
-                productos.add(p);
+            }
+            for(int i=0;i<productos.size();i++){
+                System.out.println(productos.get(i).getNombre_producto());
             }
         } catch (SQLException e) {
             throw new CaException("productosDAO", "no se pudo realizar la busqueda");
