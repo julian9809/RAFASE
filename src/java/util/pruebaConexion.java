@@ -22,6 +22,7 @@ public class pruebaConexion {
         String password = "dbadministrator";
         System.out.println("esta corriendo");
         Connection conexion = ServiceLocator.getInstance(usuario,password).tomarConexion();
+        System.out.println("hola()");
         System.out.println("Termino de correr");
     }
     

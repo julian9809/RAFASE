@@ -27,13 +27,14 @@ public class ProductosDAO {
         p = new Producto();
     }
     
-    public ArrayList<Producto> buscarProducto(String usuario,String password) throws CaException {
+    public ArrayList<Producto> buscarProducto(String usuario,String password,String producto_buscado) throws CaException {
         ArrayList<Producto> productos = new ArrayList<Producto>();
         try {
-            String strSQL = "select id_producto,nombre_producto,marca_producto,referencia_producto,caracteristicas_producto,foto,precio_base,unidad_medida,id_subcategoria from producto where nombre_producto like '% ? %';";
+            System.out.println("busqueda");
+            String strSQL = "select id_producto,nombre_producto,marca_producto,referencia_producto,caracteristicas_producto,foto,precio_base,unidad_medida,id_subcategoria from admin_db.producto " 
+                    + "where UPPER(nombre_producto) like UPPER('%"+producto_buscado+"%') ";
             Connection conexion = ServiceLocator.getInstance(usuario,password).tomarConexion();
             PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
-            prepStmt.setString(1, p.getNombre_producto());
             ResultSet rs = prepStmt.executeQuery();
             while (rs.next()) {
                 p.setId_producto(rs.getDouble(1));

@@ -56,8 +56,8 @@
                         <a class="nav-link" href="#">Control</a>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar productos" aria-label="Search">
+                <form action="BuscarProducto" method="post" class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar productos" name="producto_buscado" id="producto_buscado" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0 buscar" type="submit">Buscar</button>                
                 </form>
                 <div class="btn-group" role="group">

@@ -9,6 +9,9 @@
 <%@page import="control.ProductosDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+  String producto_buscado = request.getParameter("busqueda");  
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -42,8 +45,8 @@
                         <a class="nav-link" href="#">Control</a>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar productos" aria-label="Search">
+                <form action="../BuscarProducto" method="post" class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar productos" name="producto_buscado" id="producto_buscado" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0 buscar" type="submit">Buscar</button>
                 </form>
                 <div class="btn-group" role="group">
@@ -52,6 +55,34 @@
                 </div>
             </div>
         </nav>
+        <!-------------------------------Contenido-------------------------------------->
+        <% ProductosDAO productosDAO = new ProductosDAO();
+            ArrayList<Producto> listaproductos = new ArrayList<Producto>();
+            listaproductos = productosDAO.buscarProducto("visitante", "abc123", producto_buscado);
+        %>
+        <h1>Productos</h1>
+
+        <table border="2">
+            <thead>
+                <th>No</th><th>idProducto</th> <th>Nombre</th> <th>Marca</th> <th>Referencia</th><th>Caracteristicas</th> <th>Foto</th> <th>Precio</th> <th>Unidades</th> <th>Subcategoria</th>
+            </thead>
+            <tbody>
+                <%for (int i = 0; i < listaproductos.size(); i++) {%>
+                    <tr>
+                        <td><%=(i + 1)%> </td>
+                        <td><%=listaproductos.get(i).getId_producto()%></td>
+                        <td><%=listaproductos.get(i).getNombre_producto()%></td>
+                        <td><%=listaproductos.get(i).getMarca_producto()%></td>
+                        <td><%=listaproductos.get(i).getReferencia_producto()%></td>
+                        <td><%=listaproductos.get(i).getCaracteristicas_producto()%></td>
+                        <td><%=listaproductos.get(i).getFoto()%></td>
+                        <td><%=listaproductos.get(i).getPrecio_base()%></td>
+                        <td><%=listaproductos.get(i).getUnidad_medida()%></td>
+                        <td><%=listaproductos.get(i).getId_subcategoria()%></td>
+                     </tr>
+                <%}%>
+            </tbody>
+        </table>
         <!-------------------------------boton flotante--------------------------------->
         <a class="btn btn-success btn-carrito" href="productos.jsp" role="button" data-toggle="modal" data-target="#exampleModal">
             <svg class="bi bi-cart4" id="carrito" width="3em" height="3em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
