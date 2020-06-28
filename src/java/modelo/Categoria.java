@@ -15,11 +15,8 @@ public class Categoria {
     private double iva;
     private String descripcion_categoria;
     
-    public Categoria(double id_categoria,String nombre_categoria,double iva,String descripcion_categoria){
-        this.id_categoria = id_categoria;
-        this.nombre_categoria = nombre_categoria;
-        this.iva = iva;
-        this.descripcion_categoria = descripcion_categoria;
+    public Categoria(){
+        
     }
 
     public double getId_categoria() {

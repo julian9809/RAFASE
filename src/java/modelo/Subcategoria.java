@@ -14,10 +14,8 @@ public class Subcategoria {
     private String nombre_subcategoria;
     private double id_categoria;
     
-    public Subcategoria(double id_subcategoria,String nombre_subcategoria,double id_categoria){
-        this.id_subcategoria = id_subcategoria;
-        this.nombre_subcategoria = nombre_subcategoria;
-        this.id_categoria = id_categoria;
+    public Subcategoria(){
+        
     }
 
     public double getId_subcategoria() {

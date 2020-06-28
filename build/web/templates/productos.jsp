@@ -4,6 +4,9 @@
     Author     : julia
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="modelo.Producto"%>
+<%@page import="control.ProductosDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
