@@ -14,6 +14,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import util.CaException;
 import util.ServiceLocator;
 //imports modelo
@@ -27,7 +28,8 @@ public class PedidoDAO {
         pe = new Pedido();
     }
 
-    public void consultarPedido(String usuario, String password) throws CaException {
+    public ArrayList<Pedido> consultarPedido(String usuario, String password) throws CaException {
+        ArrayList<Pedido> pedidos = new ArrayList<>();
         try {
             String strSQL = "SELECT * FROM Pedido PE, Usuario USER WHERE PE.ID_CEDULA=USER.ID_CEDULA";
             Connection conexion = ServiceLocator.getInstance(usuario, password).tomarConexion();
@@ -40,6 +42,9 @@ public class PedidoDAO {
                     pe.setTotal_pedido(rs.getDouble(4));
                     pe.setId_cedula(rs.getDouble(5));
                     pe.setId_ciudad(rs.getDouble(6));
+                    pedidos.add(pe);
+                    pe = null;
+                    pe = new Pedido();
                 }
             }
         } catch (SQLException e) {
@@ -47,10 +52,10 @@ public class PedidoDAO {
         } finally {
             ServiceLocator.getInstance(usuario, password).liberarConexion();
         }
+        return pedidos;
     }
     
     public void insertarPedido(String usuario, String password, Pedido ped) throws CaException {
-
         try {
             String strSQL = "INSERT INTO Pedido (ID_PEDIDO, ESTADO_PEDIDO, FECHA_PEDIDO, TOTAL_PEDIDO, ID_CEDULA, ID_CIUDAD) VALUES(?,?,?,?,?,?)";
             Connection conexion = ServiceLocator.getInstance(usuario, password).tomarConexion();
