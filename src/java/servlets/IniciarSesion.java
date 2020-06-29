@@ -6,9 +6,9 @@
 package servlets;
 
 import control.ClienteDAO;
+import control.DAOFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -16,15 +16,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.Cliente;
 import util.CaException;
 
 /**
  *
- * @author david
+ * @author danie
  */
-@WebServlet(name = "registro_user", urlPatterns = {"/registro_user"})
-public class registro_user extends HttpServlet {
+@WebServlet(name = "IniciarSesion", urlPatterns = {"/IniciarSesion"})
+public class IniciarSesion extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,56 +39,18 @@ public class registro_user extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String nombre = request.getParameter("nombre");
-            String[] nombres = nombre.split(" ");
-            String primerNombre = nombres[0];
-            String segundoNombre;
-            if(nombres.length == 1){
-                segundoNombre = "";
+            String nickname = request.getParameter("username");
+            String inputPassword = request.getParameter("inputPassword");
+            ClienteDAO cdao = new ClienteDAO();
+            DAOFacade facade = new DAOFacade("aplicacion","java");
+            //if(facade.iniciarSesion(nickname, inputPassword)){
+            if(cdao.iniciarSesion("admin_db","dbadministrator",nickname, inputPassword)){ 
+                System.out.println("inicio sesion");
+                response.sendRedirect("templates/index_usuario.jsp?usuario=" + nickname);
             }
             else{
-                segundoNombre = nombres[1];
+                response.sendRedirect("templates/sign.jsp");
             }
-            String apellido = request.getParameter("apellido");
-            String[] apellidos = apellido.split(" ");
-            String primerApellido = apellidos[0];
-            String segundoApellido;
-            if(apellidos.length == 1){
-                segundoApellido = "";
-            }
-            else{
-                segundoApellido = apellidos[1];
-            }
-            System.out.println(""+request.getParameter("cedula"));
-            Long cedula = Long.valueOf(request.getParameter("cedula"));
-            String email = request.getParameter("email");
-            String gender = request.getParameter("gender");
-            String nickname = request.getParameter("nickname");
-            String fecha_nacimiento = request.getParameter("fecha_nacimiento");
-            String password = request.getParameter("password");
-            String confirme_password = request.getParameter("confirme_password");
-            if (password.equals(confirme_password)) {
-                ClienteDAO cliente = new ClienteDAO();
-                Cliente cli = new Cliente();
-                cli.setPrimer_nombre(primerNombre);
-                cli.setSegundo_nombre(segundoNombre);
-                cli.setPrimer_apellido(primerApellido);
-                cli.setSegundo_apellido(segundoApellido);
-                cli.setTipo_id("CC");
-                cli.setId_cedula(cedula);
-                cli.setEmail(email);
-                cli.setGenero(gender);
-                cli.setNickname(nickname);
-                cli.setFecha_nacimiento((Date.valueOf(fecha_nacimiento)));
-                cli.setPassword(password);
-                cliente.insertarCliente("admin_db", "dbadministrator", cli);
-                cliente.crearUsuario(nickname, password);
-                response.sendRedirect("index.jsp?usuario=" + nickname);
-            } else {
-                response.sendRedirect("templates/registro_user.jsp");
-            }
-
-            //response.sendRedirect("templates/buscarProductos.jsp?busqueda="+producto);
         }
     }
 
@@ -108,7 +69,7 @@ public class registro_user extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (CaException ex) {
-            Logger.getLogger(registro_user.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(IniciarSesion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -126,7 +87,7 @@ public class registro_user extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (CaException ex) {
-            Logger.getLogger(registro_user.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(IniciarSesion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

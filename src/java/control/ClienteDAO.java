@@ -61,16 +61,18 @@ public class ClienteDAO {
 
     public boolean iniciarSesion(String usuario, String password, String nickname, String userPassword) throws CaException {
         try {
-            String strSQL = "SELECT COUNT(*) FROM Usuario WHERE NICKNAME = ? AND PASSWORD = ?";
+            String strSQL = "SELECT COUNT(*) FROM admin_db.Usuario WHERE NICKNAME = ? AND PASSWORD = ?";
             Connection conexion = ServiceLocator.getInstance(usuario, password).tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.setString(1, nickname);
                 prepStmt.setString(2, userPassword);
                 ResultSet rs = prepStmt.executeQuery();
-                if (rs.getLong(1) == 0) {
-                    return false;
-                } else {
-                    return true;
+                while(rs.next()){
+                    if (rs.getLong(1) == 0) {
+                        return false;
+                    } else {
+                        return true;
+                    }
                 }
             }
         } catch (SQLException e) {
@@ -78,6 +80,7 @@ public class ClienteDAO {
         } finally {
             ServiceLocator.getInstance(usuario, password).liberarConexion();
         }
+        return false;
     }
 
     public void insertarDireccion(String usuario, String password) throws CaException {
@@ -139,5 +142,4 @@ public class ClienteDAO {
         }
 
     }
-
 }
