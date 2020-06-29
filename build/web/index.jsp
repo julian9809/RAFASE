@@ -6,6 +6,14 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<% String usuario = "";
+System.out.println(""+request.getParameter("usuario"));
+    if(request.getParameter("usuario") == null){
+        usuario = "visitante";
+    }else{
+        usuario = request.getParameter("usuario");
+    }
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -60,10 +68,17 @@
                     <input class="form-control mr-sm-2" type="search" placeholder="Buscar productos" name="producto_buscado" id="producto_buscado" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0 buscar" type="submit">Buscar</button>                
                 </form>
+                <%if(usuario=="visitante"){%>
                 <div class="btn-group" role="group">
                     <a class="btn btn-outline-info iniciar_sesion"  href="templates/sign.jsp" role="button">Iniciar sesión</a>
                     <a class="btn btn-outline-primary"  href="templates/registro_user.jsp" role="button">Registrarse</a>
                 </div>
+                <%}else{%>
+                <div class="btn-group" role="group">
+                    <a class="btn btn-outline-info iniciar_sesion"  href="#" role="button"><%=usuario%></a>
+                    <form><a class="btn btn-outline-primary"  href="cerrarSesion?usuario=visitante" role="button">Log out</a></form>
+                </div>
+                <%}%>
             </div>
         </nav>
         <!--------------------------------Carrusel de imagenes------------------------------------------->

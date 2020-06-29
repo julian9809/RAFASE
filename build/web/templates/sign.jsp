@@ -22,7 +22,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Averia+Libre&display=swap" rel="stylesheet">
     </head>
     <body>
-        <form class="form-signin">
+        <form class="form-signin" action = "../IniciarSesion" method = "post">
             <div class="text-center mb-4">
                 <img id="logo" class="mb-4" src="../img/Logo.png" alt="">
                 <h1 class="h3 mb-3 font-weight-normal">Iniciar Sesión</h1>
@@ -30,12 +30,12 @@
             </div>
 
             <div class="form-label-group">
-                <input type="text" id="username" class="form-control" placeholder="Username" required autofocus>
+                <input type="text" id="username" class="form-control" placeholder="Username" required autofocus name = "username">
                 <label for="username">Nombre de Usuario</label>
             </div>
 
             <div class="form-label-group">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required name = "inputPassword">
                 <label for="inputPassword">Contraseña</label>
             </div>
 

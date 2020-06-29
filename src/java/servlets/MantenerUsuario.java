@@ -5,25 +5,20 @@
  */
 package servlets;
 
-import control.ClienteDAO;
-import control.DAOFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import util.CaException;
 
 /**
  *
- * @author danie
+ * @author david
  */
-@WebServlet(name = "IniciarSesion", urlPatterns = {"/IniciarSesion"})
-public class IniciarSesion extends HttpServlet {
+@WebServlet(name = "MantenerUsuario", urlPatterns = {"/MantenerUsuario"})
+public class MantenerUsuario extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,22 +30,13 @@ public class IniciarSesion extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, CaException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String nickname = request.getParameter("username");
-            String inputPassword = request.getParameter("inputPassword");
-            ClienteDAO cdao = new ClienteDAO();
-            DAOFacade facade = new DAOFacade("aplicacion","java");
-            //if(facade.iniciarSesion(nickname, inputPassword)){
-            if(cdao.iniciarSesion("admin_db","dbadministrator",nickname, inputPassword)){ 
-                System.out.println("inicio sesion");
-                response.sendRedirect("index.jsp?usuario=" + nickname);
-            }
-            else{
-                response.sendRedirect("templates/sign.jsp");
-            }
+            String usuario = request.getParameter("usuario");
+            response.sendRedirect("templates/productos.jsp?usuario="+usuario);
+            
         }
     }
 
@@ -66,11 +52,7 @@ public class IniciarSesion extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (CaException ex) {
-            Logger.getLogger(IniciarSesion.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -84,11 +66,7 @@ public class IniciarSesion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (CaException ex) {
-            Logger.getLogger(IniciarSesion.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
