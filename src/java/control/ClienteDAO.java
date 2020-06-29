@@ -67,7 +67,7 @@ public class ClienteDAO {
                 prepStmt.setString(1, nickname);
                 prepStmt.setString(2, userPassword);
                 ResultSet rs = prepStmt.executeQuery();
-                while(rs.next()){
+                while (rs.next()) {
                     if (rs.getLong(1) == 0) {
                         return false;
                     } else {
@@ -140,6 +140,25 @@ public class ClienteDAO {
         } finally {
             ServiceLocator.getInstance("admin_db", "dbadministrator").liberarConexion();
         }
+    }
 
+    public long buscarIdCliente(String usuario, String password) throws CaException {
+        long id_cliente=-1;
+        try {
+            String strSQL = "SELECT ID_CEDULA FROM admin_db.Usuario WHERE NICKNAME='" + usuario + "'";
+            Connection conexion = ServiceLocator.getInstance(usuario, password).tomarConexion();
+            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
+                ResultSet rs = prepStmt.executeQuery();
+                while (rs.next()) {
+                    id_cliente = (long) rs.getLong(1);
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new CaException("ClienteDAO", "No se pudo realizar la busqueda" + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance(usuario, password).liberarConexion();
+        }
+        return id_cliente;
     }
 }

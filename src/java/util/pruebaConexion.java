@@ -19,8 +19,8 @@ public class pruebaConexion {
      */
     public static void main(String[] args) throws CaException {
         // TODO code application logic here
-        ClienteDAO cliente = new ClienteDAO();
-        cliente.crearUsuario("prueba", "1234");        
+        ClienteDAO cliente = new ClienteDAO(); 
+        System.out.println(cliente.buscarIdCliente("yami", "1234"));
     }
     
 }
