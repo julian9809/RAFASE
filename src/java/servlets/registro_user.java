@@ -6,6 +6,7 @@
 package servlets;
 
 import control.ClienteDAO;
+import control.PedidoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
@@ -60,7 +61,6 @@ public class registro_user extends HttpServlet {
             else{
                 segundoApellido = apellidos[1];
             }
-            System.out.println(""+request.getParameter("cedula"));
             Long cedula = Long.valueOf(request.getParameter("cedula"));
             String email = request.getParameter("email");
             String gender = request.getParameter("gender");
@@ -69,7 +69,7 @@ public class registro_user extends HttpServlet {
             String password = request.getParameter("password");
             String confirme_password = request.getParameter("confirme_password");
             if (password.equals(confirme_password)) {
-                ClienteDAO cliente = new ClienteDAO();
+                ClienteDAO clienteDAO = new ClienteDAO();
                 Cliente cli = new Cliente();
                 cli.setPrimer_nombre(primerNombre);
                 cli.setSegundo_nombre(segundoNombre);
@@ -82,8 +82,10 @@ public class registro_user extends HttpServlet {
                 cli.setNickname(nickname);
                 cli.setFecha_nacimiento((Date.valueOf(fecha_nacimiento)));
                 cli.setPassword(password);
-                cliente.insertarCliente("admin_db", "dbadministrator", cli);
-                cliente.crearUsuario(nickname, password);
+                clienteDAO.insertarCliente("admin_db", "dbadministrator", cli);
+                clienteDAO.crearUsuario(nickname, password);
+                PedidoDAO pedidoDAO = new PedidoDAO();
+                pedidoDAO.crearCarrito(nickname, cli.getId_cedula());
                 response.sendRedirect("index.jsp?usuario=" + nickname);
             } else {
                 response.sendRedirect("templates/registro_user.jsp");

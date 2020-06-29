@@ -5,7 +5,10 @@
  */
 package util;
 import control.ClienteDAO;
+import control.PedidoDAO;
 import java.sql.Connection;
+import java.util.ArrayList;
+import modelo.Carrito;
 import util.ServiceLocator;
 
 /**
@@ -19,8 +22,13 @@ public class pruebaConexion {
      */
     public static void main(String[] args) throws CaException {
         // TODO code application logic here
-        ClienteDAO cliente = new ClienteDAO(); 
-        System.out.println(cliente.buscarIdCliente("1234"));
+        ClienteDAO clienteDAO = new ClienteDAO(); 
+        PedidoDAO pedidoDAO = new PedidoDAO();
+        ArrayList<Carrito> carrito = new ArrayList<Carrito>();
+        carrito = pedidoDAO.consultarCarrito("generico");
+        for(int i = 0;i<carrito.size();i++){
+            System.out.println(carrito.get(i).getNombreProducto());
+        }
     }
     
 }

@@ -32,9 +32,7 @@ public class ServiceLocator {
     public static ServiceLocator getInstance(String usuario,String password) {
         if (instance == null) {
             try {
-                System.out.println("instance");
                 instance = new ServiceLocator(usuario,password);
-                System.out.println(usuario + password);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -64,11 +62,9 @@ public class ServiceLocator {
         try {            
             // Se registra el Driver y se crea la conexion
             String url = "jdbc:oracle:thin:@localhost:1521:xe";
-            System.out.println(url);
             Class.forName("oracle.jdbc.driver.OracleDriver").newInstance();
             conexion = DriverManager.getConnection(url, usuario, password);
             conexion.setAutoCommit(false);
-            System.out.println("termino");
         } catch (Exception e) {
             throw new CaException("ServiceLocator", "ERROR_CONEXION_BD " + e);
         }
@@ -81,9 +77,7 @@ public class ServiceLocator {
      * @return da la conexion a la base de datos
      */
     public synchronized Connection tomarConexion() {
-        System.out.println("entro");
         while (!conexionLibre) {
-            System.out.println("entro while");
             try {
                 wait();
             } catch (InterruptedException e) {

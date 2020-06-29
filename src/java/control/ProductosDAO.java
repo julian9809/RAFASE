@@ -50,7 +50,6 @@ public class ProductosDAO {
                 p = new Producto();
             }
             for(int i=0;i<productos.size();i++){
-                System.out.println(productos.get(i).getNombre_producto());
             }
         } catch (SQLException e) {
             throw new CaException("productosDAO", " no se pudo realizar la busqueda: " + e);

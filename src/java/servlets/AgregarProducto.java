@@ -47,25 +47,31 @@ public class AgregarProducto extends HttpServlet {
             if (usuario.equals("visitante")) {
                 response.sendRedirect("templates/sign.jsp");
             } else {
-                System.out.println("alguna cosa" + usuario);
-                String id_producto = request.getParameter("button");
+                String id_producto = request.getParameter("id_producto");
                 PedidoDAO pedidoDAO = new PedidoDAO();
                 ClienteDAO clienteDAO = new ClienteDAO();
                 DetallePedido deped = new DetallePedido();
                 Pedido ped = new Pedido();
-                if(pedidoDAO.consultarPedidos(usuario, clienteDAO.buscarIdCliente(usuario))){
+                if(pedidoDAO.consultarPedidos(clienteDAO.buscarIdCliente(usuario))){
                     ped = pedidoDAO.consultarPedido(usuario, clienteDAO.buscarIdCliente(usuario));
-                    
                     deped.setID_PEDIDO(ped.getId_pedido());
                     deped.setCANTIDAD(1);
-                    deped.setID_PRODUCTO(Double.parseDouble(id_producto));
+                    deped.setID_PRODUCTO(Double.valueOf(id_producto));
                     pedidoDAO.insertarProductosPedido(usuario, deped);
                 }
-                else{
+                else{                    
                     ped.setEstado_pedido(0);
-                    
+                    ped.setTotal_pedido(1);
+                    ped.setId_cedula(clienteDAO.buscarIdCliente(usuario));
+                    ped.setId_ciudad(1);
                     
                     pedidoDAO.insertarPedido(usuario, ped);
+                    Pedido ped2 = new Pedido();
+                    ped2 = pedidoDAO.consultarPedido(usuario, clienteDAO.buscarIdCliente(usuario));
+                    
+                    deped.setID_PEDIDO(ped2.getId_pedido());
+                    deped.setCANTIDAD(1);
+                    deped.setID_PRODUCTO(Double.parseDouble(id_producto));
                     pedidoDAO.insertarProductosPedido(usuario, deped);
                 }          
                 System.out.println(id_producto);

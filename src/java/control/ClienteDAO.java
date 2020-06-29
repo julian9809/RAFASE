@@ -128,7 +128,6 @@ public class ClienteDAO {
             String strSQL = "create user " + usuario + " identified by "
                     + password;
             String strSQLDOS = "grant cliente to " + usuario;
-            System.out.println(strSQL);
             Connection conexion = ServiceLocator.getInstance("admin_db", "dbadministrator").tomarConexion();
             PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
             prepStmt.execute();
