@@ -36,14 +36,14 @@
         <!-------------------------------Barra de navegación--------------------------------->
         <nav class="navbar navbar-expand-lg navbar navbar-light bg-light">
             <img id="logo" src="../img/Logo.png">
-            <a class="navbar-brand" href="../index.jsp">Inicio</a>
+            <a class="navbar-brand" href="../MantenerUsuario?usuario=<%=usuario%>&pagina=inicio">Inicio</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="productos.jsp">Productos<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="../MantenerUsuario?usuario=<%=usuario%> &pagina=productos">Productos<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="#">Ir a pagar<span class="sr-only">(current)</span></a>
@@ -54,17 +54,18 @@
                 </ul>
                 <form action="../BuscarProducto" method="post" class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Buscar productos" name="producto_buscado" id="producto_buscado" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0 buscar" type="submit">Buscar</button>
+                    <input type="hidden" name = "usuario" id="usuario" value=<%=usuario%>>
+                    <button class="btn btn-outline-success my-2 my-sm-0 buscar" type="submit">Buscar</button>                
                 </form>
-                <%if (usuario == "visitante") {%>
+                <%if (usuario.equals("visitante")) {%>
                 <div class="btn-group" role="group">
-                    <a class="btn btn-outline-info iniciar_sesion"  href="templates/sign.jsp" role="button">Iniciar sesión</a>
-                    <a class="btn btn-outline-primary"  href="templates/registro_user.jsp" role="button">Registrarse</a>
+                    <a class="btn btn-outline-info iniciar_sesion"  href="sign.jsp" role="button">Iniciar sesión</a>
+                    <a class="btn btn-outline-primary"  href="registro_user.jsp" role="button">Registrarse</a>
                 </div>
                 <%} else {%>
                 <div class="btn-group" role="group">
                     <a class="btn btn-outline-info iniciar_sesion"  href="#" role="button"><%=usuario%></a>
-                    <form><a class="btn btn-outline-primary"  href="cerrarSesion?usuario=visitante" role="button">Log out</a></form>
+                    <form><a class="btn btn-outline-primary"  href="../cerrarSesion?usuario=visitante" role="button">Log out</a></form>
                 </div>
                 <%}%>
             </div>
@@ -93,6 +94,11 @@
                 <td><%=listaproductos.get(i).getPrecio_base()%></td>
                 <td><%=listaproductos.get(i).getUnidad_medida()%></td>
                 <td><%=listaproductos.get(i).getId_subcategoria()%></td>
+                 <td><form method="post" action = "../AgregarProducto">
+                        <input type="hidden" name = "usuario" id="usuario" value=<%=usuario%>>
+                    <input type="hidden" name = "busqueda" id="busqueda" value=<%=producto_buscado%>>
+                    <button class="btn btn-outline-success my-2 my-sm-0 buscar" type="submit">Añadir producto</button>                
+                </form></td>
             </tr>
             <%}%>
         </tbody>

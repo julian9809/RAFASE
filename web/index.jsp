@@ -48,14 +48,16 @@ System.out.println(""+request.getParameter("usuario"));
         </header>
         <!------------------------------Barra de navegacion-------------------------------------------->
         <nav class="navbar navbar-expand-lg navbar navbar-light bg-light">
-            <a class="navbar-brand" href="index.jsp">Inicio</a>
+            <a class="navbar-brand" href="MantenerUsuario?usuario=<%=usuario%>&pagina=inicio">Inicio</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="templates/productos.jsp">Productos<span class="sr-only">(current)</span></a>
+                        <form>
+                        <a class="nav-link" href="MantenerUsuario?usuario=<%=usuario%> &pagina=productos">Productos<span class="sr-only">(current)</span></a>
+                        </form>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="#">Ir a Pagar<span class="sr-only">(current)</span></a>
@@ -66,9 +68,10 @@ System.out.println(""+request.getParameter("usuario"));
                 </ul>
                 <form action="BuscarProducto" method="post" class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Buscar productos" name="producto_buscado" id="producto_buscado" aria-label="Search">
+                    <input type="hidden" name = "usuario" id="usuario" value=<%=usuario%>>
                     <button class="btn btn-outline-success my-2 my-sm-0 buscar" type="submit">Buscar</button>                
                 </form>
-                <%if(usuario=="visitante"){%>
+                <%if(usuario.equals("visitante")){%>
                 <div class="btn-group" role="group">
                     <a class="btn btn-outline-info iniciar_sesion"  href="templates/sign.jsp" role="button">Iniciar sesión</a>
                     <a class="btn btn-outline-primary"  href="templates/registro_user.jsp" role="button">Registrarse</a>
