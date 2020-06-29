@@ -15,10 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author david
+ * @author danie
  */
-@WebServlet(name = "MantenerUsuario", urlPatterns = {"/MantenerUsuario"})
-public class MantenerUsuario extends HttpServlet {
+@WebServlet(name = "AgregarProducto", urlPatterns = {"/AgregarProducto"})
+public class AgregarProducto extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,14 +35,13 @@ public class MantenerUsuario extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String usuario = request.getParameter("usuario");
-            String pagina = request.getParameter("pagina");
-            if(pagina.equals("inicio")){
-                response.sendRedirect("index.jsp?usuario="+usuario);
+            String producto_buscado = request.getParameter("busqueda");
+            if(usuario.equals("visitante")){
+                response.sendRedirect("templates/sign.jsp");
             }
             else{
-                response.sendRedirect("templates/productos.jsp?usuario="+usuario);
+                response.sendRedirect("templates/buscarProductos.jsp?usuario=" + usuario + "&busqueda=" + producto_buscado);
             }
-            
         }
     }
 

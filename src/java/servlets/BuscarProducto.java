@@ -35,8 +35,9 @@ public class BuscarProducto extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String producto = request.getParameter("producto_buscado");
-            
-            response.sendRedirect("templates/buscarProductos.jsp?busqueda="+producto);
+            String usuario = request.getParameter("usuario");
+
+            response.sendRedirect("templates/buscarProductos.jsp?usuario=" + usuario + "&busqueda=" + producto);
         }
     }
 

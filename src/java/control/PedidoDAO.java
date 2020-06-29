@@ -75,6 +75,25 @@ public class PedidoDAO {
             ServiceLocator.getInstance(usuario, password).liberarConexion();
         }
     }
+    
+    public void insertarProductosPedido(String usuario, String password, Pedido ped) throws CaException {
+        try {
+            String strSQL = "INSERT INTO Detalle_Pedido(ID_DETALLE, CANTIDAD, ID_PEDIDO, ID_PRODUCTO) VALUES (?,?,?,?)";
+            Connection conexion = ServiceLocator.getInstance(usuario, password).tomarConexion();
+            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
+                prepStmt.setDouble(1, (double) );
+                prepStmt.setDouble(2, (double) );
+                prepStmt.setDouble(3, (double) );
+                prepStmt.setDouble(4, (double) );
+                prepStmt.executeUpdate();
+            }
+            ServiceLocator.getInstance(usuario, password).commit();
+        } catch (SQLException e) {
+            throw new CaException("PedidoDAO", "No pudo crear el carrito\n" + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance(usuario, password).liberarConexion();
+        }
+    }
 
     public void crearCarrito(String usuario, String password) throws CaException {
 

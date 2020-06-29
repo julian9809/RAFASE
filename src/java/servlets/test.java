@@ -15,10 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author david
+ * @author danie
  */
-@WebServlet(name = "MantenerUsuario", urlPatterns = {"/MantenerUsuario"})
-public class MantenerUsuario extends HttpServlet {
+@WebServlet(name = "test", urlPatterns = {"/test"})
+public class test extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,15 +34,7 @@ public class MantenerUsuario extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String usuario = request.getParameter("usuario");
-            String pagina = request.getParameter("pagina");
-            if(pagina.equals("inicio")){
-                response.sendRedirect("index.jsp?usuario="+usuario);
-            }
-            else{
-                response.sendRedirect("templates/productos.jsp?usuario="+usuario);
-            }
-            
+        
         }
     }
 
@@ -58,7 +50,6 @@ public class MantenerUsuario extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /**
@@ -72,7 +63,9 @@ public class MantenerUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+            String test = request.getParameter("test");
+            System.out.println(test);
+            response.sendRedirect("templates/buscarProductos.jsp");
     }
 
     /**
