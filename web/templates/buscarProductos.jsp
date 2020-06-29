@@ -80,7 +80,6 @@
             <table class="table table-bordered table-hover">
                 <thead class="thead-dark">
                 <th>No</th>
-                <th>idProducto</th>
                 <th>Nombre</th>
                 <th>Marca</th>
                 <th>Referencia</th>
@@ -88,13 +87,11 @@
                 <th>Foto</th>
                 <th>Precio</th>
                 <th>Unidades</th>
-                <th>Subcategoria</th>
                 </thead>
                 <tbody>
                     <%for (int i = 0; i < listaproductos.size(); i++) {%>
                     <tr>
                         <th scope="row"><%=(i + 1)%> </th>
-                        <td><%=listaproductos.get(i).getId_producto()%></td>
                         <td><%=listaproductos.get(i).getNombre_producto()%></td>
                         <td><%=listaproductos.get(i).getMarca_producto()%></td>
                         <td><%=listaproductos.get(i).getReferencia_producto()%></td>
@@ -102,9 +99,9 @@
                         <td><%=listaproductos.get(i).getFoto()%></td>
                         <td><%=listaproductos.get(i).getPrecio_base()%></td>
                         <td><%=listaproductos.get(i).getUnidad_medida()%></td>
-                        <td><%=listaproductos.get(i).getId_subcategoria()%></td>
                         <td>
                             <form method="post" action = "../AgregarProducto">
+                                <input type="hidden" name = "id_producto" id="id_producto" value=<%=listaproductos.get(i).getId_producto()%>>
                                 <input type="hidden" name = "usuario" id="usuario" value=<%=usuario%>>
                                 <input type="hidden" name = "busqueda" id="busqueda" value=<%=producto_buscado%>>
                                 <button class="btn btn-outline-success my-2 my-sm-0 buscar" type="submit">Añadir producto</button>                
