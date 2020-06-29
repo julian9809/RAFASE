@@ -57,7 +57,14 @@ public class AgregarProducto extends HttpServlet {
                     deped.setID_PEDIDO(ped.getId_pedido());
                     deped.setCANTIDAD(1);
                     deped.setID_PRODUCTO(Double.valueOf(id_producto));
-                    pedidoDAO.insertarProductosPedido(usuario, deped);
+                    
+                    if(pedidoDAO.verificarExistencia(ped.getId_pedido(), deped.getID_PRODUCTO())){
+                        System.out.println("entra si");
+                        pedidoDAO.actualizarCantidad(ped.getId_pedido(), deped.getID_PRODUCTO());
+                    }else{
+                        System.out.println("entra no");
+                        pedidoDAO.insertarProductosPedido(usuario, deped);
+                    }                    
                 }
                 else{                    
                     ped.setEstado_pedido(0);
@@ -72,9 +79,14 @@ public class AgregarProducto extends HttpServlet {
                     deped.setID_PEDIDO(ped2.getId_pedido());
                     deped.setCANTIDAD(1);
                     deped.setID_PRODUCTO(Double.parseDouble(id_producto));
-                    pedidoDAO.insertarProductosPedido(usuario, deped);
+                    if(pedidoDAO.verificarExistencia(ped2.getId_pedido(), deped.getID_PRODUCTO())){
+                        System.out.println("entra si");
+                        pedidoDAO.actualizarCantidad(ped.getId_pedido(), deped.getID_PRODUCTO());
+                    }else{
+                        System.out.println("entra no");
+                        pedidoDAO.insertarProductosPedido(usuario, deped);
+                    }  
                 }          
-                System.out.println(id_producto);
                 response.sendRedirect("templates/buscarProductos.jsp?usuario=" + usuario + "&busqueda=" + producto_buscado);
 
             }

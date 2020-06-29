@@ -154,7 +154,7 @@
                                     <td><%=listarcarrito.get(i).getCantidad()%></td>
                                     <td><%=listarcarrito.get(i).getPrecio_base()%></td>
                                     <%
-                                     total = total + listarcarrito.get(i).getPrecio_base();%>
+                                     total = total + (listarcarrito.get(i).getPrecio_base() * listarcarrito.get(i).getCantidad());%>
                                 </tr>
                                 <%}%>
                             </tbody>

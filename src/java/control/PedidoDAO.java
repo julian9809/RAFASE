@@ -52,7 +52,7 @@ public class PedidoDAO {
         }
         return pe;
     }
-    
+
     public boolean consultarPedidos(long usuario_id) throws CaException {
         try {
             String strSQL = "SELECT COUNT(*) FROM Pedido PE, Usuario U WHERE PE.ID_CEDULA=U.ID_CEDULA and U.ID_CEDULA= " + usuario_id + " and PE.ESTADO_PEDIDO=0";
@@ -60,10 +60,9 @@ public class PedidoDAO {
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 ResultSet rs = prepStmt.executeQuery();
                 while (rs.next()) {
-                    if(rs.getDouble(1) == 0){
+                    if (rs.getDouble(1) == 0) {
                         return false;
-                    }
-                    else{
+                    } else {
                         return true;
                     }
                 }
@@ -141,13 +140,13 @@ public class PedidoDAO {
     public void crearCarrito(String usuario, long cedula) throws CaException {
 
         try {
-            String strSQL = "CREATE VIEW CARRITO_" + usuario + " AS " + 
-                "(SELECT PE.ID_PEDIDO, PR.NOMBRE_PRODUCTO, DP.CANTIDAD, PR.PRECIO_BASE FROM Producto PR, Detalle_pedido DP, Usuario U, Pedido PE " +
-                "WHERE PR.ID_PRODUCTO = DP.ID_PRODUCTO AND " +
-                "U.ID_CEDULA = PE.ID_CEDULA AND " +
-                "PE.ID_PEDIDO = DP.ID_PEDIDO AND " +
-                "U.ID_CEDULA = " + cedula + " AND " +
-                "PE.ESTADO_PEDIDO = 0)";
+            String strSQL = "CREATE VIEW CARRITO_" + usuario + " AS "
+                    + "(SELECT PE.ID_PEDIDO, PR.NOMBRE_PRODUCTO, DP.CANTIDAD, PR.PRECIO_BASE FROM Producto PR, Detalle_pedido DP, Usuario U, Pedido PE "
+                    + "WHERE PR.ID_PRODUCTO = DP.ID_PRODUCTO AND "
+                    + "U.ID_CEDULA = PE.ID_CEDULA AND "
+                    + "PE.ID_PEDIDO = DP.ID_PEDIDO AND "
+                    + "U.ID_CEDULA = " + cedula + " AND "
+                    + "PE.ESTADO_PEDIDO = 0)";
             Connection conexion = ServiceLocator.getInstance("admin_db", "dbadministrator").tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.executeUpdate();
@@ -159,7 +158,7 @@ public class PedidoDAO {
             ServiceLocator.getInstance("admin_db", "dbadministrator").liberarConexion();
         }
     }
-    
+
     public ArrayList<Carrito> consultarCarrito(String usuario) throws CaException {
         ArrayList<Carrito> productosCarrito = new ArrayList<Carrito>();
         try {
@@ -184,5 +183,56 @@ public class PedidoDAO {
             ServiceLocator.getInstance("admin_db", "dbadministrator").liberarConexion();
         }
         return productosCarrito;
+    }
+
+    public boolean verificarExistencia(double id_pedido, double id_producto) throws CaException {
+        try {
+            String strSQL = "SELECT COUNT(*) FROM DETALLE_PEDIDO WHERE ID_PEDIDO = " + id_pedido + " AND ID_PRODUCTO = " + id_producto;
+            Connection conexion = ServiceLocator.getInstance("admin_db", "dbadministrator").tomarConexion();
+            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
+                ResultSet rs = prepStmt.executeQuery();
+                while (rs.next()) {
+                    if (rs.getDouble(1) == 0) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new CaException("No pudo recuperar el pedido\n " + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance("admin_db", "dbadministrator").liberarConexion();
+        }
+        return false;
+    }
+
+    public void actualizarCantidad(double id_pedido, double id_producto) throws CaException {
+        try {
+            double cantidad = 0;
+            String strSQL = "SELECT CANTIDAD FROM DETALLE_PEDIDO WHERE ID_PEDIDO = " + id_pedido + " AND ID_PRODUCTO = " + id_producto;
+
+            Connection conexion = ServiceLocator.getInstance("admin_db", "dbadministrator").tomarConexion();
+            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
+                ResultSet rs = prepStmt.executeQuery();
+                while (rs.next()) {
+                    cantidad = rs.getDouble(1);
+                }
+                double nuevaCantidad = cantidad + 1;
+                System.out.println("setea la cantidad " + nuevaCantidad);
+                String strSQLDOS = "UPDATE DETALLE_PEDIDO SET CANTIDAD = ? WHERE ID_PRODUCTO = ? AND ID_PEDIDO = ?";
+                PreparedStatement prepStmt2 = conexion.prepareStatement(strSQLDOS); 
+                prepStmt2.setDouble(1, nuevaCantidad);
+                prepStmt2.setDouble(2, id_producto);
+                prepStmt2.setDouble(3, id_pedido);
+                prepStmt2.executeUpdate();
+            }
+            
+            ServiceLocator.getInstance("admin_db", "dbadministrator").commit();
+        } catch (SQLException e) {
+            throw new CaException("PedidoDAO", "No se pudo editar la cantidad\n" + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance("admin_db", "dbadministrator").liberarConexion();
+        }
     }
 }
