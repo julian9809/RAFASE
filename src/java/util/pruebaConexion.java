@@ -20,7 +20,7 @@ public class pruebaConexion {
     public static void main(String[] args) throws CaException {
         // TODO code application logic here
         ClienteDAO cliente = new ClienteDAO(); 
-        System.out.println(cliente.buscarIdCliente("yami", "1234"));
+        System.out.println(cliente.buscarIdCliente("1234"));
     }
     
 }
