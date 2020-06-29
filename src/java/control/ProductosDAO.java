@@ -53,7 +53,7 @@ public class ProductosDAO {
                 System.out.println(productos.get(i).getNombre_producto());
             }
         } catch (SQLException e) {
-            throw new CaException("productosDAO", "no se pudo realizar la busqueda");
+            throw new CaException("productosDAO", " no se pudo realizar la busqueda: " + e);
         } finally {
             ServiceLocator.getInstance(usuario,password).liberarConexion();
         }

@@ -79,15 +79,9 @@ public class PedidoDAO {
     public void crearCarrito(String usuario, String password) throws CaException {
 
         try {
-            String strSQL = "CREATE MATERIALIZED VIEW vista_materializada"
-                    + "[TABLESPACE RAFASE_Cliente]"
-                    + "[PARALELL (DEGREE n)]"
-                    + "[BUILD {IMMEDIATE | DEFERRED}]"
-                    + "[REFRESH {ON COMMIT | ON DEMAND | [START WITH fecha_inicial] NEXT intervalo_tiempo } |"
-                    + "{COMPLETE | FAST | FORCE | NEVER} ]"
-                    + "[{ENABLE|DISABLE} QUERY REWRITE]"
+            String strSQL = "CREATE VIEW CARRITO "
                     + "AS SELECT tabla1.campo_a, tabla2.campo_b"
-                    + "FROM tabla1 , tabla2"
+                    + "FROM Pedido PE, Detalle_Pedido DP, Producto PR"
                     + "WHERE tabla1.campo_a = tabla2.campo_a...";
             Connection conexion = ServiceLocator.getInstance(usuario, password).tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {

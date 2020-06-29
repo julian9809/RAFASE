@@ -10,7 +10,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-  String producto_buscado = request.getParameter("busqueda");  
+  String producto_buscado = request.getParameter("busqueda");
 %>
 <html>
     <head>
