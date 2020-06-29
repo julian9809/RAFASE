@@ -4,6 +4,8 @@
     Author     : julia
 --%>
 
+<%@page import="modelo.Carrito"%>
+<%@page import="control.PedidoDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="modelo.Producto"%>
 <%@page import="control.ProductosDAO"%>
@@ -114,12 +116,14 @@
         </div>
 
         <!-------------------------------boton flotante--------------------------------->
+        <%if (!usuario.equals("visitante")) {%>
         <a class="btn btn-success btn-carrito" href="productos.jsp" role="button" data-toggle="modal" data-target="#exampleModal">
             <svg class="bi bi-cart4" id="carrito" width="3em" height="3em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
             </svg>
         </a>
         <!---------------------- Modal --------------------------------->
+
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -129,9 +133,36 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        ...
+                    <% PedidoDAO pedidoDAO = new PedidoDAO();
+                        ArrayList<Carrito> listarcarrito = new ArrayList<>();
+                        listarcarrito = pedidoDAO.consultarCarrito(usuario);
+                        if (!listarcarrito.isEmpty()) {
+                            double total = 0;
+                    %>
+                    <div class="modal-body table-responsive">
+                        <h2>Pedido: <%=listarcarrito.get(0).getId_pedido() %></h2>
+                        <table class="table table-bordered table-hover">
+                            <thead class="thead-dark">
+                            <th>Nombre</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                            </thead>
+                            <tbody>
+                                <%for (int i = 0; i < listarcarrito.size(); i++) {%>
+                                <tr>
+                                    <td><%=listarcarrito.get(i).getNombreProducto()%></td>
+                                    <td><%=listarcarrito.get(i).getCantidad()%></td>
+                                    <td><%=listarcarrito.get(i).getPrecio_base()%></td>
+                                    <%
+                                     total = total + listarcarrito.get(i).getPrecio_base();%>
+                                </tr>
+                                <%}%>
+                            </tbody>
+                            <td colspan="2">Total</td>
+                            <td><%=total%></td>
+                        </table>
                     </div>
+                    <%}%>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Volver</button>
                         <button type="button" class="btn btn-success">Pagar</button>
@@ -139,6 +170,7 @@
                 </div>
             </div>
         </div>
+        <%}%>
         <!-------------------------------Scripts--------------------------------->
         <script src="../js/jquery.js"></script>
         <script src="../js/bootstrap.min.js"></script>

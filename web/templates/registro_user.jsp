@@ -41,8 +41,14 @@
                                     <div class="form-group">
                                         <input type="text" class="form-control" placeholder="Apellido(s) *" value="" name="apellido" id="apellido"/>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group form-check-inline">
                                         <input type="text" class="form-control" placeholder="Cedula *" value="" name="cedula" id="cedula"/>
+                                        <select class="form-control" name="tipo_cedula" id="tipo_cedula">
+                                            <option selected>Tipo de documento...</option>
+                                            <option>Cedula</option>
+                                            <option>Tarjeta de identidad</option>
+                                            <option>Cedula de extranjeria</option>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <input type="email" class="form-control" placeholder="Correo Electronico *" value="" name="email" id="email"/>
@@ -69,7 +75,7 @@
                                         <input type="text" class="form-control" placeholder="Nombre de usuario *" value="" name="nickname" id="nikename"/>
                                     </div>
                                     <div class="form-group">
-                                        <input type="date" class="form-control" placeholder="Fecha de nacimiento *" value="" name="fecha_nacimiento" id="fecha_nacimiento"/>
+                                        <input type="date" class="form-control" max="2002-01-01" placeholder="Fecha de nacimiento *" value="" name="fecha_nacimiento" id="fecha_nacimiento"/>
                                     </div>
                                     <div class="form-group">
                                         <input type="password" class="form-control" placeholder="Contraseña *" value="" name="password" id="password"/>
