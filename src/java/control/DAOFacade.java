@@ -31,7 +31,7 @@ public class DAOFacade {
     }
     
     public void insertarCliente() throws CaException {
-        clienteDAO.insertarCliente(usuario, password);
+        //clienteDAO.insertarCliente(usuario, password,);
     }
     
     public boolean iniciarSesion(String nickname, String userPassword) throws CaException{

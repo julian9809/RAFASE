@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package util;
+import control.ClienteDAO;
 import java.sql.Connection;
 import util.ServiceLocator;
 
@@ -16,14 +17,10 @@ public class pruebaConexion {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CaException {
         // TODO code application logic here
-        String usuario = "admin_db";
-        String password = "dbadministrator";
-        System.out.println("esta corriendo");
-        Connection conexion = ServiceLocator.getInstance(usuario,password).tomarConexion();
-        System.out.println("hola()");
-        System.out.println("Termino de correr");
+        ClienteDAO cliente = new ClienteDAO();
+        cliente.crearUsuario("prueba", "1234");        
     }
     
 }

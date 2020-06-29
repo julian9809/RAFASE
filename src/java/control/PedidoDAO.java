@@ -60,12 +60,12 @@ public class PedidoDAO {
             String strSQL = "INSERT INTO Pedido (ID_PEDIDO, ESTADO_PEDIDO, FECHA_PEDIDO, TOTAL_PEDIDO, ID_CEDULA, ID_CIUDAD) VALUES(?,?,?,?,?,?)";
             Connection conexion = ServiceLocator.getInstance(usuario, password).tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
-                prepStmt.setLong(1, (long) ped.getId_pedido());
-                prepStmt.setLong(2, (long) ped.getEstado_pedido());
+                prepStmt.setDouble(1, (double) ped.getId_pedido());
+                prepStmt.setDouble(2, (double) ped.getEstado_pedido());
                 prepStmt.setDate(3, (Date) ped.getFecha_pedido());
-                prepStmt.setLong(4, (long) ped.getTotal_pedido());
-                prepStmt.setLong(5, (long) ped.getId_cedula());
-                prepStmt.setLong(6, (long) ped.getId_ciudad());
+                prepStmt.setDouble(4, (double) ped.getTotal_pedido());
+                prepStmt.setDouble(5, (double) ped.getId_cedula());
+                prepStmt.setDouble(6, (double) ped.getId_ciudad());
                 prepStmt.executeUpdate();
             }
             ServiceLocator.getInstance(usuario, password).commit();

@@ -33,32 +33,32 @@
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                             <h3 class="register-heading">¡Registrate como cliente!</h3>
-                            <div class="row register-form">
+                            <form class="row register-form" action="../registro_user" method="post">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Nombre(s) *" value="" />
+                                        <input type="text" class="form-control" placeholder="Nombre(s) *" value="" name="nombre" id="nombre"/>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Apellido(s) *" value="" />
+                                        <input type="text" class="form-control" placeholder="Apellido(s) *" value="" name="apellido" id="apellido"/>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="Cedula" class="form-control" placeholder="Cedula *" value="" />
+                                        <input type="text" class="form-control" placeholder="Cedula *" value="" name="cedula" id="cedula"/>
                                     </div>
                                     <div class="form-group">
-                                        <input type="email" class="form-control" placeholder="Correo Electronico *" value="" />
+                                        <input type="email" class="form-control" placeholder="Correo Electronico *" value="" name="email" id="email"/>
                                     </div>                                    
                                     <div class="form-group">
                                         <div class="maxl">
                                             <label class="radio inline"> 
-                                                <input type="radio" name="gender" value="hombre" checked>
+                                                <input type="radio" name="gender" value="M" checked id="gender">
                                                 <span> Hombre </span> 
                                             </label>
                                             <label class="radio inline"> 
-                                                <input type="radio" name="gender" value="mujer">
+                                                <input type="radio" name="gender" value="F" id="gender">
                                                 <span> Mujer </span> 
                                             </label>
                                             <label class="radio inline"> 
-                                                <input type="radio" name="gender" value="otro">
+                                                <input type="radio" name="gender" value="O" id="gender">
                                                 <span> Otro </span> 
                                             </label>    
                                         </div>
@@ -66,20 +66,20 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Nombre de usuario *" value="" />
+                                        <input type="text" class="form-control" placeholder="Nombre de usuario *" value="" name="nickname" id="nikename"/>
                                     </div>
                                     <div class="form-group">
-                                        <input type="date" class="form-control" placeholder="Fecha de nacimiento *" value="" />
+                                        <input type="date" class="form-control" placeholder="Fecha de nacimiento *" value="" name="fecha_nacimiento" id="fecha_nacimiento"/>
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control" placeholder="Contraseña *" value="" />
+                                        <input type="password" class="form-control" placeholder="Contraseña *" value="" name="password" id="password"/>
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control"  placeholder="Confirmar Contraseña *" value="" />
+                                        <input type="password" class="form-control"  placeholder="Confirmar Contraseña *" value="" name="confirme_password" id="confirme_password"/>
                                     </div>
-                                    <input type="submit" class="btnRegister"  value="Registrarse"/>
+                                    <button class="btn btn-outline-success my-2 my-sm-0 btnRegister" type="submit">Registrarse</button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
