@@ -5,13 +5,21 @@
  */
 package servlets;
 
+import control.ClienteDAO;
+import control.PedidoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Cliente;
+import modelo.DetallePedido;
+import modelo.Pedido;
+import util.CaException;
 
 /**
  *
@@ -30,17 +38,39 @@ public class AgregarProducto extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, CaException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String usuario = request.getParameter("usuario");
             String producto_buscado = request.getParameter("busqueda");
-            if(usuario.equals("visitante")){
+            if (usuario.equals("visitante")) {
                 response.sendRedirect("templates/sign.jsp");
-            }
-            else{
+            } else {
+                System.out.println("alguna cosa" + usuario);
+                String id_producto = request.getParameter("button");
+                PedidoDAO pedidoDAO = new PedidoDAO();
+                ClienteDAO clienteDAO = new ClienteDAO();
+                DetallePedido deped = new DetallePedido();
+                Pedido ped = new Pedido();
+                if(pedidoDAO.consultarPedidos(usuario, clienteDAO.buscarIdCliente(usuario))){
+                    ped = pedidoDAO.consultarPedido(usuario, clienteDAO.buscarIdCliente(usuario));
+                    
+                    deped.setID_PEDIDO(ped.getId_pedido());
+                    deped.setCANTIDAD(1);
+                    deped.setID_PRODUCTO(Double.parseDouble(id_producto));
+                    pedidoDAO.insertarProductosPedido(usuario, deped);
+                }
+                else{
+                    ped.setEstado_pedido(0);
+                    
+                    
+                    pedidoDAO.insertarPedido(usuario, ped);
+                    pedidoDAO.insertarProductosPedido(usuario, deped);
+                }          
+                System.out.println(id_producto);
                 response.sendRedirect("templates/buscarProductos.jsp?usuario=" + usuario + "&busqueda=" + producto_buscado);
+
             }
         }
     }
@@ -57,7 +87,11 @@ public class AgregarProducto extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (CaException ex) {
+            Logger.getLogger(AgregarProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -71,7 +105,11 @@ public class AgregarProducto extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (CaException ex) {
+            Logger.getLogger(AgregarProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

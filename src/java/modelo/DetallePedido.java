@@ -11,43 +11,44 @@ package modelo;
  */
 public class DetallePedido {
 
-    private long ID_DETALLE_PEDIDO;
-    private String CANTIDAD;
-    private String ID_PEDIDO;
-    private String ID_PRODUCTO;
+    private double ID_DETALLE_PEDIDO;
+    private double CANTIDAD;
+    private double ID_PEDIDO;
+    private double ID_PRODUCTO;
 
-    public long getID_DETALLE_PEDIDO() {
+    public double getID_DETALLE_PEDIDO() {
         return ID_DETALLE_PEDIDO;
     }
 
-    public void setID_DETALLE_PEDIDO(long ID_DETALLE_PEDIDO) {
+    public void setID_DETALLE_PEDIDO(double ID_DETALLE_PEDIDO) {
         this.ID_DETALLE_PEDIDO = ID_DETALLE_PEDIDO;
     }
 
-    public String getCANTIDAD() {
+    public double getCANTIDAD() {
         return CANTIDAD;
     }
 
-    public void setCANTIDAD(String CANTIDAD) {
+    public void setCANTIDAD(double CANTIDAD) {
         this.CANTIDAD = CANTIDAD;
     }
 
-    public String getID_PEDIDO() {
+    public double getID_PEDIDO() {
         return ID_PEDIDO;
     }
 
-    public void setID_PEDIDO(String ID_PEDIDO) {
+    public void setID_PEDIDO(double ID_PEDIDO) {
         this.ID_PEDIDO = ID_PEDIDO;
     }
 
-    public String getID_PRODUCTO() {
+    public double getID_PRODUCTO() {
         return ID_PRODUCTO;
     }
 
-    public void setID_PRODUCTO(String ID_PRODUCTO) {
+    public void setID_PRODUCTO(double ID_PRODUCTO) {
         this.ID_PRODUCTO = ID_PRODUCTO;
     }
-    
+
+  
     
 }
 
