@@ -24,6 +24,8 @@ public class Cliente {
     private String email;
     private String nickname;
 
+    public Cliente(){}
+    
     public long getId_cedula() {
         return id_cedula;
     }
