@@ -24,11 +24,6 @@ public class pruebaConexion {
         // TODO code application logic here
         ClienteDAO clienteDAO = new ClienteDAO(); 
         PedidoDAO pedidoDAO = new PedidoDAO();
-        ArrayList<Carrito> carrito = new ArrayList<Carrito>();
-        carrito = pedidoDAO.consultarCarrito("generico");
-        for(int i = 0;i<carrito.size();i++){
-            System.out.println(carrito.get(i).getNombreProducto());
-        }
     }
     
 }

@@ -147,6 +147,7 @@ public class PedidoDAO {
                     + "PE.ID_PEDIDO = DP.ID_PEDIDO AND "
                     + "U.ID_CEDULA = " + cedula + " AND "
                     + "PE.ESTADO_PEDIDO = 0)";
+            System.out.println("pedidodao");
             Connection conexion = ServiceLocator.getInstance("admin_db", "dbadministrator").tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.executeUpdate();

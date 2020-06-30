@@ -51,6 +51,7 @@ public class ClienteDAO {
                 prepStmt.setString(11, cli.getNickname());
                 prepStmt.executeUpdate();
             }
+            System.out.println("inserta usuario");
             ServiceLocator.getInstance(usuario, password).commit();
         } catch (SQLException e) {
             throw new CaException("ClienteDAO", "No pudo crear el cliente\n" + e.getMessage());
@@ -133,6 +134,7 @@ public class ClienteDAO {
             prepStmt.execute();
             prepStmt = conexion.prepareStatement(strSQLDOS);
             prepStmt.execute();
+            System.out.println("crea usuario");
             ServiceLocator.getInstance("admin_db", "dbadministrator").commit();
         } catch (SQLException e) {
             throw new CaException("ClienteDAO", "No se pudo crear el Usuario\n" + e.getMessage());
