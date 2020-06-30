@@ -40,22 +40,22 @@ INSERT INTO Producto(ID_PRODUCTO, NOMBRE_PRODUCTO, MARCA_PRODUCTO, REFERENCIA_PR
 
 
 
-INSERT INTO Producto VALUES ( 99,'gomitas rellenas','italo','g001','gomitas rellenas de jalea dulce','img.jpg',1500,'libra',9);
-INSERT INTO Producto VALUES ( 98,'choco balons','nacional de chocolates','choco002','mini balones de chocolate','img.jpg',2500,'libra',9);
-INSERT INTO Producto VALUES ( 89,'fríjoles','del campo','fri003','fríjoles rojos mexicanos','img.jpg',2500,'kilo',8);
-INSERT INTO Producto VALUES ( 88,'lentejas','del campo','len004','lentejas nacionales','img.jpg',2200,'kilo',8);
-INSERT INTO Producto VALUES ( 79,'colombinas','districarnes','col005','colombinas de pollo','img.jpg',3500,'kilo',7);
-INSERT INTO Producto VALUES ( 78,'chunchullo','districarnes','chu006','tripas de res','img.jpg',5200,'kilo',7);
-INSERT INTO Producto VALUES ( 69,'paisaje','decorex','dec007','cuadro de pared','img.jpg',355500,'unidad',6);
-INSERT INTO Producto VALUES ( 68,'modelos','decorex','mod008','cuadro de pared','img.jpg',999999.99,'unidad',6);
-INSERT INTO Producto VALUES ( 59,'monopolio','hasbro','mono009','juego de mesa para toda la familiar','img.jpg',12500,'unidad',5);
-INSERT INTO Producto VALUES ( 58,'corazones','punto rosa','cor010','juego virtual para adultos','img.jpg',22200,'unidad',5);
-INSERT INTO Producto VALUES ( 49,'molinillo','tu cocina','moli011','milinillo para chocolate','img.jpg',1999.99,'unidad',4);
-INSERT INTO Producto VALUES ( 48,'olleta','tu cocina','oll012','olleta para chocolate','img.jpg',7200,'unidad',4);
-INSERT INTO Producto VALUES ( 39,'batman','dc comics','accion - ficcion','batman primera entrega','img.jpg',32500,'unidad',3);
-INSERT INTO Producto VALUES ( 38,'spiderman','marvel comics','accion - ficcion','spiderman segunda entrega','img.jpg',32200,'unidado',3);
-INSERT INTO Producto VALUES ( 29,'Jazz','sony music','viejitos','grandes exitos del Jazz','img.jpg',32000,'unidad',2);
-INSERT INTO Producto VALUES ( 28,'Blues','sony music','viejitos','grandes exitos del Blues','img.jpg',32000,'unidad',2);
-INSERT INTO Producto VALUES ( 9780563528883,'El señor de los anillos','George Allen And Unwin','la comunidad del anillo','el señor de los anillos primera entrega','img.jpg',92500,'unidad',1);
-INSERT INTO Producto VALUES ( 9781481510714,'El señor de los anillos','George Allen And Unwin','el retorno del rey','el señor de los anillos tercera entrega','img.jpg',92500,'unidad',1);
-INSERT INTO Producto VALUES ( 9780898452235,'El señor de los anillos','George Allen And Unwin','las dos torres','el señor de los anillos segunda entrega','img.jpg',92500,'unidad',1);
+INSERT INTO Producto VALUES ( 99,'gomitas rellenas','italo','g001','gomitas rellenas de jalea dulce','gomitas_rellenas.png',1500,'libra',9);
+INSERT INTO Producto VALUES ( 98,'choco balons','nacional de chocolates','choco002','mini balones de chocolate','chocobolas.png',2500,'libra',9);
+INSERT INTO Producto VALUES ( 89,'fríjoles','del campo','fri003','fríjoles rojos mexicanos','frijol.png',2500,'kilo',8);
+INSERT INTO Producto VALUES ( 88,'lentejas','del campo','len004','lentejas nacionales','lentejas.png',2200,'kilo',8);
+INSERT INTO Producto VALUES ( 79,'colombinas','districarnes','col005','colombinas de pollo','colombinas.png',3500,'kilo',7);
+INSERT INTO Producto VALUES ( 78,'chunchullo','districarnes','chu006','tripas de res','chunchullo.png',5200,'kilo',7);
+INSERT INTO Producto VALUES ( 69,'paisaje','decorex','dec007','cuadro de pared','paisaje.png',355500,'unidad',6);
+INSERT INTO Producto VALUES ( 68,'modelos','decorex','mod008','cuadro de pared','modelos.png',999999.99,'unidad',6);
+INSERT INTO Producto VALUES ( 59,'monopolio','hasbro','mono009','juego de mesa para toda la familiar','monopoly.png',12500,'unidad',5);
+INSERT INTO Producto VALUES ( 58,'corazones','punto rosa','cor010','juego virtual para adultos','corazones.png',22200,'unidad',5);
+INSERT INTO Producto VALUES ( 49,'molinillo','tu cocina','moli011','milinillo para chocolate','molinillo.png',1999.99,'unidad',4);
+INSERT INTO Producto VALUES ( 48,'olleta','tu cocina','oll012','olleta para chocolate','olleta.png',7200,'unidad',4);
+INSERT INTO Producto VALUES ( 39,'batman','dc comics','accion - ficcion','batman primera entrega','batman.png',32500,'unidad',3);
+INSERT INTO Producto VALUES ( 38,'spiderman','marvel comics','accion - ficcion','spiderman segunda entrega','spiderman.png',32200,'unidado',3);
+INSERT INTO Producto VALUES ( 29,'Jazz','sony music','viejitos','grandes exitos del Jazz','jazz.png',32000,'unidad',2);
+INSERT INTO Producto VALUES ( 28,'Blues','sony music','viejitos','grandes exitos del Blues','Blues.png',32000,'unidad',2);
+INSERT INTO Producto VALUES ( 9780563528883,'El señor de los anillos','George Allen And Unwin','la comunidad del anillo','el señor de los anillos primera entrega','El_señor_de_los_anillos_1.png',92500,'unidad',1);
+INSERT INTO Producto VALUES ( 9781481510714,'El señor de los anillos','George Allen And Unwin','el retorno del rey','el señor de los anillos tercera entrega','El_señor_de_los_anillos_2.png',92500,'unidad',1);
+INSERT INTO Producto VALUES ( 9780898452235,'El señor de los anillos','George Allen And Unwin','las dos torres','el señor de los anillos segunda entrega','El_señor_de_los_anillos_2.png',92500,'unidad',1);

@@ -98,7 +98,7 @@
                         <td><%=listaproductos.get(i).getMarca_producto()%></td>
                         <td><%=listaproductos.get(i).getReferencia_producto()%></td>
                         <td><%=listaproductos.get(i).getCaracteristicas_producto()%></td>
-                        <td><%=listaproductos.get(i).getFoto()%></td>
+                        <td><img class="img-thumbnail img-responsive" alt="Responsive image" width="150" height="150" src="../img/Productos/<%=listaproductos.get(i).getFoto()%>"></td>
                         <td><%=listaproductos.get(i).getPrecio_base()%></td>
                         <td><%=listaproductos.get(i).getUnidad_medida()%></td>
                         <td>
