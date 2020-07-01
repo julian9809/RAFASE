@@ -82,6 +82,7 @@ public class registro_user extends HttpServlet {
                 cli.setNickname(nickname);
                 cli.setFecha_nacimiento((Date.valueOf(fecha_nacimiento)));
                 cli.setPassword(password);
+                System.out.println(""+password);
                 clienteDAO.insertarCliente("admin_db", "dbadministrator", cli);
                 clienteDAO.crearUsuario(nickname, password);
                 PedidoDAO pedidoDAO = new PedidoDAO();
