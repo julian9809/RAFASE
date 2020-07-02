@@ -47,7 +47,7 @@ create role usuarioGeneral;
 grant create session to usuarioGeneral;
 grant  select any table to usuarioGeneral;
 
-create role cliente;
+create role cliente identified by password;
 grant create session to cliente;
 grant  select any table to cliente;
 grant insert on admin_db.usuario to cliente;
