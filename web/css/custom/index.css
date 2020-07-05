@@ -33,13 +33,10 @@ body{
 }
 
 img#logo{
+    min-width: 5rem;
     max-width: 5rem;
     width: 100%;
     border: 0.3rem solid #fff;
     border-radius: 0.8rem;
-}
-
-.buscar{
-    margin-right: 0.4rem;
 }
 

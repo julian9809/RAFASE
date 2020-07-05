@@ -39,13 +39,17 @@
                 <label for="inputPassword">Contraseña</label>
             </div>
 
-            <div class="checkbox mb-3">
+            <div class="checkbox mb-2">
                 <label>
                     <input type="checkbox" value="remember-me"> Recuérdame
                 </label>
             </div>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar Sesión</button>
-            <p class="mt-5 mb-3 text-muted text-center"><a href="#">Administrador</a> &copy; 2020</p>
+            <!--------------------------------FOOTER--------------------------------->
+            <footer class="container">
+                <p class="mt-2 text-center"><a href="#">Privacidad</a> &middot; <a href="#">Términos y Condiciones</a></p>
+                <p class="text-muted text-center">&copy; 2020 RAFASE, Inc.&middot; <a href="#">Administrador</a></p>
+            </footer>
         </form>
         <!-------------------------------Scripts--------------------------------->
         <script src="../js/jquery.js"></script>

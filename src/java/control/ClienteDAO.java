@@ -51,7 +51,6 @@ public class ClienteDAO {
                 prepStmt.setString(11, cli.getNickname());
                 prepStmt.executeUpdate();
             }
-            System.out.println("inserta usuario");
             ServiceLocator.getInstance(usuario, password).commit();
         } catch (SQLException e) {
             throw new CaException("ClienteDAO", "No pudo crear el cliente\n" + e.getMessage());
