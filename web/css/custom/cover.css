@@ -1,0 +1,121 @@
+/*
+ * Globals
+ */
+
+/* Links */
+a,
+a:focus,
+a:hover {
+  color: #fff;
+}
+img#logo{
+    min-width: 5rem;
+    max-width: 5rem;
+    width: 100%;
+    border: 0.3rem solid #fff;
+    border-radius: 0.8rem;
+}
+
+/* Custom default button */
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  color: #333;
+  text-shadow: none; /* Prevent inheritance from `body` */
+  background-color: #fff;
+  border: .05rem solid #fff;
+}
+
+
+/*
+ * Base structure
+ */
+
+html,
+body {
+  height: 100%;
+  background: linear-gradient(125deg, #E6E6E6 0%, rgba(46,100,254,1) 100%);
+}
+
+body {
+  display: -ms-flexbox;
+  display: flex;
+  color: rgba(52, 49, 58, 1);
+  text-shadow: 0 .05rem .1rem rgba(255, 255, 255, .7);
+  box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+}
+
+h1{
+    font-family: 'Averia Libre', cursive;
+}
+
+.cover-container {
+  max-width: 42em;
+}
+
+
+/*
+ * Header
+ */
+.masthead {
+  margin-bottom: 2rem;
+}
+
+.masthead-brand {
+  margin-bottom: 0;
+}
+
+.nav-masthead .nav-link {
+  padding: .25rem 0;
+  font-weight: 700;
+  color: rgba(255, 255, 255, .9);
+  text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .7);
+  background-color: transparent;
+  border-bottom: .25rem solid transparent;
+}
+
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+  border-bottom-color: rgba(255, 255, 255, .25);
+}
+
+.nav-masthead .nav-link {
+  margin-left: 1rem;
+  margin-top: 1rem;
+}
+
+.nav-masthead .active {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+@media (min-width: 48em) {
+  .masthead-brand {
+    float: left;
+  }
+  .nav-masthead {
+    float: right;
+  }
+}
+
+
+/*
+ * Cover
+ */
+.cover {
+  padding: 0 1.5rem;
+}
+.cover .btn-lg {
+  padding: .75rem 1.25rem;
+  font-weight: 700;
+}
+.inicio{
+    color: rgba(32, 30, 36, 1);
+}
+
+/*
+ * Footer
+ */
+.mastfoot {
+  color: rgba(255, 255, 255, 1);
+}
