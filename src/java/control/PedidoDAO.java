@@ -161,7 +161,7 @@ public class PedidoDAO {
     }
 
     public ArrayList<Carrito> consultarCarrito(String usuario) throws CaException {
-        ArrayList<Carrito> productosCarrito = new ArrayList<Carrito>();
+        ArrayList<Carrito> productosCarrito = new ArrayList<>();
         try {
             String strSQL = "SELECT * FROM CARRITO_" + usuario;
             Connection conexion = ServiceLocator.getInstance("admin_db", "dbadministrator").tomarConexion();

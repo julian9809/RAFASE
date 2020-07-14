@@ -9,6 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Perfil de Usuario</title>
         <link rel="icon" href="../img/Logo.png" type="image/png">
         <!-- Bootstrap core CSS -->
@@ -20,6 +21,11 @@
         <link href="https://fonts.googleapis.com/css2?family=Averia+Libre&display=swap" rel="stylesheet">
     </head>
     <body>
+        <!--------------------------------FOOTER--------------------------------->
+        <footer class="container">
+            <p class="float-right"><a href="#">Volver al arriba</a></p>
+            <p>&copy; 2020 RAFASE, Inc. &middot; <a href="#">Privacidad</a> &middot; <a href="#">Términos y Condiciones</a></p>
+        </footer>
         <!-------------------------------Scripts--------------------------------->
         <script src="../js/jquery.js"></script>
         <script src="../js/bootstrap.min.js"></script>

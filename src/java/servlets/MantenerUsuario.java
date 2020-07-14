@@ -40,7 +40,7 @@ public class MantenerUsuario extends HttpServlet {
                 response.sendRedirect("index.jsp?usuario="+usuario);
             }
             else{
-                response.sendRedirect("templates/productos.jsp?usuario="+usuario);
+                
             }
             
         }

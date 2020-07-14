@@ -9,6 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Registro de clientes</title>
         <link rel="icon" href="../img/Logo.png" type="image/png">
         <!-- Bootstrap core CSS -->

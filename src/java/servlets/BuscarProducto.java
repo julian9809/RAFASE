@@ -38,7 +38,7 @@ public class BuscarProducto extends HttpServlet {
             String usuario = request.getParameter("usuario");
             
 
-            response.sendRedirect("templates/buscarProductos.jsp?usuario=" + usuario + "&busqueda=" + producto);
+            response.sendRedirect("templates/productos.jsp?usuario=" + usuario + "&busqueda=" + producto);
         }
     }
 
