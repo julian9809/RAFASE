@@ -12,6 +12,15 @@ body{
     background-color: #E6E6E6;
 }
 
+.bg-producto,
+.bg-producto:hover,
+.bg-producto:focus {
+  color: #888;
+  text-shadow: none; /* Prevent inheritance from `body` */
+  background: linear-gradient(45deg, #E6E6E6 0%, rgba(46,100,254,1) 100%);
+  border: .05rem solid #fff;
+}
+
 img#logo{
     position: static;
     left: 1rem;

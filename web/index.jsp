@@ -11,14 +11,20 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>RAFASE</title>
+        <!-- RAFASE icon -->
         <link rel="icon" href="img/Logo.png" type="image/png">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+        <!-- Google Fonts Roboto -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
         <!-- Bootstrap core CSS -->
         <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+        <!-- Material Design Bootstrap -->
+        <link rel="stylesheet" href="css/mdb/mdb.min.css">
         <!-- Customs styles for this template -->
         <link rel="stylesheet" href="css/custom/cover.css">
         <!-- Customs fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Averia+Libre&display=swap" rel="stylesheet">     
-        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Averia+Libre&display=swap" rel="stylesheet">
     </head>
     <body class="text-center">
         <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
@@ -52,8 +58,14 @@
                 </div>
             </footer>
             <!-------------------------------Scripts--------------------------------->
-            <script src="js/jquery.js"></script>
-            <script src="js/bootstrap.min.js"></script>
+        <!-- jQuery -->
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="js/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="js/mdb.min.js"></script>
         </div>
     </body>
 </html>

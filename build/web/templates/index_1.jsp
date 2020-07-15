@@ -25,12 +25,18 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>JSP Page</title>
+        <!-- RAFASE icon -->
         <link rel="icon" href="../img/Logo.png" type="image/png">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+        <!-- Google Fonts Roboto -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
         <!-- Bootstrap core CSS -->
-        <link rel="stylesheet" href="../css/bootstrap.min.css">
-        <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
+        <!-- Material Design Bootstrap -->
+        <link rel="stylesheet" href="../css/mdb/mdb.min.css">
         <!-- Customs styles for this template -->
-        <link rel="stylesheet" href="../css/index.css">
+        <link rel="stylesheet" href="../css/custom/index.css">
         <!-- Customs fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Averia+Libre&display=swap" rel="stylesheet">
         <script src="../js/bootstrap.min.js"></script>
@@ -58,10 +64,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="../BuscarProducto?usuario=<%=usuario%>&producto_buscado=">Productos<span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="#">Ir a pagar<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
@@ -91,5 +97,14 @@
             <p class="float-right"><a href="#">Volver al arriba</a></p>
             <p>&copy; 2020 RAFASE, Inc. &middot; <a href="#">Privacidad</a> &middot; <a href="#">Términos y Condiciones</a></p>
         </footer>
+        <!-------------------------------Scripts--------------------------------->
+        <!-- jQuery -->
+        <script type="text/javascript" src="../js/jquery.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="../js/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="../js/mdb.min.js"></script>
     </body>
 </html>
