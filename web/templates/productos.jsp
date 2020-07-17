@@ -129,11 +129,10 @@
 
         <!-------------------------------boton flotante--------------------------------->
         <%if (!usuario.equals("visitante")) {%>
-        <a class="btn btn-success btn-carrito" href="productos.jsp" role="button" data-toggle="modal" data-target="#exampleModal">
-            <svg class="bi bi-cart4" id="carrito" width="3em" height="3em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
-            </svg>
+        <a class="btn btn-default btn-carrito floating-action-button" href="productos.jsp" role="button" data-toggle="modal" data-target="#exampleModal">
+            <i class="fas fa-shopping-cart fa-3x"></i>
         </a>
+
         <!---------------------- Modal --------------------------------->
 
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -186,7 +185,7 @@
         <!--------------------------------Productos--------------------------------->
         <div class="container-fluid">
             <h1 class="display-4 mt-2 mb-4 text-center">Productos</h1>
-            
+
             <div class="row justify-content-center">
                 <div class="card-deck col-12 text-center">
                     <%for (int i = 0; i < listaproductos.size(); i++) {%>
@@ -218,7 +217,10 @@
                                     <input type="hidden" name = "id_producto" id="id_producto" value=<%=listaproductos.get(i).getId_producto()%>>
                                     <input type="hidden" name = "usuario" id="usuario" value=<%=usuario%>>
                                     <input type="hidden" name = "busqueda" id="busqueda" value=<%=producto_buscado%>>
-                                    <button class="btn btn-success my-2 my-sm-0 buscar" type="submit">Añadir producto</button>                
+                                    <div class="btn-group" role="group">
+                                        <input type="number" min="0" max="99" class="form-control" placeholder="Cant" value="" name="Cantidad" id="Cantidad"/>
+                                        <button class="btn btn-success my-0 bordes" type="submit"><i class="fas fa-cart-arrow-down fa-2x"></i></button>                
+                                    </div>
                                 </form>
                             </div>
                         </div>

@@ -12,15 +12,6 @@ body{
     background-color: #E6E6E6;
 }
 
-.bg-producto,
-.bg-producto:hover,
-.bg-producto:focus {
-  color: #888;
-  text-shadow: none; /* Prevent inheritance from `body` */
-  background: linear-gradient(45deg, #E6E6E6 0%, rgba(46,100,254,1) 100%);
-  border: .05rem solid #fff;
-}
-
 img#logo{
     position: static;
     left: 1rem;
@@ -42,25 +33,24 @@ h1#nombre{
     padding-top: 1.5rem;
 }
 
-.btn-carrito{
-    display:block;
-    width:70px;
-    height:70px;
-    color: #fff;
+.floating-action-button {
+    display: block;
     position: fixed;
-    right:20px;
-    bottom:20px;
-    border-radius:50%;
-    line-height:80px;
-    text-align:center;
-    z-index:999;
+    width: 70px;
+    height: 70px;
+    padding-left: 0rem;
+    padding-right: 0rem;
+    border-radius: 50px;
+    line-height: 4.5rem;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 999;
 }
-
-svg#carrito{
-    margin-bottom: 1em;
-    margin-left: 0.2em;
-}
-
-.buscar{
-    margin-right: 0.4rem;
+.bordes{
+    padding: 0rem;
+    padding-left: 0.5rem;
+    padding-right: 1.5rem;
+    border-radius: 50px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
 }
