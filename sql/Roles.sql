@@ -13,6 +13,7 @@ create temporary tablespace RAFASE_usuariosTemp tempfile 'C:\oraclexe\app\oracle
 --ROLES
 
 create role administradorBD;
+grant create session to administradorBD;
 grant create any table to administradorBD;
 
 create user admin_db identified by dbadministrator;
