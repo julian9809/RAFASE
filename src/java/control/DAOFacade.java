@@ -6,8 +6,11 @@
 package control;
 
 import java.util.ArrayList;
+import modelo.Carrito;
 import modelo.Cliente;
+import modelo.DetallePedido;
 import modelo.Producto;
+import modelo.Pedido;
 import util.CaException;
 
 /**
@@ -15,34 +18,79 @@ import util.CaException;
  * @author danie
  */
 public class DAOFacade {
+
     private ClienteDAO clienteDAO;
     private PedidoDAO pedidoDAO;
     private ProductosDAO productosDAO;
-    
-    private String usuario, password;
-    
-    public DAOFacade(String usuario, String password){
-        this.usuario = usuario;
-        this.password = password;
-        
+
+    public DAOFacade() {
+
         clienteDAO = new ClienteDAO();
         pedidoDAO = new PedidoDAO();
         productosDAO = new ProductosDAO();
     }
-    
-    public void insertarCliente() throws CaException {
-        //clienteDAO.insertarCliente(usuario, password,);
+
+    public void insertarCliente(String usuario, String password, Cliente cli) throws CaException {
+        clienteDAO.insertarCliente(usuario, password, cli);
     }
-    
-    public boolean iniciarSesion(String nickname, String userPassword) throws CaException{
+
+    public boolean iniciarSesion(String usuario, String password, String nickname, String userPassword) throws CaException {
         return clienteDAO.iniciarSesion(usuario, password, nickname, userPassword);
     }
-    
-    public ArrayList<Producto> buscarProducto(String producto_buscado) throws CaException {
-        return productosDAO.buscarProducto(usuario, password, producto_buscado);
+
+    public void insertarDireccion(String usuario, String password) throws CaException {
+        clienteDAO.insertarDireccion(usuario, password);
+    }
+
+    public ArrayList<String> buscarDirecciones(String usuario, String password, long cedula) throws CaException {
+        return clienteDAO.buscarDirecciones(usuario, password, cedula);
+    }
+
+    public void crearUsuario(String usuario, String password) throws CaException {
+        clienteDAO.crearUsuario(usuario, password);
+    }
+
+    public long buscarIdCliente(String usuario) throws CaException {
+        return clienteDAO.buscarIdCliente(usuario);
+    }
+
+    public Pedido consultarPedido(String usuario, long usuario_id) throws CaException{
+        return pedidoDAO.consultarPedido(usuario, usuario_id);
+    }
+
+    public boolean consultarPedidos(long usuario_id) throws CaException{
+        return pedidoDAO.consultarPedidos(usuario_id);
+    }
+
+    public void insertarPedido(String usuario, Pedido ped) throws CaException{
+        pedidoDAO.insertarPedido(usuario, ped);
+    }
+
+    public void insertarProductosPedido(String usuario, DetallePedido deped) throws CaException{
+        pedidoDAO.insertarProductosPedido(usuario, deped);
+    }
+
+    public ArrayList<DetallePedido> consultarProductosPedido(String usuario, String password, DetallePedido deped) throws CaException{
+        return pedidoDAO.consultarProductosPedido(usuario, password, deped);
+    }
+
+    public void crearCarrito(String usuario, long cedula) throws CaException{
+        pedidoDAO.crearCarrito(usuario, cedula);
+    }
+
+    public ArrayList<Carrito> consultarCarrito(String usuario) throws CaException{
+        return pedidoDAO.consultarCarrito(usuario);
+    }
+
+    public boolean verificarExistencia(double id_pedido, double id_producto) throws CaException{
+        return pedidoDAO.verificarExistencia(id_pedido, id_producto);
+    }
+
+    public void actualizarCantidad(double id_pedido, double id_producto) throws CaException{
+        pedidoDAO.actualizarCantidad(id_pedido, id_producto);
     }
     
-    public void insertarDireccion() throws CaException{
-        clienteDAO.insertarDireccion(usuario, password);
+    public ArrayList<Producto> buscarProducto(String usuario,String password,String producto_buscado) throws CaException {
+        return productosDAO.buscarProducto(usuario, password, producto_buscado);
     }
 }

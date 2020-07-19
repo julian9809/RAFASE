@@ -6,6 +6,7 @@
 package servlets;
 
 import control.ClienteDAO;
+import control.DAOFacade;
 import control.PedidoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -48,39 +49,38 @@ public class AgregarProducto extends HttpServlet {
                 response.sendRedirect("templates/sign.jsp");
             } else {
                 String id_producto = request.getParameter("id_producto");
-                PedidoDAO pedidoDAO = new PedidoDAO();
-                ClienteDAO clienteDAO = new ClienteDAO();
+                DAOFacade facade = new DAOFacade();
                 DetallePedido deped = new DetallePedido();
                 Pedido ped = new Pedido();
-                if(pedidoDAO.consultarPedidos(clienteDAO.buscarIdCliente(usuario))){
-                    ped = pedidoDAO.consultarPedido(usuario, clienteDAO.buscarIdCliente(usuario));
+                if(facade.consultarPedidos(facade.buscarIdCliente(usuario))){
+                    ped = facade.consultarPedido(usuario, facade.buscarIdCliente(usuario));
                     deped.setID_PEDIDO(ped.getId_pedido());
                     deped.setCANTIDAD(1);
                     deped.setID_PRODUCTO(Double.valueOf(id_producto));
                     
-                    if(pedidoDAO.verificarExistencia(ped.getId_pedido(), deped.getID_PRODUCTO())){
-                        pedidoDAO.actualizarCantidad(ped.getId_pedido(), deped.getID_PRODUCTO());
+                    if(facade.verificarExistencia(ped.getId_pedido(), deped.getID_PRODUCTO())){
+                        facade.actualizarCantidad(ped.getId_pedido(), deped.getID_PRODUCTO());
                     }else{
-                        pedidoDAO.insertarProductosPedido(usuario, deped);
+                        facade.insertarProductosPedido(usuario, deped);
                     }                    
                 }
                 else{                    
                     ped.setEstado_pedido(0);
                     ped.setTotal_pedido(1);
-                    ped.setId_cedula(clienteDAO.buscarIdCliente(usuario));
+                    ped.setId_cedula(facade.buscarIdCliente(usuario));
                     ped.setId_ciudad(1);
                     
-                    pedidoDAO.insertarPedido(usuario, ped);
+                    facade.insertarPedido(usuario, ped);
                     Pedido ped2 = new Pedido();
-                    ped2 = pedidoDAO.consultarPedido(usuario, clienteDAO.buscarIdCliente(usuario));
+                    ped2 = facade.consultarPedido(usuario, facade.buscarIdCliente(usuario));
                     
                     deped.setID_PEDIDO(ped2.getId_pedido());
                     deped.setCANTIDAD(1);
                     deped.setID_PRODUCTO(Double.parseDouble(id_producto));
-                    if(pedidoDAO.verificarExistencia(ped2.getId_pedido(), deped.getID_PRODUCTO())){
-                        pedidoDAO.actualizarCantidad(ped.getId_pedido(), deped.getID_PRODUCTO());
+                    if(facade.verificarExistencia(ped2.getId_pedido(), deped.getID_PRODUCTO())){
+                        facade.actualizarCantidad(ped.getId_pedido(), deped.getID_PRODUCTO());
                     }else{
-                        pedidoDAO.insertarProductosPedido(usuario, deped);
+                        facade.insertarProductosPedido(usuario, deped);
                     }  
                 }          
                 response.sendRedirect("templates/productos.jsp?usuario=" + usuario + "&busqueda=" + producto_buscado);

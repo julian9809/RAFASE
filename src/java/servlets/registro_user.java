@@ -7,6 +7,7 @@ package servlets;
 
 import control.ClienteDAO;
 import control.PedidoDAO;
+import control.DAOFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
@@ -69,7 +70,8 @@ public class registro_user extends HttpServlet {
             String password = request.getParameter("password");
             String confirme_password = request.getParameter("confirme_password");
             if (password.equals(confirme_password)) {
-                ClienteDAO clienteDAO = new ClienteDAO();
+                DAOFacade facade = new DAOFacade();
+                
                 Cliente cli = new Cliente();
                 cli.setPrimer_nombre(primerNombre);
                 cli.setSegundo_nombre(segundoNombre);
@@ -83,10 +85,11 @@ public class registro_user extends HttpServlet {
                 cli.setFecha_nacimiento((Date.valueOf(fecha_nacimiento)));
                 cli.setPassword(password);
                 System.out.println(""+password);
-                clienteDAO.insertarCliente("admin_db", "dbadministrator", cli);
-                clienteDAO.crearUsuario(nickname, password);
-                PedidoDAO pedidoDAO = new PedidoDAO();
-                pedidoDAO.crearCarrito(nickname, cli.getId_cedula());
+                
+                facade.insertarCliente("admin_db", "dbadministrator", cli);
+                facade.crearUsuario(nickname, password);
+                
+                facade.crearCarrito(nickname, cli.getId_cedula());
                 response.sendRedirect("index.jsp?usuario=" + nickname);
             } else {
                 response.sendRedirect("templates/registro_user.jsp");

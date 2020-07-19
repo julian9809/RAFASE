@@ -29,6 +29,21 @@ public class ServiceLocator {
     /**
      * @return instancia del ServiceLocator para el manejo de la conexion
      */
+    public static ServiceLocator getInstance() {
+        if (instance == null) {
+            try {
+                instance = new ServiceLocator();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return instance;
+    }
+    
+    /**
+     * @return instancia del ServiceLocator para el manejo de la conexion
+     */
     public static ServiceLocator getInstance(String usuario,String password) {
         if (instance == null) {
             try {
@@ -44,19 +59,19 @@ public class ServiceLocator {
     /**
      * @throws Exception dice si no se pudo crear la conexion
      */
-    /*private ServiceLocator() throws Exception {
+    private ServiceLocator() throws Exception {
         try {
             // Se registra el Driver y se crea la conexion
             String url = "jdbc:oracle:thin:@localhost:1521:xe";
-            String usuario = "conjunto";
-            String password = "conjunto";
+            String usuario = "admin_db";
+            String password = "dbadministrator";
             Class.forName("oracle.jdbc.driver.OracleDriver").newInstance();
             conexion = DriverManager.getConnection(url, usuario, password);
             conexion.setAutoCommit(false);
         } catch (Exception e) {
             throw new CaException("ServiceLocator", "ERROR_CONEXION_BD " + e);
         }
-    }*/
+    }
     
     private ServiceLocator(String usuario, String password) throws Exception {
         try {            

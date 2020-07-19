@@ -59,12 +59,5 @@ public class ProductosDAO {
         return productos;
     }
 
-    public Producto getP() {
-        return p;
-    }
-
-    public void setP(Producto p) {
-        this.p = p;
-    }
     
 }

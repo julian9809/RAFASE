@@ -36,7 +36,7 @@ public class ClienteDAO {
     public void insertarCliente(String usuario, String password, Cliente cli) throws CaException {
         try {
             String strSQL = "INSERT INTO Usuario(ID_CEDULA, PRIMER_NOMB, SEGUNDO_NOMB, PRIMER_APELL, SEGUNDO_APELL, PASSWORD, FECH_NAC, TIPO_ID, GENERO, EMAIL, NICKNAME) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-            Connection conexion = ServiceLocator.getInstance(usuario, password).tomarConexion();
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.setLong(1, cli.getId_cedula());
                 prepStmt.setString(2, cli.getPrimer_nombre());
@@ -51,7 +51,7 @@ public class ClienteDAO {
                 prepStmt.setString(11, cli.getNickname());
                 prepStmt.executeUpdate();
             }
-            ServiceLocator.getInstance(usuario, password).commit();
+            ServiceLocator.getInstance().commit();
         } catch (SQLException e) {
             throw new CaException("ClienteDAO", "No pudo crear el cliente\n" + e.getMessage());
         } finally {
