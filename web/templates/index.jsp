@@ -12,10 +12,10 @@
     
     if(sesion.getAttribute("Ciudad")!=null){
         ciudad = sesion.getAttribute("Ciudad").toString();
-        if(ciudad.equals("no ciudad")){
-            response.sendRedirect("index.jsp");
-        }
+    }else{
+        out.print("<script>location.replace('../index.jsp');</script>");
     }
+    
     String usuario = "";
     System.out.println("" + request.getParameter("usuario"));
     if (request.getParameter("usuario") == null) {
@@ -56,7 +56,7 @@
                         <h5 class="text-left" id="lema">Rapido, Facil y Seguro</h5>
                     </div>
                     <div class="col-4 col-sm-3 col-md-2 col-lg-2 col-xl-2 my-auto">
-                        <a class="float-right text-white ciudad" href="../index.jsp"><%=ciudad%></a>
+                        <a class="float-right text-white ciudad" href="../Ciudad?cerrar=true"><%=ciudad%></a>
                     </div>
                 </div>
             </div>

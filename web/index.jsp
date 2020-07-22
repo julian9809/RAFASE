@@ -25,7 +25,7 @@
         <!-- Customs styles for this template -->
         <link rel="stylesheet" href="css/custom/cover.css">
         <!-- Customs fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Averia+Libre&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Averia+Libre&display=swap" rel="stylesheet">        
     </head>
     <body class="text-center">
         <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">

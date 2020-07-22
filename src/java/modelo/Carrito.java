@@ -5,13 +5,15 @@
  */
 package modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author danie
  */
 public class Carrito {
     private double id_pedido;
-    private String nombreProducto;
+    private String nombre_producto;
     private double cantidad;
     private double precio_base;
     
@@ -25,12 +27,12 @@ public class Carrito {
         this.id_pedido = id_pedido;
     }
 
-    public String getNombreProducto() {
-        return nombreProducto;
+    public String getNombre_producto() {
+        return nombre_producto;
     }
 
-    public void setNombreProducto(String nombreProducto) {
-        this.nombreProducto = nombreProducto;
+    public void setNombre_producto(String nombre_producto) {
+        this.nombre_producto = nombre_producto;
     }
 
     public double getCantidad() {

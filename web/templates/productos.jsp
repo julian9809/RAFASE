@@ -12,6 +12,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
+    HttpSession sesion = request.getSession();
+    String ciudad = "no ciudad";
+    
+    if(sesion.getAttribute("Ciudad")!=null){
+        ciudad = sesion.getAttribute("Ciudad").toString();
+    }else{
+        out.print("<script>location.replace('../index.jsp');</script>");
+    }
+    
     String producto_buscado = request.getParameter("busqueda");
     String usuario = "";
     System.out.println("" + request.getParameter("usuario"));

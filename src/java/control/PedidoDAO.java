@@ -25,6 +25,7 @@ import modelo.Pedido;
 public class PedidoDAO {
 
     private Pedido pe;
+    
 
     public PedidoDAO() {
         pe = new Pedido();
@@ -99,9 +100,9 @@ public class PedidoDAO {
             String strSQL = "INSERT INTO Detalle_Pedido(ID_DETALLE_PEDIDO, CANTIDAD, ID_PEDIDO, ID_PRODUCTO) VALUES (ID_DETALLE.NEXTVAL,?,?,?)";
             Connection conexion = ServiceLocator.getInstance("admin_db", "dbadministrator").tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
-                prepStmt.setDouble(1, (double) deped.getCANTIDAD());
-                prepStmt.setDouble(2, (double) deped.getID_PEDIDO());
-                prepStmt.setDouble(3, (double) deped.getID_PRODUCTO());
+                prepStmt.setDouble(1, (double) deped.getCantidad());
+                prepStmt.setDouble(2, (double) deped.getId_pedido());
+                prepStmt.setDouble(3, (double) deped.getId_producto());
                 prepStmt.executeUpdate();
             }
             ServiceLocator.getInstance("admin_db", "dbadministrator").commit();
@@ -115,7 +116,7 @@ public class PedidoDAO {
     public ArrayList<DetallePedido> consultarProductosPedido(String usuario, String password, DetallePedido deped) throws CaException {
         ArrayList<DetallePedido> detaped = new ArrayList<>();
         try {
-            String strSQL = "SELECT DE.ID_DETALLE, DE.CANTIDAD, DE.ID_PEDIDO, DE.ID_PRODUCTO FROM admin_db.Detalle_Pedido DE, admin_db.Pedido PE WHERE DE.ID_PEDIDO = PE.ID_PEDIDO AND DE.ID_PEDIDO = '" + deped.getID_PEDIDO() + "'";
+            String strSQL = "SELECT DE.ID_DETALLE, DE.CANTIDAD, DE.ID_PEDIDO, DE.ID_PRODUCTO FROM admin_db.Detalle_Pedido DE, admin_db.Pedido PE WHERE DE.ID_PEDIDO = PE.ID_PEDIDO AND DE.ID_PEDIDO = '" + deped.getId_pedido() + "'";
             Connection conexion = ServiceLocator.getInstance(usuario, password).tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 ResultSet rs = prepStmt.executeQuery();
@@ -170,7 +171,7 @@ public class PedidoDAO {
                 while (rs.next()) {
                     Carrito producto = new Carrito();
                     producto.setId_pedido(rs.getDouble(1));
-                    producto.setNombreProducto(rs.getString(2));
+                    producto.setNombre_producto(rs.getString(2));
                     producto.setCantidad(rs.getDouble(3));
                     producto.setPrecio_base(rs.getDouble(4));
                     productosCarrito.add(producto);

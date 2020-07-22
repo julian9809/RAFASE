@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author julia
@@ -13,6 +15,10 @@ public class Subcategoria {
     private double id_subcategoria;
     private String nombre_subcategoria;
     private double id_categoria;
+    
+    private ArrayList id_subcategoria_array = new ArrayList();
+    private ArrayList nombre_subcategoria_array = new ArrayList();
+    private ArrayList id_categoria_array = new ArrayList();
     
     public Subcategoria(){
         
@@ -41,6 +47,28 @@ public class Subcategoria {
     public void setId_categoria(double id_categoria) {
         this.id_categoria = id_categoria;
     }
-    
-    
+
+    public ArrayList getId_subcategoria_array() {
+        return id_subcategoria_array;
+    }
+
+    public void setId_subcategoria_array(ArrayList id_subcategoria_array) {
+        this.id_subcategoria_array = id_subcategoria_array;
+    }
+
+    public ArrayList getNombre_subcategoria_array() {
+        return nombre_subcategoria_array;
+    }
+
+    public void setNombre_subcategoria_array(ArrayList nombre_subcategoria_array) {
+        this.nombre_subcategoria_array = nombre_subcategoria_array;
+    }
+
+    public ArrayList getId_categoria_array() {
+        return id_categoria_array;
+    }
+
+    public void setId_categoria_array(ArrayList id_categoria_array) {
+        this.id_categoria_array = id_categoria_array;
+    }    
 }

@@ -89,7 +89,7 @@ public class ClienteDAO {
             Connection conexion = ServiceLocator.getInstance(usuario, password).tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.setLong(1, direccion.getId_direccion());
-                prepStmt.setString(2, direccion.getDireccion());
+                prepStmt.setString(2, direccion.getDireccion_completa());
                 prepStmt.setString(3, direccion.getExtras());
                 prepStmt.setString(4, direccion.getTipo_direccion());
                 prepStmt.setLong(5, direccion.getId_cedula());

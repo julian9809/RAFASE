@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import modelo.Producto;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import util.CaException;
 import util.ServiceLocator;
@@ -28,7 +27,7 @@ public class ProductosDAO {
     }
     
     public ArrayList<Producto> buscarProducto(String usuario,String password,String producto_buscado) throws CaException {
-        ArrayList<Producto> productos = new ArrayList<Producto>();
+        ArrayList<Producto> productos = new ArrayList<>();
         try {
             String strSQL = "select id_producto,nombre_producto,marca_producto,referencia_producto,caracteristicas_producto,foto,precio_base,unidad_medida,id_subcategoria from admin_db.producto " 
                     + "where UPPER(nombre_producto) like UPPER('%"+producto_buscado+"%') ";
@@ -42,7 +41,7 @@ public class ProductosDAO {
                 p.setReferencia_producto(rs.getString(4));
                 p.setCaracteristicas_producto(rs.getString(5));
                 p.setFoto(rs.getString(6));
-                p.setPrecio_base(rs.getDouble(7));
+                p.setIva(rs.getDouble(7));
                 p.setUnidad_medida(rs.getString(8));
                 p.setId_subcategoria(rs.getDouble(9));
                 productos.add(p);

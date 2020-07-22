@@ -55,12 +55,12 @@ public class AgregarProducto extends HttpServlet {
                 Pedido ped = new Pedido();
                 if(facade.consultarPedidos(facade.buscarIdCliente(usuario))){
                     ped = facade.consultarPedido(usuario, facade.buscarIdCliente(usuario));
-                    deped.setID_PEDIDO(ped.getId_pedido());
-                    deped.setCANTIDAD(1);
-                    deped.setID_PRODUCTO(Double.valueOf(id_producto));
+                    deped.setId_pedido(ped.getId_pedido());
+                    deped.setCantidad(1);
+                    deped.setId_producto(Double.valueOf(id_producto));
                     
-                    if(facade.verificarExistencia(ped.getId_pedido(), deped.getID_PRODUCTO())){
-                        facade.actualizarCantidad(ped.getId_pedido(), deped.getID_PRODUCTO());
+                    if(facade.verificarExistencia(ped.getId_pedido(), deped.getId_producto())){
+                        facade.actualizarCantidad(ped.getId_pedido(), deped.getId_producto());
                     }else{
                         facade.insertarProductosPedido(usuario, deped);
                     }                    
@@ -75,11 +75,11 @@ public class AgregarProducto extends HttpServlet {
                     Pedido ped2 = new Pedido();
                     ped2 = facade.consultarPedido(usuario, facade.buscarIdCliente(usuario));
                     
-                    deped.setID_PEDIDO(ped2.getId_pedido());
-                    deped.setCANTIDAD(1);
-                    deped.setID_PRODUCTO(Double.parseDouble(id_producto));
-                    if(facade.verificarExistencia(ped2.getId_pedido(), deped.getID_PRODUCTO())){
-                        facade.actualizarCantidad(ped.getId_pedido(), deped.getID_PRODUCTO());
+                    deped.setId_pedido(ped2.getId_pedido());
+                    deped.setCantidad(1);
+                    deped.setId_producto(Double.parseDouble(id_producto));
+                    if(facade.verificarExistencia(ped2.getId_pedido(), deped.getId_producto())){
+                        facade.actualizarCantidad(ped.getId_pedido(), deped.getId_producto());
                     }else{
                         facade.insertarProductosPedido(usuario, deped);
                     }  

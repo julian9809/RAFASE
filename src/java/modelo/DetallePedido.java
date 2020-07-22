@@ -5,50 +5,69 @@
  */
 package modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Mateo
  */
 public class DetallePedido {
 
-    private double ID_DETALLE_PEDIDO;
-    private double CANTIDAD;
-    private double ID_PEDIDO;
-    private double ID_PRODUCTO;
+    private double id_pedido;
+    private double id_producto;
+    private double cantidad;
+    
+    private ArrayList id_pedido_array = new ArrayList();
+    private ArrayList id_producto_array = new ArrayList();
+    private ArrayList cantidad_array = new ArrayList();
 
-    public double getID_DETALLE_PEDIDO() {
-        return ID_DETALLE_PEDIDO;
+    public double getId_pedido() {
+        return id_pedido;
     }
 
-    public void setID_DETALLE_PEDIDO(double ID_DETALLE_PEDIDO) {
-        this.ID_DETALLE_PEDIDO = ID_DETALLE_PEDIDO;
+    public void setId_pedido(double id_pedido) {
+        this.id_pedido = id_pedido;
     }
 
-    public double getCANTIDAD() {
-        return CANTIDAD;
+    public double getId_producto() {
+        return id_producto;
     }
 
-    public void setCANTIDAD(double CANTIDAD) {
-        this.CANTIDAD = CANTIDAD;
+    public void setId_producto(double id_producto) {
+        this.id_producto = id_producto;
+    }
+    
+    public double getCantidad() {
+        return cantidad;
     }
 
-    public double getID_PEDIDO() {
-        return ID_PEDIDO;
+    public void setCantidad(double cantidad) {
+        this.cantidad = cantidad;
     }
 
-    public void setID_PEDIDO(double ID_PEDIDO) {
-        this.ID_PEDIDO = ID_PEDIDO;
+    public ArrayList getId_pedido_array() {
+        return id_pedido_array;
     }
 
-    public double getID_PRODUCTO() {
-        return ID_PRODUCTO;
+    public void setId_pedido_array(ArrayList id_pedido_array) {
+        this.id_pedido_array = id_pedido_array;
     }
 
-    public void setID_PRODUCTO(double ID_PRODUCTO) {
-        this.ID_PRODUCTO = ID_PRODUCTO;
+    public ArrayList getId_producto_array() {
+        return id_producto_array;
     }
 
-  
+    public void setId_producto_array(ArrayList id_producto_array) {
+        this.id_producto_array = id_producto_array;
+    }
+
+    public ArrayList getCantidad_array() {
+        return cantidad_array;
+    }
+
+    public void setCantidad_array(ArrayList cantidad_array) {
+        this.cantidad_array = cantidad_array;
+    }
     
 }
 

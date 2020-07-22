@@ -89,7 +89,7 @@ public class registro_user extends HttpServlet {
                 facade.crearUsuario(nickname, password);
                 
                 facade.crearCarrito(nickname, cli.getId_cedula());
-                response.sendRedirect("index.jsp?usuario=" + nickname);
+                response.sendRedirect("templates/index.jsp?usuario=" + nickname);
             } else {
                 response.sendRedirect("templates/registro_user.jsp");
             }
