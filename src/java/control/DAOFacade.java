@@ -30,12 +30,12 @@ public class DAOFacade {
         productosDAO = new ProductosDAO();
     }
 
-    public void insertarCliente(String usuario, String password, Cliente cli) throws CaException {
-        clienteDAO.insertarCliente(usuario, password, cli);
+    public void insertarCliente() throws CaException {
+        clienteDAO.insertarCliente();
     }
 
-    public boolean iniciarSesion(String usuario, String password, String nickname, String userPassword) throws CaException {
-        return clienteDAO.iniciarSesion(usuario, password, nickname, userPassword);
+    public boolean iniciarSesion(String nickname, String userPassword) throws CaException {
+        return clienteDAO.iniciarSesion(nickname, userPassword);
     }
 
     public void insertarDireccion(String usuario, String password) throws CaException {
@@ -92,5 +92,9 @@ public class DAOFacade {
     
     public ArrayList<Producto> buscarProducto(String usuario,String password,String producto_buscado) throws CaException {
         return productosDAO.buscarProducto(usuario, password, producto_buscado);
+    }
+    
+    public Cliente getCliente(){
+        return clienteDAO.getCliente();
     }
 }

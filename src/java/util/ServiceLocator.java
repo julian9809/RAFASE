@@ -42,6 +42,8 @@ public class ServiceLocator {
     }
     
     /**
+     * @param usuario
+     * @param password
      * @return instancia del ServiceLocator para el manejo de la conexion
      */
     public static ServiceLocator getInstance(String usuario,String password) {
