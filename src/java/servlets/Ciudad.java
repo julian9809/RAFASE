@@ -34,8 +34,8 @@ public class Ciudad extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            request.setCharacterEncoding("UTF-8");
             String ciudad = request.getParameter("ciudad");
-            
             HttpSession sesion = request.getSession();
             sesion.setAttribute("Ciudad", ciudad);
             response.sendRedirect("templates/index.jsp");
