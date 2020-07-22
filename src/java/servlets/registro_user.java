@@ -71,8 +71,7 @@ public class registro_user extends HttpServlet {
             String confirme_password = request.getParameter("confirme_password");
             if (password.equals(confirme_password)) {
                 DAOFacade facade = new DAOFacade();
-                
-                Cliente cli = new Cliente();
+                Cliente cli = facade.getCliente();
                 cli.setPrimer_nombre(primerNombre);
                 cli.setSegundo_nombre(segundoNombre);
                 cli.setPrimer_apellido(primerApellido);
@@ -86,7 +85,7 @@ public class registro_user extends HttpServlet {
                 cli.setPassword(password);
                 System.out.println(""+password);
                 
-                facade.insertarCliente("admin_db", "dbadministrator", cli);
+                facade.insertarCliente();
                 facade.crearUsuario(nickname, password);
                 
                 facade.crearCarrito(nickname, cli.getId_cedula());

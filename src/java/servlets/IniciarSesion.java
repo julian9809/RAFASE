@@ -43,8 +43,9 @@ public class IniciarSesion extends HttpServlet {
             String inputPassword = request.getParameter("inputPassword");
             ClienteDAO cdao = new ClienteDAO();
             DAOFacade facade = new DAOFacade();
+            //facade.iniciarSesion("admin_db","dbadministrator", nickname, inputPassword);
             //if(facade.iniciarSesion(nickname, inputPassword)){
-            if(cdao.iniciarSesion("admin_db","dbadministrator",nickname, inputPassword)){ 
+            if(cdao.iniciarSesion(nickname, inputPassword)){ 
                 response.sendRedirect("templates/index.jsp?usuario=" + nickname);
             }
             else{
