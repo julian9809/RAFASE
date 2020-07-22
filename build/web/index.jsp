@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page session="true"%> 
 <!DOCTYPE html>
 <html>
     <head>
@@ -41,12 +42,12 @@
             <main role="main" class="inner cover">
                 <h1 class="cover-heading">RAFASE</h1>
                 <p class="lead inicio">Somos una tienda virtual con varias sucursales fisicas en distintas ciudades del pais, escoge tu ciudad eh inicia a comprar de forma rapida y sencilla.</p>
-                <form class="lead btn-group">
+                <form class="lead btn-group" action="Ciudad" method="post">
                     <select class="btn btn-lg btn-light" name="ciudad" id="ciudad">
                         <option selected hidden disabled>Escoge tu ciudad</option>
-                        <option value="BT">Bogotá</option>
-                        <option value="ME">Medellin</option>
-                        <option value="CA">Cali</option>
+                        <option value="Bogotá">Bogotá</option>
+                        <option value="Medellin">Medellin</option>
+                        <option value="Cali">Cali</option>
                     </select>
                     <button class="btn btn-lg btn-success" type="summit">Continuar</button>
                 </form>

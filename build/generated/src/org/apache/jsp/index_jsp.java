@@ -44,6 +44,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");
+      out.write(" \r\n");
       out.write("<!DOCTYPE html>\r\n");
       out.write("<html>\r\n");
       out.write("    <head>\r\n");
@@ -80,7 +81,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            <main role=\"main\" class=\"inner cover\">\r\n");
       out.write("                <h1 class=\"cover-heading\">RAFASE</h1>\r\n");
       out.write("                <p class=\"lead inicio\">Somos una tienda virtual con varias sucursales fisicas en distintas ciudades del pais, escoge tu ciudad eh inicia a comprar de forma rapida y sencilla.</p>\r\n");
-      out.write("                <form class=\"lead btn-group\">\r\n");
+      out.write("                <form class=\"lead btn-group\" action=\"ciudad\" method=\"post\">\r\n");
       out.write("                    <select class=\"btn btn-lg btn-light\" name=\"ciudad\" id=\"ciudad\">\r\n");
       out.write("                        <option selected hidden disabled>Escoge tu ciudad</option>\r\n");
       out.write("                        <option value=\"BT\">Bogotá</option>\r\n");

@@ -6,7 +6,15 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<% String usuario = "";
+<% 
+    HttpSession sesion = request.getSession();
+    String ciudad = "no ciudad";
+    
+    if(sesion.getAttribute("Ciudad")!=null){
+        ciudad = sesion.getAttribute("Ciudad").toString();
+    }
+    
+    String usuario = "";
     System.out.println("" + request.getParameter("usuario"));
     if (request.getParameter("usuario") == null) {
         usuario = "visitante";
@@ -44,6 +52,9 @@
                     <div class="col-sm-10 col-md-10 col-lg-11 col-xl-11 text-center">
                         <h2 class="text-left" id="titulo">RAFASE</h2>
                         <h5 class="text-left">Rapido, Facil y Seguro</h5>
+                    </div>
+                    <div>
+                        <h2><%=ciudad%></h2>
                     </div>
                 </div>
             </div>
