@@ -18,6 +18,7 @@ grant create any table to administradorBD;
 grant create any view to administradorBD;
 grant create role to administradorBD;
 grant create user to administradorBD;
+grant create public synonym to admin_db;
 
 create user admin_db identified by dbadministrator;
 grant administradorBD to admin_db;
