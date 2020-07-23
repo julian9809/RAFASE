@@ -13,13 +13,13 @@ import java.sql.Date;
  */
 public class Cliente {
     private long id_cedula;
+    private String tipo_id;
     private String primer_nombre;
     private String segundo_nombre;
     private String primer_apellido;
     private String segundo_apellido;
     private String password;
     private Date fecha_nacimiento;
-    private String tipo_id;
     private String genero;
     private String email;
     private String nickname;
@@ -32,6 +32,14 @@ public class Cliente {
 
     public void setId_cedula(long id_cedula) {
         this.id_cedula = id_cedula;
+    }
+    
+    public String getTipo_id() {
+        return tipo_id;
+    }
+
+    public void setTipo_id(String tipo_id) {
+        this.tipo_id = tipo_id;
     }
 
     public String getPrimer_nombre() {
@@ -80,14 +88,6 @@ public class Cliente {
 
     public void setFecha_nacimiento(Date fecha_nacimiento) {
         this.fecha_nacimiento = fecha_nacimiento;
-    }
-
-    public String getTipo_id() {
-        return tipo_id;
-    }
-
-    public void setTipo_id(String tipo_id) {
-        this.tipo_id = tipo_id;
     }
 
     public String getGenero() {

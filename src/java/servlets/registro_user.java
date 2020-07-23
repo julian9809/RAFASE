@@ -5,8 +5,6 @@
  */
 package servlets;
 
-import control.ClienteDAO;
-import control.PedidoDAO;
 import control.DAOFacade;
 import java.io.IOException;
 import java.io.PrintWriter;

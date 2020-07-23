@@ -12,6 +12,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
+    HttpSession sesion = request.getSession();
+    String ciudad = "no ciudad";
+    
+    if(sesion.getAttribute("Ciudad")!=null){
+        ciudad = sesion.getAttribute("Ciudad").toString();
+    }else{
+        out.print("<script>location.replace('../index.jsp');</script>");
+    }
+    
     String producto_buscado = request.getParameter("busqueda");
     String usuario = "";
     System.out.println("" + request.getParameter("usuario"));
@@ -111,7 +120,7 @@
                         <td><%=listaproductos.get(i).getReferencia_producto()%></td>
                         <td><%=listaproductos.get(i).getCaracteristicas_producto()%></td>
                         <td><img class="img-thumbnail img-responsive" alt="Responsive image" width="150" height="150" src="../img/Productos/<%=listaproductos.get(i).getFoto()%>"></td>
-                        <td><%=listaproductos.get(i).getPrecio_base()%></td>
+                        <td><%=listaproductos.get(i).getIva()%></td>
                         <td><%=listaproductos.get(i).getUnidad_medida()%></td>
                         <td>
                             <form method="post" action = "../AgregarProducto">
@@ -161,7 +170,7 @@
                             <tbody>
                                 <%for (int i = 0; i < listarcarrito.size(); i++) {%>
                                 <tr>
-                                    <td><%=listarcarrito.get(i).getNombreProducto()%></td>
+                                    <td><%=listarcarrito.get(i).getNombre_producto()%></td>
                                     <td><%=listarcarrito.get(i).getCantidad()%></td>
                                     <td><%=listarcarrito.get(i).getPrecio_base()%></td>
                                     <%
@@ -197,7 +206,7 @@
                             <td><%=listaproductos.get(i).getReferencia_producto()%></td>
                             <td><%=listaproductos.get(i).getCaracteristicas_producto()%></td>
                             <td></td>
-                            <td><%=listaproductos.get(i).getPrecio_base()%></td>
+                            <td><%=listaproductos.get(i).getIva()%></td>
                             <td><%=listaproductos.get(i).getUnidad_medida()%></td>
                             <td>
                                 <form method="post" action = "../AgregarProducto">
@@ -212,7 +221,7 @@
                                 <h5 class="card-title">
                                     <img class="img-thumbnail img-responsive" alt="Responsive image" width="200" height="200" src="../img/Productos/<%=listaproductos.get(i).getFoto()%>">
                                 </h5>
-                                <p>$<%=listaproductos.get(i).getPrecio_base()%></p>
+                                <p>$<%=listaproductos.get(i).getIva()%></p>
                                 <form method="post" action = "../AgregarProducto">
                                     <input type="hidden" name = "id_producto" id="id_producto" value=<%=listaproductos.get(i).getId_producto()%>>
                                     <input type="hidden" name = "usuario" id="usuario" value=<%=usuario%>>
