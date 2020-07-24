@@ -4,6 +4,8 @@
     Author     : julia
 --%>
 
+<%@page import="modelo.Pedido"%>
+<%@page import="control.DAOFacade"%>
 <%@page import="modelo.Carrito"%>
 <%@page import="control.PedidoDAO"%>
 <%@page import="java.util.ArrayList"%>
@@ -14,13 +16,13 @@
 <%
     HttpSession sesion = request.getSession();
     String ciudad = "no ciudad";
-    
-    if(sesion.getAttribute("Ciudad")!=null){
+
+    if (sesion.getAttribute("Ciudad") != null) {
         ciudad = sesion.getAttribute("Ciudad").toString();
-    }else{
+    } else {
         out.print("<script>location.replace('../index.jsp');</script>");
     }
-    
+
     String producto_buscado = request.getParameter("busqueda");
     String usuario = "";
     System.out.println("" + request.getParameter("usuario"));
@@ -95,8 +97,14 @@
         </nav>
         <!-------------------------------Contenido-------------------------------------->
         <% ProductosDAO productosDAO = new ProductosDAO();
+
+            DAOFacade facade = new DAOFacade();
+            Producto prod = facade.getProducto();
+            
+            facade.buscarProducto("visitante", "abc123", producto_buscado);
+        
             ArrayList<Producto> listaproductos = new ArrayList<>();
-            listaproductos = productosDAO.buscarProducto("visitante", "abc123", producto_buscado);
+            //listaproductos = productosDAO.buscarProducto("visitante", "abc123", producto_buscado);
         %>
         <h1>Productos</h1>
         <div class="table-responsive">

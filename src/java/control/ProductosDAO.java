@@ -26,7 +26,7 @@ public class ProductosDAO {
         p = new Producto();
     }
     
-    public ArrayList<Producto> buscarProducto(String usuario,String password,String producto_buscado) throws CaException {
+    public void buscarProducto(String usuario,String password,String producto_buscado) throws CaException {
         ArrayList<Producto> productos = new ArrayList<>();
         try {
             String strSQL = "select id_producto,nombre_producto,marca_producto,referencia_producto,caracteristicas_producto,foto,precio_base,unidad_medida,id_subcategoria from admin_db.producto " 
@@ -35,6 +35,7 @@ public class ProductosDAO {
             PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
             ResultSet rs = prepStmt.executeQuery();
             while (rs.next()) {
+                p.getId_producto_array().add(rs.getDouble(1));
                 p.setId_producto(rs.getDouble(1));
                 p.setNombre_producto(rs.getString(2));
                 p.setMarca_producto(rs.getString(3));
@@ -55,8 +56,15 @@ public class ProductosDAO {
         } finally {
             ServiceLocator.getInstance(usuario,password).liberarConexion();
         }
-        return productos;
+        //return productos;
     }
 
+    public Producto getP() {
+        return p;
+    }
+
+    public void setP(Producto p) {
+        this.p = p;
+    }
     
 }

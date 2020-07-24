@@ -90,11 +90,15 @@ public class DAOFacade {
         pedidoDAO.actualizarCantidad(id_pedido, id_producto);
     }
     
-    public ArrayList<Producto> buscarProducto(String usuario,String password,String producto_buscado) throws CaException {
-        return productosDAO.buscarProducto(usuario, password, producto_buscado);
+    public void buscarProducto(String usuario,String password,String producto_buscado) throws CaException {
+        productosDAO.buscarProducto(usuario, password, producto_buscado);
     }
     
     public Cliente getCliente(){
         return clienteDAO.getCliente();
+    }
+    
+    public Producto getProducto(){
+        return productosDAO.getP();
     }
 }
