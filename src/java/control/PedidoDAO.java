@@ -148,7 +148,6 @@ public class PedidoDAO {
                     + "PE.ID_PEDIDO = DP.ID_PEDIDO AND "
                     + "U.ID_CEDULA = " + cedula + " AND "
                     + "PE.ESTADO_PEDIDO = 0)";
-            System.out.println("pedidodao");
             Connection conexion = ServiceLocator.getInstance("admin_db", "dbadministrator").tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.executeUpdate();
@@ -221,7 +220,6 @@ public class PedidoDAO {
                     cantidad = rs.getDouble(1);
                 }
                 double nuevaCantidad = cantidad + 1;
-                System.out.println("setea la cantidad " + nuevaCantidad);
                 String strSQLDOS = "UPDATE DETALLE_PEDIDO SET CANTIDAD = ? WHERE ID_PRODUCTO = ? AND ID_PEDIDO = ?";
                 PreparedStatement prepStmt2 = conexion.prepareStatement(strSQLDOS); 
                 prepStmt2.setDouble(1, nuevaCantidad);

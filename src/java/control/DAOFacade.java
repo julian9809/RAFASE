@@ -99,6 +99,6 @@ public class DAOFacade {
     }
     
     public Producto getProducto(){
-        return productosDAO.getP();
+        return productosDAO.getProducto();
     }
 }

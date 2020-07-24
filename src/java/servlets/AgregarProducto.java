@@ -5,10 +5,7 @@
  */
 package servlets;
 
-import com.sun.org.apache.bcel.internal.generic.D2F;
-import control.ClienteDAO;
 import control.DAOFacade;
-import control.PedidoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -18,7 +15,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.Cliente;
 import modelo.DetallePedido;
 import modelo.Pedido;
 import util.CaException;
