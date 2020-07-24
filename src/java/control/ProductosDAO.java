@@ -34,8 +34,8 @@ public class ProductosDAO {
     public void buscarProducto(String usuario, String password, String producto_buscado) throws CaException {
         try {
             String strSQL = "SELECT id_producto,nombre_producto,marca_producto,"
-                    + "referencia_producto,caracteristicas_producto,foto,iva,"
-                    + "unidad_medida,id_subcategoria FROM prod WHERE "
+                    + "referencia_producto,caracteristicas_producto,foto,id_subcategoria,"
+                    + "iva,unidad_medida FROM prod WHERE "
                     + "UPPER(nombre_producto) LIKE UPPER('%" + producto_buscado
                     + "%')";
             Connection conexion = ServiceLocator.getInstance(usuario, password).tomarConexion();
@@ -48,9 +48,9 @@ public class ProductosDAO {
                     producto.getReferencia_producto_array().add(rs.getString(4));
                     producto.getCaracteristicas_producto_array().add(rs.getString(5));
                     producto.getFoto_array().add(rs.getString(6));
-                    producto.getIva_array().add(rs.getString(7));
-                    producto.getUnidad_medida_array().add(rs.getString(8));
-                    producto.getId_subcategoria_array().add(rs.getString(9));
+                    producto.getId_subcategoria_array().add(rs.getDouble(7));
+                    producto.getIva_array().add(rs.getDouble(8));
+                    producto.getUnidad_medida_array().add(rs.getString(9));
                 }
             }
         } catch (SQLException e) {

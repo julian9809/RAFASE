@@ -5,8 +5,6 @@
  */
 package modelo;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author danie

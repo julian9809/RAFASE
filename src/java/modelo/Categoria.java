@@ -16,9 +16,9 @@ public class Categoria {
     private String nombre_categoria;
     private String descripcion_categoria;
     
-    private ArrayList id_categoria_array = new ArrayList();
-    private ArrayList nombre_categoria_array = new ArrayList();
-    private ArrayList descripcion_categoria_array = new ArrayList();
+    private ArrayList<Double> id_categoria_array = new ArrayList<>();
+    private ArrayList<String> nombre_categoria_array = new ArrayList<>();
+    private ArrayList<String> descripcion_categoria_array = new ArrayList<>();
     
     public Categoria(){
         
@@ -48,27 +48,27 @@ public class Categoria {
         this.descripcion_categoria = descripcion_categoria;
     }
 
-    public ArrayList getId_categoria_array() {
+    public ArrayList<Double> getId_categoria_array() {
         return id_categoria_array;
     }
 
-    public void setId_categoria_array(ArrayList id_categoria_array) {
+    public void setId_categoria_array(ArrayList<Double> id_categoria_array) {
         this.id_categoria_array = id_categoria_array;
     }
 
-    public ArrayList getNombre_categoria_array() {
+    public ArrayList<String> getNombre_categoria_array() {
         return nombre_categoria_array;
     }
 
-    public void setNombre_categoria_array(ArrayList nombre_categoria_array) {
+    public void setNombre_categoria_array(ArrayList<String> nombre_categoria_array) {
         this.nombre_categoria_array = nombre_categoria_array;
     }
 
-    public ArrayList getDescripcion_categoria_array() {
+    public ArrayList<String> getDescripcion_categoria_array() {
         return descripcion_categoria_array;
     }
 
-    public void setDescripcion_categoria_array(ArrayList descripcion_categoria_array) {
+    public void setDescripcion_categoria_array(ArrayList<String> descripcion_categoria_array) {
         this.descripcion_categoria_array = descripcion_categoria_array;
     }
     
