@@ -17,7 +17,6 @@
     }
     
     String usuario = "";
-    System.out.println("" + request.getParameter("usuario"));
     if (request.getParameter("usuario") == null) {
         usuario = "visitante";
     } else {

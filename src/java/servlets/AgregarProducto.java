@@ -5,10 +5,7 @@
  */
 package servlets;
 
-import com.sun.org.apache.bcel.internal.generic.D2F;
-import control.ClienteDAO;
 import control.DAOFacade;
-import control.PedidoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -18,7 +15,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.Cliente;
 import modelo.DetallePedido;
 import modelo.Pedido;
 import util.CaException;
@@ -54,7 +50,7 @@ public class AgregarProducto extends HttpServlet {
                 DetallePedido deped = new DetallePedido();
                 Pedido ped = new Pedido();
                 if(facade.consultarPedidos(facade.buscarIdCliente(usuario))){
-                    ped = facade.consultarPedido(usuario, facade.buscarIdCliente(usuario));
+                    facade.consultarPedido(usuario, facade.buscarIdCliente(usuario));
                     deped.setId_pedido(ped.getId_pedido());
                     deped.setCantidad(1);
                     deped.setId_producto(Double.valueOf(id_producto));
@@ -73,7 +69,7 @@ public class AgregarProducto extends HttpServlet {
                     
                     facade.insertarPedido(usuario, ped);
                     Pedido ped2 = new Pedido();
-                    ped2 = facade.consultarPedido(usuario, facade.buscarIdCliente(usuario));
+                    facade.consultarPedido(usuario, facade.buscarIdCliente(usuario));
                     
                     deped.setId_pedido(ped2.getId_pedido());
                     deped.setCantidad(1);

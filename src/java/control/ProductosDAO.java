@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import modelo.Producto;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import util.CaException;
 import util.ServiceLocator;
 
@@ -19,44 +18,54 @@ import util.ServiceLocator;
  * @author julia
  */
 public class ProductosDAO {
-    
-    private Producto p;
-    
-    public ProductosDAO(){
-        p = new Producto();
+
+    private Producto producto;
+
+    public ProductosDAO() {
+        producto = new Producto();
     }
     
-    public ArrayList<Producto> buscarProducto(String usuario,String password,String producto_buscado) throws CaException {
-        ArrayList<Producto> productos = new ArrayList<>();
+    /**
+     * @param usuario
+     * @param password
+     * @param producto_buscado
+     * @throws CaException
+     */
+    public void buscarProducto(String usuario, String password, String producto_buscado) throws CaException {
         try {
-            String strSQL = "select id_producto,nombre_producto,marca_producto,referencia_producto,caracteristicas_producto,foto,precio_base,unidad_medida,id_subcategoria from admin_db.producto " 
-                    + "where UPPER(nombre_producto) like UPPER('%"+producto_buscado+"%') ";
-            Connection conexion = ServiceLocator.getInstance(usuario,password).tomarConexion();
-            PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
-            ResultSet rs = prepStmt.executeQuery();
-            while (rs.next()) {
-                p.setId_producto(rs.getDouble(1));
-                p.setNombre_producto(rs.getString(2));
-                p.setMarca_producto(rs.getString(3));
-                p.setReferencia_producto(rs.getString(4));
-                p.setCaracteristicas_producto(rs.getString(5));
-                p.setFoto(rs.getString(6));
-                p.setIva(rs.getDouble(7));
-                p.setUnidad_medida(rs.getString(8));
-                p.setId_subcategoria(rs.getDouble(9));
-                productos.add(p);
-                p = null;
-                p = new Producto();
-            }
-            for(int i=0;i<productos.size();i++){
+            String strSQL = "SELECT id_producto,nombre_producto,marca_producto,"
+                    + "referencia_producto,caracteristicas_producto,foto,id_subcategoria,"
+                    + "iva,unidad_medida FROM prod WHERE "
+                    + "UPPER(nombre_producto) LIKE UPPER('%" + producto_buscado
+                    + "%')";
+            Connection conexion = ServiceLocator.getInstance(usuario, password).tomarConexion();
+            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
+                ResultSet rs = prepStmt.executeQuery();
+                while (rs.next()) {
+                    producto.getId_producto_array().add(rs.getDouble(1));
+                    producto.getNombre_producto_array().add(rs.getString(2));
+                    producto.getMarca_producto_array().add(rs.getString(3));
+                    producto.getReferencia_producto_array().add(rs.getString(4));
+                    producto.getCaracteristicas_producto_array().add(rs.getString(5));
+                    producto.getFoto_array().add(rs.getString(6));
+                    producto.getId_subcategoria_array().add(rs.getDouble(7));
+                    producto.getIva_array().add(rs.getDouble(8));
+                    producto.getUnidad_medida_array().add(rs.getString(9));
+                }
             }
         } catch (SQLException e) {
-            throw new CaException("productosDAO", " no se pudo realizar la busqueda: " + e);
+            throw new CaException("productosDAO", " no se pudo realizar la busqueda: " + e.getMessage());
         } finally {
-            ServiceLocator.getInstance(usuario,password).liberarConexion();
+            ServiceLocator.getInstance(usuario, password).liberarConexion();
         }
-        return productos;
     }
 
-    
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+
 }

@@ -4,26 +4,26 @@
     Author     : julia
 --%>
 
+<%@page import="modelo.Pedido"%>
+<%@page import="control.DAOFacade"%>
 <%@page import="modelo.Carrito"%>
 <%@page import="control.PedidoDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="modelo.Producto"%>
-<%@page import="control.ProductosDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
     HttpSession sesion = request.getSession();
     String ciudad = "no ciudad";
-    
-    if(sesion.getAttribute("Ciudad")!=null){
+
+    if (sesion.getAttribute("Ciudad") != null) {
         ciudad = sesion.getAttribute("Ciudad").toString();
-    }else{
+    } else {
         out.print("<script>location.replace('../index.jsp');</script>");
     }
-    
+
     String producto_buscado = request.getParameter("busqueda");
     String usuario = "";
-    System.out.println("" + request.getParameter("usuario"));
     if (request.getParameter("usuario") == null) {
         usuario = "visitante";
     } else {
@@ -94,9 +94,14 @@
             </div>
         </nav>
         <!-------------------------------Contenido-------------------------------------->
-        <% ProductosDAO productosDAO = new ProductosDAO();
-            ArrayList<Producto> listaproductos = new ArrayList<>();
-            listaproductos = productosDAO.buscarProducto("visitante", "abc123", producto_buscado);
+        <%
+            DAOFacade facade = new DAOFacade();
+            Producto prod = facade.getProducto();
+            try {
+                facade.buscarProducto("visitante", "abc123", producto_buscado);
+            } catch (Exception e1) {
+                out.println("Error --> " + e1 + e1.getMessage());
+            }
         %>
         <h1>Productos</h1>
         <div class="table-responsive">
@@ -108,36 +113,70 @@
                 <th>Referencia</th>
                 <th>Caracteristicas</th>
                 <th>Foto</th>
-                <th>Precio</th>
+                <th>Iva</th>
                 <th>Unidades</th>
                 </thead>
                 <tbody>
-                    <%for (int i = 0; i < listaproductos.size(); i++) {%>
+                    <%
+                        for (int i = 0; i < prod.getId_producto_array().size(); i++) {
+                    %>
                     <tr>
                         <th scope="row"><%=(i + 1)%> </th>
-                        <td><%=listaproductos.get(i).getNombre_producto()%></td>
-                        <td><%=listaproductos.get(i).getMarca_producto()%></td>
-                        <td><%=listaproductos.get(i).getReferencia_producto()%></td>
-                        <td><%=listaproductos.get(i).getCaracteristicas_producto()%></td>
-                        <td><img class="img-thumbnail img-responsive" alt="Responsive image" width="150" height="150" src="../img/Productos/<%=listaproductos.get(i).getFoto()%>"></td>
-                        <td><%=listaproductos.get(i).getPrecio_base()%></td>
-                        <td><%=listaproductos.get(i).getUnidad_medida()%></td>
+                        <td><%= prod.getNombre_producto_array().get(i) %></td>
+                        <td><%= prod.getMarca_producto_array().get(i) %></td>
+                        <td><%= prod.getReferencia_producto_array().get(i) %></td>
+                        <td><%= prod.getCaracteristicas_producto_array().get(i) %></td>
+                        <td><img class="img-thumbnail img-responsive" alt="Responsive image" width="150" height="150" src="../img/Productos/<%= prod.getFoto_array().get(i) %>"></td>
+                        <td><%= prod.getIva_array().get(i) %></td>
+                        <td><%= prod.getUnidad_medida_array().get(i) %></td>
                         <td>
                             <form method="post" action = "../AgregarProducto">
-                                <input type="hidden" name = "id_producto" id="id_producto" value=<%=listaproductos.get(i).getId_producto()%>>
+                                <input type="hidden" name = "id_producto" id="id_producto" value=<%= prod.getId_producto_array().get(i) %>>
                                 <input type="hidden" name = "usuario" id="usuario" value=<%=usuario%>>
                                 <input type="hidden" name = "busqueda" id="busqueda" value=<%=producto_buscado%>>
                                 <button class="btn btn-outline-success my-2 my-sm-0 buscar" type="submit">Añadir producto</button>                
                             </form>
                         </td>
                     </tr>
-                    <%}%>
+                    <%}//End for listar productos%>
                 </tbody>
             </table>
         </div>
+        <!--------------------------------Productos--------------------------------->
+        <div class="container-fluid">
+            <h1 class="display-4 mt-2 mb-4 text-center">Productos</h1>
 
+            <div class="row justify-content-center">
+                <div class="card-deck col-12 text-center">
+                    <%  
+                        for (int i = 0; i < prod.getId_producto_array().size(); i++) {
+                    %>
+                    <div class="col-md-6 col-xl-4">
+                        <div class="card bg-light border-info mb-4 shadow-sm">
+                            <div class="card-header"><%= prod.getNombre_producto_array().get(i) %></div>
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <img class="img-thumbnail img-responsive" alt="Responsive image" width="200" height="200" src="../img/Productos/<%= prod.getFoto_array().get(i) %>">
+                                </h5>
+                                    <p>$<%= prod.getIva_array().get(i) %></p>
+                                <form method="post" action = "../AgregarProducto">
+                                    <input type="hidden" name = "id_producto" id="id_producto" value=<%= prod.getId_producto_array().get(i) %>>
+                                    <input type="hidden" name = "usuario" id="usuario" value=<%=usuario%>>
+                                    <input type="hidden" name = "busqueda" id="busqueda" value=<%=producto_buscado%>>
+                                    <div class="btn-group" role="group">
+                                        <input type="number" min="0" max="99" class="form-control" placeholder="Cant" value="" name="Cantidad" id="Cantidad"/>
+                                        <button class="btn btn-success my-0 bordes" type="submit"><i class="fas fa-cart-arrow-down fa-2x"></i></button>                
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <%}//End For%>
+                </div>
+            </div>
+        </div>
         <!-------------------------------boton flotante--------------------------------->
-        <%if (!usuario.equals("visitante")) {%>
+        <% if(!usuario.equals("visitante")) {%>
         <a class="btn btn-default btn-carrito floating-action-button" href="productos.jsp" role="button" data-toggle="modal" data-target="#exampleModal">
             <i class="fas fa-shopping-cart fa-3x"></i>
         </a>
@@ -153,14 +192,15 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <% PedidoDAO pedidoDAO = new PedidoDAO();
+                    <%  
+                        /*PedidoDAO pedidoDAO = new PedidoDAO();
                         ArrayList<Carrito> listarcarrito = new ArrayList<>();
                         listarcarrito = pedidoDAO.consultarCarrito(usuario);
                         if (!listarcarrito.isEmpty()) {
-                            double total = 0;
+                            double total = 0;*/
                     %>
                     <div class="modal-body table-responsive">
-                        <h2>Pedido: <%=listarcarrito.get(0).getId_pedido()%></h2>
+                        <h2>Pedido: <%//=listarcarrito.get(0).getId_pedido()%></h2>
                         <table class="table table-bordered table-hover">
                             <thead class="thead-dark">
                             <th>Nombre</th>
@@ -168,21 +208,21 @@
                             <th>Precio</th>
                             </thead>
                             <tbody>
-                                <%for (int i = 0; i < listarcarrito.size(); i++) {%>
+                                <%//for (int i = 0; i < listarcarrito.size(); i++) {%>
                                 <tr>
-                                    <td><%=listarcarrito.get(i).getNombreProducto()%></td>
-                                    <td><%=listarcarrito.get(i).getCantidad()%></td>
-                                    <td><%=listarcarrito.get(i).getPrecio_base()%></td>
+                                    <td><%//=listarcarrito.get(i).getNombre_producto()%></td>
+                                    <td><%//=listarcarrito.get(i).getCantidad()%></td>
+                                    <td><%//=listarcarrito.get(i).getPrecio_base()%></td>
                                     <%
-                                        total = total + (listarcarrito.get(i).getPrecio_base() * listarcarrito.get(i).getCantidad());%>
+                                        //total = total + (listarcarrito.get(i).getPrecio_base() * listarcarrito.get(i).getCantidad());%>
                                 </tr>
-                                <%}%>
+                                <%//}//End for items carrito%>
                             </tbody>
                             <td colspan="2">Total</td>
-                            <td><%=total%></td>
+                            <td><%//=total%></td>
                         </table>
                     </div>
-                    <%}%>
+                    <%//}//End if !carrito.isEmpty %>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Volver</button>
                         <button type="button" class="btn btn-success">Pagar</button>
@@ -190,54 +230,7 @@
                 </div>
             </div>
         </div>
-        <%}%>
-        <!--------------------------------Productos--------------------------------->
-        <div class="container-fluid">
-            <h1 class="display-4 mt-2 mb-4 text-center">Productos</h1>
-
-            <div class="row justify-content-center">
-                <div class="card-deck col-12 text-center">
-                    <%for (int i = 0; i < listaproductos.size(); i++) {%>
-                    <div class="col-md-6 col-xl-4">
-                        <div class="card bg-light border-info mb-4 shadow-sm">
-
-                            <!--td><%=listaproductos.get(i).getNombre_producto()%></td>
-                            <td><%=listaproductos.get(i).getMarca_producto()%></td>
-                            <td><%=listaproductos.get(i).getReferencia_producto()%></td>
-                            <td><%=listaproductos.get(i).getCaracteristicas_producto()%></td>
-                            <td></td>
-                            <td><%=listaproductos.get(i).getPrecio_base()%></td>
-                            <td><%=listaproductos.get(i).getUnidad_medida()%></td>
-                            <td>
-                                <form method="post" action = "../AgregarProducto">
-                                    <input type="hidden" name = "id_producto" id="id_producto" value=<%=listaproductos.get(i).getId_producto()%>>
-                                    <input type="hidden" name = "usuario" id="usuario" value=<%=usuario%>>
-                                    <input type="hidden" name = "busqueda" id="busqueda" value=<%=producto_buscado%>>
-                                    <button class="btn btn-outline-success my-2 my-sm-0 buscar" type="submit">Añadir producto</button>                
-                                </form>
-                            </td-->
-                            <div class="card-header"><%=listaproductos.get(i).getNombre_producto()%></div>
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <img class="img-thumbnail img-responsive" alt="Responsive image" width="200" height="200" src="../img/Productos/<%=listaproductos.get(i).getFoto()%>">
-                                </h5>
-                                <p>$<%=listaproductos.get(i).getPrecio_base()%></p>
-                                <form method="post" action = "../AgregarProducto">
-                                    <input type="hidden" name = "id_producto" id="id_producto" value=<%=listaproductos.get(i).getId_producto()%>>
-                                    <input type="hidden" name = "usuario" id="usuario" value=<%=usuario%>>
-                                    <input type="hidden" name = "busqueda" id="busqueda" value=<%=producto_buscado%>>
-                                    <div class="btn-group" role="group">
-                                        <input type="number" min="0" max="99" class="form-control" placeholder="Cant" value="" name="Cantidad" id="Cantidad"/>
-                                        <button class="btn btn-success my-0 bordes" type="submit"><i class="fas fa-cart-arrow-down fa-2x"></i></button>                
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <%}%>
-                </div>
-            </div>
-        </div>
+        <%}//End if isVisitante%>
         <!--------------------------------FOOTER--------------------------------->
         <footer class="container">
             <p class="float-right"><a href="#">Volver al arriba</a></p>
