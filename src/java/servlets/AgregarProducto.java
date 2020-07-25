@@ -50,7 +50,7 @@ public class AgregarProducto extends HttpServlet {
                 DetallePedido deped = new DetallePedido();
                 Pedido ped = new Pedido();
                 if(facade.consultarPedidos(facade.buscarIdCliente(usuario))){
-                    ped = facade.consultarPedido(usuario, facade.buscarIdCliente(usuario));
+                    facade.consultarPedido(usuario, facade.buscarIdCliente(usuario));
                     deped.setId_pedido(ped.getId_pedido());
                     deped.setCantidad(1);
                     deped.setId_producto(Double.valueOf(id_producto));
@@ -69,7 +69,7 @@ public class AgregarProducto extends HttpServlet {
                     
                     facade.insertarPedido(usuario, ped);
                     Pedido ped2 = new Pedido();
-                    ped2 = facade.consultarPedido(usuario, facade.buscarIdCliente(usuario));
+                    facade.consultarPedido(usuario, facade.buscarIdCliente(usuario));
                     
                     deped.setId_pedido(ped2.getId_pedido());
                     deped.setCantidad(1);
