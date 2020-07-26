@@ -35,7 +35,7 @@ public class ClienteDAO {
      */
     public void insertarCliente() throws CaException {
         try {
-            String strSQL = "INSERT INTO Usuario(ID_CEDULA, PRIMER_NOMB, SEGUNDO_NOMB, PRIMER_APELL, SEGUNDO_APELL, PASSWORD, FECH_NAC, TIPO_ID, GENERO, EMAIL, NICKNAME) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+            String strSQL = "INSERT INTO usur(ID_CEDULA, PRIMER_NOMB, SEGUNDO_NOMB, PRIMER_APELL, SEGUNDO_APELL, PASSWORD, FECH_NAC, TIPO_ID, GENERO, EMAIL, NICKNAME) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.setLong(1, cliente.getId_cedula());
@@ -61,7 +61,7 @@ public class ClienteDAO {
 
     public boolean iniciarSesion(String nickname, String userPassword) throws CaException {
         try {
-            String strSQL = "SELECT COUNT(*) FROM admin_db.Usuario WHERE NICKNAME = ? AND PASSWORD = ?";
+            String strSQL = "SELECT COUNT(*) FROM usur WHERE NICKNAME = ? AND PASSWORD = ?";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.setString(1, nickname);
@@ -85,7 +85,7 @@ public class ClienteDAO {
 
     public void insertarDireccion(String usuario, String password) throws CaException {
         try {
-            String strSQL = "INSERT INTO Direccion(ID_DIRECCION, DIRECCION_COMPLETA, EXTRAS, TIPO_DIRECCION, ID_CEDULA, ID_CIUDAD) VALUES (?,?,?,?,?,?)";
+            String strSQL = "INSERT INTO dir(ID_DIRECCION, DIRECCION_COMPLETA, EXTRAS, TIPO_DIRECCION, ID_CEDULA, ID_CIUDAD) VALUES (?,?,?,?,?,?)";
             Connection conexion = ServiceLocator.getInstance(usuario, password).tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.setLong(1, direccion.getId_direccion());
@@ -107,7 +107,7 @@ public class ClienteDAO {
     public ArrayList<String> buscarDirecciones(String usuario, String password, long cedula) throws CaException {
         ArrayList<String> direcciones = new ArrayList<>();
         try {
-            String strSQL = "SELECT DIRECCION FROM Direccion WHERE ID_CEDULA = ?";
+            String strSQL = "SELECT DIRECCION FROM dir WHERE ID_CEDULA = ?";
             Connection conexion = ServiceLocator.getInstance(usuario, password).tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.setLong(1, cedula);
@@ -144,7 +144,7 @@ public class ClienteDAO {
     public long buscarIdCliente(String usuario) throws CaException {
         long id_cliente=-1;
         try {
-            String strSQL = "SELECT ID_CEDULA FROM admin_db.Usuario WHERE NICKNAME='" + usuario + "'";
+            String strSQL = "SELECT ID_CEDULA FROM usur WHERE NICKNAME='" + usuario + "'";
             Connection conexion = ServiceLocator.getInstance("visitante", "abc123").tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 ResultSet rs = prepStmt.executeQuery();
