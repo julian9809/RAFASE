@@ -39,7 +39,7 @@ public class Ciudad extends HttpServlet {
             String ciudad = request.getParameter("ciudad");
             
             if(request.getParameter("cerrar")!=null){
-                sesion.invalidate();
+                sesion.setAttribute("Ciudad","no ciudad");
                 response.sendRedirect("index.jsp");
             }else{                    
                 if(ciudad == null){

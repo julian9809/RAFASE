@@ -9,6 +9,7 @@ import control.ClienteDAO;
 import control.DAOFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -16,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import util.CaException;
 
 /**
@@ -42,11 +44,17 @@ public class IniciarSesion extends HttpServlet {
             String nickname = request.getParameter("username");
             String inputPassword = request.getParameter("inputPassword");
             ClienteDAO cdao = new ClienteDAO();
-            DAOFacade facade = new DAOFacade();
+            DAOFacade facade = new DAOFacade();          
+            
             //facade.iniciarSesion("admin_db","dbadministrator", nickname, inputPassword);
-            //if(facade.iniciarSesion(nickname, inputPassword)){
-            if(cdao.iniciarSesion(nickname, inputPassword)){ 
-                response.sendRedirect("templates/index.jsp?usuario=" + nickname);
+            //if(facade.iniciarSesion(nickname, inputPassword)){ 
+            
+            HttpSession usuarios = request.getSession();
+            
+            if(cdao.iniciarSesion(nickname, inputPassword)){
+                usuarios.setAttribute("usuario", nickname);
+                usuarios.setAttribute("contraseña", inputPassword);
+                response.sendRedirect("templates/index.jsp");
             }
             else{
                 response.sendRedirect("templates/sign.jsp");

@@ -7,6 +7,20 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true"%> 
 <!DOCTYPE html>
+<%
+    
+    HttpSession usuarios = request.getSession();
+    
+    if(usuarios.getAttribute("usuario")==null){
+        usuarios.setAttribute("usuario", "visitante");
+        usuarios.setAttribute("contraseña", "abc123");
+    }else{
+        usuarios.getAttribute("usuario");
+        usuarios.getAttribute("contraseña");
+    }
+    
+    
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
