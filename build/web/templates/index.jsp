@@ -8,20 +8,16 @@
 <!DOCTYPE html>
 <% 
     HttpSession sesion = request.getSession();
+    HttpSession usuarios = request.getSession();
     String ciudad = "no ciudad";
     
-    if(sesion.getAttribute("Ciudad")!=null){
+    if(!sesion.getAttribute("Ciudad").equals("no ciudad")){
         ciudad = sesion.getAttribute("Ciudad").toString();
     }else{
         out.print("<script>location.replace('../index.jsp');</script>");
     }
     
-    String usuario = "";
-    if (request.getParameter("usuario") == null) {
-        usuario = "visitante";
-    } else {
-        usuario = request.getParameter("usuario");
-    }
+    String usuario = usuarios.getAttribute("usuario").toString();
 %>
 <html>
     <head>

@@ -14,6 +14,7 @@
 <!DOCTYPE html>
 <%
     HttpSession sesion = request.getSession();
+    HttpSession usuarios = request.getSession();
     String ciudad = "no ciudad";
 
     if (sesion.getAttribute("Ciudad") != null) {
@@ -23,12 +24,8 @@
     }
 
     String producto_buscado = request.getParameter("busqueda");
-    String usuario = "";
-    if (request.getParameter("usuario") == null) {
-        usuario = "visitante";
-    } else {
-        usuario = request.getParameter("usuario");
-    }
+    String usuario = usuarios.getAttribute("usuario").toString();
+    
 %>
 <html>
     <head>
@@ -87,7 +84,7 @@
                              alt="avatar image" height="35"> <%=usuario%> </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
                         <a class="dropdown-item" href="#">My account</a>
-                        <a class="dropdown-item" href="../cerrarSesion?usuario=visitante">Log out</a>
+                        <a class="dropdown-item" href="../cerrarSesion">Log out</a>
                     </div>
                 </div>
                 <%}%>
