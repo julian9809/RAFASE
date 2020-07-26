@@ -21,13 +21,13 @@ public class Pedido {
     private double id_cedula;
     private String tipo_id;
     
-    private ArrayList id_pedido_array = new ArrayList();
-    private ArrayList estado_pedido_array = new ArrayList();
-    private ArrayList fecha_pedido_array = new ArrayList();
-    private ArrayList total_pedido_array = new ArrayList();
-    private ArrayList id_ciudad_array = new ArrayList();
-    private ArrayList id_cedula_array = new ArrayList();
-    private ArrayList tipo_id_array = new ArrayList();
+    private ArrayList<Double> id_pedido_array = new ArrayList<>();
+    private ArrayList<Double> estado_pedido_array = new ArrayList<>();
+    private ArrayList<Date> fecha_pedido_array = new ArrayList<>();
+    private ArrayList<Double> total_pedido_array = new ArrayList<>();
+    private ArrayList<Double> id_ciudad_array = new ArrayList<>();
+    private ArrayList<Double> id_cedula_array = new ArrayList<>();
+    private ArrayList<String> tipo_id_array = new ArrayList<>();
     
     public Pedido() {
     }
@@ -88,59 +88,59 @@ public class Pedido {
         this.tipo_id = tipo_id;
     }
 
-    public ArrayList getId_pedido_array() {
+    public ArrayList<Double> getId_pedido_array() {
         return id_pedido_array;
     }
 
-    public void setId_pedido_array(ArrayList id_pedido_array) {
+    public void setId_pedido_array(ArrayList<Double> id_pedido_array) {
         this.id_pedido_array = id_pedido_array;
     }
 
-    public ArrayList getEstado_pedido_array() {
+    public ArrayList<Double> getEstado_pedido_array() {
         return estado_pedido_array;
     }
 
-    public void setEstado_pedido_array(ArrayList estado_pedido_array) {
+    public void setEstado_pedido_array(ArrayList<Double> estado_pedido_array) {
         this.estado_pedido_array = estado_pedido_array;
     }
 
-    public ArrayList getFecha_pedido_array() {
+    public ArrayList<Date> getFecha_pedido_array() {
         return fecha_pedido_array;
     }
 
-    public void setFecha_pedido_array(ArrayList fecha_pedido_array) {
+    public void setFecha_pedido_array(ArrayList<Date> fecha_pedido_array) {
         this.fecha_pedido_array = fecha_pedido_array;
     }
 
-    public ArrayList getTotal_pedido_array() {
+    public ArrayList<Double> getTotal_pedido_array() {
         return total_pedido_array;
     }
 
-    public void setTotal_pedido_array(ArrayList total_pedido_array) {
+    public void setTotal_pedido_array(ArrayList<Double> total_pedido_array) {
         this.total_pedido_array = total_pedido_array;
     }
 
-    public ArrayList getId_ciudad_array() {
+    public ArrayList<Double> getId_ciudad_array() {
         return id_ciudad_array;
     }
 
-    public void setId_ciudad_array(ArrayList id_ciudad_array) {
+    public void setId_ciudad_array(ArrayList<Double> id_ciudad_array) {
         this.id_ciudad_array = id_ciudad_array;
     }
 
-    public ArrayList getId_cedula_array() {
+    public ArrayList<Double> getId_cedula_array() {
         return id_cedula_array;
     }
 
-    public void setId_cedula_array(ArrayList id_cedula_array) {
+    public void setId_cedula_array(ArrayList<Double> id_cedula_array) {
         this.id_cedula_array = id_cedula_array;
     }
 
-    public ArrayList getTipo_id_array() {
+    public ArrayList<String> getTipo_id_array() {
         return tipo_id_array;
     }
 
-    public void setTipo_id_array(ArrayList tipo_id_array) {
+    public void setTipo_id_array(ArrayList<String> tipo_id_array) {
         this.tipo_id_array = tipo_id_array;
     }
     

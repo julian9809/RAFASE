@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import modelo.Cliente;
 import util.CaException;
 
@@ -67,6 +68,12 @@ public class registro_user extends HttpServlet {
             String fecha_nacimiento = request.getParameter("fecha_nacimiento");
             String password = request.getParameter("password");
             String confirme_password = request.getParameter("confirme_password");
+            
+            HttpSession usuarios = request.getSession();
+            
+            usuarios.setAttribute("usuario", nickname);
+            usuarios.setAttribute("contraseña", password);
+            
             if (password.equals(confirme_password)) {
                 DAOFacade facade = new DAOFacade();
                 Cliente cli = facade.getCliente();
@@ -81,13 +88,12 @@ public class registro_user extends HttpServlet {
                 cli.setNickname(nickname);
                 cli.setFecha_nacimiento((Date.valueOf(fecha_nacimiento)));
                 cli.setPassword(password);
-                System.out.println(""+password);
                 
                 facade.insertarCliente();
                 facade.crearUsuario(nickname, password);
                 
-                facade.crearCarrito(nickname, cli.getId_cedula());
-                response.sendRedirect("templates/index.jsp?usuario=" + nickname);
+                //facade.crearCarrito(nickname, cli.getId_cedula());
+                response.sendRedirect("templates/index.jsp");
             } else {
                 response.sendRedirect("templates/registro_user.jsp");
             }

@@ -17,9 +17,9 @@ public class DetallePedido {
     private double id_producto;
     private double cantidad;
     
-    private ArrayList id_pedido_array = new ArrayList();
-    private ArrayList id_producto_array = new ArrayList();
-    private ArrayList cantidad_array = new ArrayList();
+    private ArrayList<Double> id_pedido_array = new ArrayList<>();
+    private ArrayList<Double> id_producto_array = new ArrayList<>();
+    private ArrayList<Double> cantidad_array = new ArrayList<>();
 
     public double getId_pedido() {
         return id_pedido;
@@ -45,27 +45,27 @@ public class DetallePedido {
         this.cantidad = cantidad;
     }
 
-    public ArrayList getId_pedido_array() {
+    public ArrayList<Double> getId_pedido_array() {
         return id_pedido_array;
     }
 
-    public void setId_pedido_array(ArrayList id_pedido_array) {
+    public void setId_pedido_array(ArrayList<Double> id_pedido_array) {
         this.id_pedido_array = id_pedido_array;
     }
 
-    public ArrayList getId_producto_array() {
+    public ArrayList<Double> getId_producto_array() {
         return id_producto_array;
     }
 
-    public void setId_producto_array(ArrayList id_producto_array) {
+    public void setId_producto_array(ArrayList<Double> id_producto_array) {
         this.id_producto_array = id_producto_array;
     }
 
-    public ArrayList getCantidad_array() {
+    public ArrayList<Double> getCantidad_array() {
         return cantidad_array;
     }
 
-    public void setCantidad_array(ArrayList cantidad_array) {
+    public void setCantidad_array(ArrayList<Double> cantidad_array) {
         this.cantidad_array = cantidad_array;
     }
     

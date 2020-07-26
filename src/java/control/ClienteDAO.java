@@ -133,7 +133,6 @@ public class ClienteDAO {
             prepStmt.execute();
             prepStmt = conexion.prepareStatement(strSQLDOS);
             prepStmt.execute();
-            System.out.println("crea usuario");
             ServiceLocator.getInstance().commit();
         } catch (SQLException e) {
             throw new CaException("ClienteDAO", "No se pudo crear el Usuario\n" + e.getMessage());

@@ -17,7 +17,14 @@ public class Carrito {
     private double cantidad;
     private double precio_base;
     
-    public Carrito(){}
+    private ArrayList<Double> id_pedido_array = new ArrayList<>();
+    private ArrayList<String> nombre_producto_array = new ArrayList<>();
+    private ArrayList<Double> cantidad_array = new ArrayList<>();
+    private ArrayList<Double> precio_base_array = new ArrayList<>();
+    
+    public Carrito(){
+        
+    }
 
     public double getId_pedido() {
         return id_pedido;
@@ -50,6 +57,37 @@ public class Carrito {
     public void setPrecio_base(double precio_base) {
         this.precio_base = precio_base;
     }
-    
+
+    public ArrayList<Double> getId_pedido_array() {
+        return id_pedido_array;
+    }
+
+    public void setId_pedido_array(ArrayList<Double> id_pedido_array) {
+        this.id_pedido_array = id_pedido_array;
+    }
+
+    public ArrayList<String> getNombre_producto_array() {
+        return nombre_producto_array;
+    }
+
+    public void setNombre_producto_array(ArrayList<String> nombre_producto_array) {
+        this.nombre_producto_array = nombre_producto_array;
+    }
+
+    public ArrayList<Double> getCantidad_array() {
+        return cantidad_array;
+    }
+
+    public void setCantidad_array(ArrayList<Double> cantidad_array) {
+        this.cantidad_array = cantidad_array;
+    }
+
+    public ArrayList<Double> getPrecio_base_array() {
+        return precio_base_array;
+    }
+
+    public void setPrecio_base_array(ArrayList<Double> precio_base_array) {
+        this.precio_base_array = precio_base_array;
+    }
     
 }

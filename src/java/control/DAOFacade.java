@@ -54,8 +54,8 @@ public class DAOFacade {
         return clienteDAO.buscarIdCliente(usuario);
     }
 
-    public Pedido consultarPedido(String usuario, long usuario_id) throws CaException{
-        return pedidoDAO.consultarPedido(usuario, usuario_id);
+    public void consultarPedido(String usuario, long usuario_id) throws CaException{
+        pedidoDAO.consultarPedido(usuario, usuario_id);
     }
 
     public boolean consultarPedidos(long usuario_id) throws CaException{
@@ -70,16 +70,16 @@ public class DAOFacade {
         pedidoDAO.insertarProductosPedido(usuario, deped);
     }
 
-    public ArrayList<DetallePedido> consultarProductosPedido(String usuario, String password, DetallePedido deped) throws CaException{
-        return pedidoDAO.consultarProductosPedido(usuario, password, deped);
+    public void consultarProductosPedido(String usuario, String password, DetallePedido deped) throws CaException{
+        pedidoDAO.consultarProductosPedido(usuario, password, deped);
     }
 
     public void crearCarrito(String usuario, long cedula) throws CaException{
         pedidoDAO.crearCarrito(usuario, cedula);
     }
 
-    public ArrayList<Carrito> consultarCarrito(String usuario) throws CaException{
-        return pedidoDAO.consultarCarrito(usuario);
+    public void consultarCarrito(String usuario) throws CaException{
+        pedidoDAO.consultarCarrito(usuario);
     }
 
     public boolean verificarExistencia(double id_pedido, double id_producto) throws CaException{
@@ -90,11 +90,15 @@ public class DAOFacade {
         pedidoDAO.actualizarCantidad(id_pedido, id_producto);
     }
     
-    public ArrayList<Producto> buscarProducto(String usuario,String password,String producto_buscado) throws CaException {
-        return productosDAO.buscarProducto(usuario, password, producto_buscado);
+    public void buscarProducto(String usuario,String password,String producto_buscado) throws CaException {
+        productosDAO.buscarProducto(usuario, password, producto_buscado);
     }
     
     public Cliente getCliente(){
         return clienteDAO.getCliente();
+    }
+    
+    public Producto getProducto(){
+        return productosDAO.getProducto();
     }
 }
