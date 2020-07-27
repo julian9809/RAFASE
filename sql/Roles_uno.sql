@@ -19,6 +19,9 @@ grant create any view to administradorBD;
 grant create role to administradorBD;
 grant create user to administradorBD;
 grant create public synonym to administradorBD;
+grant create sequence to administradorBD;
+grant create procedure to administradorBD;
+grant create trigger to administradorBD;
 
 create user admin_db identified by dbadministrator;
 grant administradorBD to admin_db;
