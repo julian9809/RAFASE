@@ -66,8 +66,11 @@ grant select on tel to adminRAFASE;
 grant select on tien to adminRAFASE;
 grant select on usur to adminRAFASE;
 grant insert, update on prove to adminRAFASE;
-grant update on inv to adminRAFASE;
-grant update on tien to adminRAFASE; 
+grant insert, update on inv to adminRAFASE;
+grant insert, update on subcat to adminRAFASE;
+grant insert, update on categ to adminRAFASE;
+grant insert, update on prod to adminRAFASE;
+grant update on tien to adminRAFASE;
 
 create role usuarioGeneral;
 grant create session to usuarioGeneral;
@@ -79,7 +82,7 @@ grant select on prod to usuarioGeneral;
 grant select on subcat to usuarioGeneral;
 grant select on usur to usuarioGeneral;
 
-create role cliente identified by password;
+create role cliente;
 grant create session to cliente;
 grant select on prod to cliente;
 grant select on categ to cliente;
@@ -94,15 +97,14 @@ grant select on usur to cliente;
 grant update on depe to cliente;
 grant update on dir to cliente;
 grant update on usur to cliente;
-grant update on tel to cliente; 
+grant update on tel to cliente;
 
 grant insert on depe to cliente;
 grant insert on dir to cliente;
 grant insert on env to cliente;
 grant insert on ped to cliente;
 grant insert on tc to cliente;
-grant insert on tel to cliente; 
-
+grant insert on tel to cliente;
 --USUARIOS 
 
 create user RAFASEadmin identified by contrasena

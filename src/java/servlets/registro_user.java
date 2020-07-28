@@ -71,9 +71,6 @@ public class registro_user extends HttpServlet {
             
             HttpSession usuarios = request.getSession();
             
-            usuarios.setAttribute("usuario", nickname);
-            usuarios.setAttribute("contraseña", password);
-            
             if (password.equals(confirme_password)) {
                 DAOFacade facade = new DAOFacade();
                 Cliente cli = facade.getCliente();
@@ -91,6 +88,9 @@ public class registro_user extends HttpServlet {
                 
                 facade.insertarCliente();
                 facade.crearUsuario(nickname, password);
+                
+                usuarios.setAttribute("usuario", nickname);
+                usuarios.setAttribute("contraseña", password);
                 
                 //facade.crearCarrito(nickname, cli.getId_cedula());
                 response.sendRedirect("templates/index.jsp");
