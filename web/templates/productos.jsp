@@ -43,10 +43,31 @@
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
         <!-- Material Design Bootstrap -->
         <link rel="stylesheet" href="../css/mdb/mdb.min.css">
+        <!---------------------- Alertify CSS ---------------------->
+        <!-- CSS -->
+        <link rel="stylesheet" href="../css/alertify/alertify.min.css"/>
+        <!-- Default theme -->
+        <link rel="stylesheet" href="../css/alertify/themes/default.min.css"/>
+        <!-- Semantic UI theme -->
+        <link rel="stylesheet" href="../css/alertify/themes/semantic.min.css"/>
+        <!-- Bootstrap theme -->
+        <link rel="stylesheet" href="../css/alertify/themes/bootstrap.min.css"/>
+        <!---------------------- Alertify CSS ---------------------->
         <!-- Customs styles for this template -->
         <link rel="stylesheet" href="../css/custom/productos.css">
         <!-- Customs fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Averia+Libre&display=swap" rel="stylesheet">
+        <!-------------------------------Scripts--------------------------------->
+        <!-- jQuery -->
+        <script type="text/javascript" src="../js/jquery.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="../js/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="../js/mdb.min.js"></script>
+        <!-- Alertifyjs JavaScript -->
+        <script type="text/javascript" src="../js/alertifyjs/alertify.min.js"></script>
     </head>
     <body>
         <!-------------------------------Barra de navegación--------------------------------->
@@ -99,8 +120,14 @@
                 facade.buscarProducto("admin_db", "dbadministrator", producto_buscado,
                 ciudad,"","");
             } catch (Exception e1) {
-                out.println("Error --> " + e1 + e1.getMessage());
-            }
+                %>
+                <script type="text/javascript">
+                    alertify.alert("<%= "Error --> " + e1 + e1.getMessage() %>", function(){
+                        alertify.message('OK');
+                    });
+                </script>
+                <%
+            }//End catch
         %>
         <h1>Productos</h1>
         <div class="table-responsive">
@@ -235,14 +262,5 @@
             <p class="float-right"><a href="#">Volver al arriba</a></p>
             <p>&copy; 2020 RAFASE, Inc. &middot; <a href="#">Privacidad</a> &middot; <a href="#">Términos y Condiciones</a></p>
         </footer>
-        <!-------------------------------Scripts--------------------------------->
-        <!-- jQuery -->
-        <script type="text/javascript" src="../js/jquery.js"></script>
-        <!-- Bootstrap tooltips -->
-        <script type="text/javascript" src="../js/popper.min.js"></script>
-        <!-- Bootstrap core JavaScript -->
-        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-        <!-- MDB core JavaScript -->
-        <script type="text/javascript" src="../js/mdb.min.js"></script>
     </body>
 </html>
