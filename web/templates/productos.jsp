@@ -96,7 +96,7 @@
             DAOFacade facade = new DAOFacade();
             InventarioRafase inventarioRafase = facade.getInventario_rafase();
             try {
-                facade.buscarProducto("visitante", "abc123", producto_buscado,
+                facade.buscarProducto("admin_db", "dbadministrator", producto_buscado,
                 ciudad,"","");
             } catch (Exception e1) {
                 out.println("Error --> " + e1 + e1.getMessage());

@@ -56,7 +56,7 @@
             <main role="main" class="inner cover">
                 <h1 class="cover-heading">RAFASE</h1>
                 <p class="lead inicio">Somos una tienda virtual con varias sucursales fisicas en distintas ciudades del pais, escoge tu ciudad eh inicia a comprar de forma rapida y sencilla.</p>
-                <form class="lead btn-group" action="SesionCiudad" method="post">
+                <form class="lead btn-group" action="Ciudad" method="post">
                     <select class="btn btn-lg btn-light" name="ciudad" id="ciudad">
                         <option selected hidden disabled>Escoge tu ciudad</option>
                         <option value="Bogotá">Bogotá</option>

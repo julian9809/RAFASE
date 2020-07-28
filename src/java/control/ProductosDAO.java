@@ -43,7 +43,7 @@ public class ProductosDAO {
             throws CaException {
         try {
             String strSQL = "SELECT * FROM INVENTARIO_RAFASE "
-                    + "WHERE ID_CIUDAD = " + ciudad + " "
+                    + "WHERE NOMBRE = '" + ciudad + "' "
                     + "AND NOMBRE_PRODUCTO LIKE UPPER('%"+producto_buscado+"%') "
                     + "AND ID_SUBCATEGORIA LIKE UPPER('%"+subcategoria_buscada+"%') "
                     + "AND ID_CATEGORIA LIKE UPPER('%"+categoria_buscada+"%') "
