@@ -687,7 +687,7 @@ ALTER TABLE    Producto
 ;
 
 ALTER TABLE    Producto  
- ADD CONSTRAINT   CK_IVA  CHECK (IVA > 0)
+ ADD CONSTRAINT   CK_IVA  CHECK (IVA >= 0)
 ;
 
 ALTER TABLE    Proveedor  
