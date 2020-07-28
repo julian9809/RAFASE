@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import modelo.Carrito;
 import modelo.Cliente;
 import modelo.DetallePedido;
+import modelo.InventarioRafase;
 import modelo.Producto;
 import modelo.Pedido;
 import util.CaException;
@@ -24,7 +25,6 @@ public class DAOFacade {
     private ProductosDAO productosDAO;
 
     public DAOFacade() {
-
         clienteDAO = new ClienteDAO();
         pedidoDAO = new PedidoDAO();
         productosDAO = new ProductosDAO();
@@ -104,4 +104,8 @@ public class DAOFacade {
     public Producto getProducto(){
         return productosDAO.getProducto();
     }
+    public InventarioRafase getInventario_rafase() {
+        return productosDAO.getInventario_rafase();
+    }
+    
 }

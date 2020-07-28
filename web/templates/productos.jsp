@@ -4,6 +4,7 @@
     Author     : julia
 --%>
 
+<%@page import="modelo.InventarioRafase"%>
 <%@page import="modelo.Pedido"%>
 <%@page import="control.DAOFacade"%>
 <%@page import="modelo.Carrito"%>
@@ -93,9 +94,10 @@
         <!-------------------------------Contenido-------------------------------------->
         <%
             DAOFacade facade = new DAOFacade();
-            Producto prod = facade.getProducto();
+            InventarioRafase inventarioRafase = facade.getInventario_rafase();
             try {
-                facade.buscarProducto("visitante", "abc123", producto_buscado);
+                facade.buscarProducto("admin_db", "dbadministrator", producto_buscado,
+                ciudad,"","");
             } catch (Exception e1) {
                 out.println("Error --> " + e1 + e1.getMessage());
             }
@@ -115,20 +117,20 @@
                 </thead>
                 <tbody>
                     <%
-                        for (int i = 0; i < prod.getId_producto_array().size(); i++) {
+                        for (int i = 0; i < inventarioRafase.getProducto().getId_producto_array().size(); i++) {
                     %>
                     <tr>
                         <th scope="row"><%=(i + 1)%> </th>
-                        <td><%= prod.getNombre_producto_array().get(i) %></td>
-                        <td><%= prod.getMarca_producto_array().get(i) %></td>
-                        <td><%= prod.getReferencia_producto_array().get(i) %></td>
-                        <td><%= prod.getCaracteristicas_producto_array().get(i) %></td>
-                        <td><img class="img-thumbnail img-responsive" alt="Responsive image" width="150" height="150" src="../img/Productos/<%= prod.getFoto_array().get(i) %>"></td>
-                        <td><%= prod.getIva_array().get(i) %></td>
-                        <td><%= prod.getUnidad_medida_array().get(i) %></td>
+                        <td><%= inventarioRafase.getProducto().getNombre_producto_array().get(i) %></td>
+                        <td><%= inventarioRafase.getProducto().getMarca_producto_array().get(i) %></td>
+                        <td><%= inventarioRafase.getProducto().getReferencia_producto_array().get(i) %></td>
+                        <td><%= inventarioRafase.getProducto().getCaracteristicas_producto_array().get(i) %></td>
+                        <td><img class="img-thumbnail img-responsive" alt="Responsive image" width="150" height="150" src="../img/Productos/<%= inventarioRafase.getProducto().getFoto_array().get(i) %>"></td>
+                        <td><%= inventarioRafase.getProducto().getIva_array().get(i) %></td>
+                        <td><%= inventarioRafase.getProducto().getUnidad_medida_array().get(i) %></td>
                         <td>
                             <form method="post" action = "../AgregarProducto">
-                                <input type="hidden" name = "id_producto" id="id_producto" value=<%= prod.getId_producto_array().get(i) %>>
+                                <input type="hidden" name = "id_producto" id="id_producto" value=<%= inventarioRafase.getProducto().getId_producto_array().get(i) %>>
                                 <input type="hidden" name = "usuario" id="usuario" value=<%=usuario%>>
                                 <input type="hidden" name = "busqueda" id="busqueda" value=<%=producto_buscado%>>
                                 <button class="btn btn-outline-success my-2 my-sm-0 buscar" type="submit">Añadir producto</button>                
@@ -146,18 +148,18 @@
             <div class="row justify-content-center">
                 <div class="card-deck col-12 text-center">
                     <%  
-                        for (int i = 0; i < prod.getId_producto_array().size(); i++) {
+                        for (int i = 0; i < inventarioRafase.getProducto().getId_producto_array().size(); i++) {
                     %>
                     <div class="col-md-6 col-xl-4">
                         <div class="card bg-light border-info mb-4 shadow-sm">
-                            <div class="card-header"><%= prod.getNombre_producto_array().get(i) %></div>
+                            <div class="card-header"><%= inventarioRafase.getProducto().getNombre_producto_array().get(i) %></div>
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    <img class="img-thumbnail img-responsive" alt="Responsive image" width="200" height="200" src="../img/Productos/<%= prod.getFoto_array().get(i) %>">
+                                    <img class="img-thumbnail img-responsive" alt="Responsive image" width="200" height="200" src="../img/Productos/<%= inventarioRafase.getProducto().getFoto_array().get(i) %>">
                                 </h5>
-                                    <p>$<%= prod.getIva_array().get(i) %></p>
+                                    <p>$<%= inventarioRafase.getProducto().getIva_array().get(i) %></p>
                                 <form method="post" action = "../AgregarProducto">
-                                    <input type="hidden" name = "id_producto" id="id_producto" value=<%= prod.getId_producto_array().get(i) %>>
+                                    <input type="hidden" name = "id_producto" id="id_producto" value=<%= inventarioRafase.getProducto().getId_producto_array().get(i) %>>
                                     <input type="hidden" name = "usuario" id="usuario" value=<%=usuario%>>
                                     <input type="hidden" name = "busqueda" id="busqueda" value=<%=producto_buscado%>>
                                     <div class="btn-group" role="group">
