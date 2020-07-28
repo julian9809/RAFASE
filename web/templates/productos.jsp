@@ -109,7 +109,7 @@
                         <a class="dropdown-item" href="../cerrarSesion">Log out</a>
                     </div>
                 </div>
-                <%}%>
+                <%}//End If visitante%>
             </div>
         </nav>
         <!-------------------------------Contenido-------------------------------------->
@@ -117,12 +117,13 @@
             DAOFacade facade = new DAOFacade();
             InventarioRafase inventarioRafase = facade.getInventario_rafase();
             try {
-                facade.buscarProducto("admin_db", "dbadministrator", producto_buscado,
-                ciudad,"","");
+                facade.buscarProducto(usuarios.getAttribute("usuario").toString(),
+                        usuarios.getAttribute("contraseña").toString(),
+                        producto_buscado,ciudad,"","");
             } catch (Exception e1) {
                 %>
                 <script type="text/javascript">
-                    alertify.alert("<%= "Error --> " + e1 + e1.getMessage() %>", function(){
+                    alertify.alert("Error","<%= "Error --> " + e1 + e1.getMessage() %>", function(){
                         alertify.message('OK');
                     });
                 </script>

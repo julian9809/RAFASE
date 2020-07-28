@@ -5,11 +5,9 @@
  */
 package servlets;
 
-import control.ClienteDAO;
 import control.DAOFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -35,6 +33,7 @@ public class IniciarSesion extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws util.CaException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, CaException {
@@ -43,7 +42,6 @@ public class IniciarSesion extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String nickname = request.getParameter("username");
             String inputPassword = request.getParameter("inputPassword");
-            ClienteDAO cdao = new ClienteDAO();
             DAOFacade facade = new DAOFacade();          
             
             //facade.iniciarSesion("admin_db","dbadministrator", nickname, inputPassword);
@@ -51,7 +49,7 @@ public class IniciarSesion extends HttpServlet {
             
             HttpSession usuarios = request.getSession();
             
-            if(cdao.iniciarSesion(nickname, inputPassword)){
+            if(facade.iniciarSesion(nickname, inputPassword)){
                 usuarios.setAttribute("usuario", nickname);
                 usuarios.setAttribute("contraseña", inputPassword);
                 response.sendRedirect("templates/index.jsp");
