@@ -29,6 +29,8 @@ public class PedidoDAO {
 
     public PedidoDAO() {
         pedido = new Pedido();
+        detalle_pedido = new DetallePedido();
+        carrito = new Carrito();
     }
 
     public void consultarPedido(String usuario, long usuario_id) throws CaException {

@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
  * @author julia
  */
 @WebServlet(urlPatterns = {"/Ciudad"})
-public class Ciudad extends HttpServlet {
+public class SesionCiudad extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

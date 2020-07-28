@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import modelo.Producto;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import modelo.InventarioRafase;
 import util.CaException;
 import util.ServiceLocator;
 
@@ -20,9 +21,11 @@ import util.ServiceLocator;
 public class ProductosDAO {
 
     private Producto producto;
-
+    private InventarioRafase inventario_rafase;
+    
     public ProductosDAO() {
         producto = new Producto();
+        inventario_rafase = new InventarioRafase();
     }
     
     /**
@@ -49,15 +52,23 @@ public class ProductosDAO {
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 ResultSet rs = prepStmt.executeQuery();
                 while (rs.next()) {
-                    producto.getId_producto_array().add(rs.getDouble(1));
-                    producto.getNombre_producto_array().add(rs.getString(2));
-                    producto.getMarca_producto_array().add(rs.getString(3));
-                    producto.getReferencia_producto_array().add(rs.getString(4));
-                    producto.getCaracteristicas_producto_array().add(rs.getString(5));
-                    producto.getFoto_array().add(rs.getString(6));
-                    producto.getId_subcategoria_array().add(rs.getDouble(7));
-                    producto.getIva_array().add(rs.getDouble(8));
-                    producto.getUnidad_medida_array().add(rs.getString(9));
+                    inventario_rafase.getCiudad().getId_ciudad_array().add(rs.getDouble(1));
+                    inventario_rafase.getCiudad().getNombre_array().add(rs.getString(2));
+                    inventario_rafase.getCategoria().getId_categoria_array().add(rs.getDouble(3));
+                    inventario_rafase.getCategoria().getNombre_categoria_array().add(rs.getString(4));
+                    inventario_rafase.getCategoria().getDescripcion_categoria_array().add(rs.getString(5));
+                    inventario_rafase.getSubcategoria().getId_subcategoria_array().add(rs.getDouble(6));
+                    inventario_rafase.getSubcategoria().getNombre_subcategoria_array().add(rs.getString(7));
+                    inventario_rafase.getProducto().getId_producto_array().add(rs.getDouble(8));
+                    inventario_rafase.getProducto().getNombre_producto_array().add(rs.getString(9));
+                    inventario_rafase.getProducto().getMarca_producto_array().add(rs.getString(10));
+                    inventario_rafase.getProducto().getReferencia_producto_array().add(rs.getString(11));
+                    inventario_rafase.getProducto().getCaracteristicas_producto_array().add(rs.getString(12));
+                    inventario_rafase.getProducto().getFoto_array().add(rs.getString(13));
+                    inventario_rafase.getProducto().getIva_array().add(rs.getDouble(14));
+                    inventario_rafase.getProducto().getUnidad_medida_array().add(rs.getString(15));
+                    inventario_rafase.getInventario().getExistencias_array().add(rs.getDouble(16));
+                    inventario_rafase.getInventario().getPrecio_base_array().add(rs.getDouble(17));
                 }
             }
         } catch (SQLException e) {
@@ -75,4 +86,12 @@ public class ProductosDAO {
         this.producto = producto;
     }
 
+    public InventarioRafase getInventario_rafase() {
+        return inventario_rafase;
+    }
+
+    public void setInventario_rafase(InventarioRafase inventario_rafase) {
+        this.inventario_rafase = inventario_rafase;
+    }
+    
 }
