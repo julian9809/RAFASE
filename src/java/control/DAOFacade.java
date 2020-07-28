@@ -90,8 +90,11 @@ public class DAOFacade {
         pedidoDAO.actualizarCantidad(id_pedido, id_producto);
     }
     
-    public void buscarProducto(String usuario,String password,String producto_buscado) throws CaException {
-        productosDAO.buscarProducto(usuario, password, producto_buscado);
+    public void buscarProducto(String usuario, String password,
+            String producto_buscado, String ciudad,
+            String subcategoria_buscada, String categoria_buscada) throws CaException {
+        productosDAO.buscarProducto(usuario, password, producto_buscado,
+                ciudad,subcategoria_buscada,categoria_buscada);
     }
     
     public Cliente getCliente(){

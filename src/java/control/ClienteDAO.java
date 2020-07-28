@@ -114,7 +114,6 @@ public class ClienteDAO {
                 ResultSet rs = prepStmt.executeQuery();
                 direcciones.add(rs.getString(1));
             }
-
         } catch (SQLException e) {
             throw new CaException("ClienteDAO", "No se pudo realizar la busqueda" + e.getMessage());
         } finally {
@@ -129,11 +128,13 @@ public class ClienteDAO {
                     + password;
             String strSQLDOS = "grant cliente to " + usuario;
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
-            PreparedStatement prepStmt = conexion.prepareStatement(strSQL);
-            prepStmt.execute();
-            prepStmt = conexion.prepareStatement(strSQLDOS);
-            prepStmt.execute();
-            ServiceLocator.getInstance().commit();
+            try(PreparedStatement prepStmt = conexion.prepareStatement(strSQL)){
+                prepStmt.execute();
+                try(PreparedStatement prepStmtDOS = conexion.prepareStatement(strSQLDOS)){
+                    prepStmtDOS.execute();
+                    ServiceLocator.getInstance().commit();
+                }
+            }
         } catch (SQLException e) {
             throw new CaException("ClienteDAO", "No se pudo crear el Usuario\n" + e.getMessage());
         } finally {

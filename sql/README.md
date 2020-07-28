@@ -4,5 +4,6 @@
 3. Ingresar como admin_db (conn admin_db/dbadministrator)
 4. Correr ScriptProyecto.sql
 5. Correr secuencias.sql
-6. Correr Roles_Dos.sql
+6. Corret Vistas.sql
+7. Correr Roles_Dos.sql
 ## Si algo falla llorar

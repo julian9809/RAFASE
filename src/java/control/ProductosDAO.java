@@ -45,11 +45,6 @@ public class ProductosDAO {
                     + "AND ID_SUBCATEGORIA LIKE UPPER('%"+subcategoria_buscada+"%') "
                     + "AND ID_CATEGORIA LIKE UPPER('%"+categoria_buscada+"%') "
                     + "ORDER BY NOMBRE_PRODUCTO ASC";
-                    /*"SELECT id_producto,nombre_producto,marca_producto,"
-                    + "referencia_producto,caracteristicas_producto,foto,id_subcategoria,"
-                    + "iva,unidad_medida FROM prod WHERE "
-                    + "UPPER(nombre_producto) LIKE UPPER('%" + producto_buscado
-                    + "%')";*/
             Connection conexion = ServiceLocator.getInstance(usuario, password).tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 ResultSet rs = prepStmt.executeQuery();
