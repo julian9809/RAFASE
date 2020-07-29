@@ -68,11 +68,7 @@ public class ClienteDAO {
                 prepStmt.setString(2, userPassword);
                 ResultSet rs = prepStmt.executeQuery();
                 while (rs.next()) {
-                    if (rs.getLong(1) == 0) {
-                        return false;
-                    } else {
-                        return true;
-                    }
+                    return rs.getLong(1) != 0;
                 }
             }
         } catch (SQLException e) {
