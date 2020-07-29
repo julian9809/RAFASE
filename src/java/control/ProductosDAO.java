@@ -42,7 +42,7 @@ public class ProductosDAO {
             String subcategoria_buscada, String categoria_buscada)
             throws CaException {
         try {
-            String strSQL = "SELECT * FROM INVENTARIO_RAFASE "
+            String strSQL = "SELECT * FROM INV_RAFA "
                     + "WHERE NOMBRE = '" + ciudad + "' "
                     + "AND NOMBRE_PRODUCTO LIKE UPPER('%"+producto_buscado+"%') "
                     + "AND ID_SUBCATEGORIA LIKE UPPER('%"+subcategoria_buscada+"%') "

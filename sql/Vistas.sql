@@ -8,3 +8,9 @@ CREATE OR REPLACE VIEW INVENTARIO_RAFASE AS
 	AND ciu.ID_CIUDAD = inv.ID_CIUDAD
 	AND prod.ID_SUBCATEGORIA = subcat.ID_SUBCATEGORIA
 	AND subcat.ID_CATEGORIA = categ.ID_CATEGORIA);
+
+create public synonym inv_rafa for admin_db.inventario_rafase;
+
+grant select on inv_rafa to usuarioGeneral;
+grant select on inv_rafa to cliente;
+grant select on inv_rafa to adminRAFASE;
