@@ -4,6 +4,7 @@
     Author     : julia
 --%>
 
+<%@page import="util.CaException"%>
 <%@page import="modelo.InventarioRafase"%>
 <%@page import="modelo.Pedido"%>
 <%@page import="control.DAOFacade"%>
