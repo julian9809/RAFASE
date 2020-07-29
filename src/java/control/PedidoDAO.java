@@ -29,8 +29,6 @@ public class PedidoDAO {
 
     public PedidoDAO() {
         pedido = new Pedido();
-        detalle_pedido = new DetallePedido();
-        carrito = new Carrito();
     }
 
     public void consultarPedido(String usuario, long usuario_id) throws CaException {
@@ -75,7 +73,8 @@ public class PedidoDAO {
 
     public void insertarPedido(String usuario, Pedido ped) throws CaException {
         try {
-            String strSQL = "INSERT INTO ped(ID_PEDIDO, ESTADO_PEDIDO, FECHA_PEDIDO, TOTAL_PEDIDO, ID_CIUDAD, ID_CEDULA, TIPO_ID) VALUES(ID_PEDIDO.NEXTVAL,?,SYSDATE,?,?,?,?)";
+            String strSQL = "INSERT INTO ped VALUES(ID_PEDIDO.NEXTVAL,?,SYSDATE,?,?,?,?)";
+            
             Connection conexion = ServiceLocator.getInstance("admin_db", "dbadministrator").tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.setDouble(1, (double) ped.getEstado_pedido());
@@ -110,10 +109,15 @@ public class PedidoDAO {
             ServiceLocator.getInstance("admin_db", "dbadministrator").liberarConexion();
         }
     }
-
+        //CONSULTAR EL CARRITO
     public void consultarProductosPedido(String usuario, String password, DetallePedido deped) throws CaException {
         try {
-            String strSQL = "SELECT depe.ID_PEDIDO, depe.ID_PRODUCTO, depe.CANTIDAD FROM depe, ped WHERE depe.ID_PEDIDO = ped.ID_PEDIDO AND depe.ID_PEDIDO = '" + deped.getId_pedido() + "'";
+            String strSQL = "SELECT depe.ID_PEDIDO, depe.ID_PRODUCTO, depe.CANTIDAD, inv.PRECIO_BASE "
+                    + "FROM depe, ped, inv, prod"
+                    + "WHERE depe.ID_PEDIDO = ped.ID_PEDIDO "
+                    + "AND depe.ID_PRODUCTO = prod.ID_PRODUCTO  "
+                    + "AND prod.ID_PRODUCTO = inv.ID_PRODUCTO"
+                    + "AND depe.ID_PEDIDO = '" + deped.getId_pedido() + "'";
             Connection conexion = ServiceLocator.getInstance(usuario, password).tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 ResultSet rs = prepStmt.executeQuery();
@@ -121,6 +125,7 @@ public class PedidoDAO {
                     detalle_pedido.getId_pedido_array().add(rs.getDouble(1));
                     detalle_pedido.getId_producto_array().add(rs.getDouble(2));
                     detalle_pedido.getCantidad_array().add(rs.getDouble(3));
+                    
                 }
             }
             ServiceLocator.getInstance(usuario, password).commit();
