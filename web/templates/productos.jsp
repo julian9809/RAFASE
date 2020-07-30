@@ -148,7 +148,9 @@
                                 <h5 class="card-title">
                                     <img class="img-thumbnail img-responsive" alt="Responsive image" width="200" height="200" src="../img/Productos/<%= inventarioRafase.getProducto().getFoto_array().get(i) %>">
                                 </h5>
-                                    <p>$<%= inventarioRafase.getProducto().getIva_array().get(i) %></p>
+                                    <p>$<%= inventarioRafase.getInventario().getPrecio_base_array().get(i) 
+                                            + (inventarioRafase.getInventario().getPrecio_base_array().get(i)
+                                            *inventarioRafase.getProducto().getIva_array().get(i))%></p>
                                 <form method="post" action = "../AgregarProducto">
                                     <input type="hidden" name = "id_producto" id="id_producto" value=<%= inventarioRafase.getProducto().getId_producto_array().get(i) %>>
                                     <input type="hidden" name = "usuario" id="usuario" value=<%=usuario%>>
