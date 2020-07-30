@@ -34,7 +34,7 @@ public class DAOFacade {
     }
     
     public void buscarCiudades(String nickname, String userPassword) throws CaException {
-        ciudadDAO.buscarCiudades(userPassword, userPassword);
+        ciudadDAO.buscarCiudades(nickname, userPassword);
     }
 
     public void insertarCliente() throws CaException {

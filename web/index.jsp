@@ -97,7 +97,7 @@
                         <%  
                             for (int i = 0; i < ciudad.getId_ciudad_array().size(); i++) {
                         %>
-                        <option value="<%= ciudad.getNombre_array().get(i) %>"><%= ciudad.getNombre_array().get(i) %>"</option>
+                        <option value="<%= ciudad.getNombre_array().get(i) %>"><%= ciudad.getNombre_array().get(i) %></option>
                         <%}//End for ciudad%>
                     </select>
                     <button class="btn btn-lg btn-success" type="summit">Continuar</button>
