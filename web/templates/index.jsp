@@ -68,7 +68,7 @@
                         <a class="nav-link" href="../BuscarProducto?usuario=<%=usuario%>&producto_buscado=">Productos<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Ir a Pagar<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="pago.jsp">Ir a Pagar<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Control</a>
@@ -193,7 +193,7 @@
             </div>
         </div>
         <!--------------------------------FOOTER--------------------------------->
-        <footer class="container footer">
+        <footer class="container">
             <p class="float-right"><a href="#">Volver al arriba</a></p>
             <p>&copy; 2020 RAFASE, Inc. &middot; <a href="#">Privacidad</a> &middot; <a href="#">Términos y Condiciones</a></p>
         </footer>
