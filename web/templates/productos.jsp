@@ -26,6 +26,7 @@
     }
 
     String producto_buscado = request.getParameter("busqueda");
+    String categoria = request.getParameter("categoria");
     String usuario = usuarios.getAttribute("usuario").toString();
     
 %>
@@ -74,7 +75,7 @@
         <!-------------------------------Barra de navegación--------------------------------->
         <nav class="navbar navbar-expand-lg navbar navbar-light bg-light sticky-top scrolling-navbar">
             <img id="logo" src="../img/Logo.png">
-            <a class="navbar-brand" href="../index.jsp">Inicio</a>
+            <a class="navbar-brand" href="index.jsp">Inicio</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -120,7 +121,7 @@
             try {
                 facade.buscarProducto(usuarios.getAttribute("usuario").toString(),
                         usuarios.getAttribute("contraseña").toString(),
-                        producto_buscado,ciudad,"","");
+                        producto_buscado,ciudad,"",categoria);
             } catch (Exception e1) {
                 %>
                 <script type="text/javascript">
@@ -130,46 +131,7 @@
                 </script>
                 <%
             }//End catch
-        %>
-        <h1>Productos</h1>
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover">
-                <thead class="thead-dark">
-                <th>No</th>
-                <th>Nombre</th>
-                <th>Marca</th>
-                <th>Referencia</th>
-                <th>Caracteristicas</th>
-                <th>Foto</th>
-                <th>Iva</th>
-                <th>Unidades</th>
-                </thead>
-                <tbody>
-                    <%
-                        for (int i = 0; i < inventarioRafase.getProducto().getId_producto_array().size(); i++) {
-                    %>
-                    <tr>
-                        <th scope="row"><%=(i + 1)%> </th>
-                        <td><%= inventarioRafase.getProducto().getNombre_producto_array().get(i) %></td>
-                        <td><%= inventarioRafase.getProducto().getMarca_producto_array().get(i) %></td>
-                        <td><%= inventarioRafase.getProducto().getReferencia_producto_array().get(i) %></td>
-                        <td><%= inventarioRafase.getProducto().getCaracteristicas_producto_array().get(i) %></td>
-                        <td><img class="img-thumbnail img-responsive" alt="Responsive image" width="150" height="150" src="../img/Productos/<%= inventarioRafase.getProducto().getFoto_array().get(i) %>"></td>
-                        <td><%= inventarioRafase.getProducto().getIva_array().get(i) %></td>
-                        <td><%= inventarioRafase.getProducto().getUnidad_medida_array().get(i) %></td>
-                        <td>
-                            <form method="post" action = "../AgregarProducto">
-                                <input type="hidden" name = "id_producto" id="id_producto" value=<%= inventarioRafase.getProducto().getId_producto_array().get(i) %>>
-                                <input type="hidden" name = "usuario" id="usuario" value=<%=usuario%>>
-                                <input type="hidden" name = "busqueda" id="busqueda" value=<%=producto_buscado%>>
-                                <button class="btn btn-outline-success my-2 my-sm-0 buscar" type="submit">Añadir producto</button>                
-                            </form>
-                        </td>
-                    </tr>
-                    <%}//End for listar productos%>
-                </tbody>
-            </table>
-        </div>
+        %>        
         <!--------------------------------Productos--------------------------------->
         <div class="container-fluid">
             <h1 class="display-4 mt-2 mb-4 text-center">Productos</h1>

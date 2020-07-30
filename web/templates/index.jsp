@@ -151,7 +151,7 @@
                                     </svg>
                                 </h5>
                                 <center>
-                                    <a class="btn btn-light" href="productos.jsp" role="button" id="categoria" name="categoria" value="Entretenimento">Ver articulos</a>
+                                    <a class="btn btn-light" href="../BuscarProducto?categoria=Entretenimiento" role="button" id="categoria" name="categoria" value="Entretenimento">Ver articulos</a>
                                 </center>                        
                             </div>
                         </div>
@@ -167,7 +167,7 @@
                                     </svg>
                                 </h5>
                                 <center>
-                                    <a class="btn btn-light" href="productos.jsp" role="button">Ver articulos</a>
+                                    <a class="btn btn-light" href="../BuscarProducto?categoria=Hogar" role="button">Ver articulos</a>
                                 </center> 
                             </div>
                         </div>
@@ -184,7 +184,7 @@
                                     </svg>
                                 </h5>
                                 <center>
-                                    <a class="btn btn-light" href="productos.jsp" role="button">Ver articulos</a>
+                                    <a class="btn btn-light" href="../BuscarProducto?categoria=Mercado" role="button">Ver articulos</a>
                                 </center> 
                             </div>
                         </div>

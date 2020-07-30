@@ -44,9 +44,9 @@ public class ProductosDAO {
         try {
             String strSQL = "SELECT * FROM INV_RAFA "
                     + "WHERE NOMBRE = '" + ciudad + "' "
-                    + "AND NOMBRE_PRODUCTO LIKE UPPER('%"+producto_buscado+"%') "
-                    + "AND ID_SUBCATEGORIA LIKE UPPER('%"+subcategoria_buscada+"%') "
-                    + "AND ID_CATEGORIA LIKE UPPER('%"+categoria_buscada+"%') "
+                    + "AND UPPER(NOMBRE_PRODUCTO) LIKE UPPER('%"+producto_buscado+"%') "
+                    + "AND UPPER(ID_SUBCATEGORIA) LIKE UPPER('%"+subcategoria_buscada+"%') "
+                    + "AND UPPER(NOMBRE_CATEGORIA) LIKE UPPER('%"+categoria_buscada+"%') "
                     + "ORDER BY NOMBRE_PRODUCTO ASC";
             Connection conexion = ServiceLocator.getInstance(usuario, password).tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
