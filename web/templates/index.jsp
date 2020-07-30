@@ -6,17 +6,17 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<% 
+<%
     HttpSession sesion = request.getSession();
     HttpSession usuarios = request.getSession();
     String ciudad = "no ciudad";
-    
-    if(!sesion.getAttribute("Ciudad").equals("no ciudad")){
+
+    if (!sesion.getAttribute("Ciudad").equals("no ciudad")) {
         ciudad = sesion.getAttribute("Ciudad").toString();
-    }else{
+    } else {
         out.print("<script>location.replace('../index.jsp');</script>");
     }
-    
+
     String usuario = usuarios.getAttribute("usuario").toString();
 %>
 <html>
@@ -75,8 +75,14 @@
                     </li>
                 </ul>
                 <form action="../BuscarProducto" method="post" class="form-inline my-2 my-lg-0 ml-auto">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar productos" name="producto_buscado" id="producto_buscado" aria-label="Search">
-                    <button class="btn btn-outline-success btn-sm my-2 my-sm-0 buscar" type="submit">Buscar</button>
+                    <div class="input-group form-sm form-2">
+                        <input class="form-control" type="text" placeholder="Buscar productos" name="producto_buscado" id="producto_buscado" aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="input-group-text grey lighten-5 mr-2">
+                                <i class="fas fa-search text-grey" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
                 </form>
                 <%if (usuario.equals("visitante")) {%>
                 <div class="btn-group" role="group">

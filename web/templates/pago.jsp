@@ -82,8 +82,14 @@
                     </li>
                 </ul>
                 <form action="../BuscarProducto" method="post" class="form-inline my-2 my-lg-0 ml-auto">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar productos" name="producto_buscado" id="producto_buscado" aria-label="Search">
-                    <button class="btn btn-outline-success btn-sm my-2 my-sm-0 buscar" type="submit">Buscar</button>
+                    <div class="input-group form-sm form-2">
+                        <input class="form-control" type="text" placeholder="Buscar productos" name="producto_buscado" id="producto_buscado" aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="input-group-text grey lighten-5 mr-2">
+                                <i class="fas fa-search text-grey" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
                 </form>
                 <%if (usuario.equals("visitante")) {%>
                 <div class="btn-group btn-sm" role="group">
@@ -106,7 +112,7 @@
         </nav>
         <!-------------------------------Contenido-------------------------------------->
         <!--------------------------------FOOTER--------------------------------->
-        <footer class="footer fixed-bottom">
+        <footer class="footer">
             <div class="container">
                 <p class="float-right"><a href="#">Volver al arriba</a></p>
                 <p>&copy; 2020 RAFASE, Inc. &middot; <a href="#">Privacidad</a> &middot; <a href="#">Términos y Condiciones</a></p>
