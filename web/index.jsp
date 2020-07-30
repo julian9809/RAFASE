@@ -4,11 +4,12 @@
     Author     : david
 --%>
 
+<%@page import="modelo.Ciudad"%>
+<%@page import="control.DAOFacade"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page session="true"%> 
 <!DOCTYPE html>
 <%
-    
     HttpSession usuarios = request.getSession();
     
     if(usuarios.getAttribute("usuario")==null){
@@ -18,8 +19,6 @@
         usuarios.getAttribute("usuario");
         usuarios.getAttribute("contraseña");
     }
-    
-    
 %>
 <html>
     <head>
@@ -36,10 +35,31 @@
         <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
         <!-- Material Design Bootstrap -->
         <link rel="stylesheet" href="css/mdb/mdb.min.css">
+        <!---------------------- Alertify CSS ---------------------->
+        <!-- CSS -->
+        <link rel="stylesheet" href="../css/alertify/alertify.min.css"/>
+        <!-- Default theme -->
+        <link rel="stylesheet" href="../css/alertify/themes/default.min.css"/>
+        <!-- Semantic UI theme -->
+        <link rel="stylesheet" href="../css/alertify/themes/semantic.min.css"/>
+        <!-- Bootstrap theme -->
+        <link rel="stylesheet" href="../css/alertify/themes/bootstrap.min.css"/>
+        <!---------------------- Alertify CSS ---------------------->
         <!-- Customs styles for this template -->
         <link rel="stylesheet" href="css/custom/cover.css">
         <!-- Customs fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Averia+Libre&display=swap" rel="stylesheet">        
+        <link href="https://fonts.googleapis.com/css2?family=Averia+Libre&display=swap" rel="stylesheet">
+        <!-------------------------------Scripts--------------------------------->
+        <!-- jQuery -->
+        <script type="text/javascript" src="../js/jquery.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="../js/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="../js/mdb.min.js"></script>
+        <!-- Alertifyjs JavaScript -->
+        <script type="text/javascript" src="../js/alertifyjs/alertify.min.js"></script>
     </head>
     <body class="text-center">
         <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
@@ -52,35 +72,43 @@
                     </nav>
                 </div>
             </header>
-
+            <%
+                DAOFacade facade = new DAOFacade();
+                Ciudad ciudad = facade.getCiudad();
+                try {
+                    facade.buscarCiudades(usuarios.getAttribute("usuario").toString(),
+                            usuarios.getAttribute("contraseña").toString());
+                } catch (Exception e1) {
+                    %>
+                    <script type="text/javascript">
+                        alertify.alert("Error","<%= "Error --> " + e1 + e1.getMessage() %>", function(){
+                            alertify.message('OK');
+                        });
+                    </script>
+                    <%
+                }//End catch
+            %>
             <main role="main" class="inner cover">
                 <h1 class="cover-heading">RAFASE</h1>
                 <p class="lead inicio">Somos una tienda virtual con varias sucursales fisicas en distintas ciudades del pais, escoge tu ciudad eh inicia a comprar de forma rapida y sencilla.</p>
                 <form class="lead btn-group" action="Ciudad" method="post">
                     <select class="btn btn-lg btn-light" name="ciudad" id="ciudad">
                         <option selected hidden disabled>Escoge tu ciudad</option>
-                        <option value="Bogotá">Bogotá</option>
-                        <option value="Medellin">Medellin</option>
-                        <option value="Cali">Cali</option>
+                        <%  
+                            for (int i = 0; i < ciudad.getId_ciudad_array().size(); i++) {
+                        %>
+                        <option value="<%= ciudad.getNombre_array().get(i) %>"><%= ciudad.getNombre_array().get(i) %>"</option>
+                        <%}//End for ciudad%>
                     </select>
                     <button class="btn btn-lg btn-success" type="summit">Continuar</button>
                 </form>
             </main>
-
+            <!--------------------------------FOOTER--------------------------------->
             <footer class="container footer mastfoot mt-auto">
                 <div class="inner">
-                <p>&copy; 2020 RAFASE, Inc. &middot; <a href="#">Privacidad</a> &middot; <a href="#">Términos y Condiciones</a></p>
+                    <p>&copy; 2020 RAFASE, Inc. &middot; <a href="#">Privacidad</a> &middot; <a href="#">Términos y Condiciones</a></p>
                 </div>
             </footer>
-            <!-------------------------------Scripts--------------------------------->
-        <!-- jQuery -->
-        <script type="text/javascript" src="js/jquery.js"></script>
-        <!-- Bootstrap tooltips -->
-        <script type="text/javascript" src="js/popper.min.js"></script>
-        <!-- Bootstrap core JavaScript -->
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <!-- MDB core JavaScript -->
-        <script type="text/javascript" src="js/mdb.min.js"></script>
         </div>
     </body>
 </html>

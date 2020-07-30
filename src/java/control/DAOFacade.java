@@ -7,6 +7,7 @@ package control;
 
 import java.util.ArrayList;
 import modelo.Carrito;
+import modelo.Ciudad;
 import modelo.Cliente;
 import modelo.DetallePedido;
 import modelo.InventarioRafase;
@@ -20,14 +21,20 @@ import util.CaException;
  */
 public class DAOFacade {
 
+    private CiudadDAO ciudadDAO;
     private ClienteDAO clienteDAO;
     private PedidoDAO pedidoDAO;
     private ProductosDAO productosDAO;
 
     public DAOFacade() {
+        ciudadDAO = new CiudadDAO();
         clienteDAO = new ClienteDAO();
         pedidoDAO = new PedidoDAO();
         productosDAO = new ProductosDAO();
+    }
+    
+    public void buscarCiudades(String nickname, String userPassword) throws CaException {
+        ciudadDAO.buscarCiudades(userPassword, userPassword);
     }
 
     public void insertarCliente() throws CaException {
@@ -104,8 +111,13 @@ public class DAOFacade {
     public Producto getProducto(){
         return productosDAO.getProducto();
     }
+    
     public InventarioRafase getInventario_rafase() {
         return productosDAO.getInventario_rafase();
+    }
+    
+    public Ciudad getCiudad(){
+        return ciudadDAO.getCiudad();
     }
     
 }
