@@ -34,17 +34,17 @@ public class ClienteDAO {
      */
     public void insertarCliente() throws CaException {
         try {
-            String strSQL = "INSERT INTO usur(ID_CEDULA, PRIMER_NOMB, SEGUNDO_NOMB, PRIMER_APELL, SEGUNDO_APELL, PASSWORD, FECH_NAC, TIPO_ID, GENERO, EMAIL, NICKNAME) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+            String strSQL = "INSERT INTO usur(ID_CEDULA, TIPO_ID, PRIMER_NOMB, SEGUNDO_NOMB, PRIMER_APELL, SEGUNDO_APELL, PASSWORD, FECH_NAC, GENERO, EMAIL, NICKNAME) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.setLong(1, cliente.getId_cedula());
-                prepStmt.setString(2, cliente.getPrimer_nombre());
-                prepStmt.setString(3, cliente.getSegundo_nombre());
-                prepStmt.setString(4, cliente.getPrimer_apellido());
-                prepStmt.setString(5, cliente.getSegundo_apellido());
-                prepStmt.setString(6, cliente.getPassword());
-                prepStmt.setDate(7, (Date) cliente.getFecha_nacimiento());
-                prepStmt.setString(8, cliente.getTipo_id());
+                prepStmt.setString(2, cliente.getTipo_id());
+                prepStmt.setString(3, cliente.getPrimer_nombre());
+                prepStmt.setString(4, cliente.getSegundo_nombre());
+                prepStmt.setString(5, cliente.getPrimer_apellido());
+                prepStmt.setString(6, cliente.getSegundo_apellido());
+                prepStmt.setString(7, cliente.getPassword());
+                prepStmt.setDate(8, (Date) cliente.getFecha_nacimiento());
                 prepStmt.setString(9, cliente.getGenero());
                 prepStmt.setString(10, cliente.getEmail());
                 prepStmt.setString(11, cliente.getNickname());
@@ -99,20 +99,21 @@ public class ClienteDAO {
 
     public void insertarDireccion(String usuario, String password) throws CaException {
         try {
-            String strSQL = "INSERT INTO dir(ID_DIRECCION, DIRECCION_COMPLETA, EXTRAS, TIPO_DIRECCION, ID_CEDULA, ID_CIUDAD) VALUES (?,?,?,?,?,?)";
+            String strSQL = "INSERT INTO dir(ID_DIRECCION, DIRECCION_COMPLETA, EXTRAS, TIPO_DIRECCION, ID_CIUDAD, ID_CEDULA, TIPO_ID) VALUES (?,?,?,?,?,?,?)";
             Connection conexion = ServiceLocator.getInstance(usuario, password).tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.setLong(1, direccion.getId_direccion());
                 prepStmt.setString(2, direccion.getDireccion_completa());
                 prepStmt.setString(3, direccion.getExtras());
                 prepStmt.setString(4, direccion.getTipo_direccion());
-                prepStmt.setLong(5, direccion.getId_cedula());
-                prepStmt.setLong(6, direccion.getId_ciudad());
+                prepStmt.setLong(5, direccion.getId_ciudad());
+                prepStmt.setLong(6, direccion.getId_cedula());
+                prepStmt.setString(7, direccion.getTipo_id());
                 prepStmt.executeUpdate();
             }
             ServiceLocator.getInstance(usuario, password).commit();
         } catch (SQLException e) {
-            throw new CaException("ClienteDAO", "No se pudo crear el Usuario\n" + e.getMessage());
+            throw new CaException("ClienteDAO", "No se pudo insertar la dirección\n" + e.getMessage());
         } finally {
             ServiceLocator.getInstance(usuario, password).liberarConexion();
         }
@@ -136,13 +137,15 @@ public class ClienteDAO {
 
     public void crearUsuario(String usuario, String password) throws CaException {
         try {
-            String strSQL = "create user " + usuario + " identified by "
-                    + password;
-            String strSQLDOS = "grant cliente to " + usuario;
+            String strSQL = "CREATE USER ? IDENTIFY BY ?";
+            String strSQLDOS = "GRANT CLIENTE TO ?";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try(PreparedStatement prepStmt = conexion.prepareStatement(strSQL)){
+                prepStmt.setString(1, usuario);
+                prepStmt.setString(2, password);
                 prepStmt.execute();
                 try(PreparedStatement prepStmtDOS = conexion.prepareStatement(strSQLDOS)){
+                    prepStmtDOS.setString(1, usuario);
                     prepStmtDOS.execute();
                     ServiceLocator.getInstance().commit();
                 }
