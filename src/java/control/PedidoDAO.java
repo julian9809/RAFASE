@@ -109,7 +109,7 @@ public class PedidoDAO {
             ServiceLocator.getInstance("admin_db", "dbadministrator").liberarConexion();
         }
     }
-        //CONSULTAR EL CARRITO
+        
     public void consultarProductosPedido(String usuario, String password, DetallePedido deped) throws CaException {
         try {
             String strSQL = "SELECT depe.ID_PEDIDO, depe.ID_PRODUCTO, depe.CANTIDAD, inv.PRECIO_BASE "
@@ -136,11 +136,11 @@ public class PedidoDAO {
         }
     }
 
-    public void crearCarrito(String usuario, long cedula) throws CaException {
+   public void crearCarrito(String usuario, long cedula) throws CaException {
         try {
             String strSQL = "CREATE VIEW CARRITO_" + usuario + " AS "
                     + "(SELECT ped.ID_PEDIDO, prod.NOMBRE_PRODUCTO, "
-                    + "depe.CANTIDAD, inv.PRECIO_PRODUCTO "
+                    + "depe.CANTIDAD, inv.PRECIO_BASE "
                     + "FROM prod, depe, usur, ped, inv"
                     + "WHERE prod.ID_PRODUCTO = depe.ID_PRODUCTO AND "
                     + "usur.ID_CEDULA = ped.ID_CEDULA AND "
