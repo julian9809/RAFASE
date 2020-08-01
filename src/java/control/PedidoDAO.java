@@ -47,15 +47,16 @@ public class PedidoDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new CaException("No pudo recuperar el pedido\n " + e.getMessage());
+            throw new CaException("No pudo consultar el pedido\n " + e.getMessage());
         } finally {
             ServiceLocator.getInstance("admin_db", "dbadministrator").liberarConexion();
         }
     }
-
-    public boolean consultarPedidos(String nickname, String password, long usuario_id) throws CaException {
+            //antes consultarPedidos redundante
+            //solo consulta existencia del pedido en estado = carrito
+    public boolean existeCarrito(String nickname, String password, long usuario_id) throws CaException {
         try {
-            String strSQL = "SELECT COUNT(*) FROM ped, usur WHERE ped.ID_CEDULA=usur.ID_CEDULA and usur.ID_CEDULA= " + usuario_id + " and ped.ESTADO_PEDIDO=0";
+            String strSQL = "SELECT COUNT(*) FROM ped, usur WHERE ped.ID_CEDULA=usur.ID_CEDULA and usur.ID_CEDULA= " + usuario_id + " and ped.ESTADO_PEDIDO='CA'";
             Connection conexion = ServiceLocator.getInstance(nickname, password).tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 ResultSet rs = prepStmt.executeQuery();
@@ -64,7 +65,7 @@ public class PedidoDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new CaException("No pudo recuperar el pedido\n " + e.getMessage());
+            throw new CaException("No pudo recuperar  pedido\n " + e.getMessage() + "linea67");
         } finally {
             ServiceLocator.getInstance(nickname, password).liberarConexion();
         }
@@ -192,7 +193,7 @@ public class PedidoDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new CaException("No pudo recuperar el pedido " + e.getMessage());
+            throw new CaException("No pudo recuperar el pedido al verificar existencias" + e.getMessage());
         } finally {
             ServiceLocator.getInstance("admin_db", "dbadministrator").liberarConexion();
         }
@@ -212,7 +213,7 @@ public class PedidoDAO {
                 double nuevaCantidad = cantidad + 1;
                 String strSQLDOS = "UPDATE depe SET CANTIDAD = ? WHERE ID_PRODUCTO = ? AND ID_PEDIDO = ?";
                 try (PreparedStatement prepStmt2 = conexion.prepareStatement(strSQLDOS)) {
-                    prepStmt2.setDouble(1, nuevaCantidad);
+                   prepStmt2.setDouble(1, nuevaCantidad);
                     prepStmt2.setDouble(2, id_producto);
                     prepStmt2.setDouble(3, id_pedido);
                     prepStmt2.executeUpdate();

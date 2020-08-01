@@ -71,8 +71,8 @@ public class DAOFacade {
         pedidoDAO.consultarPedido(usuario, usuario_id);
     }
 
-    public boolean consultarPedidos(String nickname, String password, long usuario_id) throws CaException{
-        return pedidoDAO.consultarPedidos(nickname, password, usuario_id);
+    public boolean existeCarrito(String nickname, String password, long usuario_id) throws CaException{
+        return pedidoDAO.existeCarrito(nickname, password, usuario_id);
     }
 
     public void insertarPedido(String usuario, Pedido ped) throws CaException{
