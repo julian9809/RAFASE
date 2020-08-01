@@ -48,7 +48,7 @@ public class ProductosDAO {
                     + "AND UPPER(ID_SUBCATEGORIA) LIKE UPPER('%"+subcategoria_buscada+"%') "
                     + "AND UPPER(NOMBRE_CATEGORIA) LIKE UPPER('%"+categoria_buscada+"%') "
                     + "ORDER BY NOMBRE_PRODUCTO ASC";
-            Connection conexion = ServiceLocator.getInstance(usuario, password).tomarConexion();
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 ResultSet rs = prepStmt.executeQuery();
                 while (rs.next()) {
@@ -74,7 +74,7 @@ public class ProductosDAO {
         } catch (SQLException e) {
             throw new CaException("productosDAO", " no se pudo realizar la busqueda: " + e.getMessage());
         } finally {
-            ServiceLocator.getInstance(usuario, password).liberarConexion();
+            ServiceLocator.getInstance().liberarConexion();
         }
     }
 

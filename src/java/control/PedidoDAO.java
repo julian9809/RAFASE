@@ -119,7 +119,7 @@ public class PedidoDAO {
                     + "AND depe.ID_PRODUCTO = prod.ID_PRODUCTO  "
                     + "AND prod.ID_PRODUCTO = inv.ID_PRODUCTO"
                     + "AND depe.ID_PEDIDO = '" + deped.getId_pedido() + "'";
-            Connection conexion = ServiceLocator.getInstance(usuario, password).tomarConexion();
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 ResultSet rs = prepStmt.executeQuery();
                 while (rs.next()) {
@@ -129,11 +129,11 @@ public class PedidoDAO {
                     
                 }
             }
-            ServiceLocator.getInstance(usuario, password).commit();
+            ServiceLocator.getInstance().commit();
         } catch (SQLException e) {
             throw new CaException("PedidoDAO", "No pudo consultar productos pedido\n" + e.getMessage());
         } finally {
-            ServiceLocator.getInstance(usuario, password).liberarConexion();
+            ServiceLocator.getInstance().liberarConexion();
         }
     }
 

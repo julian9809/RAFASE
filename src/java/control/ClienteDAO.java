@@ -61,7 +61,7 @@ public class ClienteDAO {
     public boolean buscarExisteCliente(String usuario, String password, String nickname) throws CaException {
         try {
             String strSQL = "SELECT COUNT(*) FROM usur WHERE NICKNAME = ?";
-            Connection conexion = ServiceLocator.getInstance(usuario, password).tomarConexion();
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.setString(1, nickname);
                 ResultSet rs = prepStmt.executeQuery();
@@ -72,7 +72,7 @@ public class ClienteDAO {
         } catch (SQLException e) {
             throw new CaException("ClienteDAO", "No pudo recuperar el conjunto\n " + e.getMessage());
         } finally {
-            ServiceLocator.getInstance(usuario, password).liberarConexion();
+            ServiceLocator.getInstance().liberarConexion();
         }
         return false;
     }
@@ -80,7 +80,7 @@ public class ClienteDAO {
     public boolean buscarExisteCliente(String usuario, String password, String nickname, String userPassword) throws CaException {
         try {
             String strSQL = "SELECT COUNT(*) FROM usur WHERE NICKNAME = ? AND PASSWORD = ?";
-            Connection conexion = ServiceLocator.getInstance(usuario, password).tomarConexion();
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.setString(1, nickname);
                 prepStmt.setString(2, userPassword);
@@ -92,7 +92,7 @@ public class ClienteDAO {
         } catch (SQLException e) {
             throw new CaException("ClienteDAO", "No pudo recuperar el conjunto\n " + e.getMessage());
         } finally {
-            ServiceLocator.getInstance(usuario, password).liberarConexion();
+            ServiceLocator.getInstance().liberarConexion();
         }
         return false;
     }
@@ -100,7 +100,7 @@ public class ClienteDAO {
     public void insertarDireccion(String usuario, String password) throws CaException {
         try {
             String strSQL = "INSERT INTO dir(ID_DIRECCION, DIRECCION_COMPLETA, EXTRAS, TIPO_DIRECCION, ID_CIUDAD, ID_CEDULA, TIPO_ID) VALUES (?,?,?,?,?,?,?)";
-            Connection conexion = ServiceLocator.getInstance(usuario, password).tomarConexion();
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.setLong(1, direccion.getId_direccion());
                 prepStmt.setString(2, direccion.getDireccion_completa());
@@ -115,14 +115,14 @@ public class ClienteDAO {
         } catch (SQLException e) {
             throw new CaException("ClienteDAO", "No se pudo insertar la dirección\n" + e.getMessage());
         } finally {
-            ServiceLocator.getInstance(usuario, password).liberarConexion();
+            ServiceLocator.getInstance().liberarConexion();
         }
     }
 
     public void buscarDirecciones(String usuario, String password, long cedula) throws CaException {
         try {
             String strSQL = "SELECT DIRECCION FROM dir WHERE ID_CEDULA = ?";
-            Connection conexion = ServiceLocator.getInstance(usuario, password).tomarConexion();
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.setLong(1, cedula);
                 ResultSet rs = prepStmt.executeQuery();
@@ -131,7 +131,7 @@ public class ClienteDAO {
         } catch (SQLException e) {
             throw new CaException("ClienteDAO", "No se pudo realizar la busqueda" + e.getMessage());
         } finally {
-            ServiceLocator.getInstance(usuario, password).liberarConexion();
+            ServiceLocator.getInstance().liberarConexion();
         }
     }
 
@@ -161,7 +161,7 @@ public class ClienteDAO {
         long id_cliente=-1;
         try {
             String strSQL = "SELECT ID_CEDULA FROM usur WHERE NICKNAME='" + usuario + "'";
-            Connection conexion = ServiceLocator.getInstance(usuario, password).tomarConexion();
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 ResultSet rs = prepStmt.executeQuery();
                 while (rs.next()) {
@@ -171,7 +171,7 @@ public class ClienteDAO {
         } catch (SQLException e) {
             throw new CaException("ClienteDAO", "No se pudo realizar la busqueda" + e.getMessage());
         } finally {
-            ServiceLocator.getInstance(usuario, password).liberarConexion();
+            ServiceLocator.getInstance().liberarConexion();
         }
         return id_cliente;
     }
