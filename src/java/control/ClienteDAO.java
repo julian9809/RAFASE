@@ -58,13 +58,12 @@ public class ClienteDAO {
         }
     }
 
-    public boolean buscarExisteCliente(String usuario, String userPassword) throws CaException {
+    public boolean buscarExisteCliente(String usuario, String password, String nickname) throws CaException {
         try {
-            String strSQL = "SELECT COUNT(*) FROM usur WHERE NICKNAME = ? AND PASSWORD = ?";
-            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            String strSQL = "SELECT COUNT(*) FROM usur WHERE NICKNAME = ?";
+            Connection conexion = ServiceLocator.getInstance(usuario, password).tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
-                prepStmt.setString(1, usuario);
-                prepStmt.setString(2, userPassword);
+                prepStmt.setString(1, nickname);
                 ResultSet rs = prepStmt.executeQuery();
                 while (rs.next()) {
                     return rs.getLong(1) != 0;
@@ -73,7 +72,7 @@ public class ClienteDAO {
         } catch (SQLException e) {
             throw new CaException("ClienteDAO", "No pudo recuperar el conjunto\n " + e.getMessage());
         } finally {
-            ServiceLocator.getInstance().liberarConexion();
+            ServiceLocator.getInstance(usuario, password).liberarConexion();
         }
         return false;
     }
