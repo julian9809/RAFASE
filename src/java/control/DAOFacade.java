@@ -45,6 +45,10 @@ public class DAOFacade {
     public boolean buscarExisteCliente(String usuario, String password, String nickname) throws CaException {
         return clienteDAO.buscarExisteCliente(usuario, password, nickname);
     }
+    
+    public boolean buscarExisteCliente(String usuario, String password, String nickname, String userPassword) throws CaException {
+        return clienteDAO.buscarExisteCliente(usuario, password, nickname, userPassword);
+    }
 
     public void insertarDireccion(String usuario, String password) throws CaException {
         clienteDAO.insertarDireccion(usuario, password);

@@ -49,7 +49,9 @@ public class IniciarSesion extends HttpServlet {
             
             HttpSession usuarios = request.getSession();
             
-            if(facade.buscarExisteCliente(nickname, inputPassword)){
+            if(facade.buscarExisteCliente(usuarios.getAttribute("usuario")
+                    .toString(), usuarios.getAttribute("contraseña").toString(),
+                    nickname, inputPassword)){
                 usuarios.setAttribute("usuario", nickname);
                 usuarios.setAttribute("contraseña", inputPassword);
                 response.sendRedirect("templates/index.jsp");
