@@ -28,7 +28,7 @@ public class CiudadDAO {
     public void buscarCiudades(String usuario, String password) throws CaException {
         try {
             String strSQL = "SELECT * FROM ciu";
-            Connection conexion = ServiceLocator.getInstance(usuario, password).tomarConexion();
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 ResultSet rs = prepStmt.executeQuery();
                 while (rs.next()) {
@@ -40,7 +40,7 @@ public class CiudadDAO {
         } catch (SQLException e) {
             throw new CaException("ciudadDAO", " no se pudo conseguir ciudades: " + e.getMessage());
         } finally {
-            ServiceLocator.getInstance(usuario, password).liberarConexion();
+            ServiceLocator.getInstance().liberarConexion();
         }
     }
 
