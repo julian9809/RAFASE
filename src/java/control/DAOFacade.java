@@ -5,7 +5,6 @@
  */
 package control;
 
-import java.util.ArrayList;
 import modelo.Carrito;
 import modelo.Ciudad;
 import modelo.Cliente;
@@ -33,40 +32,43 @@ public class DAOFacade {
         productosDAO = new ProductosDAO();
     }
     
+    //---------------------------------CiudadDAO--------------------------------
     public void buscarCiudades(String nickname, String userPassword) throws CaException {
         ciudadDAO.buscarCiudades(nickname, userPassword);
     }
-
+    
+    //--------------------------------ClienteDAO--------------------------------
     public void insertarCliente() throws CaException {
         clienteDAO.insertarCliente();
     }
 
-    public boolean iniciarSesion(String nickname, String userPassword) throws CaException {
-        return clienteDAO.iniciarSesion(nickname, userPassword);
+    public boolean buscarExisteCliente(String nickname, String userPassword) throws CaException {
+        return clienteDAO.buscarExisteCliente(nickname, userPassword);
     }
 
     public void insertarDireccion(String usuario, String password) throws CaException {
         clienteDAO.insertarDireccion(usuario, password);
     }
 
-    public ArrayList<String> buscarDirecciones(String usuario, String password, long cedula) throws CaException {
-        return clienteDAO.buscarDirecciones(usuario, password, cedula);
+    public void buscarDirecciones(String usuario, String password, long cedula) throws CaException {
+        clienteDAO.buscarDirecciones(usuario, password, cedula);
     }
 
     public void crearUsuario(String usuario, String password) throws CaException {
         clienteDAO.crearUsuario(usuario, password);
     }
 
-    public long buscarIdCliente(String usuario) throws CaException {
-        return clienteDAO.buscarIdCliente(usuario);
+    public long buscarIdCliente(String usuario, String password) throws CaException {
+        return clienteDAO.buscarIdCliente(usuario, password);
     }
-
+    
+    //---------------------------------PedidoDAO--------------------------------
     public void consultarPedido(String usuario, long usuario_id) throws CaException{
         pedidoDAO.consultarPedido(usuario, usuario_id);
     }
 
-    public boolean consultarPedidos(long usuario_id) throws CaException{
-        return pedidoDAO.consultarPedidos(usuario_id);
+    public boolean consultarPedidos(String nickname, String password, long usuario_id) throws CaException{
+        return pedidoDAO.consultarPedidos(nickname, password, usuario_id);
     }
 
     public void insertarPedido(String usuario, Pedido ped) throws CaException{
@@ -97,6 +99,7 @@ public class DAOFacade {
         pedidoDAO.actualizarCantidad(id_pedido, id_producto);
     }
     
+    //-------------------------------ProductoDAO--------------------------------
     public void buscarProducto(String usuario, String password,
             String producto_buscado, String ciudad,
             String subcategoria_buscada, String categoria_buscada) throws CaException {
