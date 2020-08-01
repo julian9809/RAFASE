@@ -57,7 +57,7 @@
         <!-------------------------------Barra de navegación--------------------------------->
         <nav class="navbar navbar-expand-lg navbar navbar-light bg-light sticky-top">
             <img id="logo" src="../img/Logo.png">
-            <a class="navbar-brand" href="../MantenerUsuario?usuario=<%=usuario%>&pagina=inicio">Inicio</a>
+            <a class="navbar-brand" href="../index.jsp">Inicio</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -75,7 +75,6 @@
                 </ul>
                 <form action="../BuscarProducto" method="post" class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Buscar productos" name="producto_buscado" id="producto_buscado" aria-label="Search">
-                    <input type="hidden" name = "usuario" id="usuario" value=<%=usuario%>>
                     <button class="btn btn-outline-success my-2 my-sm-0 buscar" type="submit">Buscar</button>                
                 </form>
                 <%if (usuario.equals("visitante")) {%>

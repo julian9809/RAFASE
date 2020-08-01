@@ -34,11 +34,17 @@ public class BuscarProducto extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            request.setCharacterEncoding("UTF-8");
             String producto = request.getParameter("producto_buscado");
-            String usuario = request.getParameter("usuario");
+            String categoria = request.getParameter("categoria");
+            if(producto == null){
+                producto = "";
+            }
+            if(categoria == null){
+                categoria = "";
+            }
+            response.sendRedirect("templates/productos.jsp?busqueda=" + producto +"&categoria=" + categoria);
             
-
-            response.sendRedirect("templates/productos.jsp?usuario=" + usuario + "&busqueda=" + producto);
         }
     }
 

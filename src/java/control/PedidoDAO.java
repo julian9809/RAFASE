@@ -53,10 +53,10 @@ public class PedidoDAO {
         }
     }
 
-    public boolean consultarPedidos(long usuario_id) throws CaException {
+    public boolean consultarPedidos(String nickname, String password, long usuario_id) throws CaException {
         try {
             String strSQL = "SELECT COUNT(*) FROM ped, usur WHERE ped.ID_CEDULA=usur.ID_CEDULA and usur.ID_CEDULA= " + usuario_id + " and ped.ESTADO_PEDIDO=0";
-            Connection conexion = ServiceLocator.getInstance("admin_db", "dbadministrator").tomarConexion();
+            Connection conexion = ServiceLocator.getInstance(nickname, password).tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 ResultSet rs = prepStmt.executeQuery();
                 while (rs.next()) {
@@ -66,7 +66,7 @@ public class PedidoDAO {
         } catch (SQLException e) {
             throw new CaException("No pudo recuperar el pedido\n " + e.getMessage());
         } finally {
-            ServiceLocator.getInstance("admin_db", "dbadministrator").liberarConexion();
+            ServiceLocator.getInstance(nickname, password).liberarConexion();
         }
         return false;
     }

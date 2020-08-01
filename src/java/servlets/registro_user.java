@@ -35,12 +35,14 @@ public class registro_user extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws util.CaException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, CaException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+            /* TODO output your page here. You may use following sample code. */     
+            //Seteo de variables del formulario
             String nombre = request.getParameter("nombre");
             String[] nombres = nombre.split(" ");
             String primerNombre = nombres[0];
@@ -68,37 +70,43 @@ public class registro_user extends HttpServlet {
             String fecha_nacimiento = request.getParameter("fecha_nacimiento");
             String password = request.getParameter("password");
             String confirme_password = request.getParameter("confirme_password");
+            //Fin seteo de variables del formulario
             
             HttpSession usuarios = request.getSession();
-            
-            if (password.equals(confirme_password)) {
-                DAOFacade facade = new DAOFacade();
-                Cliente cli = facade.getCliente();
-                cli.setPrimer_nombre(primerNombre);
-                cli.setSegundo_nombre(segundoNombre);
-                cli.setPrimer_apellido(primerApellido);
-                cli.setSegundo_apellido(segundoApellido);
-                cli.setTipo_id("CC");
-                cli.setId_cedula(cedula);
-                cli.setEmail(email);
-                cli.setGenero(gender);
-                cli.setNickname(nickname);
-                cli.setFecha_nacimiento((Date.valueOf(fecha_nacimiento)));
-                cli.setPassword(password);
-                
-                facade.insertarCliente();
-                facade.crearUsuario(nickname, password);
-                
-                usuarios.setAttribute("usuario", nickname);
-                usuarios.setAttribute("contraseña", password);
-                
-                //facade.crearCarrito(nickname, cli.getId_cedula());
-                response.sendRedirect("templates/index.jsp");
-            } else {
+            DAOFacade facade = new DAOFacade();
+            //Buscar NO existe un usuario ya con ese nickname
+            if(!facade.buscarExisteCliente(usuarios.getAttribute("usuario")
+                    .toString(), usuarios.getAttribute("contraseña").toString(),
+                    nickname)) {
+                //Revisar que las constraseñas suministradas coinsidan
+                if (password.equals(confirme_password)) {
+                    Cliente cli = facade.getCliente();
+                    cli.setPrimer_nombre(primerNombre);
+                    cli.setSegundo_nombre(segundoNombre);
+                    cli.setPrimer_apellido(primerApellido);
+                    cli.setSegundo_apellido(segundoApellido);
+                    cli.setTipo_id("CC");
+                    cli.setId_cedula(cedula);
+                    cli.setEmail(email);
+                    cli.setGenero(gender);
+                    cli.setNickname(nickname);
+                    cli.setFecha_nacimiento((Date.valueOf(fecha_nacimiento)));
+                    cli.setPassword(password);
+
+                    facade.insertarCliente();
+                    facade.crearUsuario(nickname, password);
+
+                    usuarios.setAttribute("usuario", nickname);
+                    usuarios.setAttribute("contraseña", password);
+
+                    //facade.crearCarrito(nickname, cli.getId_cedula());
+                    response.sendRedirect("templates/index.jsp");
+                } else {
+                    response.sendRedirect("templates/registro_user.jsp");
+                }
+            }else {
                 response.sendRedirect("templates/registro_user.jsp");
             }
-
-            //response.sendRedirect("templates/buscarProductos.jsp?busqueda="+producto);
         }
     }
 

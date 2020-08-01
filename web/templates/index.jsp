@@ -6,17 +6,17 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<% 
+<%
     HttpSession sesion = request.getSession();
     HttpSession usuarios = request.getSession();
     String ciudad = "no ciudad";
-    
-    if(!sesion.getAttribute("Ciudad").equals("no ciudad")){
+
+    if (!sesion.getAttribute("Ciudad").equals("no ciudad")) {
         ciudad = sesion.getAttribute("Ciudad").toString();
-    }else{
+    } else {
         out.print("<script>location.replace('../index.jsp');</script>");
     }
-    
+
     String usuario = usuarios.getAttribute("usuario").toString();
 %>
 <html>
@@ -58,7 +58,7 @@
         </header>
         <!--------------------------------Barra de navegacion--------------------------------->
         <nav class="navbar navbar-expand-lg navbar navbar-light bg-light sticky-top scrolling-navbar">
-            <a class="navbar-brand" href="../MantenerUsuario?usuario=<%=usuario%>&pagina=inicio">Inicio</a>
+            <a class="navbar-brand" href="../index.jsp">Inicio</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -68,20 +68,26 @@
                         <a class="nav-link" href="../BuscarProducto?usuario=<%=usuario%>&producto_buscado=">Productos<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Ir a Pagar<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="pago.jsp">Ir a Pagar<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Control</a>
                     </li>
                 </ul>
                 <form action="../BuscarProducto" method="post" class="form-inline my-2 my-lg-0 ml-auto">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar productos" name="producto_buscado" id="producto_buscado" aria-label="Search">
-                    <input type="hidden" name="usuario" id="usuario" value=<%=usuario%>>
+                    <div class="input-group form-sm form-2">
+                        <input class="form-control" type="text" placeholder="Buscar productos" name="producto_buscado" id="producto_buscado" aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="input-group-text grey lighten-5 mr-2">
+                                <i class="fas fa-search text-grey" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
                 </form>
                 <%if (usuario.equals("visitante")) {%>
                 <div class="btn-group" role="group">
                     <a class="btn btn-outline-info btn-sm align-middle ml-0" href="sign.jsp" role="button">Iniciar sesión</a>
-                    <a class="btn btn-outline-primary btn-sm  align-middle" href="registro_user.jsp" role="button">Registrarse</a>
+                    <a class="btn btn-outline-primary btn-sm align-middle" href="registro_user.jsp" role="button">Registrarse</a>
                 </div>
                 <%} else {%>
                 <div class="nav-item dropdown avatar">
@@ -151,7 +157,7 @@
                                     </svg>
                                 </h5>
                                 <center>
-                                    <a class="btn btn-light" href="productos.jsp" role="button" id="categoria" name="categoria" value="Entretenimento">Ver articulos</a>
+                                    <a class="btn btn-light" href="../BuscarProducto?categoria=Entretenimiento" role="button" id="categoria" name="categoria" value="Entretenimento">Ver articulos</a>
                                 </center>                        
                             </div>
                         </div>
@@ -167,7 +173,7 @@
                                     </svg>
                                 </h5>
                                 <center>
-                                    <a class="btn btn-light" href="productos.jsp" role="button">Ver articulos</a>
+                                    <a class="btn btn-light" href="../BuscarProducto?categoria=Hogar" role="button">Ver articulos</a>
                                 </center> 
                             </div>
                         </div>
@@ -184,7 +190,7 @@
                                     </svg>
                                 </h5>
                                 <center>
-                                    <a class="btn btn-light" href="productos.jsp" role="button">Ver articulos</a>
+                                    <a class="btn btn-light" href="../BuscarProducto?categoria=Mercado" role="button">Ver articulos</a>
                                 </center> 
                             </div>
                         </div>
@@ -193,7 +199,7 @@
             </div>
         </div>
         <!--------------------------------FOOTER--------------------------------->
-        <footer class="container footer">
+        <footer class="container">
             <p class="float-right"><a href="#">Volver al arriba</a></p>
             <p>&copy; 2020 RAFASE, Inc. &middot; <a href="#">Privacidad</a> &middot; <a href="#">Términos y Condiciones</a></p>
         </footer>

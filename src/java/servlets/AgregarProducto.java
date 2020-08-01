@@ -34,6 +34,7 @@ public class AgregarProducto extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws util.CaException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, CaException {
@@ -80,8 +81,7 @@ public class AgregarProducto extends HttpServlet {
                         facade.insertarProductosPedido(usuario, deped);
                     }  
                 }          
-                response.sendRedirect("templates/productos.jsp?usuario=" + usuario + "&busqueda=" + producto_buscado);
-
+                response.sendRedirect("templates/productos.jsp?busqueda=" + producto_buscado);
             }
         }
     }
