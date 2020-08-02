@@ -32,32 +32,6 @@ public class ClienteDAO {
     /**
      * @throws CaException
      */
-    public void insertarCliente() throws CaException {
-        try {
-            String strSQL = "INSERT INTO usur(ID_CEDULA, TIPO_ID, PRIMER_NOMB, SEGUNDO_NOMB, PRIMER_APELL, SEGUNDO_APELL, PASSWORD, FECH_NAC, GENERO, EMAIL, NICKNAME) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-            Connection conexion = ServiceLocator.getInstance().tomarConexion();
-            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
-                prepStmt.setLong(1, cliente.getId_cedula());
-                prepStmt.setString(2, cliente.getTipo_id());
-                prepStmt.setString(3, cliente.getPrimer_nombre());
-                prepStmt.setString(4, cliente.getSegundo_nombre());
-                prepStmt.setString(5, cliente.getPrimer_apellido());
-                prepStmt.setString(6, cliente.getSegundo_apellido());
-                prepStmt.setString(7, cliente.getPassword());
-                prepStmt.setDate(8, (Date) cliente.getFecha_nacimiento());
-                prepStmt.setString(9, cliente.getGenero());
-                prepStmt.setString(10, cliente.getEmail());
-                prepStmt.setString(11, cliente.getNickname());
-                prepStmt.executeUpdate();
-            }
-            ServiceLocator.getInstance().commit();
-        } catch (SQLException e) {
-            throw new CaException("ClienteDAO", "No pudo crear el cliente\n" + e.getMessage());
-        } finally {
-            ServiceLocator.getInstance().liberarConexion();
-        }
-    }
-
     public boolean buscarExisteCliente(String usuario, String password, String nickname) throws CaException {
         try {
             String strSQL = "SELECT COUNT(*) FROM usur WHERE NICKNAME = ?";
@@ -110,9 +84,10 @@ public class ClienteDAO {
                 prepStmt.setLong(6, direccion.getId_cedula());
                 prepStmt.setString(7, direccion.getTipo_id());
                 prepStmt.executeUpdate();
+                ServiceLocator.getInstance().commit();
             }
-            ServiceLocator.getInstance(usuario, password).commit();
         } catch (SQLException e) {
+            ServiceLocator.getInstance().rollback();
             throw new CaException("ClienteDAO", "No se pudo insertar la dirección\n" + e.getMessage());
         } finally {
             ServiceLocator.getInstance().liberarConexion();
@@ -158,11 +133,12 @@ public class ClienteDAO {
                         prepStmt.executeUpdate();
                         prepStmtDOS.execute();
                         prepStmtTRES.execute();
+                        ServiceLocator.getInstance().commit();
                     }
                 }
             }
-            ServiceLocator.getInstance().commit();
         } catch (SQLException e) {
+            ServiceLocator.getInstance().rollback();
             throw new CaException("ClienteDAO", "No se pudo crear el Usuario\n" + e.getMessage());
         } finally {
             ServiceLocator.getInstance().liberarConexion();

@@ -42,10 +42,7 @@ public class IniciarSesion extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String nickname = request.getParameter("username");
             String inputPassword = request.getParameter("inputPassword");
-            DAOFacade facade = new DAOFacade();          
-            
-            //facade.iniciarSesion("admin_db","dbadministrator", nickname, inputPassword);
-            //if(facade.iniciarSesion(nickname, inputPassword)){ 
+            DAOFacade facade = new DAOFacade();
             
             HttpSession usuarios = request.getSession();
             

@@ -50,8 +50,8 @@ public class AgregarProducto extends HttpServlet {
                 DAOFacade facade = new DAOFacade();
                 DetallePedido deped = new DetallePedido();
                 Pedido ped = new Pedido();
-                if(facade.consultarPedidos(facade.buscarIdCliente(usuario))){
-                    facade.consultarPedido(usuario, facade.buscarIdCliente(usuario));
+                if(true/*facade.consultarPedidos(facade.buscarIdCliente(usuario))*/){
+                    facade.consultarPedido(usuario, 1/*facade.buscarIdCliente(usuario)*/);
                     deped.setId_pedido(ped.getId_pedido());
                     deped.setCantidad(1);
                     deped.setId_producto(Double.valueOf(id_producto));
@@ -65,12 +65,12 @@ public class AgregarProducto extends HttpServlet {
                 else{                    
                     ped.setEstado_pedido(0);
                     ped.setTotal_pedido(1);
-                    ped.setId_cedula(facade.buscarIdCliente(usuario));
+                    //ped.setId_cedula(facade.buscarIdCliente(usuario));
                     ped.setId_ciudad(1);
                     
                     facade.insertarPedido(usuario, ped);
                     Pedido ped2 = new Pedido();
-                    facade.consultarPedido(usuario, facade.buscarIdCliente(usuario));
+                    //facade.consultarPedido(usuario, facade.buscarIdCliente(usuario));
                     
                     deped.setId_pedido(ped2.getId_pedido());
                     deped.setCantidad(1);

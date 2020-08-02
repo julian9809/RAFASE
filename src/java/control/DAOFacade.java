@@ -38,10 +38,6 @@ public class DAOFacade {
     }
     
     //--------------------------------ClienteDAO--------------------------------
-    public void insertarCliente() throws CaException {
-        clienteDAO.insertarCliente();
-    }
-
     public boolean buscarExisteCliente(String usuario, String password, String nickname) throws CaException {
         return clienteDAO.buscarExisteCliente(usuario, password, nickname);
     }
