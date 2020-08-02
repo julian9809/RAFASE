@@ -42,44 +42,29 @@
                             <h3 class="register-heading">¡Registrate como cliente!</h3>
                             <form class="row register-form" action="../registro_user" method="post">
                                 <div class="col-md-6">
-                                    <div class="md-form md-bg input-with-pre-icon">
-                                        <i class="fas fa-user input-prefix"></i>
-                                        <input type="text" id="username" class="form-control" required autofocus name = "username">
-                                        <label for="username">Nombre de Usuario</label>
-                                    </div>
                                     <div class="md-form md-bg">
                                         <input type="text" class="form-control white" name="nombre" id="nombre" required/>
-                                        <label for="nombre">Nombre(s) *</label>
+                                        <label for="nombre">Nombre(s)</label>
                                     </div>
                                     <div class="md-form md-bg">
                                         <input type="text" class="form-control white" name="apellido" id="apellido" required/>
-                                        <label for="nombre">Apellido(s) *</label>
+                                        <label for="apellido">Apellido(s)</label>
                                     </div>
                                     <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <div class="md-form md-bg">
-                                                <input type="text" class="form-control white" name="cedula" id="cedula" required/>
-                                                <label for="cedula">Cedula *</label>
-                                            </div>
-                                            <select class="form-control white" name="tipo_cedula" id="tipo_cedula" searchable="Busca" required>
-                                                <option value="" disabled selected>Tipo de documento...</option>
-                                                <option value="CC" required>Cedula</option>
-                                                <option value="CE" required>Cedula de extranjeria</option>
-                                            </select>
+                                        <div class="md-form md-bg input-group-prepend mt-0 mb-0">
+                                            <input type="text" class="form-control white mb-0" name="cedula" id="cedula" required/>
+                                            <label for="cedula">Cedula</label>
                                         </div>
-                                    </div>
-                                    <div class="md-form md-bg input-group-prepend">
-                                        <input type="text" class="form-control white" name="cedula" id="cedula" required/>
-                                        <label for="cedula">Cedula *</label>
-                                        <select class="form-control white" name="tipo_cedula" id="tipo_cedula" searchable="Busca" required>
+                                        <select class="form-control white" name="tipo_id" id="tipo_id" required>
                                             <option value="" disabled selected>Tipo de documento...</option>
                                             <option value="CC" required>Cedula</option>
                                             <option value="CE" required>Cedula de extranjeria</option>
                                         </select>
                                     </div>
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" placeholder="Correo Electronico *" value="" name="email" id="email" required/>
-                                    </div>                                    
+                                    <div class="md-form md-bg">
+                                        <input type="email" class="form-control white" value="" name="email" id="email" required/>
+                                        <label for="email">Correo Electronico</label>
+                                    </div>
                                     <div class="form-group">
                                         <div class="maxl">
                                             <label class="radio inline"> 
@@ -98,17 +83,21 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Nombre de usuario *" value="" name="nickname" id="nikename" required/>
+                                    <div class="md-form md-bg">
+                                        <input type="text" class="form-control white" value="" name="nickname" id="nikename" required/>
+                                        <label for="nickname">Nombre de usuario</label>
                                     </div>
-                                    <div class="form-group">
-                                        <input type="date" class="form-control" max="2002-01-01" placeholder="Fecha de nacimiento *" value="" name="fecha_nacimiento" id="fecha_nacimiento" required/>
+                                    <div class="md-form md-bg">
+                                        <input type="date" class="form-control white" max="2002-01-01" value="" name="fecha_nacimiento" id="fecha_nacimiento" required/>
+                                        <label for="fecha_nacimiento">Fecha de nacimiento</label>
                                     </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control" placeholder="Contraseña *" value="" name="password" id="password" required/>
+                                    <div class="md-form md-bg">
+                                        <input type="password" class="form-control white" value="" name="password" id="password" required/>
+                                        <label for="password">Contraseña</label>
                                     </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control"  placeholder="Confirmar Contraseña *" value="" name="confirme_password" id="confirme_password" required/>
+                                    <div class="md-form md-bg">
+                                        <input type="password" class="form-control white" value="" name="confirme_password" id="confirme_password" required/>
+                                        <label for="confirme_password">Confirmar Contraseña</label>
                                     </div>
                                     <button class="btn btn-outline-success my-2 my-sm-0 btnRegister" type="submit">Registrarse</button>
                                 </div>

@@ -64,6 +64,7 @@ public class registro_user extends HttpServlet {
                 segundoApellido = apellidos[1];
             }
             Long cedula = Long.valueOf(request.getParameter("cedula"));
+            String tipo_id = request.getParameter("tipo_id");
             String email = request.getParameter("email");
             String gender = request.getParameter("gender");
             String nickname = request.getParameter("nickname");
@@ -85,7 +86,7 @@ public class registro_user extends HttpServlet {
                     cli.setSegundo_nombre(segundoNombre);
                     cli.setPrimer_apellido(primerApellido);
                     cli.setSegundo_apellido(segundoApellido);
-                    cli.setTipo_id("CC");
+                    cli.setTipo_id(tipo_id);
                     cli.setId_cedula(cedula);
                     cli.setEmail(email);
                     cli.setGenero(gender);
