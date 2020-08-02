@@ -37,12 +37,12 @@
             </div>
             <div class="md-form md-bg white input-with-pre-icon">
                 <i class="fas fa-user input-prefix"></i>
-                <input type="text" id="username" class="form-control white validate mb-0" required autofocus name = "username">
+                <input type="text" id="username" class="form-control white validate mb-0" autocomplete="username" required autofocus name = "username">
                 <label for="username">Nombre de Usuario</label>
             </div>
             <div class="md-form md-bg white input-with-pre-icon mb-3">
                 <i class="fas fa-lock input-prefix"></i>
-                <input type="password" id="inputPassword" class="form-control white validate mb-0" required name = "inputPassword">
+                <input type="password" id="inputPassword" class="form-control white validate mb-0" autocomplete="current-password" required name = "inputPassword">
                 <label for="inputPassword">Contraseña</label>
             </div>
             <div class="checkbox mb-2">

@@ -40,7 +40,7 @@ public class IniciarSesion extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String nickname = request.getParameter("username");
+            String username = request.getParameter("username");
             String inputPassword = request.getParameter("inputPassword");
             DAOFacade facade = new DAOFacade();
             
@@ -48,8 +48,8 @@ public class IniciarSesion extends HttpServlet {
             
             if(facade.buscarExisteCliente(usuarios.getAttribute("usuario")
                     .toString(), usuarios.getAttribute("contraseña").toString(),
-                    nickname, inputPassword)){
-                usuarios.setAttribute("usuario", nickname);
+                    username, inputPassword)){
+                usuarios.setAttribute("usuario", username);
                 usuarios.setAttribute("contraseña", inputPassword);
                 response.sendRedirect("templates/index.jsp");
             }
