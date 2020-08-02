@@ -67,7 +67,7 @@ public class registro_user extends HttpServlet {
             String tipo_id = request.getParameter("tipo_id");
             String email = request.getParameter("email");
             String gender = request.getParameter("gender");
-            String nickname = request.getParameter("nickname");
+            String username = request.getParameter("username");
             String fecha_nacimiento = request.getParameter("fecha_nacimiento");
             String password = request.getParameter("password");
             String confirme_password = request.getParameter("confirme_password");
@@ -78,7 +78,7 @@ public class registro_user extends HttpServlet {
             //Buscar NO existe un usuario ya con ese nickname
             if(!facade.buscarExisteCliente(usuarios.getAttribute("usuario")
                     .toString(), usuarios.getAttribute("contraseña").toString(),
-                    nickname)) {
+                    username)) {
                 //Revisar que las constraseñas suministradas coinsidan
                 if (password.equals(confirme_password)) {
                     Cliente cli = facade.getCliente();
@@ -90,13 +90,13 @@ public class registro_user extends HttpServlet {
                     cli.setId_cedula(cedula);
                     cli.setEmail(email);
                     cli.setGenero(gender);
-                    cli.setNickname(nickname);
+                    cli.setNickname(username);
                     cli.setFecha_nacimiento((Date.valueOf(fecha_nacimiento)));
                     cli.setPassword(password);
 
                     facade.crearUsuario();
 
-                    usuarios.setAttribute("usuario", nickname);
+                    usuarios.setAttribute("usuario", username);
                     usuarios.setAttribute("contraseña", password);
 
                     //facade.crearCarrito(nickname, cli.getId_cedula());

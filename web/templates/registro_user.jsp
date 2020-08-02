@@ -84,19 +84,19 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="md-form md-bg">
-                                        <input type="text" class="form-control white" value="" name="nickname" id="nikename" required/>
-                                        <label for="nickname">Nombre de usuario</label>
+                                        <input type="text" class="form-control white" value="" name="username" id="username" required/>
+                                        <label for="username">Nombre de usuario</label>
                                     </div>
                                     <div class="md-form md-bg">
                                         <input type="date" class="form-control white" max="2002-01-01" value="" name="fecha_nacimiento" id="fecha_nacimiento" required/>
                                         <label for="fecha_nacimiento">Fecha de nacimiento</label>
                                     </div>
                                     <div class="md-form md-bg">
-                                        <input type="password" class="form-control white" value="" name="password" id="password" required/>
+                                        <input type="password" class="form-control white" value="" name="password" id="password" autocomplete="new-password" required/>
                                         <label for="password">Contraseña</label>
                                     </div>
                                     <div class="md-form md-bg">
-                                        <input type="password" class="form-control white" value="" name="confirme_password" id="confirme_password" required/>
+                                        <input type="password" class="form-control white" value="" name="confirme_password" id="confirme_password" autocomplete="new-password" required/>
                                         <label for="confirme_password">Confirmar Contraseña</label>
                                     </div>
                                     <button class="btn btn-outline-success my-2 my-sm-0 btnRegister" type="submit">Registrarse</button>
