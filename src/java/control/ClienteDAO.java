@@ -135,21 +135,33 @@ public class ClienteDAO {
         }
     }
 
-    public void crearUsuario(String usuario, String password) throws CaException {
+    public void crearUsuario() throws CaException {
         try {
-            String strSQL = "CREATE USER ? IDENTIFY BY ?";
-            String strSQLDOS = "GRANT CLIENTE TO ?";
+            String strSQL = "INSERT INTO usur(ID_CEDULA, TIPO_ID, PRIMER_NOMB, SEGUNDO_NOMB, PRIMER_APELL, SEGUNDO_APELL, PASSWORD, FECH_NAC, GENERO, EMAIL, NICKNAME) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+            String strSQLDOS = "CREATE USER " + cliente.getNickname() +" IDENTIFIED BY " + cliente.getPassword();
+            String strSQLTRES = "GRANT CLIENTE TO " + cliente.getNickname();
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
-            try(PreparedStatement prepStmt = conexion.prepareStatement(strSQL)){
-                prepStmt.setString(1, usuario);
-                prepStmt.setString(2, password);
-                prepStmt.execute();
+            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
+                prepStmt.setLong(1, cliente.getId_cedula());
+                prepStmt.setString(2, cliente.getTipo_id());
+                prepStmt.setString(3, cliente.getPrimer_nombre());
+                prepStmt.setString(4, cliente.getSegundo_nombre());
+                prepStmt.setString(5, cliente.getPrimer_apellido());
+                prepStmt.setString(6, cliente.getSegundo_apellido());
+                prepStmt.setString(7, cliente.getPassword());
+                prepStmt.setDate(8, (Date) cliente.getFecha_nacimiento());
+                prepStmt.setString(9, cliente.getGenero());
+                prepStmt.setString(10, cliente.getEmail());
+                prepStmt.setString(11, cliente.getNickname());
                 try(PreparedStatement prepStmtDOS = conexion.prepareStatement(strSQLDOS)){
-                    prepStmtDOS.setString(1, usuario);
-                    prepStmtDOS.execute();
-                    ServiceLocator.getInstance().commit();
+                    try(PreparedStatement prepStmtTRES = conexion.prepareStatement(strSQLTRES)){
+                        prepStmt.executeUpdate();
+                        prepStmtDOS.execute();
+                        prepStmtTRES.execute();
+                    }
                 }
             }
+            ServiceLocator.getInstance().commit();
         } catch (SQLException e) {
             throw new CaException("ClienteDAO", "No se pudo crear el Usuario\n" + e.getMessage());
         } finally {

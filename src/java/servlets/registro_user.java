@@ -93,8 +93,7 @@ public class registro_user extends HttpServlet {
                     cli.setFecha_nacimiento((Date.valueOf(fecha_nacimiento)));
                     cli.setPassword(password);
 
-                    facade.insertarCliente();
-                    facade.crearUsuario(nickname, password);
+                    facade.crearUsuario();
 
                     usuarios.setAttribute("usuario", nickname);
                     usuarios.setAttribute("contraseña", password);

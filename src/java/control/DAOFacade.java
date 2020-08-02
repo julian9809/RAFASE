@@ -58,8 +58,8 @@ public class DAOFacade {
         clienteDAO.buscarDirecciones(usuario, password, cedula);
     }
 
-    public void crearUsuario(String usuario, String password) throws CaException {
-        clienteDAO.crearUsuario(usuario, password);
+    public void crearUsuario() throws CaException {
+        clienteDAO.crearUsuario();
     }
 
     public long buscarIdCliente(String usuario, String password) throws CaException {
