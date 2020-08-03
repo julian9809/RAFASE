@@ -28,7 +28,7 @@
     String producto_buscado = request.getParameter("busqueda");
     String categoria = request.getParameter("categoria");
     String usuario = usuarios.getAttribute("usuario").toString();
-    
+
 %>
 <html>
     <head>
@@ -127,60 +127,160 @@
             try {
                 facade.buscarProducto(usuarios.getAttribute("usuario").toString(),
                         usuarios.getAttribute("contraseña").toString(),
-                        producto_buscado,ciudad,"",categoria);
+                        producto_buscado, ciudad, "", categoria);
             } catch (Exception e1) {
-                %>
-                <script type="text/javascript">
-                    alertify.alert("Error","<%= "Error --> " + e1 + e1.getMessage() %>", function(){
-                        alertify.message('OK');
-                    });
-                </script>
-                <%
+        %>
+        <script type="text/javascript">
+            alertify.alert("Error", "<%= "Error --> " + e1 + e1.getMessage()%>", function () {
+                alertify.message('OK');
+            });
+        </script>
+        <%
             }//End catch
         %>        
         <!--------------------------------Productos--------------------------------->
-        <div class="container-fluid">
-            <h1 class="display-4 mt-2 mb-4 text-center">Productos</h1>
+        <div class="container-fluid my-5">
 
-            <div class="row justify-content-center">
-                <div class="card-deck col-12 text-center">
-                    <%  
-                        for (int i = 0; i < inventarioRafase.getProducto().getId_producto_array().size(); i++) {
-                    %>
-                    <div class="col-md-6 col-xl-4">
-                        <div class="card bg-light border-info mb-4 shadow-sm">
-                            <div class="card-header"><%= inventarioRafase.getProducto().getNombre_producto_array().get(i) %></div>
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <img class="img-thumbnail img-responsive" alt="Responsive image" width="200" height="200" src="../img/Productos/<%= inventarioRafase.getProducto().getFoto_array().get(i) %>">
-                                </h5>
-                                    <p>$<%= inventarioRafase.getInventario().getPrecio_base_array().get(i) 
-                                            + (inventarioRafase.getInventario().getPrecio_base_array().get(i)
-                                            *inventarioRafase.getProducto().getIva_array().get(i))%></p>
-                                <form method="post" action = "../AgregarProducto">
-                                    <input type="hidden" name = "id_producto" id="id_producto" value=<%= inventarioRafase.getProducto().getId_producto_array().get(i) %>>
-                                    <input type="hidden" name = "usuario" id="usuario" value=<%=usuario%>>
-                                    <input type="hidden" name = "busqueda" id="busqueda" value=<%=producto_buscado%>>
-                                    <div class="btn-group" role="group">
-                                        <input type="number" min="0" max="99" class="form-control" placeholder="Cant" value="" name="Cantidad" id="Cantidad"/>
-                                        <button class="btn btn-success my-0 bordes" type="submit"><i class="fas fa-cart-arrow-down fa-2x"></i></button>                
+            <!--Section: Content-->
+            <section class="dark-grey-text text-center">
+
+                <!-- Section heading -->
+                <h1 class="font-weight-bold mb-4 pb-2">Productos</h1>
+                <!-- Section description -->
+                <p class="grey-text w-responsive mx-auto mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit fugit, error amet numquam iure provident voluptate esse quasi nostrum quisquam eum porro a pariatur veniam.</p>
+
+                <!-- Grid row -->
+                <div class="row justify-content-center">
+                    <div class="card-deck col-12 text-center">
+                        <%
+                            for (int i = 0; i < inventarioRafase.getProducto().getId_producto_array().size(); i++) {
+                        %>
+                        <!-- Grid column -->
+                        <div class="col-lg-4 col-md-6 mb-4">
+
+                            <form method="post" action = "../AgregarProducto">
+                                <!-- Card -->
+                                <div class="card card-cascade">
+                                    <!-- Card image -->
+                                    <div class="view view-cascade overlay zoom">
+                                        <!--src="../img/Productos/<//%= inventarioRafase.getProducto().getFoto_array().get(i)%>">-->
+                                        <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/4.jpg" class="img-responsive card-img-top"
+                                             alt="Imagen de <%= inventarioRafase.getProducto().getNombre_producto_array().get(i)%>"
+                                             title="Imagen de <%= inventarioRafase.getProducto().getNombre_producto_array().get(i)%>">
+                                        <a>
+                                            <div class="mask rgba-white-slight"></div>
+                                        </a>
                                     </div>
-                                </form>
-                            </div>
+                                    <!-- Card image -->
+                                    <!-- Card content -->
+                                    <div class="card-body card-body-cascade text-center pb-3">
+                                        <!-- Title -->
+                                        <h5 class="card-title mb-1">
+                                            <strong>
+                                                <a href="#!"><%= inventarioRafase.getProducto().getNombre_producto_array().get(i)%></a>
+                                            </strong>
+                                        </h5>
+                                        <!-- Description -->
+                                        <p class="card-text">
+                                            <%= inventarioRafase.getProducto().getCaracteristicas_producto_array().get(i)%>
+                                        </p>
+                                        <!-- Card footer -->
+                                        <div class="card-footer px-1 white text-center">
+                                            <div class="d-flex justify-content-between">
+                                                <span class="font-weight-bold align-middle">
+                                                    <strong>$<%= inventarioRafase.getInventario().getPrecio_base_array().get(i)
+                                                            + (inventarioRafase.getInventario().getPrecio_base_array().get(i)
+                                                            * inventarioRafase.getProducto().getIva_array().get(i))%>
+                                                    </strong>
+                                                </span>
+
+                                            </div>
+                                            <div class="d-flex justify-content-between mt-2">
+                                                <div class="def-number-input number-input safari_only">
+                                                    <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus form-control"></button>
+                                                    <input type="number" class="form-control quantity" min="0" max="99" placeholder="Cant" value="" name="Cantidad" id="Cantidad">
+                                                    <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus form-control"></button>
+                                                </div>
+                                                <!--Entradas escondidad-->
+                                                <input type="hidden" name = "id_producto" id="id_producto" value=<%= inventarioRafase.getProducto().getId_producto_array().get(i)%>>
+                                                <input type="hidden" name = "usuario" id="usuario" value=<%=usuario%>>
+                                                <input type="hidden" name = "busqueda" id="busqueda" value=<%=producto_buscado%>>
+                                                <!--Entradas escondidad-->
+                                                <button class="btn btn-success btn-sm my-auto btnRedondo" type="submit" title="Añadir al carrito">
+                                                    <i class="fas fa-cart-arrow-down fa-2x"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- Card content -->
+                                </div>
+                                <!-- Card -->
+
+                            </form>
                         </div>
+                        <!-- Grid column -->
+                        <%}//End For%>
                     </div>
-                    <%}//End For%>
                 </div>
-            </div>
+                <!-- Grid row -->
+                <!-- Grid row -->
+                <div class="row justify-content-center mt-3 mb-4">
+                    <!-- Pagination -->
+                    <nav class="mb-4">
+                        <ul class="pagination pagination-circle pg-blue mb-0">
+                            <!-- First -->
+                            <li class="page-item disabled clearfix d-none d-md-block">
+                                <a class="page-link waves-effect waves-effect">First</a>
+                            </li>
+                            <!-- Arrow left -->
+                            <li class="page-item disabled">
+                                <a class="page-link waves-effect waves-effect" aria-label="Previous">
+                                    <span aria-hidden="true">«</span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </li>
+                            <!-- Numbers -->
+                            <li class="page-item active">
+                                <a class="page-link waves-effect waves-effect">1</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link waves-effect waves-effect">2</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link waves-effect waves-effect">3</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link waves-effect waves-effect">4</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link waves-effect waves-effect">5</a>
+                            </li>
+                            <!-- Arrow right -->
+                            <li class="page-item">
+                                <a class="page-link waves-effect waves-effect" aria-label="Next">
+                                    <span aria-hidden="true">»</span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </li>
+                            <!-- First -->
+                            <li class="page-item clearfix d-none d-md-block">
+                                <a class="page-link waves-effect waves-effect">Last</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- Pagination -->
+                </div>
+                <!-- Grid row -->
+            </section>
+            <!--Section: Content-->
         </div>
         <!-------------------------------boton flotante--------------------------------->
         <% if(!usuario.equals("visitante")) {%>
         <a class="btn btn-default btn-carrito floating-action-button" href="productos.jsp" role="button" data-toggle="modal" data-target="#exampleModal">
             <i class="fas fa-shopping-cart fa-3x"></i>
         </a>
-
         <!---------------------- Modal --------------------------------->
-
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
