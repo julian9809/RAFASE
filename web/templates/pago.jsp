@@ -24,7 +24,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Productos</title>
+        <title>Tu Carrito</title>
         <!-- RAFASE icon -->
         <link rel="icon" href="../img/Logo.png" type="image/png">
         <!-- Font Awesome -->
@@ -111,9 +111,26 @@
             </div>
         </nav>
         <!-------------------------------Contenido-------------------------------------->
+        <div class="container mt-5">
+            <div class="card">
+                <div class="card-header text-left">
+                    Tu carrito
+                </div>
+                <div class="card-body text-left">
+                    <h3>Contenido del carrito</h3>
+                    <hr class="my-2">
+                    <div class="text-right">
+                        <button type="button" class="btn btn-success">Pagar</button>
+                    </div>
+                </div>
+                <div class="card-footer text-center text-muted">
+                    Tu carrito esta disponible hasta...
+                </div>
+            </div>
+        </div>
         <!--------------------------------FOOTER--------------------------------->
         <footer class="footer">
-            <div class="container">
+            <div class="container mt-5">
                 <p class="float-right"><a href="#">Volver al arriba</a></p>
                 <p>&copy; 2020 RAFASE, Inc. &middot; <a href="#">Privacidad</a> &middot; <a href="#">Términos y Condiciones</a></p>
             </div>
