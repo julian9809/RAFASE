@@ -113,7 +113,6 @@
                         <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="rounded-circle z-depth-0"
                              alt="avatar image" height="35"> <%=usuario%> </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-                        <a class="dropdown-item" href="#">My account</a>
                         <a class="dropdown-item" href="../cerrarSesion">Log out</a>
                     </div>
                 </div>
