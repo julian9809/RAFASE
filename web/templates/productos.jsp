@@ -112,8 +112,9 @@
                        aria-haspopup="true" aria-expanded="false">
                         <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="rounded-circle z-depth-0"
                              alt="avatar image" height="35"> <%=usuario%> </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-                        <a class="dropdown-item" href="../cerrarSesion">Log out</a>
+                    <div class="dropdown-menu dropdown-menu-left dropdown-menu-lg-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+                        <a class="dropdown-item" href="perfil_user.jsp">Mi cuenta</a>
+                        <a class="dropdown-item" href="../cerrarSesion?usuario=visitante">Cerrar sesión</a>
                     </div>
                 </div>
                 <%}//End If visitante%>
