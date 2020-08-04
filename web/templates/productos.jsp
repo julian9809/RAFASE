@@ -198,12 +198,11 @@
                                             <div class="d-flex justify-content-between mt-2">
                                                 <div class="def-number-input number-input safari_only">
                                                     <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus form-control"></button>
-                                                    <input type="number" class="form-control quantity" min="0" max="99" placeholder="Cant" value="" name="Cantidad" id="Cantidad">
+                                                    <input type="number" class="form-control quantity" min="0" max="99" placeholder="Cant" value="" name="Cantidad" id="Cantidad" required>
                                                     <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus form-control"></button>
                                                 </div>
                                                 <!--Entradas escondidad-->
                                                 <input type="hidden" name = "id_producto" id="id_producto" value=<%= inventarioRafase.getProducto().getId_producto_array().get(i)%>>
-                                                <input type="hidden" name = "usuario" id="usuario" value=<%=usuario%>>
                                                 <input type="hidden" name = "busqueda" id="busqueda" value=<%=producto_buscado%>>
                                                 <!--Entradas escondidad-->
                                                 <button class="btn btn-success btn-sm my-auto btnRedondo" type="submit" title="Añadir al carrito">
