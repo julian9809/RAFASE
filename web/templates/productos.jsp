@@ -176,7 +176,7 @@
                                     <div class="card-body card-body-cascade text-center pb-3">
                                         <!-- Title -->
                                         <h5 class="card-title mb-1">
-                                                <a class="font-weight-bold" href="#!"><%= inventarioRafase.getProducto().getNombre_producto_array().get(i)%></a>
+                                            <a class="font-weight-bold" href="#!"><%= inventarioRafase.getProducto().getNombre_producto_array().get(i)%></a>
                                         </h5>
                                         <!-- Description -->
                                         <p class="card-text">
@@ -187,8 +187,8 @@
                                             <div class="d-flex justify-content-between">
                                                 <span class="font-weight-bold align-middle">
                                                     $<%= inventarioRafase.getInventario().getPrecio_base_array().get(i)
-                                                        + (inventarioRafase.getInventario().getPrecio_base_array().get(i)
-                                                                * inventarioRafase.getProducto().getIva_array().get(i))%>
+                                                            + (inventarioRafase.getInventario().getPrecio_base_array().get(i)
+                                                            * inventarioRafase.getProducto().getIva_array().get(i))%>
                                                 </span>
                                             </div>
                                             <div class="d-flex justify-content-between mt-2">
@@ -437,16 +437,16 @@
                     </div>
                     <!-- /.Shopping Cart table -->
                     <%//}//End if !carrito.isEmpty %>
-                    <div class="modal-footer flex-fill">
-                        <button type="button" class="left btn btn-secondary" data-dismiss="modal">Volver</button>
-                        <div class="row">
-                            <h4 class="font-weight-bold align-bottom">
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Volver</button>
+                        <div class="ml-auto">
+                            <h4 class="font-weight-bold">
                                 Total: $2600
                             </h4>
-                            <button type="button" class="float-right btn btn-success">Pagar
-                                <i class="fas fa-angle-right right"></i>
-                            </button>
                         </div>
+                        <button type="button" class="float-right btn btn-success">Pagar
+                            <i class="fas fa-angle-right right"></i>
+                        </button>
                     </div>
                 </div>
             </div>
