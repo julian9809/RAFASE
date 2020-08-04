@@ -65,7 +65,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="../BuscarProducto?usuario=<%=usuario%>&producto_buscado=">Productos<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="../BuscarProducto?producto_buscado=">Productos<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="pago.jsp">Ir a Pagar<span class="sr-only">(current)</span></a>
@@ -96,7 +96,7 @@
                         <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="rounded-circle z-depth-0"
                              alt="avatar image" height="35"> <%=usuario%> </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-                        <a class="dropdown-item" href="#">My account</a>
+                        <a class="dropdown-item" href="perfil_user.jsp">My account</a>
                         <a class="dropdown-item" href="../cerrarSesion?usuario=visitante">Log out</a>
                     </div>
                 </div>
