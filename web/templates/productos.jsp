@@ -176,9 +176,7 @@
                                     <div class="card-body card-body-cascade text-center pb-3">
                                         <!-- Title -->
                                         <h5 class="card-title mb-1">
-                                            <strong>
-                                                <a href="#!"><%= inventarioRafase.getProducto().getNombre_producto_array().get(i)%></a>
-                                            </strong>
+                                                <a class="font-weight-bold" href="#!"><%= inventarioRafase.getProducto().getNombre_producto_array().get(i)%></a>
                                         </h5>
                                         <!-- Description -->
                                         <p class="card-text">
@@ -188,12 +186,10 @@
                                         <div class="card-footer px-1 white text-center">
                                             <div class="d-flex justify-content-between">
                                                 <span class="font-weight-bold align-middle">
-                                                    <strong>$<%= inventarioRafase.getInventario().getPrecio_base_array().get(i)
-                                                            + (inventarioRafase.getInventario().getPrecio_base_array().get(i)
-                                                            * inventarioRafase.getProducto().getIva_array().get(i))%>
-                                                    </strong>
+                                                    $<%= inventarioRafase.getInventario().getPrecio_base_array().get(i)
+                                                        + (inventarioRafase.getInventario().getPrecio_base_array().get(i)
+                                                                * inventarioRafase.getProducto().getIva_array().get(i))%>
                                                 </span>
-
                                             </div>
                                             <div class="d-flex justify-content-between mt-2">
                                                 <div class="def-number-input number-input safari_only">
@@ -276,15 +272,15 @@
         </div>
         <!-------------------------------boton flotante--------------------------------->
         <% if(!usuario.equals("visitante")) {%>
-        <a class="btn btn-default btn-carrito floating-action-button" href="productos.jsp" role="button" data-toggle="modal" data-target="#exampleModal">
+        <a class="btn btn-default btn-carrito floating-action-button" href="productos.jsp" role="button" data-toggle="modal" data-target="#modalCarrito">
             <i class="fas fa-shopping-cart fa-3x"></i>
         </a>
         <!---------------------- Modal --------------------------------->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+        <div class="modal fade" id="modalCarrito" tabindex="-1" role="dialog" aria-labelledby="modalCarritoLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg modal-notify modal-success" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Tu carrito</h5>
+                        <h5 class="modal-title text-white font-weight-bold" id="modalCarritoLabel">Tu carrito</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -297,7 +293,7 @@
                             double total = 0;*/
                     %>
                     <div class="modal-body table-responsive">
-                        <h2>Pedido: <%//=listarcarrito.get(0).getId_pedido()%></h2>
+                        <!--h2>Pedido: <%//=listarcarrito.get(0).getId_pedido()%></h2>
                         <table class="table table-bordered table-hover">
                             <thead class="thead-dark">
                             <th>Nombre</th>
@@ -305,24 +301,152 @@
                             <th>Precio</th>
                             </thead>
                             <tbody>
-                                <%//for (int i = 0; i < listarcarrito.size(); i++) {%>
+                        <%//for (int i = 0; i < listarcarrito.size(); i++) {%>
+                            <tr>
+                                <td><%//=listarcarrito.get(i).getNombre_producto()%></td>
+                                <td><%//=listarcarrito.get(i).getCantidad()%></td>
+                                <td><%//=listarcarrito.get(i).getPrecio_base()%></td>
+                        <%
+                            //total = total + (listarcarrito.get(i).getPrecio_base() * listarcarrito.get(i).getCantidad());%>
+                        </tr>
+                        <%//}//End for items carrito%>
+                    </tbody>
+                    <td colspan="2">Total</td>
+                    <td><%//=total%></td>
+                </table-->
+
+
+
+                        <table class="table table-hover my-0">
+
+                            <!-- Table head -->
+                            <thead class="mdb-color text-white">
                                 <tr>
-                                    <td><%//=listarcarrito.get(i).getNombre_producto()%></td>
-                                    <td><%//=listarcarrito.get(i).getCantidad()%></td>
-                                    <td><%//=listarcarrito.get(i).getPrecio_base()%></td>
-                                    <%
-                                        //total = total + (listarcarrito.get(i).getPrecio_base() * listarcarrito.get(i).getCantidad());%>
+                                    <th></th>
+                                    <th class="font-weight-bold">
+                                        <h5>Producto</h5>
+                                    </th>
+                                    <th class="font-weight-bold">
+                                        <h5>Marca</h5>
+                                    </th>
+                                    <th></th>
+                                    <th class="font-weight-bold">
+                                        <h5>Precio</h5>
+                                    </th>
+                                    <th class="font-weight-bold">
+                                        <h5>Cantidad</h5>
+                                    </th>
+                                    <th class="font-weight-bold">
+                                        <h5>Monto</h5>
+                                    </th>
+                                    <th></th>
                                 </tr>
-                                <%//}//End for items carrito%>
+                            </thead>
+                            <!-- /.Table head -->
+
+                            <!-- Table body -->
+                            <tbody>
+
+                                <!-- First row -->
+                                <tr>
+                                    <th scope="row">
+                                        <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg" alt="" class="img-fluid z-depth-0">
+                                    </th>
+                                    <td>
+                                        <h5 class="font-weight-bold">
+                                            iPhone
+                                        </h5>
+                                        <p class="text-muted">Apple</p>
+                                    </td>
+                                    <td>White</td>
+                                    <td></td>
+                                    <td>$800</td>
+                                    <td>
+                                        <input type="number" value="2" aria-label="Search" class="form-control" style="width: 100px">
+                                    </td>
+                                    <td class="font-weight-bold">$800
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-primary btnRedondo" data-toggle="tooltip" data-placement="top"
+                                                title="Remove item">X
+                                        </button>
+                                    </td>
+                                </tr>
+                                <!-- /.First row -->
+
+                                <!-- Second row -->
+                                <tr>
+                                    <th scope="row">
+                                        <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/6.jpg" alt="" class="img-fluid z-depth-0">
+                                    </th>
+                                    <td>
+                                        <h5 class="font-weight-bold">
+                                            Headphones
+                                        </h5>
+                                        <p class="text-muted">Sony</p>
+                                    </td>
+                                    <td>Red</td>
+                                    <td></td>
+                                    <td>$200</td>
+                                    <td>
+                                        <input type="number" value="2" aria-label="Search" class="form-control" style="width: 100px">
+                                    </td>
+                                    <td class="font-weight-bold">
+                                        $600
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-primary btnRedondo" data-toggle="tooltip" data-placement="top"
+                                                title="Remove item">X
+                                        </button>
+                                    </td>
+                                </tr>
+                                <!-- /.Second row -->
+
+                                <!-- Third row -->
+                                <tr>
+                                    <th scope="row">
+                                        <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/1.jpg" alt="" class="img-fluid z-depth-0">
+                                    </th>
+                                    <td>
+                                        <h5 class="font-weight-bold">
+                                            iPad Pro
+                                        </h5>
+                                        <p class="text-muted">Apple</p>
+                                    </td>
+                                    <td>Gold</td>
+                                    <td></td>
+                                    <td>$600</td>
+                                    <td>
+                                        <input type="number" value="2" aria-label="Search" class="form-control" style="width: 100px">
+                                    </td>
+                                    <td class="font-weight-bold">
+                                        $1200
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-primary btnRedondo" data-toggle="tooltip" data-placement="top"
+                                                title="Remove item">X
+                                        </button>
+                                    </td>
+                                </tr>
+                                <!-- /.Third row -->
                             </tbody>
-                            <td colspan="2">Total</td>
-                            <td><%//=total%></td>
+                            <!-- /.Table body -->
+
                         </table>
+
                     </div>
+                    <!-- /.Shopping Cart table -->
                     <%//}//End if !carrito.isEmpty %>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Volver</button>
-                        <button type="button" class="btn btn-success">Pagar</button>
+                    <div class="modal-footer flex-fill">
+                        <button type="button" class="left btn btn-secondary" data-dismiss="modal">Volver</button>
+                        <div class="row">
+                            <h4 class="font-weight-bold align-bottom">
+                                Total: $2600
+                            </h4>
+                            <button type="button" class="float-right btn btn-success">Pagar
+                                <i class="fas fa-angle-right right"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
