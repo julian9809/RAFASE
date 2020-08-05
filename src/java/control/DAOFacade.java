@@ -53,8 +53,12 @@ public class DAOFacade {
         clienteDAO.insertarDireccion(usuario, password);
     }
 
-    public void buscarDirecciones(String usuario, String password, long cedula) throws CaException {
-        clienteDAO.buscarDirecciones(usuario, password, cedula);
+    public void buscarDireccionResidencia(String usuario, String password, String tipo, long cedula) throws CaException {
+        clienteDAO.buscarDireccionResidencia(usuario, password, tipo, cedula);
+    }
+    
+    public void buscarDireccionEnvio(String usuario, String password, String tipo, long cedula) throws CaException {
+        clienteDAO.buscarDireccionEnvio(usuario, password, tipo, cedula);
     }
     
     public void insertarTelefono(String usuario, String password) throws CaException {
