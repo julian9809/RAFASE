@@ -118,10 +118,14 @@
         <%
             DAOFacade facade = new DAOFacade();
             Direccion dir = facade.getDireccion();
+            Direccion dirEnv = facade.getDireccionEnvio();
             Ciudad ciudades = facade.getCiudad();
 
             try {
                 facade.buscarDireccionResidencia(usuario, usuarios.getAttribute("contraseña").toString(),
+                        facade.buscarTipoID(usuario, usuarios.getAttribute("contraseña").toString()),
+                        facade.buscarIdCliente(usuario, usuarios.getAttribute("contraseña").toString()));
+                facade.buscarDireccionEnvio(usuario, usuarios.getAttribute("contraseña").toString(),
                         facade.buscarTipoID(usuario, usuarios.getAttribute("contraseña").toString()),
                         facade.buscarIdCliente(usuario, usuarios.getAttribute("contraseña").toString()));
                 facade.buscarCiudades(usuarios.getAttribute("usuario").toString(),
@@ -135,7 +139,7 @@
         </script>
         <%
             }//end catch            
-%>
+        %>
 
         <div class="container mt-5">
             <div class="card">
@@ -173,6 +177,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        <!----------------------------Encabezado-------------------------------->
                         <div class="tab-pane fade in show" id="direcciones" role="tabpanel">
                             <div class="d-flex justify-content-between">
                                 <a class="btn btn-primary" data-toggle="collapse" href="#direccionResidencia" role="button" aria-expanded="false"
@@ -182,17 +187,13 @@
                                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse"
                                         aria-expanded="false" aria-controls="direccionResidencia direccionEnvio">Todas las direcciones</button>
                             </div>
-
+                            <!----------------------------Direcciones de Residencia-------------------------------->
                             <div class="row">
                                 <div class="col">
                                     <div class="collapse multi-collapse" id="direccionResidencia">
                                         <div class="card card-body">
                                             <table class="table table-borderless">
-                                                <% if (dir.getDireccion_completa_array().isEmpty()) {%>
-                                                <tr>
-                                                    <td>No tienes direcciones registradas</td>
-                                                    <td><a class="btn btn-info btn-sm align-middle ml-0" href="perfil_user.jsp" role="button" data-toggle="modal" data-target="#modalDireccion">Registrar dirección</a></td>
-                                                    <!------------------------------------Modal--------------------------------------------->
+                                                <!------------------------------------Modal--------------------------------------------->
                                                 <div class="modal fade" id="modalDireccion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                                                      aria-hidden="true">
                                                     <div class="modal-dialog modal-notify" role="document">
@@ -253,6 +254,10 @@
                                                         <!--/.Content-->
                                                     </div>
                                                 </div>
+                                                <% if (dir.getDireccion_completa_array().isEmpty()) {%>
+                                                <tr>
+                                                    <td>No tienes direcciones registradas</td>
+                                                    <td><a class="btn btn-info btn-sm align-middle ml-0" href="perfil_user.jsp" role="button" data-toggle="modal" data-target="#modalDireccion">Registrar dirección</a></td>                                                    
                                                 </tr>
                                                 <%} else {%>
                                                 <%
@@ -273,11 +278,32 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!----------------------------Direcciones de envio-------------------------------->
                                 <div class="col">
                                     <div class="collapse multi-collapse" id="direccionEnvio">
                                         <div class="card card-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil
-                                            anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                                            <table class="table table-borderless">
+                                                <% if (dirEnv.getDireccion_completa_array().isEmpty()) {%>
+                                                <tr>
+                                                    <td>No tienes direcciones registradas</td>
+                                                    <td><a class="btn btn-info btn-sm align-middle ml-0" href="perfil_user.jsp" role="button" data-toggle="modal" data-target="#modalDireccion">Registrar dirección</a></td>
+                                                </tr>
+                                                <%} else {%>
+                                                <%
+                                                    for (int i = 0; i < dirEnv.getDireccion_completa_array().size(); i++) {
+                                                %>
+                                                <tr>
+                                                    <td><%=dirEnv.getDireccion_completa_array().get(i)%></td>
+                                                </tr>
+                                                <tr class="grey lighten-2">
+                                                    <td>Datos adicionales</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><%=dirEnv.getExtras_array().get(i)%></td>
+                                                </tr>
+                                                <%} //end for%>
+                                                <%} //end if%>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>

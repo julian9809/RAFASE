@@ -154,6 +154,10 @@ public class DAOFacade {
         return clienteDAO.getDireccion();
     }
     
+    public Direccion getDireccionEnvio(){
+        return clienteDAO.getDireccionEnvio();
+    }
+    
     public Telefono getTelefono(){
         return clienteDAO.getTelefono();
     }

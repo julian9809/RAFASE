@@ -25,12 +25,14 @@ public class ClienteDAO {
 
     private Cliente cliente;
     private Direccion direccion;
+    private Direccion direccionEnvio;
     private Telefono telefono;
     private TarjetaCredito tarjetaCredito;
 
     public ClienteDAO() {
         cliente = new Cliente();
         direccion = new Direccion();
+        direccionEnvio = new Direccion();
         telefono = new Telefono();
         tarjetaCredito = new TarjetaCredito();
     }
@@ -126,8 +128,8 @@ public class ClienteDAO {
                 prepStmt.setLong(1, cedula);
                 ResultSet rs = prepStmt.executeQuery();
                 while (rs.next()) {
-                    direccion.getDireccion_completa_array().add(rs.getString(1));
-                    direccion.getExtras_array().add(rs.getString(2));
+                    direccionEnvio.getDireccion_completa_array().add(rs.getString(1));
+                    direccionEnvio.getExtras_array().add(rs.getString(2));
                 }
             }
         } catch (SQLException e) {
@@ -304,7 +306,14 @@ public class ClienteDAO {
     public void setDireccion(Direccion direccion) {
         this.direccion = direccion;
     }
-    
+
+    public Direccion getDireccionEnvio() {
+        return direccionEnvio;
+    }
+
+    public void setDireccionEnvio(Direccion direccionEnvio) {
+        this.direccionEnvio = direccionEnvio;
+    }    
     
     public Telefono getTelefono() {
         return telefono;
