@@ -59,7 +59,7 @@ public class ProductosDAO {
                     inventario_rafase.getCategoria().getDescripcion_categoria_array().add(rs.getString(5));
                     inventario_rafase.getSubcategoria().getId_subcategoria_array().add(rs.getDouble(6));
                     inventario_rafase.getSubcategoria().getNombre_subcategoria_array().add(rs.getString(7));
-                    inventario_rafase.getProducto().getId_producto_array().add(rs.getDouble(8));
+                    inventario_rafase.getProducto().getId_producto_array().add(rs.getLong(8));
                     inventario_rafase.getProducto().getNombre_producto_array().add(rs.getString(9));
                     inventario_rafase.getProducto().getMarca_producto_array().add(rs.getString(10));
                     inventario_rafase.getProducto().getReferencia_producto_array().add(rs.getString(11));

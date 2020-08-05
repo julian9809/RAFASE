@@ -147,7 +147,9 @@
                 <!-- Section heading -->
                 <h1 class="font-weight-bold mb-4 pb-2">Productos</h1>
                 <!-- Section description -->
-                <p class="grey-text w-responsive mx-auto mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit fugit, error amet numquam iure provident voluptate esse quasi nostrum quisquam eum porro a pariatur veniam.</p>
+                <p class="grey-text w-responsive mx-auto mb-5">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ante nulla, sagittis et commodo ac, sollicitudin at purus. Quisque elementum diam eget luctus feugiat. Donec turpis dolor, pulvinar vitae luctus vitae, imperdiet id est. Aenean interdum sem sed sapien suscipit, sit amet aliquet diam blandit. Maecenas mollis, sem sed volutpat cursus, felis sem euismod magna, vel condimentum nulla quam a mauris. Mauris sit amet dapibus augue. Curabitur quam libero, feugiat sed efficitur a, porta ac elit. Nam at fringilla urna, non convallis elit. Donec sed nisi gravida, ullamcorper ex et, aliquam metus. Nulla at quam metus. Donec dictum ipsum tristique nisl posuere, at congue risus tincidunt.
+                </p>
 
                 <!-- Grid row -->
                 <div class="row justify-content-center">
@@ -163,8 +165,11 @@
                                 <div class="card card-cascade">
                                     <!-- Card image -->
                                     <div class="view view-cascade overlay zoom">
-                                        <!--src="../img/Productos/<//%= inventarioRafase.getProducto().getFoto_array().get(i)%>">-->
-                                        <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/4.jpg" class="img-responsive card-img-top"
+                                        <img src="../img/Productos/<%= 
+                                                inventarioRafase.getCategoria().getNombre_categoria_array().get(i)
+                                                + "/" + inventarioRafase.getSubcategoria().getNombre_subcategoria_array().get(i)
+                                                + "/" + inventarioRafase.getProducto().getId_producto_array().get(i)
+                                                + "/" + inventarioRafase.getProducto().getFoto_array().get(i) %>" class="img-responsive card-img-top"
                                              alt="Imagen de <%= inventarioRafase.getProducto().getNombre_producto_array().get(i)%>"
                                              title="Imagen de <%= inventarioRafase.getProducto().getNombre_producto_array().get(i)%>">
                                         <a>
