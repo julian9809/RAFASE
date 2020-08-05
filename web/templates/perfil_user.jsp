@@ -207,29 +207,29 @@
                                                                 <div class="modal-body">
                                                                     <div class="md-form mb-5">
                                                                         <i class="fas fa-home prefix grey-text"></i>
-                                                                        <input type="text" id="form3" class="form-control validate">
-                                                                        <label data-error="wrong" data-success="right" for="form3">Dirección</label>
+                                                                        <input type="text" id="direccion" name="direccion" class="form-control validate">
+                                                                        <label data-error="wrong" data-success="right" for="direccion">Dirección</label>
                                                                     </div>
 
                                                                     <div class="form-group">
-                                                                        <textarea class="form-control rounded-0 validate" maxlength="50" id="exampleFormControlTextarea2" rows="3" placeholder="Datos adicionales"></textarea>
+                                                                        <textarea class="form-control rounded-0 validate" maxlength="50" id="extras" name="extras" rows="3" placeholder="Datos adicionales"></textarea>
                                                                     </div>
 
                                                                     <div class="md-form">
                                                                         <i class="fas fa-city prefix grey-text"></i>
-                                                                        <input type="text" id="form2" class="form-control validate">
-                                                                        <label data-error="wrong" data-success="right" for="form2">Ciudad</label>
+                                                                        <input type="text" id="ciudad" name="ciudad" class="form-control validate">
+                                                                        <label data-error="wrong" data-success="right" for="ciudad">Ciudad</label>
                                                                     </div>
 
                                                                     <!-- Group of default radios - option 1 -->
                                                                     <div class="custom-control custom-radio">
-                                                                        <input type="radio" class="custom-control-input" id="residencia" name="tipo_direccion" checked>
+                                                                        <input type="radio" class="custom-control-input" id="residencia" name="tipo_direccion" value="residencia" checked>
                                                                         <label class="custom-control-label" for="defaultGroupExample1">Residencia</label>
                                                                     </div>
 
                                                                     <!-- Group of default radios - option 2 -->
                                                                     <div class="custom-control custom-radio">
-                                                                        <input type="radio" class="custom-control-input" id="envio" name="tipo_direccion">
+                                                                        <input type="radio" class="custom-control-input" id="envio" name="tipo_direccion" value="envio">
                                                                         <label class="custom-control-label" for="defaultGroupExample2">Envio</label>
                                                                     </div>
                                                                 </div>

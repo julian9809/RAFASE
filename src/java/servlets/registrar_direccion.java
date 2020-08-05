@@ -34,15 +34,12 @@ public class registrar_direccion extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet registrar_direccion</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet registrar_direccion at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            String direccion = request.getParameter("direccion");
+            String extra = request.getParameter("extras");
+            String ciudad = request.getParameter("ciudad");
+            String tipo = request.getParameter("tipo_direccion");
+            
+            System.out.println("Datos: "+direccion+extra+ciudad+tipo);
         }
     }
 
