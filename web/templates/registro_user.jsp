@@ -42,53 +42,62 @@
                             <h3 class="register-heading">¡Registrate como cliente!</h3>
                             <form class="row register-form" action="../registro_user" method="post">
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Nombre(s) *" value="" name="nombre" id="nombre"/>
+                                    <div class="md-form md-bg">
+                                        <input type="text" class="form-control white" name="nombre" id="nombre" required/>
+                                        <label for="nombre">Nombre(s)</label>
                                     </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Apellido(s) *" value="" name="apellido" id="apellido"/>
+                                    <div class="md-form md-bg">
+                                        <input type="text" class="form-control white" name="apellido" id="apellido" required/>
+                                        <label for="apellido">Apellido(s)</label>
                                     </div>
-                                    <div class="form-group form-check-inline">
-                                        <input type="text" class="form-control" placeholder="Cedula *" value="" name="cedula" id="cedula"/>
-                                        <select class="form-control" name="tipo_cedula" id="tipo_cedula">
-                                            <option selected>Tipo de documento...</option>
-                                            <option>Cedula</option>
-                                            <option>Tarjeta de identidad</option>
-                                            <option>Cedula de extranjeria</option>
+                                    <div class="input-group">
+                                        <div class="md-form md-bg input-group-prepend mt-0 mb-0">
+                                            <input type="text" class="form-control white mb-0" name="cedula" id="cedula" required/>
+                                            <label for="cedula">Cedula</label>
+                                        </div>
+                                        <select class="form-control white" name="tipo_id" id="tipo_id" required>
+                                            <option value="" disabled selected>Tipo de documento...</option>
+                                            <option value="CC" required>Cedula</option>
+                                            <option value="CE" required>Cedula de extranjeria</option>
                                         </select>
                                     </div>
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" placeholder="Correo Electronico *" value="" name="email" id="email"/>
-                                    </div>                                    
+                                    <div class="md-form md-bg">
+                                        <input type="email" class="form-control white" value="" name="email" id="email" required/>
+                                        <label for="email">Correo Electronico</label>
+                                    </div>
                                     <div class="form-group">
                                         <div class="maxl">
                                             <label class="radio inline"> 
-                                                <input type="radio" name="gender" value="M" checked id="gender">
+                                                <input type="radio" name="gender" value="M" id="gender" required>
                                                 <span> Hombre </span> 
                                             </label>
                                             <label class="radio inline"> 
-                                                <input type="radio" name="gender" value="F" id="gender">
+                                                <input type="radio" name="gender" value="F" id="gender" required>
                                                 <span> Mujer </span> 
                                             </label>
                                             <label class="radio inline"> 
-                                                <input type="radio" name="gender" value="O" id="gender">
+                                                <input type="radio" name="gender" value="O" id="gender" required>
                                                 <span> Otro </span> 
                                             </label>    
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Nombre de usuario *" value="" name="nickname" id="nikename"/>
+                                    <div class="md-form md-bg">
+                                        <input type="text" class="form-control white" value="" name="username" id="username" required/>
+                                        <label for="username">Nombre de usuario</label>
                                     </div>
-                                    <div class="form-group">
-                                        <input type="date" class="form-control" max="2002-01-01" placeholder="Fecha de nacimiento *" value="" name="fecha_nacimiento" id="fecha_nacimiento"/>
+                                    <div class="md-form md-bg">
+                                        <input type="date" class="form-control white" max="2002-01-01" value="" name="fecha_nacimiento" id="fecha_nacimiento" required/>
+                                        <label for="fecha_nacimiento">Fecha de nacimiento</label>
                                     </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control" placeholder="Contraseña *" value="" name="password" id="password"/>
+                                    <div class="md-form md-bg">
+                                        <input type="password" class="form-control white" value="" name="password" id="password" autocomplete="new-password" required/>
+                                        <label for="password">Contraseña</label>
                                     </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control"  placeholder="Confirmar Contraseña *" value="" name="confirme_password" id="confirme_password"/>
+                                    <div class="md-form md-bg">
+                                        <input type="password" class="form-control white" value="" name="confirme_password" id="confirme_password" autocomplete="new-password" required/>
+                                        <label for="confirme_password">Confirmar Contraseña</label>
                                     </div>
                                     <button class="btn btn-outline-success my-2 my-sm-0 btnRegister" type="submit">Registrarse</button>
                                 </div>

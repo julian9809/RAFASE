@@ -13,7 +13,7 @@ import java.util.Date;
  * @author david
  */
 public class Pedido {
-    private double id_pedido;
+    private long id_pedido;
     private double estado_pedido;
     private Date fecha_pedido;
     private double total_pedido;
@@ -21,7 +21,7 @@ public class Pedido {
     private double id_cedula;
     private String tipo_id;
     
-    private ArrayList<Double> id_pedido_array = new ArrayList<>();
+    private ArrayList<Long> id_pedido_array = new ArrayList<>();
     private ArrayList<Double> estado_pedido_array = new ArrayList<>();
     private ArrayList<Date> fecha_pedido_array = new ArrayList<>();
     private ArrayList<Double> total_pedido_array = new ArrayList<>();
@@ -36,7 +36,7 @@ public class Pedido {
         return id_pedido;
     }
 
-    public void setId_pedido(double id_pedido) {
+    public void setId_pedido(long id_pedido) {
         this.id_pedido = id_pedido;
     }
 
@@ -88,11 +88,11 @@ public class Pedido {
         this.tipo_id = tipo_id;
     }
 
-    public ArrayList<Double> getId_pedido_array() {
+    public ArrayList<Long> getId_pedido_array() {
         return id_pedido_array;
     }
 
-    public void setId_pedido_array(ArrayList<Double> id_pedido_array) {
+    public void setId_pedido_array(ArrayList<Long> id_pedido_array) {
         this.id_pedido_array = id_pedido_array;
     }
 

@@ -24,7 +24,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Productos</title>
+        <title>Tu Carrito</title>
         <!-- RAFASE icon -->
         <link rel="icon" href="../img/Logo.png" type="image/png">
         <!-- Font Awesome -->
@@ -102,18 +102,35 @@
                        aria-haspopup="true" aria-expanded="false">
                         <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="rounded-circle z-depth-0"
                              alt="avatar image" height="35"> <%=usuario%> </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
-                        <a class="dropdown-item" href="#">My account</a>
-                        <a class="dropdown-item" href="../cerrarSesion">Log out</a>
+                    <div class="dropdown-menu dropdown-menu-left dropdown-menu-lg-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+                        <a class="dropdown-item" href="perfil_user.jsp">Mi cuenta</a>
+                        <a class="dropdown-item" href="../cerrarSesion?usuario=visitante">Cerrar sesión</a>
                     </div>
                 </div>
                 <%}//End If visitante%>
             </div>
         </nav>
         <!-------------------------------Contenido-------------------------------------->
+        <div class="container mt-5">
+            <div class="card">
+                <div class="card-header text-left">
+                    Tu carrito
+                </div>
+                <div class="card-body text-left">
+                    <h3>Contenido del carrito</h3>
+                    <hr class="my-2">
+                    <div class="text-right">
+                        <button type="button" class="btn btn-success">Pagar</button>
+                    </div>
+                </div>
+                <div class="card-footer text-center text-muted">
+                    Tu carrito esta disponible hasta...
+                </div>
+            </div>
+        </div>
         <!--------------------------------FOOTER--------------------------------->
         <footer class="footer">
-            <div class="container">
+            <div class="container mt-5">
                 <p class="float-right"><a href="#">Volver al arriba</a></p>
                 <p>&copy; 2020 RAFASE, Inc. &middot; <a href="#">Privacidad</a> &middot; <a href="#">Términos y Condiciones</a></p>
             </div>

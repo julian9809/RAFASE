@@ -10,7 +10,6 @@ package control;
  * @author david
  */
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -38,7 +37,7 @@ public class PedidoDAO {
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 ResultSet rs = prepStmt.executeQuery();
                 while (rs.next()) {
-                    pedido.getId_pedido_array().add(rs.getDouble(1));
+                    pedido.getId_pedido_array().add(rs.getLong(1));
                     pedido.getEstado_pedido_array().add(rs.getDouble(2));
                     pedido.getFecha_pedido_array().add(rs.getDate(3));
                     pedido.getTotal_pedido_array().add(rs.getDouble(4));

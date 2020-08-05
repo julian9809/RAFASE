@@ -9,9 +9,12 @@ import modelo.Carrito;
 import modelo.Ciudad;
 import modelo.Cliente;
 import modelo.DetallePedido;
+import modelo.Direccion;
 import modelo.InventarioRafase;
 import modelo.Producto;
 import modelo.Pedido;
+import modelo.TarjetaCredito;
+import modelo.Telefono;
 import util.CaException;
 
 /**
@@ -38,10 +41,6 @@ public class DAOFacade {
     }
     
     //--------------------------------ClienteDAO--------------------------------
-    public void insertarCliente() throws CaException {
-        clienteDAO.insertarCliente();
-    }
-
     public boolean buscarExisteCliente(String usuario, String password, String nickname) throws CaException {
         return clienteDAO.buscarExisteCliente(usuario, password, nickname);
     }
@@ -54,16 +53,40 @@ public class DAOFacade {
         clienteDAO.insertarDireccion(usuario, password);
     }
 
-    public void buscarDirecciones(String usuario, String password, long cedula) throws CaException {
-        clienteDAO.buscarDirecciones(usuario, password, cedula);
+    public void buscarDireccionResidencia(String usuario, String password, String tipo, long cedula) throws CaException {
+        clienteDAO.buscarDireccionResidencia(usuario, password, tipo, cedula);
+    }
+    
+    public void buscarDireccionEnvio(String usuario, String password, String tipo, long cedula) throws CaException {
+        clienteDAO.buscarDireccionEnvio(usuario, password, tipo, cedula);
+    }
+    
+    public void insertarTelefono(String usuario, String password) throws CaException {
+        clienteDAO.insertarTelefono(usuario, password);
     }
 
-    public void crearUsuario(String usuario, String password) throws CaException {
-        clienteDAO.crearUsuario(usuario, password);
+    public void buscarTelefono(String usuario, String password, long cedula) throws CaException {
+        clienteDAO.buscarTelefono(usuario, password, cedula);
+    }
+    
+    public void insertarTarjetaCredito(String usuario, String password) throws CaException {
+        clienteDAO.insertarTarjetaCredito(usuario, password);
+    }
+
+    public void buscarTarjetaCredito(String usuario, String password, long cedula) throws CaException {
+        clienteDAO.buscarTarjetaCredito(usuario, password, cedula);
+    }
+
+    public void crearUsuario() throws CaException {
+        clienteDAO.crearUsuario();
     }
 
     public long buscarIdCliente(String usuario, String password) throws CaException {
         return clienteDAO.buscarIdCliente(usuario, password);
+    }
+    
+    public String buscarTipoID(String usuario, String password) throws CaException{
+        return clienteDAO.buscarTipoID(usuario, password);
     }
     
     //---------------------------------PedidoDAO--------------------------------
@@ -127,4 +150,15 @@ public class DAOFacade {
         return ciudadDAO.getCiudad();
     }
     
+    public Direccion getDireccion(){
+        return clienteDAO.getDireccion();
+    }
+    
+    public Telefono getTelefono(){
+        return clienteDAO.getTelefono();
+    }
+    
+    public TarjetaCredito getTarjetaCredito(){
+        return clienteDAO.getTarjetaCredito();
+    }
 }

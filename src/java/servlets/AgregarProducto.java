@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import modelo.DetallePedido;
 import modelo.Pedido;
 import util.CaException;
@@ -41,8 +42,11 @@ public class AgregarProducto extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String usuario = request.getParameter("usuario");
+            HttpSession usuarios = request.getSession();
+            
+            String usuario = usuarios.getAttribute("usuario").toString();
             String producto_buscado = request.getParameter("busqueda");
+            
             if (usuario.equals("visitante")) {
                 response.sendRedirect("templates/sign.jsp");
             } else {
@@ -50,8 +54,8 @@ public class AgregarProducto extends HttpServlet {
                 DAOFacade facade = new DAOFacade();
                 DetallePedido deped = new DetallePedido();
                 Pedido ped = new Pedido();
-                if(facade.consultarPedidos(facade.buscarIdCliente(usuario))){
-                    facade.consultarPedido(usuario, facade.buscarIdCliente(usuario));
+                if(true/*facade.consultarPedidos(facade.buscarIdCliente(usuario))*/){
+                    facade.consultarPedido(usuario, 1/*facade.buscarIdCliente(usuario)*/);
                     deped.setId_pedido(ped.getId_pedido());
                     deped.setCantidad(1);
                     deped.setId_producto(Double.valueOf(id_producto));
@@ -65,12 +69,12 @@ public class AgregarProducto extends HttpServlet {
                 else{                    
                     ped.setEstado_pedido(0);
                     ped.setTotal_pedido(1);
-                    ped.setId_cedula(facade.buscarIdCliente(usuario));
+                    //ped.setId_cedula(facade.buscarIdCliente(usuario));
                     ped.setId_ciudad(1);
                     
                     facade.insertarPedido(usuario, ped);
                     Pedido ped2 = new Pedido();
-                    facade.consultarPedido(usuario, facade.buscarIdCliente(usuario));
+                    //facade.consultarPedido(usuario, facade.buscarIdCliente(usuario));
                     
                     deped.setId_pedido(ped2.getId_pedido());
                     deped.setCantidad(1);

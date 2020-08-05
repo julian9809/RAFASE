@@ -30,14 +30,13 @@ public class ServiceLocator {
      * @return instancia del ServiceLocator para el manejo de la conexion
      */
     public static ServiceLocator getInstance() {
-        if (instance == null) {
+        if(instance==null){
             try {
                 instance = new ServiceLocator();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-
         return instance;
     }
     
@@ -47,14 +46,14 @@ public class ServiceLocator {
      * @return instancia del ServiceLocator para el manejo de la conexion
      */
     public static ServiceLocator getInstance(String usuario,String password) {
-        if (instance == null) {
+        if(instance==null){
             try {
                 instance = new ServiceLocator(usuario,password);
+                return instance;
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-
         return instance;
     }
 

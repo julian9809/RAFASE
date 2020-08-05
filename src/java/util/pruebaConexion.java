@@ -4,13 +4,12 @@
  * and open the template in the editor.
  */
 package util;
-import java.sql.Connection;
+import control.DAOFacade;
 import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.LocalDate;
-import util.ServiceLocator;
+import modelo.Direccion;
+import modelo.TarjetaCredito;
+import modelo.Telefono;
 
 /**
  *
@@ -22,29 +21,75 @@ public class pruebaConexion {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws CaException {
-        try {
-            String strSQL = "INSERT INTO usur(ID_CEDULA, TIPO_ID, PRIMER_NOMB, SEGUNDO_NOMB, PRIMER_APELL, SEGUNDO_APELL, PASSWORD, FECH_NAC, GENERO, EMAIL, NICKNAME) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-            Connection conexion = ServiceLocator.getInstance().tomarConexion();
-            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
-                prepStmt.setLong(1, 1031169327);
-                prepStmt.setString(2, "CC");
-                prepStmt.setString(3, "Jhonathan");
-                prepStmt.setString(4, "Daniel");
-                prepStmt.setString(5, "Rojas");
-                prepStmt.setString(6, "Zora");
-                prepStmt.setString(7, "abc123");
-                prepStmt.setDate(8, (Date) Date.valueOf(LocalDate.MAX));
-                prepStmt.setString(9, "O");
-                prepStmt.setString(10, "daniel.r.97@hotmail.com");
-                prepStmt.setString(11, "Papas338");
-                prepStmt.executeUpdate();
-            }
-            ServiceLocator.getInstance().commit();
-        } catch (SQLException e) {
-            throw new CaException("ClienteDAO", "No pudo crear el cliente\n" + e.getMessage());
-        } finally {
-            ServiceLocator.getInstance().liberarConexion();
+        
+        //DIRECCIONES
+        
+        /*
+        //Insercion de direcciones
+        DAOFacade facade = new DAOFacade();
+        Direccion dir = facade.getDireccion();
+        dir.setDireccion_completa(direccioncompleta);
+        dir.setTipo_direccion(R,E,N);
+        dir.setId_ciudad(idciudad);
+        dir.setId_cedula(facade.buscarIdCliente(usuario, contraseña));
+        dir.setTipo_id(facade.buscarTipoID(usuario, contraseña));
+        facade.insertarDireccion(usuario, contraseña);
+        */
+        
+        /*
+        //Listado de direcciones
+        DAOFacade facade = new DAOFacade();
+        facade.buscarDirecciones(usuario, contraseña, facade.buscarIdCliente(usuario, contraseña));
+        for(int i=0;i < facade.getDireccion().getDireccion_completa_array().size();i++){
+            System.out.println(facade.getDireccion().getDireccion_completa_array().get(i));
+        }*/
+        
+        //TELEFONOS
+        
+        /*
+        //Insercion de telefonos
+        DAOFacade facade = new DAOFacade();
+        Telefono tel = facade.getTelefono();
+        tel.setNumeroTelefono(telefono);
+        tel.setEnUso(S,N);
+        tel.setIdCedula(facade.buscarIdCliente(usuario, contraseña));
+        tel.setTipoID(facade.buscarTipoID(usuario, contraseña));
+        facade.insertarTelefono(usuario, contraseña);
+        */
+        
+        /*
+        //Listado de telefonos
+        DAOFacade facade = new DAOFacade();
+        facade.buscarTelefono("", "", facade.buscarIdCliente("Papas338", ""));
+        for(int i=0;i < facade.getTelefono().getNumeroTelefonoArray().size();i++){
+            System.out.println(facade.getTelefono().getNumeroTelefonoArray().get(i));
+        }*/
+        
+        //TARJETA DE CREDITO
+        
+        /*
+        //Insercion de tarjetas
+        DAOFacade facade = new DAOFacade();
+        TarjetaCredito tc = facade.getTarjetaCredito();
+        tc.setNombreTitular(nombre titular);
+        tc.setNumeroTarjeta(numero tarjeta);
+        tc.setFechaExp(fecha);
+        tc.setTipoID(facade.buscarTipoID(usuario, contraseña));
+        tc.setIdCedula(facade.buscarIdCliente(usuario, contraseña));
+        
+        facade.insertarTarjetaCredito(usuario, contraseña);
+        */
+        
+        /*
+        //Listado de tarjetas
+        DAOFacade facade = new DAOFacade();
+        facade.buscarTarjetaCredito(usuario, contraseña, facade.buscarIdCliente(usuario, contraseña));
+        for(int i=0;i < facade.getTarjetaCredito().getNombreTitularArray().size();i++){
+            System.out.println(facade.getTarjetaCredito().getNombreTitularArray().get(i));
+            System.out.println(facade.getTarjetaCredito().getNumeroTarjetaArray().get(i));
+            System.out.println(facade.getTarjetaCredito().getFechaExpArray().get(i));
         }
+        */
     }
     
 }

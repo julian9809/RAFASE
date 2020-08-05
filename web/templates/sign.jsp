@@ -30,32 +30,37 @@
     </head>
     <body>
         <form class="form-signin" action = "../IniciarSesion" method = "post">
-            <div class="text-center mb-4">
-                <img id="logo" class="mb-4" src="../img/Logo.png" alt="">
-                <h1 class="h3 mb-3 font-weight-normal">Iniciar Sesión</h1>
+            <div class="text-center">
+                <img id="logo" class="mb-2" src="../img/Logo.png" alt="">
+                <h1 class="h3 mb-2 font-weight-normal">Iniciar Sesión</h1>
                 <p>Por favor, ingrese sus datos de sesión.</p>
             </div>
-
-            <div class="form-label-group">
-                <input type="text" id="username" class="form-control" placeholder="Username" required autofocus name = "username">
+            <div class="md-form md-bg white input-with-pre-icon">
+                <i class="fas fa-user input-prefix"></i>
+                <input type="text" id="username" class="form-control white validate mb-0" autocomplete="username" required autofocus name = "username">
                 <label for="username">Nombre de Usuario</label>
             </div>
-
-            <div class="form-label-group">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required name = "inputPassword">
+            <div class="md-form md-bg white input-with-pre-icon mb-3">
+                <i class="fas fa-lock input-prefix"></i>
+                <input type="password" id="inputPassword" class="form-control white validate mb-0" autocomplete="current-password" required name = "inputPassword">
                 <label for="inputPassword">Contraseña</label>
             </div>
-
             <div class="checkbox mb-2">
                 <label>
                     <input type="checkbox" value="remember-me"> Recuérdame
                 </label>
             </div>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar Sesión</button>
+            
+            <div class="text-center mt-2">
+                <p>¿No estas registrado?
+                    <a href="registro_user.jsp">Registrate</a>
+                </p>
+            </div>
             <!--------------------------------FOOTER--------------------------------->
-            <footer class="container">
-                <p class="mt-2 text-center"><a href="#">Privacidad</a> &middot; <a href="#">Términos y Condiciones</a></p>
-                <p class="text-muted text-center">&copy; 2020 RAFASE, Inc.&middot; <a href="#">Administrador</a></p>
+            <footer class="container mb-0">
+                <p class="mb-1 text-center"><a href="#">Privacidad</a> &middot; <a href="#">Términos y Condiciones</a></p>
+                <p class="text-muted text-center mb-0">&copy; 2020 RAFASE, Inc.&middot; <a href="#">Administrador</a></p>
             </footer>
         </form>
         <!-------------------------------Scripts--------------------------------->
