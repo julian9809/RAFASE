@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author david
  */
 public class Producto {
-    private double id_producto;
+    private long id_producto;
     private String nombre_producto;
     private String marca_producto;
     private String referencia_producto;
@@ -22,7 +22,7 @@ public class Producto {
     private double iva;
     private String unidad_medida;
     
-    private ArrayList<Double> id_producto_array = new ArrayList<>();
+    private ArrayList<Long> id_producto_array = new ArrayList<>();
     private ArrayList<String> nombre_producto_array = new ArrayList<>();
     private ArrayList<String> marca_producto_array = new ArrayList<>();
     private ArrayList<String> referencia_producto_array = new ArrayList<>();
@@ -40,7 +40,7 @@ public class Producto {
         return id_producto;
     }
 
-    public void setId_producto(double id_producto) {
+    public void setId_producto(long id_producto) {
         this.id_producto = id_producto;
     }
 
@@ -108,11 +108,11 @@ public class Producto {
         this.id_subcategoria = id_subcategoria;
     }
 
-    public ArrayList<Double> getId_producto_array() {
+    public ArrayList<Long> getId_producto_array() {
         return id_producto_array;
     }
 
-    public void setId_producto_array(ArrayList<Double> id_producto_array) {
+    public void setId_producto_array(ArrayList<Long> id_producto_array) {
         this.id_producto_array = id_producto_array;
     }
 
