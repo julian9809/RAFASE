@@ -23,16 +23,6 @@ img#logo{
     margin-right: 0.4rem;
 }
 
-h1#nombre{
-    position: absolute;
-    right: 0rem;
-    text-align: center;
-    display: block;
-    max-width : 10rem;
-    width: 100%;
-    padding-top: 1.5rem;
-}
-
 /*Botones input number*/ 
 .floating-action-button {
     display: block;

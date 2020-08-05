@@ -51,7 +51,7 @@
         <link rel="stylesheet" href="../css/alertify/themes/bootstrap.min.css"/>
         <!---------------------- Alertify CSS ---------------------->
         <!-- Customs styles for this template -->
-        <link rel="stylesheet" href="../css/custom/productos.css">
+        <link rel="stylesheet" href="../css/custom/perfil_user.css">
         <!-- Customs fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Averia+Libre&display=swap" rel="stylesheet">
         <!-------------------------------Scripts--------------------------------->
@@ -90,7 +90,7 @@
                     <div class="input-group form-sm form-2">
                         <input class="form-control" type="text" placeholder="Buscar productos" name="producto_buscado" id="producto_buscado" aria-label="Search">
                         <div class="input-group-append">
-                            <button class="input-group-text grey lighten-5 mr-2">
+                            <button class="input-group-text form-control grey lighten-5 mr-2">
                                 <i class="fas fa-search text-grey" aria-hidden="true"></i>
                             </button>
                         </div>
@@ -195,11 +195,11 @@
                                                     <!------------------------------------Modal--------------------------------------------->
                                                 <div class="modal fade" id="modalDireccion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                                                      aria-hidden="true">
-                                                    <div class="modal-dialog modal-notify modal-warning" role="document">
+                                                    <div class="modal-dialog modal-notify" role="document">
                                                         <!--Content-->
                                                         <div class="modal-content">
                                                             <!--Header-->
-                                                            <div class="modal-header text-center">
+                                                            <div class="modal-header text-center warning-color">
                                                                 <h4 class="modal-title white-text w-100 font-weight-bold py-2">Registra tu dirección</h4>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true" class="white-text">&times;</span>
@@ -210,34 +210,34 @@
 
                                                             <form action="../registrar_direccion" method="post">
                                                                 <div class="modal-body">
-                                                                    <div class="md-form mb-5">
-                                                                        <i class="fas fa-home prefix grey-text"></i>
-                                                                        <input type="text" id="direccion" name="direccion" class="form-control validate">
-                                                                        <label data-error="wrong" data-success="right" for="direccion">Dirección</label>
+                                                                    <div class="md-form mb-5 amber-input active-amber-input">
+                                                                        <i class="fas fa-home prefix"></i>
+                                                                        <input type="text" id="direccion" name="direccion" class="form-control validate" required>
+                                                                        <label for="direccion" data-error="wrong" data-success="right">Dirección</label>
                                                                     </div>
 
-                                                                    <div class="form-group">
-                                                                        <textarea class="form-control rounded-0 validate" maxlength="50" id="extras" name="extras" rows="3" placeholder="Datos adicionales"></textarea>
+                                                                    <div class="md-form amber-textarea active-amber-textarea">
+                                                                        <i class="fas fa-pencil-alt prefix"></i>
+                                                                        <textarea class="md-textarea form-control validate" maxlength="50" id="extras" name="extras" rows="3"></textarea>
+                                                                        <label for="extras" data-error="wrong" data-success="right">Datos adicionales</label>
                                                                     </div>
 
                                                                     <div class="md-form">
-                                                                        <select class="browser-default custom-select mb-4" name="id_ciudad" id="id_ciudad" required>
+                                                                        <select class="browser-default custom-select mb-4 validate" name="id_ciudad" id="id_ciudad" required>
                                                                             <option selected hidden disabled>Escoge tu ciudad</option>
                                                                             <%
                                                                                 for (int i = 0; i < ciudades.getId_ciudad_array().size(); i++) {
                                                                             %>
-                                                                            <option value="<%= ciudades.getId_ciudad_array().get(i).toString() %>"><%= ciudades.getNombre_array().get(i)%></option>
+                                                                            <option value="<%= ciudades.getId_ciudad_array().get(i).toString()%>"><%= ciudades.getNombre_array().get(i)%></option>
                                                                             <%}//End for ciudad%>
                                                                         </select>
                                                                     </div>
-                                                                    
                                                                     <p>Tipo de dirección</p>
                                                                     <!-- Group of default radios - option 1 -->
                                                                     <div class="custom-control custom-radio">
                                                                         <input type="radio" class="custom-control-input" id="residencia" name="tipo_direccion" value="R" checked>
                                                                         <label class="custom-control-label" for="residencia">Residencia</label>
                                                                     </div>
-
                                                                     <!-- Group of default radios - option 2 -->
                                                                     <div class="custom-control custom-radio">
                                                                         <input type="radio" class="custom-control-input" id="envio" name="tipo_direccion" value="E">

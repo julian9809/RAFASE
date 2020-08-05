@@ -45,13 +45,12 @@
                 <input type="password" id="inputPassword" class="form-control white validate mb-0" autocomplete="current-password" required name = "inputPassword">
                 <label for="inputPassword">Contraseña</label>
             </div>
-            <div class="checkbox mb-2">
-                <label>
-                    <input type="checkbox" value="remember-me"> Recuérdame
-                </label>
+            <div class="custom-control custom-checkbox mb-2">
+                <input type="checkbox" class="custom-control-input" value="remember-me" id="remember-me">
+                <label class="custom-control-label" for="remember-me">Recuérdame</label>
             </div>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar Sesión</button>
-            
+
             <div class="text-center mt-2">
                 <p>¿No estas registrado?
                     <a href="registro_user.jsp">Registrate</a>

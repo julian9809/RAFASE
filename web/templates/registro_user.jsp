@@ -55,10 +55,10 @@
                                             <input type="text" class="form-control white mb-0" name="cedula" id="cedula" required/>
                                             <label for="cedula">Cedula</label>
                                         </div>
-                                        <select class="form-control white" name="tipo_id" id="tipo_id" required>
-                                            <option value="" disabled selected>Tipo de documento...</option>
-                                            <option value="CC" required>Cedula</option>
-                                            <option value="CE" required>Cedula de extranjeria</option>
+                                        <select class="browser-default custom-select custom-select-lg input-group-prepend text-muted font-weight-lighter white" name="tipo_id" id="tipo_id" required>
+                                            <option class="text-muted font-weight-lighter" value="" hidden disabled selected>Tipo ID</option>
+                                            <option class="text-muted font-weight-lighter" value="CC" required>Cedula</option>
+                                            <option class="text-muted font-weight-lighter" value="CE" required>Cedula de extranjeria</option>
                                         </select>
                                     </div>
                                     <div class="md-form md-bg">
@@ -66,19 +66,17 @@
                                         <label for="email">Correo Electronico</label>
                                     </div>
                                     <div class="form-group">
-                                        <div class="maxl">
-                                            <label class="radio inline"> 
-                                                <input type="radio" name="gender" value="M" id="gender" required>
-                                                <span> Hombre </span> 
-                                            </label>
-                                            <label class="radio inline"> 
-                                                <input type="radio" name="gender" value="F" id="gender" required>
-                                                <span> Mujer </span> 
-                                            </label>
-                                            <label class="radio inline"> 
-                                                <input type="radio" name="gender" value="O" id="gender" required>
-                                                <span> Otro </span> 
-                                            </label>    
+                                        <div class="custom-control custom-radio custom-control-inline"> 
+                                            <input type="radio" class="custom-control-input" name="gender" value="M" id="gender1" required>
+                                            <label class="custom-control-label" for="gender1"> Hombre </label>
+                                        </div>
+                                        <div class="custom-control custom-radio custom-control-inline"> 
+                                            <input type="radio" class="custom-control-input" name="gender" value="F" id="gender2" required>
+                                            <label class="custom-control-label" for="gender2"> Mujer </label>
+                                        </div>
+                                        <div class="custom-control custom-radio custom-control-inline"> 
+                                            <input type="radio" class="custom-control-input" name="gender" value="O" id="gender3" required>
+                                            <label class="custom-control-label" for="gender3"> Otro </label>
                                         </div>
                                     </div>
                                 </div>

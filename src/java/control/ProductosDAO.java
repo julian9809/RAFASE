@@ -52,7 +52,7 @@ public class ProductosDAO {
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 ResultSet rs = prepStmt.executeQuery();
                 while (rs.next()) {
-                    inventario_rafase.getCiudad().getId_ciudad_array().add(rs.getDouble(1));
+                    inventario_rafase.getCiudad().getId_ciudad_array().add(rs.getLong(1));
                     inventario_rafase.getCiudad().getNombre_array().add(rs.getString(2));
                     inventario_rafase.getCategoria().getId_categoria_array().add(rs.getDouble(3));
                     inventario_rafase.getCategoria().getNombre_categoria_array().add(rs.getString(4));

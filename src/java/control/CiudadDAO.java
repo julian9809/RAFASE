@@ -32,7 +32,7 @@ public class CiudadDAO {
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 ResultSet rs = prepStmt.executeQuery();
                 while (rs.next()) {
-                    ciudad.getId_ciudad_array().add(rs.getDouble(1));
+                    ciudad.getId_ciudad_array().add(rs.getLong(1));
                     ciudad.getNombre_array().add(rs.getString(2));
                     ciudad.getId_tienda_array().add(rs.getDouble(3));
                 }

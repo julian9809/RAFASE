@@ -40,25 +40,22 @@ public class registrar_direccion extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            request.setCharacterEncoding("UTF-8");
             HttpSession usuarios = request.getSession();
             
             String usuario = usuarios.getAttribute("usuario").toString();
             String contraseña = usuarios.getAttribute("contraseña").toString();
-            
             String direccion = request.getParameter("direccion");
             String extra = request.getParameter("extras");
-            System.out.println("Prueba 1");
-            double ciudad = Double.valueOf(request.getParameter("id_ciudad"));
-            String tipo = request.getParameter("tipo_direccion");   
+            Long ciudad = Long.valueOf(request.getParameter("id_ciudad"));
+            String tipo = request.getParameter("tipo_direccion");
             
-            
-            long id_ciudad = (long)ciudad;
             DAOFacade facade = new DAOFacade();
             Direccion dir = facade.getDireccion();
             
             dir.setDireccion_completa(direccion);
             dir.setExtras(extra);
-            dir.setId_ciudad(id_ciudad);
+            dir.setId_ciudad(ciudad);
             dir.setTipo_direccion(tipo);           
             
             try {
