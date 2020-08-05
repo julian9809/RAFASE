@@ -80,6 +80,10 @@ public class DAOFacade {
     public void crearUsuario() throws CaException {
         clienteDAO.crearUsuario();
     }
+    
+    public void buscarDatosCliente(String usuario, String password, long cedula) throws CaException {
+        clienteDAO.buscarDatosCliente(usuario, password, cedula);
+    }
 
     public long buscarIdCliente(String usuario, String password) throws CaException {
         return clienteDAO.buscarIdCliente(usuario, password);

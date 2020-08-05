@@ -4,6 +4,8 @@
     Author     : david
 --%>
 
+<%@page import="modelo.Telefono"%>
+<%@page import="modelo.Cliente"%>
 <%@page import="modelo.Ciudad"%>
 <%@page import="modelo.Direccion"%>
 <%@page import="control.DAOFacade"%>
@@ -119,6 +121,8 @@
             DAOFacade facade = new DAOFacade();
             Direccion dir = facade.getDireccion();
             Direccion dirEnv = facade.getDireccionEnvio();
+            Cliente cli = facade.getCliente();
+            Telefono tel = facade.getTelefono();
             Ciudad ciudades = facade.getCiudad();
 
             try {
@@ -130,6 +134,10 @@
                         facade.buscarIdCliente(usuario, usuarios.getAttribute("contraseña").toString()));
                 facade.buscarCiudades(usuarios.getAttribute("usuario").toString(),
                         usuarios.getAttribute("contraseña").toString());
+                facade.buscarTelefono(usuario, usuarios.getAttribute("contraseña").toString(),
+                        facade.buscarIdCliente(usuario, usuarios.getAttribute("contraseña").toString()));
+                facade.buscarDatosCliente(usuario, usuarios.getAttribute("contraseña").toString(),
+                        facade.buscarIdCliente(usuario, usuarios.getAttribute("contraseña").toString()));
             } catch (Exception e1) {
         %>
         <script type="text/javascript">
@@ -158,24 +166,60 @@
                 </div>
                 <div class="card-body">
                     <div class="tab-content pt-4">
-                        <div class="tab-pane fade in show active" id="datosPersonales" role="tabpanel">
-                            <table class="table table-borderless">
-                                <tbody>
-                                    <tr>
-                                        <td>Nickname</td>
-                                        <td><%=usuario%></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nombre</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Email</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Telefono</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="d-flex tab-pane fade in show justify-content-center active" id="datosPersonales" role="tabpanel">
+                            <div class="col-lg-6 col-md-6">
+                                <div class="card">
+                                    <div class="card-header info-color white-text text-center">
+                                        Tus datos personales
+                                    </div>
+                                    <table class="table table-borderless text-center">
+                                        <tbody>
+                                            <%
+                                                for (int j = 0; j < cli.getPrimer_nombre_array().size(); j++) {
+                                            %>
+                                            <tr>
+                                                <td scope="row" class="font-weight-bold">Nickname</td>
+                                                <td><%=usuario%></td>
+                                            </tr>
+                                            <tr>
+                                                <td scope="row" class="font-weight-bold">Nombre</td>
+                                                <% if (cli.getSegundo_nombre_array().get(j) == null && cli.getSegundo_apellido_array().get(j) == null) {%>
+                                                <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getPrimer_apellido_array().get(j)%></td>
+                                                <% } else if (cli.getSegundo_nombre_array().get(j) == null) {%>
+                                                    <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getPrimer_apellido_array().get(j) + " "
+                                                        + cli.getSegundo_apellido_array().get(j)%></td>
+                                                    <% } else if (cli.getSegundo_apellido_array().get(j) == null) {%>
+                                                    <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getSegundo_nombre_array().get(j) + " "
+                                                    + cli.getPrimer_apellido_array().get(j)%></td>
+                                                    <% } else {%>
+                                                    <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getSegundo_nombre_array().get(j) + " "
+                                                    + cli.getPrimer_apellido_array().get(j) + " " + cli.getSegundo_apellido_array().get(j)%></td>
+                                                    <%} //end if %>
+                                            </tr>
+                                            <tr>
+                                                <td scope="row" class="font-weight-bold">Email</td>
+                                                <td><%= cli.getEmail_array().get(j)%></td>
+                                            </tr>
+                                            <tr>
+                                                <td scope="row" class="font-weight-bold">Telefono(s)</td>
+                                                <td>
+                                                    <table class="table table-hover text-center">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Hola</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Hola</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <%} //end for%>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                         <!----------------------------Encabezado-------------------------------->
                         <div class="tab-pane fade in show" id="direcciones" role="tabpanel">
