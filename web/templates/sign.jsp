@@ -55,7 +55,7 @@
             </div>
             <div class="md-form md-bg white input-with-pre-icon mb-3">
                 <i class="fas fa-lock input-prefix"></i>
-                <input type="password" id="password" class="form-control white validate mb-0" autocomplete="current-password" required name = "inputPassword">
+                <input type="password" id="password" class="form-control white validate mb-0" autocomplete="current-password" required name = "password">
                 <label for="password">Contraseña</label>
                 <div id="show_password" class="fa fa-eye-slash password-icon"></div>
             </div>

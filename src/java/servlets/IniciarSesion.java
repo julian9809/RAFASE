@@ -42,8 +42,8 @@ public class IniciarSesion extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String username = request.getParameter("username");
             String password = request.getParameter("password");
-            DAOFacade facade = new DAOFacade();
             
+            DAOFacade facade = new DAOFacade();
             HttpSession usuarios = request.getSession();
             
             if(facade.buscarExisteCliente(usuarios.getAttribute("usuario")
