@@ -16,7 +16,6 @@
 <!DOCTYPE html>
 <%
     HttpSession sesion = request.getSession();
-    HttpSession usuarios = request.getSession();
     String ciudad = "no ciudad";
 
     if (sesion.getAttribute("Ciudad") != null) {
@@ -27,7 +26,7 @@
 
     String producto_buscado = request.getParameter("busqueda");
     String categoria = request.getParameter("categoria");
-    String usuario = usuarios.getAttribute("usuario").toString();
+    String usuario = sesion.getAttribute("usuario").toString();
 
 %>
 <html>
@@ -125,8 +124,8 @@
             DAOFacade facade = new DAOFacade();
             InventarioRafase inventarioRafase = facade.getInventario_rafase();
             try {
-                facade.buscarProducto(usuarios.getAttribute("usuario").toString(),
-                        usuarios.getAttribute("contraseña").toString(),
+                facade.buscarProducto(sesion.getAttribute("usuario").toString(),
+                        sesion.getAttribute("contraseña").toString(),
                         producto_buscado, ciudad, "", categoria);
             } catch (Exception e1) {
         %>

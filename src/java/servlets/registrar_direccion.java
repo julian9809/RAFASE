@@ -41,10 +41,10 @@ public class registrar_direccion extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             request.setCharacterEncoding("UTF-8");
-            HttpSession usuarios = request.getSession();
+            HttpSession sesion = request.getSession();
             
-            String usuario = usuarios.getAttribute("usuario").toString();
-            String contraseña = usuarios.getAttribute("contraseña").toString();
+            String usuario = sesion.getAttribute("usuario").toString();
+            String contraseña = sesion.getAttribute("contraseña").toString();
             String direccion = request.getParameter("direccion");
             String extra = request.getParameter("extras");
             Long ciudad = Long.valueOf(request.getParameter("id_ciudad"));

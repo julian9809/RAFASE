@@ -8,7 +8,6 @@
 <!DOCTYPE html>
 <%
     HttpSession sesion = request.getSession();
-    HttpSession usuarios = request.getSession();
     String ciudad = "no ciudad";
 
     if (!sesion.getAttribute("Ciudad").equals("no ciudad")) {
@@ -17,7 +16,7 @@
         out.print("<script>location.replace('../index.jsp');</script>");
     }
 
-    String usuario = usuarios.getAttribute("usuario").toString();
+    String usuario = sesion.getAttribute("usuario").toString();
 %>
 <html>
     <head>

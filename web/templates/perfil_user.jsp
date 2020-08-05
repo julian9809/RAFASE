@@ -11,7 +11,6 @@
 <!DOCTYPE html>
 <%
     HttpSession sesion = request.getSession();
-    HttpSession usuarios = request.getSession();
     String ciudad = "no ciudad";
 
     if (sesion.getAttribute("Ciudad") != null) {
@@ -22,7 +21,7 @@
 
     String producto_buscado = request.getParameter("busqueda");
     String categoria = request.getParameter("categoria");
-    String usuario = usuarios.getAttribute("usuario").toString();
+    String usuario = sesion.getAttribute("usuario").toString();
 
 %>
 <html>
@@ -122,14 +121,14 @@
             Ciudad ciudades = facade.getCiudad();
 
             try {
-                facade.buscarDireccionResidencia(usuario, usuarios.getAttribute("contraseña").toString(),
-                        facade.buscarTipoID(usuario, usuarios.getAttribute("contraseña").toString()),
-                        facade.buscarIdCliente(usuario, usuarios.getAttribute("contraseña").toString()));
-                facade.buscarDireccionEnvio(usuario, usuarios.getAttribute("contraseña").toString(),
-                        facade.buscarTipoID(usuario, usuarios.getAttribute("contraseña").toString()),
-                        facade.buscarIdCliente(usuario, usuarios.getAttribute("contraseña").toString()));
-                facade.buscarCiudades(usuarios.getAttribute("usuario").toString(),
-                        usuarios.getAttribute("contraseña").toString());
+                facade.buscarDireccionResidencia(usuario, sesion.getAttribute("contraseña").toString(),
+                        facade.buscarTipoID(usuario, sesion.getAttribute("contraseña").toString()),
+                        facade.buscarIdCliente(usuario, sesion.getAttribute("contraseña").toString()));
+                facade.buscarDireccionEnvio(usuario, sesion.getAttribute("contraseña").toString(),
+                        facade.buscarTipoID(usuario, sesion.getAttribute("contraseña").toString()),
+                        facade.buscarIdCliente(usuario, sesion.getAttribute("contraseña").toString()));
+                facade.buscarCiudades(sesion.getAttribute("usuario").toString(),
+                        sesion.getAttribute("contraseña").toString());
             } catch (Exception e1) {
         %>
         <script type="text/javascript">

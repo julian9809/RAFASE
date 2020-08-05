@@ -43,6 +43,7 @@ public class registro_user extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */     
             //Seteo de variables del formulario
+            request.setCharacterEncoding("UTF-8");
             String nombre = request.getParameter("nombre");
             String[] nombres = nombre.split(" ");
             String primerNombre = nombres[0];
@@ -73,11 +74,11 @@ public class registro_user extends HttpServlet {
             String confirme_password = request.getParameter("confirme_password");
             //Fin seteo de variables del formulario
             
-            HttpSession usuarios = request.getSession();
+            HttpSession sesion = request.getSession();
             DAOFacade facade = new DAOFacade();
             //Buscar NO existe un usuario ya con ese nickname
-            if(!facade.buscarExisteCliente(usuarios.getAttribute("usuario")
-                    .toString(), usuarios.getAttribute("contraseña").toString(),
+            if(!facade.buscarExisteCliente(sesion.getAttribute("usuario")
+                    .toString(), sesion.getAttribute("contraseña").toString(),
                     username)) {
                 //Revisar que las constraseñas suministradas coinsidan
                 if (password.equals(confirme_password)) {
@@ -96,10 +97,13 @@ public class registro_user extends HttpServlet {
 
                     facade.crearUsuario();
 
-                    usuarios.setAttribute("usuario", username);
-                    usuarios.setAttribute("contraseña", password);
+                    sesion.setAttribute("usuario", username);
+                    sesion.setAttribute("contraseña", password);
 
-                    //facade.crearCarrito(nickname, cli.getId_cedula());
+                    facade.crearCarrito(username, cli.getId_cedula(), 
+                            sesion.getAttribute("Ciudad").toString(), 
+                            facade.buscarIdCiudad(username, password, 
+                                    sesion.getAttribute("Ciudad").toString()) );
                     response.sendRedirect("templates/index.jsp");
                 } else {
                     response.sendRedirect("templates/registro_user.jsp");

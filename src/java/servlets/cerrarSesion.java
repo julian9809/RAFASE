@@ -35,11 +35,10 @@ public class cerrarSesion extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String usuario = request.getParameter("usuario");
-            HttpSession usuarios = request.getSession();
+            HttpSession sesion = request.getSession();
             
-            usuarios.setAttribute("usuario","visitante");
-            usuarios.setAttribute("contraseña","abc123");
+            sesion.setAttribute("usuario","visitante");
+            sesion.setAttribute("contraseña","abc123");
             
             response.sendRedirect("templates/index.jsp");
             

@@ -44,13 +44,13 @@ public class IniciarSesion extends HttpServlet {
             String password = request.getParameter("password");
             
             DAOFacade facade = new DAOFacade();
-            HttpSession usuarios = request.getSession();
+            HttpSession sesion = request.getSession();
             
-            if(facade.buscarExisteCliente(usuarios.getAttribute("usuario")
-                    .toString(), usuarios.getAttribute("contraseña").toString(),
+            if(facade.buscarExisteCliente(sesion.getAttribute("usuario")
+                    .toString(), sesion.getAttribute("contraseña").toString(),
                     username, password)){
-                usuarios.setAttribute("usuario", username);
-                usuarios.setAttribute("contraseña", password);
+                sesion.setAttribute("usuario", username);
+                sesion.setAttribute("contraseña", password);
                 response.sendRedirect("templates/index.jsp");
             }
             else{
