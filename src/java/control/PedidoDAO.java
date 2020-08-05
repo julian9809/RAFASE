@@ -136,18 +136,27 @@ public class PedidoDAO {
         }
     }
 
-   public void crearCarrito(String usuario, long cedula) throws CaException {
+   public void crearCarrito(String usuario, long cedula, String ciudad, long id_ciudad) throws CaException {
         try {
-            String strSQL = "CREATE VIEW CARRITO_" + usuario + " AS "
-                    + "(SELECT ped.ID_PEDIDO, prod.NOMBRE_PRODUCTO, "
-                    + "depe.CANTIDAD, inv.PRECIO_BASE "
-                    + "FROM prod, depe, usur, ped, inv"
+            String strSQL = "CREATE VIEW CARRITO_" + usuario + "_" + ciudad
+                    + " AS (SELECT ciu.ID_CIUDAD, ciu.NOMBRE, ped.ID_PEDIDO, "
+                    + "categ.ID_CATEGORIA, categ.NOMBRE_CATEGORIA, "
+                    + "categ.DESCRIPCION_CATEGORIA, subcat.ID_SUBCATEGORIA, "
+                    + "subcat.NOMBRE_SUBCATEGORIA, prod.ID_PRODUCTO, "
+                    + "prod.NOMBRE_PRODUCTO, prod.MARCA_PRODUCTO, "
+                    + "depe.CANTIDAD, inv.PRECIO_BASE, prod.IVA, prod.FOTO "
+                    + "FROM prod, depe, usur, ped, inv, ciu, subcat, categ "
                     + "WHERE prod.ID_PRODUCTO = depe.ID_PRODUCTO AND "
+                    + "prod.ID_SUBCATEGORIA = subcat.ID_SUBCATEGORIA AND "
+                    + "subcat.ID_CATEGORIA = categ.ID_CATEGORIA AND "
+                    + "ciu.ID_CIUDAD = inv.ID_CIUDAD AND "
                     + "usur.ID_CEDULA = ped.ID_CEDULA AND "
                     + "ped.ID_PEDIDO = depe.ID_PEDIDO AND "
+                    + "prod.ID_PRODUCTO = inv.ID_PRODUCTO AND "
                     + "usur.ID_CEDULA = " + cedula + " AND "
-                    + "prod.ID_PRODUCTO = inv.ID_PRODUCTO AND"
-                    + "ped.ESTADO_PEDIDO = 0)";
+                    + "ciu.ID_CIUDAD = " + id_ciudad + " AND "
+                    + "ped.ESTADO_PEDIDO = 'CA')";
+            System.out.println("la sentencia es: "+strSQL);
             Connection conexion = ServiceLocator.getInstance("admin_db", "dbadministrator").tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.executeUpdate();
@@ -160,17 +169,28 @@ public class PedidoDAO {
         }
     }
 
-    public void consultarCarrito(String usuario) throws CaException {
+    public void consultarCarrito(String usuario, String ciudad) throws CaException {
         try {
-            String strSQL = "SELECT * FROM CARRITO_" + usuario;
+            String strSQL = "SELECT * FROM CARRITO_" + usuario + "_" + ciudad;
             Connection conexion = ServiceLocator.getInstance("admin_db", "dbadministrator").tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 ResultSet rs = prepStmt.executeQuery();
                 while (rs.next()) {
-                    carrito.getId_pedido_array().add(rs.getDouble(1));
-                    carrito.getNombre_producto_array().add(rs.getString(2));
-                    carrito.getCantidad_array().add(rs.getDouble(3));
-                    carrito.getPrecio_base_array().add(rs.getDouble(4));
+                    carrito.getId_ciudad_array().add(rs.getLong(1));
+                    carrito.getNombre_ciudad_array().add(rs.getString(2));
+                    carrito.getId_pedido_array().add(rs.getLong(3));
+                    carrito.getId_categoria_array().add(rs.getLong(4));
+                    carrito.getNombre_categoria_array().add(rs.getString(5));
+                    carrito.getDescripcion_categoria_array().add(rs.getString(6));
+                    carrito.getId_subcategoria_array().add(rs.getLong(7));
+                    carrito.getNombre_subcategoria_array().add(rs.getString(8));
+                    carrito.getId_producto_array().add(rs.getLong(9));
+                    carrito.getNombre_producto_array().add(rs.getString(10));
+                    carrito.getMarca_producto_array().add(rs.getString(11));
+                    carrito.getCantidad_array().add(rs.getLong(12));
+                    carrito.getPrecio_base_array().add(rs.getDouble(13));
+                    carrito.getIva_array().add(rs.getDouble(14));
+                    carrito.getFoto_array().add(rs.getString(15));
                 }
             }
             ServiceLocator.getInstance("admin_db", "dbadministrator").commit();
