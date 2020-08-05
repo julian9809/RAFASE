@@ -23,8 +23,21 @@
         <link rel="stylesheet" href="../css/mdb/mdb.min.css">
         <!-- Custom styles for this template -->
         <link rel="stylesheet" href="../css/custom/registro_user.css">
+        <link rel="stylesheet" href="../css/custom/checkPassword.css">
         <!-- Customs fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Averia+Libre&display=swap" rel="stylesheet">
+        <!-------------------------------Scripts--------------------------------->
+        <!-- jQuery -->
+        <script type="text/javascript" src="../js/jquery.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="../js/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="../js/mdb.min.js"></script>
+        <!-- Custom Javacript-->
+        <script type="text/javascript" src="../js/custom/checkPassword.js"></script>
+        <script type="text/javascript" src="../js/custom/viewPassword.js"></script>
     </head>
     <body>
         <div class="container register">
@@ -40,7 +53,7 @@
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                             <h3 class="register-heading">¡Registrate como cliente!</h3>
-                            <form class="row register-form" action="../registro_user" method="post">
+                            <form id="registro_user" class="row register-form" action="../registro_user" method="post">
                                 <div class="col-md-6">
                                     <div class="md-form md-bg">
                                         <input type="text" class="form-control white" name="nombre" id="nombre" required/>
@@ -89,13 +102,16 @@
                                         <input type="date" class="form-control white" max="2002-01-01" value="" name="fecha_nacimiento" id="fecha_nacimiento" required/>
                                         <label for="fecha_nacimiento">Fecha de nacimiento</label>
                                     </div>
-                                    <div class="md-form md-bg">
-                                        <input type="password" class="form-control white" value="" name="password" id="password" autocomplete="new-password" required/>
+                                    <div class="md-form md-bg mb-0">
+                                        <input type="password" class="form-control white mb-0" value="" name="password" id="password" autocomplete="new-password" required/>
                                         <label for="password">Contraseña</label>
+                                        <div id="show_password" class="fa fa-eye-slash password-icon"></div>
+                                        <div id="strengthMessage"></div>
                                     </div>
                                     <div class="md-form md-bg">
-                                        <input type="password" class="form-control white" value="" name="confirme_password" id="confirme_password" autocomplete="new-password" required/>
+                                        <input type="password" class="form-control white mb-0" value="" name="confirme_password" id="confirme_password" autocomplete="new-password" required/>
                                         <label for="confirme_password">Confirmar Contraseña</label>
+                                        <div id="show_confirme_password" class="fa fa-eye-slash password-icon"></div>
                                     </div>
                                     <button class="btn btn-outline-success my-2 my-sm-0 btnRegister" type="submit">Registrarse</button>
                                 </div>
@@ -105,14 +121,5 @@
                 </div>
             </div>
         </div>
-        <!-------------------------------Scripts--------------------------------->
-        <!-- jQuery -->
-        <script type="text/javascript" src="../js/jquery.js"></script>
-        <!-- Bootstrap tooltips -->
-        <script type="text/javascript" src="../js/popper.min.js"></script>
-        <!-- Bootstrap core JavaScript -->
-        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-        <!-- MDB core JavaScript -->
-        <script type="text/javascript" src="../js/mdb.min.js"></script>
     </body>
 </html>
