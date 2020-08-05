@@ -5,13 +5,19 @@
  */
 package servlets;
 
+import control.DAOFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import modelo.Direccion;
+import util.CaException;
 
 /**
  *
@@ -36,10 +42,30 @@ public class registrar_direccion extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String direccion = request.getParameter("direccion");
             String extra = request.getParameter("extras");
-            String ciudad = request.getParameter("ciudad");
+            long ciudad = Long.valueOf(request.getParameter("ciudad"));
             String tipo = request.getParameter("tipo_direccion");
             
-            System.out.println("Datos: "+direccion+extra+ciudad+tipo);
+            HttpSession usuarios = request.getSession();
+            
+            String usuario = usuarios.getAttribute("usuario").toString();
+            String contraseña = usuarios.getAttribute("contraseña").toString();
+            
+            DAOFacade facade = new DAOFacade();
+            Direccion dir = facade.getDireccion();
+            
+            dir.setDireccion_completa(direccion);
+            dir.setExtras(extra);
+            dir.setId_ciudad(ciudad);
+            dir.setTipo_direccion(tipo);           
+            
+            try {
+                dir.setId_cedula(facade.buscarIdCliente(usuario, contraseña));
+                dir.setTipo_id(facade.buscarTipoID(usuario, contraseña));
+                facade.insertarDireccion(usuario, contraseña);
+            } catch (CaException ex) {
+                System.out.println("error " + ex);
+            }
+            
         }
     }
 

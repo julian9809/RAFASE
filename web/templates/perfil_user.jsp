@@ -4,6 +4,7 @@
     Author     : david
 --%>
 
+<%@page import="modelo.Ciudad"%>
 <%@page import="modelo.Direccion"%>
 <%@page import="control.DAOFacade"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -117,11 +118,14 @@
         <%
             DAOFacade facade = new DAOFacade();
             Direccion dir = facade.getDireccion();
+            Ciudad ciudades = facade.getCiudad();
 
             try {
                 facade.buscarDireccionResidencia(usuario, usuarios.getAttribute("contraseña").toString(),
                         facade.buscarTipoID(usuario, usuarios.getAttribute("contraseña").toString()),
                         facade.buscarIdCliente(usuario, usuarios.getAttribute("contraseña").toString()));
+                facade.buscarCiudades(usuarios.getAttribute("usuario").toString(),
+                        usuarios.getAttribute("contraseña").toString());
             } catch (Exception e1) {
         %>
         <script type="text/javascript">
@@ -130,8 +134,9 @@
             });
         </script>
         <%
-            }
-        %>
+            }//end catch            
+%>
+
         <div class="container mt-5">
             <div class="card">
                 <div class="card-header">
@@ -216,21 +221,27 @@
                                                                     </div>
 
                                                                     <div class="md-form">
-                                                                        <i class="fas fa-city prefix grey-text"></i>
-                                                                        <input type="text" id="ciudad" name="ciudad" class="form-control validate">
-                                                                        <label data-error="wrong" data-success="right" for="ciudad">Ciudad</label>
+                                                                        <select class="browser-default custom-select mb-4" name="ciudad" id="ciudad" required>
+                                                                            <option selected hidden disabled>Escoge tu ciudad</option>
+                                                                            <%
+                                                                                for (int i = 0; i < ciudades.getId_ciudad_array().size(); i++) {
+                                                                            %>
+                                                                            <option value="<%= ciudades.getId_ciudad_array().get(i)%>"><%= ciudades.getNombre_array().get(i)%></option>
+                                                                            <%}//End for ciudad%>
+                                                                        </select>
                                                                     </div>
-
+                                                                    
+                                                                    <p>Tipo de dirección</p>
                                                                     <!-- Group of default radios - option 1 -->
                                                                     <div class="custom-control custom-radio">
-                                                                        <input type="radio" class="custom-control-input" id="residencia" name="tipo_direccion" value="residencia" checked>
-                                                                        <label class="custom-control-label" for="defaultGroupExample1">Residencia</label>
+                                                                        <input type="radio" class="custom-control-input" id="residencia" name="tipo_direccion" value="R" checked>
+                                                                        <label class="custom-control-label" for="residencia">Residencia</label>
                                                                     </div>
 
                                                                     <!-- Group of default radios - option 2 -->
                                                                     <div class="custom-control custom-radio">
-                                                                        <input type="radio" class="custom-control-input" id="envio" name="tipo_direccion" value="envio">
-                                                                        <label class="custom-control-label" for="defaultGroupExample2">Envio</label>
+                                                                        <input type="radio" class="custom-control-input" id="envio" name="tipo_direccion" value="E">
+                                                                        <label class="custom-control-label" for="envio">Envio</label>
                                                                     </div>
                                                                 </div>
                                                                 <!--Footer-->
