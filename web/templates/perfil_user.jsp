@@ -221,12 +221,12 @@
                                                                     </div>
 
                                                                     <div class="md-form">
-                                                                        <select class="browser-default custom-select mb-4" name="ciudad" id="ciudad" required>
+                                                                        <select class="browser-default custom-select mb-4" name="id_ciudad" id="id_ciudad" required>
                                                                             <option selected hidden disabled>Escoge tu ciudad</option>
                                                                             <%
                                                                                 for (int i = 0; i < ciudades.getId_ciudad_array().size(); i++) {
                                                                             %>
-                                                                            <option value="<%= ciudades.getId_ciudad_array().get(i)%>"><%= ciudades.getNombre_array().get(i)%></option>
+                                                                            <option value="<%= ciudades.getId_ciudad_array().get(i).toString() %>"><%= ciudades.getNombre_array().get(i)%></option>
                                                                             <%}//End for ciudad%>
                                                                         </select>
                                                                     </div>

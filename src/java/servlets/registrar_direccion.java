@@ -40,31 +40,37 @@ public class registrar_direccion extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String direccion = request.getParameter("direccion");
-            String extra = request.getParameter("extras");
-            long ciudad = Long.valueOf(request.getParameter("ciudad"));
-            String tipo = request.getParameter("tipo_direccion");
-            
             HttpSession usuarios = request.getSession();
             
             String usuario = usuarios.getAttribute("usuario").toString();
             String contraseña = usuarios.getAttribute("contraseña").toString();
             
+            String direccion = request.getParameter("direccion");
+            String extra = request.getParameter("extras");
+            System.out.println("Prueba 1");
+            double ciudad = Double.valueOf(request.getParameter("id_ciudad"));
+            String tipo = request.getParameter("tipo_direccion");   
+            
+            
+            long id_ciudad = (long)ciudad;
             DAOFacade facade = new DAOFacade();
             Direccion dir = facade.getDireccion();
             
             dir.setDireccion_completa(direccion);
             dir.setExtras(extra);
-            dir.setId_ciudad(ciudad);
+            dir.setId_ciudad(id_ciudad);
             dir.setTipo_direccion(tipo);           
             
             try {
                 dir.setId_cedula(facade.buscarIdCliente(usuario, contraseña));
                 dir.setTipo_id(facade.buscarTipoID(usuario, contraseña));
                 facade.insertarDireccion(usuario, contraseña);
+                response.sendRedirect("templates/perfil_user.jsp");
             } catch (CaException ex) {
                 System.out.println("error " + ex);
             }
+            
+            
             
         }
     }
