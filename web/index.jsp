@@ -10,14 +10,14 @@
 <%@page session="true"%> 
 <!DOCTYPE html>
 <%
-    HttpSession usuarios = request.getSession();
+    HttpSession sesion = request.getSession();
     
-    if(usuarios.getAttribute("usuario")==null){
-        usuarios.setAttribute("usuario", "visitante");
-        usuarios.setAttribute("contraseña", "abc123");
+    if(sesion.getAttribute("usuario")==null){
+        sesion.setAttribute("usuario", "visitante");
+        sesion.setAttribute("contraseña", "abc123");
     }else{
-        usuarios.getAttribute("usuario");
-        usuarios.getAttribute("contraseña");
+        sesion.getAttribute("usuario");
+        sesion.getAttribute("contraseña");
     }
 %>
 <html>
@@ -76,8 +76,8 @@
                 DAOFacade facade = new DAOFacade();
                 Ciudad ciudad = facade.getCiudad();
                 try {
-                    facade.buscarCiudades(usuarios.getAttribute("usuario").toString(),
-                            usuarios.getAttribute("contraseña").toString());
+                    facade.buscarCiudades(sesion.getAttribute("usuario").toString(),
+                            sesion.getAttribute("contraseña").toString());
                 } catch (Exception e1) {
                     %>
                     <script type="text/javascript">

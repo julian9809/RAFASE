@@ -111,7 +111,7 @@ INSERT INTO INV(ID_PRODUCTO,ID_PROVEEDOR,ID_CIUDAD,EXISTENCIAS,PRECIO_BASE) VALU
 INSERT INTO PROD VALUES (108003, 'Chocolate Corona', 'Casa luker', '108003', 'Chocolate de excelente calidad', 'principal.jpg', 8, 'Libra', 0.05);
 INSERT INTO INV(ID_PRODUCTO,ID_PROVEEDOR,ID_CIUDAD,EXISTENCIAS,PRECIO_BASE) VALUES (108003,10802,2,98,5990);
 --Mascotas
-INSERT INTO PROD VALUES (109001, 'Dougurmet', 'Purina', '109001', 'Purina de excelente calidad', 'principal.jpg', 9, 'Libra', 0.19);
+INSERT INTO PROD VALUES (109001, 'Dogourmet', 'Purina', '109001', 'Purina de excelente calidad', 'principal.jpg', 9, 'Libra', 0.19);
 INSERT INTO INV(ID_PRODUCTO,ID_PROVEEDOR,ID_CIUDAD,EXISTENCIAS,PRECIO_BASE) VALUES (109001,10901,1,25,2500);
 INSERT INTO PROD VALUES (109002, 'Shampoo canino', 'Perros limpios', '109002', 'Deja limpio a tu amigo peludo', 'principal.jpg', 9, 'Litro', 0.19);
 INSERT INTO INV(ID_PRODUCTO,ID_PROVEEDOR,ID_CIUDAD,EXISTENCIAS,PRECIO_BASE) VALUES (109002,10901,3,15,10900);

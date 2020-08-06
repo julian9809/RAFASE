@@ -40,6 +40,9 @@ public class DAOFacade {
         ciudadDAO.buscarCiudades(nickname, userPassword);
     }
     
+    public long buscarIdCiudad(String usuario, String password, String nombre_ciudad) throws CaException {
+        return ciudadDAO.buscarIdCiudad(usuario, password, nombre_ciudad);
+    }
     //--------------------------------ClienteDAO--------------------------------
     public boolean buscarExisteCliente(String usuario, String password, String nickname) throws CaException {
         return clienteDAO.buscarExisteCliente(usuario, password, nickname);
@@ -80,6 +83,10 @@ public class DAOFacade {
     public void crearUsuario() throws CaException {
         clienteDAO.crearUsuario();
     }
+    
+    public void buscarDatosCliente(String usuario, String password, long cedula) throws CaException {
+        clienteDAO.buscarDatosCliente(usuario, password, cedula);
+    }
 
     public long buscarIdCliente(String usuario, String password) throws CaException {
         return clienteDAO.buscarIdCliente(usuario, password);
@@ -110,12 +117,12 @@ public class DAOFacade {
         pedidoDAO.consultarProductosPedido(usuario, password, deped);
     }
 
-    public void crearCarrito(String usuario, long cedula) throws CaException{
-        pedidoDAO.crearCarrito(usuario, cedula);
+    public void crearCarrito(String usuario, long cedula, String ciudad, long id_ciudad) throws CaException{
+        pedidoDAO.crearCarrito(usuario, cedula, ciudad, id_ciudad);
     }
 
-    public void consultarCarrito(String usuario) throws CaException{
-        pedidoDAO.consultarCarrito(usuario);
+    public void consultarCarrito(String usuario, String ciudad) throws CaException{
+        pedidoDAO.consultarCarrito(usuario, ciudad);
     }
 
     public boolean verificarExistencia(double id_pedido, double id_producto) throws CaException{
@@ -152,6 +159,10 @@ public class DAOFacade {
     
     public Direccion getDireccion(){
         return clienteDAO.getDireccion();
+    }
+    
+    public Direccion getDireccionEnvio(){
+        return clienteDAO.getDireccionEnvio();
     }
     
     public Telefono getTelefono(){

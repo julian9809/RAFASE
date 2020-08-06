@@ -42,9 +42,10 @@ public class AgregarProducto extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            HttpSession usuarios = request.getSession();
+            request.setCharacterEncoding("UTF-8");
+            HttpSession sesion = request.getSession();
             
-            String usuario = usuarios.getAttribute("usuario").toString();
+            String usuario = sesion.getAttribute("usuario").toString();
             String producto_buscado = request.getParameter("busqueda");
             
             if (usuario.equals("visitante")) {

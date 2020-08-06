@@ -25,12 +25,14 @@ public class ClienteDAO {
 
     private Cliente cliente;
     private Direccion direccion;
+    private Direccion direccionEnvio;
     private Telefono telefono;
     private TarjetaCredito tarjetaCredito;
 
     public ClienteDAO() {
         cliente = new Cliente();
         direccion = new Direccion();
+        direccionEnvio = new Direccion();
         telefono = new Telefono();
         tarjetaCredito = new TarjetaCredito();
     }
@@ -126,8 +128,8 @@ public class ClienteDAO {
                 prepStmt.setLong(1, cedula);
                 ResultSet rs = prepStmt.executeQuery();
                 while (rs.next()) {
-                    direccion.getDireccion_completa_array().add(rs.getString(1));
-                    direccion.getExtras_array().add(rs.getString(2));
+                    direccionEnvio.getDireccion_completa_array().add(rs.getString(1));
+                    direccionEnvio.getExtras_array().add(rs.getString(2));
                 }
             }
         } catch (SQLException e) {
@@ -250,7 +252,29 @@ public class ClienteDAO {
             ServiceLocator.getInstance().liberarConexion();
         }
     }
-
+        
+    public void buscarDatosCliente(String usuario, String password, long cedula) throws CaException {
+        try {
+            String strSQL = "SELECT PRIMER_NOMB, SEGUNDO_NOMB, PRIMER_APELL, SEGUNDO_APELL, FECH_NAC, GENERO, EMAIL FROM USUR WHERE ID_CEDULA = ?";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
+                prepStmt.setLong(1, cedula);
+                ResultSet rs = prepStmt.executeQuery();
+                while (rs.next()) {
+                    cliente.getPrimer_nombre_array().add(rs.getString(1));
+                    cliente.getSegundo_nombre_array().add(rs.getString(2));
+                    cliente.getPrimer_apellido_array().add(rs.getString(3));
+                    cliente.getSegundo_apellido_array().add(rs.getString(4));
+                    cliente.getFecha_nacimiento_array().add(rs.getDate(5));
+                    cliente.getGenero_array().add(rs.getString(6));
+                    cliente.getEmail_array().add(rs.getString(7));
+                }
+            }
+        } catch (SQLException e) {
+            throw new CaException("ClienteDAO", "No se pudo realizar la busqueda" + e.getMessage());
+        }
+    }
+    
     public long buscarIdCliente(String usuario, String password) throws CaException {
         long id_cliente=-1;
         try {
@@ -304,7 +328,14 @@ public class ClienteDAO {
     public void setDireccion(Direccion direccion) {
         this.direccion = direccion;
     }
-    
+
+    public Direccion getDireccionEnvio() {
+        return direccionEnvio;
+    }
+
+    public void setDireccionEnvio(Direccion direccionEnvio) {
+        this.direccionEnvio = direccionEnvio;
+    }    
     
     public Telefono getTelefono() {
         return telefono;
@@ -320,5 +351,6 @@ public class ClienteDAO {
 
     public void setTarjetaCredito(TarjetaCredito tarjetaCredito) {
         this.tarjetaCredito = tarjetaCredito;
-    }
+    }   
+    
 }
