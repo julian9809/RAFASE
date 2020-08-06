@@ -6,6 +6,7 @@
 package modelo;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -23,6 +24,18 @@ public class Cliente {
     private String genero;
     private String email;
     private String nickname;
+    
+    private ArrayList<Long> id_cedula_array = new ArrayList<>();
+    private ArrayList<String> tipo_id_array = new ArrayList<>();
+    private ArrayList<String> primer_nombre_array = new ArrayList<>();
+    private ArrayList<String> segundo_nombre_array = new ArrayList<>();
+    private ArrayList<String> primer_apellido_array = new ArrayList<>();
+    private ArrayList<String> segundo_apellido_array = new ArrayList<>();
+    private ArrayList<String> password_array = new ArrayList<>();
+    private ArrayList<Date> fecha_nacimiento_array = new ArrayList<>();
+    private ArrayList<String> genero_array = new ArrayList<>();    
+    private ArrayList<String> email_array = new ArrayList<>();
+    private ArrayList<String> nickname_array = new ArrayList<>();
 
     public Cliente(){}
     
@@ -113,4 +126,94 @@ public class Cliente {
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
+
+    public ArrayList<Long> getId_cedula_array() {
+        return id_cedula_array;
+    }
+
+    public void setId_cedula_array(ArrayList<Long> id_cedula_array) {
+        this.id_cedula_array = id_cedula_array;
+    }
+
+    public ArrayList<String> getTipo_id_array() {
+        return tipo_id_array;
+    }
+
+    public void setTipo_id_array(ArrayList<String> tipo_id_array) {
+        this.tipo_id_array = tipo_id_array;
+    }
+
+    public ArrayList<String> getPrimer_nombre_array() {
+        return primer_nombre_array;
+    }
+
+    public void setPrimer_nombre_array(ArrayList<String> primer_nombre_array) {
+        this.primer_nombre_array = primer_nombre_array;
+    }
+
+    public ArrayList<String> getSegundo_nombre_array() {
+        return segundo_nombre_array;
+    }
+
+    public void setSegundo_nombre_array(ArrayList<String> segundo_nombre_array) {
+        this.segundo_nombre_array = segundo_nombre_array;
+    }
+
+    public ArrayList<String> getPrimer_apellido_array() {
+        return primer_apellido_array;
+    }
+
+    public void setPrimer_apellido_array(ArrayList<String> primer_apellido_array) {
+        this.primer_apellido_array = primer_apellido_array;
+    }
+
+    public ArrayList<String> getSegundo_apellido_array() {
+        return segundo_apellido_array;
+    }
+
+    public void setSegundo_apellido_array(ArrayList<String> segundo_apellido_array) {
+        this.segundo_apellido_array = segundo_apellido_array;
+    }
+
+    public ArrayList<String> getPassword_array() {
+        return password_array;
+    }
+
+    public void setPassword_array(ArrayList<String> password_array) {
+        this.password_array = password_array;
+    }
+
+    public ArrayList<Date> getFecha_nacimiento_array() {
+        return fecha_nacimiento_array;
+    }
+
+    public void setFecha_nacimiento_array(ArrayList<Date> fecha_nacimiento_array) {
+        this.fecha_nacimiento_array = fecha_nacimiento_array;
+    }
+
+    public ArrayList<String> getGenero_array() {
+        return genero_array;
+    }
+
+    public void setGenero_array(ArrayList<String> genero_array) {
+        this.genero_array = genero_array;
+    }
+
+    public ArrayList<String> getEmail_array() {
+        return email_array;
+    }
+
+    public void setEmail_array(ArrayList<String> email_array) {
+        this.email_array = email_array;
+    }
+
+    public ArrayList<String> getNickname_array() {
+        return nickname_array;
+    }
+
+    public void setNickname_array(ArrayList<String> nickname_array) {
+        this.nickname_array = nickname_array;
+    }
+    
+    
 }

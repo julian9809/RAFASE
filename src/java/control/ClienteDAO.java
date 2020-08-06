@@ -252,7 +252,29 @@ public class ClienteDAO {
             ServiceLocator.getInstance().liberarConexion();
         }
     }
-
+        
+    public void buscarDatosCliente(String usuario, String password, long cedula) throws CaException {
+        try {
+            String strSQL = "SELECT PRIMER_NOMB, SEGUNDO_NOMB, PRIMER_APELL, SEGUNDO_APELL, FECH_NAC, GENERO, EMAIL FROM USUR WHERE ID_CEDULA = ?";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
+                prepStmt.setLong(1, cedula);
+                ResultSet rs = prepStmt.executeQuery();
+                while (rs.next()) {
+                    cliente.getPrimer_nombre_array().add(rs.getString(1));
+                    cliente.getSegundo_nombre_array().add(rs.getString(2));
+                    cliente.getPrimer_apellido_array().add(rs.getString(3));
+                    cliente.getSegundo_apellido_array().add(rs.getString(4));
+                    cliente.getFecha_nacimiento_array().add(rs.getDate(5));
+                    cliente.getGenero_array().add(rs.getString(6));
+                    cliente.getEmail_array().add(rs.getString(7));
+                }
+            }
+        } catch (SQLException e) {
+            throw new CaException("ClienteDAO", "No se pudo realizar la busqueda" + e.getMessage());
+        }
+    }
+    
     public long buscarIdCliente(String usuario, String password) throws CaException {
         long id_cliente=-1;
         try {
@@ -329,5 +351,6 @@ public class ClienteDAO {
 
     public void setTarjetaCredito(TarjetaCredito tarjetaCredito) {
         this.tarjetaCredito = tarjetaCredito;
-    }
+    }   
+    
 }
