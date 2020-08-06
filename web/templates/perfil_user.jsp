@@ -196,7 +196,7 @@
                                                                 <input type="text" id="telefono" name="telefono" class="form-control validate" required>
                                                                 <label for="telefono" data-error="wrong" data-success="right">Teléfono</label>
                                                             </div>
-
+                                                        </div>
                                                             <!--Footer-->
                                                             <div class="modal-footer justify-content-center">
                                                                 <button class="btn btn-warning waves-effect" type="submit">Registrar</button>
