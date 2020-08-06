@@ -101,7 +101,6 @@ public class registro_user extends HttpServlet {
                     sesion.setAttribute("contraseña", password);
 
                     facade.crearCarrito(username, cli.getId_cedula(), 
-                            sesion.getAttribute("Ciudad").toString(), 
                             facade.buscarIdCiudad(username, password, 
                                     sesion.getAttribute("Ciudad").toString()) );
                     response.sendRedirect("templates/index.jsp");

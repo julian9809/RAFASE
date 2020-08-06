@@ -9,7 +9,6 @@
 <%@page import="modelo.Pedido"%>
 <%@page import="control.DAOFacade"%>
 <%@page import="modelo.Carrito"%>
-<%@page import="control.PedidoDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="modelo.Producto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -164,11 +163,10 @@
                                 <div class="card card-cascade">
                                     <!-- Card image -->
                                     <div class="view view-cascade overlay zoom">
-                                        <img src="../img/Productos/<%= 
-                                                inventarioRafase.getCategoria().getNombre_categoria_array().get(i)
+                                        <img src="../img/Productos/<%= inventarioRafase.getCategoria().getNombre_categoria_array().get(i)
                                                 + "/" + inventarioRafase.getSubcategoria().getNombre_subcategoria_array().get(i)
                                                 + "/" + inventarioRafase.getProducto().getId_producto_array().get(i)
-                                                + "/" + inventarioRafase.getProducto().getFoto_array().get(i) %>" class="img-responsive card-img-top"
+                                                + "/" + inventarioRafase.getProducto().getFoto_array().get(i)%>" class="img-responsive card-img-top"
                                              alt="Imagen de <%= inventarioRafase.getProducto().getNombre_producto_array().get(i)%>"
                                              title="Imagen de <%= inventarioRafase.getProducto().getNombre_producto_array().get(i)%>">
                                         <a>
@@ -203,7 +201,7 @@
                                                 </div>
                                                 <!--Entradas escondidad-->
                                                 <input type="hidden" name = "id_producto" id="id_producto" value=<%= inventarioRafase.getProducto().getId_producto_array().get(i)%>>
-                                                <input type="hidden" name = "busqueda" id="busqueda" value=<%=producto_buscado%>>
+                                                <input type="hidden" name = "busqueda" id="busqueda" value=<%= producto_buscado%>>
                                                 <!--Entradas escondidad-->
                                                 <button class="btn btn-success btn-sm my-auto btnRedondo" type="submit" title="Añadir al carrito">
                                                     <i class="fas fa-cart-arrow-down fa-2x"></i>
@@ -290,36 +288,15 @@
                         </button>
                     </div>
                     <%  
-                        /*PedidoDAO pedidoDAO = new PedidoDAO();
-                        ArrayList<Carrito> listarcarrito = new ArrayList<>();
-                        listarcarrito = pedidoDAO.consultarCarrito(usuario);
-                        if (!listarcarrito.isEmpty()) {
-                            double total = 0;*/
-                    %>
+                        Carrito carrito = facade.getCarrito();
+                        try {
+                            System.out.println("no pasado el carrito");
+                            if (facade.existeCarrito(usuario, sesion.getAttribute("contraseña").toString(), facade.buscarIdCliente(usuario, sesion.getAttribute("contraseña").toString()))) {
+                                facade.consultarCarrito(usuario, facade.buscarIdCiudad(usuario, sesion.getAttribute("contaseña").toString(), sesion.getAttribute("Ciudad").toString()));
+                                System.out.println("paso el carrito");
+                                if (!carrito.getId_pedido_array().isEmpty()) {  
+                    %>   
                     <div class="modal-body table-responsive">
-                        <!--h2>Pedido: <%//=listarcarrito.get(0).getId_pedido()%></h2>
-                        <table class="table table-bordered table-hover">
-                            <thead class="thead-dark">
-                            <th>Nombre</th>
-                            <th>Cantidad</th>
-                            <th>Precio</th>
-                            </thead>
-                            <tbody>
-                        <%//for (int i = 0; i < listarcarrito.size(); i++) {%>
-                            <tr>
-                                <td><%//=listarcarrito.get(i).getNombre_producto()%></td>
-                                <td><%//=listarcarrito.get(i).getCantidad()%></td>
-                                <td><%//=listarcarrito.get(i).getPrecio_base()%></td>
-                        <%
-                            //total = total + (listarcarrito.get(i).getPrecio_base() * listarcarrito.get(i).getCantidad());%>
-                        </tr>
-                        <%//}//End for items carrito%>
-                    </tbody>
-                    <td colspan="2">Total</td>
-                    <td><%//=total%></td>
-                </table-->
-
-
 
                         <table class="table table-hover my-0">
 
@@ -331,7 +308,7 @@
                                         <h5>Producto</h5>
                                     </th>
                                     <th class="font-weight-bold">
-                                        <h5>Marca</h5>
+                                        <h5>Subcategoria</h5>
                                     </th>
                                     <th></th>
                                     <th class="font-weight-bold">
@@ -350,25 +327,26 @@
 
                             <!-- Table body -->
                             <tbody>
-
                                 <!-- First row -->
+                                <%                                    //for (int i = 0; i < carrito.getId_pedido_array().size(); i++) {
+                                %>
                                 <tr>
                                     <th scope="row">
                                         <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg" alt="" class="img-fluid z-depth-0">
                                     </th>
                                     <td>
                                         <h5 class="font-weight-bold">
-                                            iPhone
+                                            <%//= carrito.getNombre_producto_array().get(i)%>
                                         </h5>
-                                        <p class="text-muted">Apple</p>
+                                        <p class="text-muted"><%//= carrito.getMarca_producto_array().get(i)%></p>
                                     </td>
-                                    <td>White</td>
+                                    <td><%//= carrito.getNombre_subcategoria_array().get(i)%></td>
                                     <td></td>
-                                    <td>$800</td>
+                                    <td>$<%//=carrito.getPrecio_base_array().get(i) + (carrito.getPrecio_base_array().get(i) * carrito.getIva_array().get(i))%></td>
                                     <td>
-                                        <input type="number" value="2" aria-label="Search" class="form-control" style="width: 100px">
+                                        <input type="number" value="<%//= carrito.getCantidad_array().get(i)%>" aria-label="Search" class="form-control" style="width: 100px">
                                     </td>
-                                    <td class="font-weight-bold">$800
+                                    <td class="font-weight-bold">$<%//= carrito.getCantidad_array().get(i)*(carrito.getPrecio_base_array().get(i) + (carrito.getPrecio_base_array().get(i) * carrito.getIva_array().get(i))) %>
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-sm btn-primary btnRedondo" data-toggle="tooltip" data-placement="top"
@@ -377,62 +355,9 @@
                                     </td>
                                 </tr>
                                 <!-- /.First row -->
-
-                                <!-- Second row -->
-                                <tr>
-                                    <th scope="row">
-                                        <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/6.jpg" alt="" class="img-fluid z-depth-0">
-                                    </th>
-                                    <td>
-                                        <h5 class="font-weight-bold">
-                                            Headphones
-                                        </h5>
-                                        <p class="text-muted">Sony</p>
-                                    </td>
-                                    <td>Red</td>
-                                    <td></td>
-                                    <td>$200</td>
-                                    <td>
-                                        <input type="number" value="2" aria-label="Search" class="form-control" style="width: 100px">
-                                    </td>
-                                    <td class="font-weight-bold">
-                                        $600
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-sm btn-primary btnRedondo" data-toggle="tooltip" data-placement="top"
-                                                title="Remove item">X
-                                        </button>
-                                    </td>
-                                </tr>
-                                <!-- /.Second row -->
-
-                                <!-- Third row -->
-                                <tr>
-                                    <th scope="row">
-                                        <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/1.jpg" alt="" class="img-fluid z-depth-0">
-                                    </th>
-                                    <td>
-                                        <h5 class="font-weight-bold">
-                                            iPad Pro
-                                        </h5>
-                                        <p class="text-muted">Apple</p>
-                                    </td>
-                                    <td>Gold</td>
-                                    <td></td>
-                                    <td>$600</td>
-                                    <td>
-                                        <input type="number" value="2" aria-label="Search" class="form-control" style="width: 100px">
-                                    </td>
-                                    <td class="font-weight-bold">
-                                        $1200
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-sm btn-primary btnRedondo" data-toggle="tooltip" data-placement="top"
-                                                title="Remove item">X
-                                        </button>
-                                    </td>
-                                </tr>
-                                <!-- /.Third row -->
+                                <%
+                                    //}//End for carrito
+                                %>
                             </tbody>
                             <!-- /.Table body -->
 
@@ -440,7 +365,23 @@
 
                     </div>
                     <!-- /.Shopping Cart table -->
-                    <%//}//End if !carrito.isEmpty %>
+                    <%
+                            }
+                        }
+                        System.out.println("paso el if");
+                    } catch (Exception e1) {
+                    %>
+                    <script  type = "text/javascript"
+                             > alertify.alert("Error", "<%= "Error-- > " + e1 + e1.getMessage()%>", function () {
+                                     alertify.message('OK');
+                                 });
+                    </script>
+                    <%
+                        } finally {
+                            System.out.println("paso alfin");
+                        }//End catch
+                        //}//End if !carrito.isEmpty
+                    %>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Volver</button>
                         <div class="ml-auto">
@@ -455,7 +396,7 @@
                 </div>
             </div>
         </div>
-        <%}//End if isVisitante%>
+        <% }//End if isVisitante %>
         <!--------------------------------FOOTER--------------------------------->
         <footer class="container footer">
             <p class="float-right"><a href="#">Volver al arriba</a></p>

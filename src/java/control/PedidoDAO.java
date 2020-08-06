@@ -128,7 +128,6 @@ public class PedidoDAO {
                     
                 }
             }
-            ServiceLocator.getInstance().commit();
         } catch (SQLException e) {
             throw new CaException("PedidoDAO", "No pudo consultar productos pedido\n" + e.getMessage());
         } finally {
@@ -136,9 +135,9 @@ public class PedidoDAO {
         }
     }
 
-   public void crearCarrito(String usuario, long cedula, String ciudad, long id_ciudad) throws CaException {
+   public void crearCarrito(String usuario, long cedula, long id_ciudad) throws CaException {
         try {
-            String strSQL = "CREATE VIEW CARRITO_" + usuario + "_" + ciudad
+            String strSQL = "CREATE VIEW CARRITO_" + usuario + "_" + id_ciudad
                     + " AS (SELECT ciu.ID_CIUDAD, ciu.NOMBRE, ped.ID_PEDIDO, "
                     + "categ.ID_CATEGORIA, categ.NOMBRE_CATEGORIA, "
                     + "categ.DESCRIPCION_CATEGORIA, subcat.ID_SUBCATEGORIA, "
@@ -169,9 +168,9 @@ public class PedidoDAO {
         }
     }
 
-    public void consultarCarrito(String usuario, String ciudad) throws CaException {
+    public void consultarCarrito(String usuario, long id_ciudad) throws CaException {
         try {
-            String strSQL = "SELECT * FROM CARRITO_" + usuario + "_" + ciudad;
+            String strSQL = "SELECT * FROM CARRITO_" + usuario + "_" + id_ciudad;
             Connection conexion = ServiceLocator.getInstance("admin_db", "dbadministrator").tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 ResultSet rs = prepStmt.executeQuery();
@@ -193,7 +192,6 @@ public class PedidoDAO {
                     carrito.getFoto_array().add(rs.getString(15));
                 }
             }
-            ServiceLocator.getInstance("admin_db", "dbadministrator").commit();
         } catch (SQLException e) {
             throw new CaException("PedidoDAO", "No pudo consultar el carrito\n" + e.getMessage());
         } finally {
@@ -245,4 +243,17 @@ public class PedidoDAO {
             ServiceLocator.getInstance("admin_db", "dbadministrator").liberarConexion();
         }
     }
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public DetallePedido getDetalle_pedido() {
+        return detalle_pedido;
+    }
+
+    public Carrito getCarrito() {
+        return carrito;
+    }
+    
 }

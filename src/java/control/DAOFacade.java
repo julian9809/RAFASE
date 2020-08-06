@@ -113,12 +113,12 @@ public class DAOFacade {
         pedidoDAO.consultarProductosPedido(usuario, password, deped);
     }
 
-    public void crearCarrito(String usuario, long cedula, String ciudad, long id_ciudad) throws CaException{
-        pedidoDAO.crearCarrito(usuario, cedula, ciudad, id_ciudad);
+    public void crearCarrito(String usuario, long cedula, long id_ciudad) throws CaException{
+        pedidoDAO.crearCarrito(usuario, cedula, id_ciudad);
     }
 
-    public void consultarCarrito(String usuario, String ciudad) throws CaException{
-        pedidoDAO.consultarCarrito(usuario, ciudad);
+    public void consultarCarrito(String usuario, long id_ciudad) throws CaException{
+        pedidoDAO.consultarCarrito(usuario, id_ciudad);
     }
 
     public boolean verificarExistencia(double id_pedido, double id_producto) throws CaException{
@@ -143,6 +143,18 @@ public class DAOFacade {
     
     public Producto getProducto(){
         return productosDAO.getProducto();
+    }
+    
+    public Carrito getCarrito(){
+        return pedidoDAO.getCarrito();
+    }
+    
+    public DetallePedido getDetallePedido(){
+        return pedidoDAO.getDetalle_pedido();
+    }
+    
+    public Pedido getPedido(){
+        return pedidoDAO.getPedido();
     }
     
     public InventarioRafase getInventario_rafase() {
