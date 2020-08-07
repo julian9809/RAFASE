@@ -272,6 +272,8 @@ public class ClienteDAO {
             }
         } catch (SQLException e) {
             throw new CaException("ClienteDAO", "No se pudo realizar la busqueda" + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance().liberarConexion();
         }
     }
     

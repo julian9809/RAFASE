@@ -42,22 +42,22 @@ public class registrar_direccion extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             request.setCharacterEncoding("UTF-8");
             HttpSession sesion = request.getSession();
-            
+
             String usuario = sesion.getAttribute("usuario").toString();
             String contraseña = sesion.getAttribute("contraseña").toString();
             String direccion = request.getParameter("direccion");
             String extra = request.getParameter("extras");
             Long ciudad = Long.valueOf(request.getParameter("id_ciudad"));
             String tipo = request.getParameter("tipo_direccion");
-            
+
             DAOFacade facade = new DAOFacade();
             Direccion dir = facade.getDireccion();
-            
+
             dir.setDireccion_completa(direccion);
             dir.setExtras(extra);
             dir.setId_ciudad(ciudad);
-            dir.setTipo_direccion(tipo);           
-            
+            dir.setTipo_direccion(tipo);
+
             try {
                 dir.setId_cedula(facade.buscarIdCliente(usuario, contraseña));
                 dir.setTipo_id(facade.buscarTipoID(usuario, contraseña));
@@ -66,9 +66,7 @@ public class registrar_direccion extends HttpServlet {
             } catch (CaException ex) {
                 System.out.println("error " + ex);
             }
-            
-            
-            
+
         }
     }
 

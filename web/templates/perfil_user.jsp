@@ -13,19 +13,15 @@
 <!DOCTYPE html>
 <%
     HttpSession sesion = request.getSession();
-    HttpSession usuarios = request.getSession();
     String ciudad = "no ciudad";
-
     if (sesion.getAttribute("Ciudad") != null) {
         ciudad = sesion.getAttribute("Ciudad").toString();
     } else {
         out.print("<script>location.replace('../index.jsp');</script>");
     }
 
-    String producto_buscado = request.getParameter("busqueda");
-    String categoria = request.getParameter("categoria");
-    String usuario = usuarios.getAttribute("usuario").toString();
-
+    String usuario = sesion.getAttribute("usuario").toString();
+    String contraseña = sesion.getAttribute("contraseña").toString();
 %>
 <html>
     <head>
@@ -126,18 +122,15 @@
             Ciudad ciudades = facade.getCiudad();
 
             try {
-                facade.buscarDireccionResidencia(usuario, usuarios.getAttribute("contraseña").toString(),
-                        facade.buscarTipoID(usuario, usuarios.getAttribute("contraseña").toString()),
-                        facade.buscarIdCliente(usuario, usuarios.getAttribute("contraseña").toString()));
-                facade.buscarDireccionEnvio(usuario, usuarios.getAttribute("contraseña").toString(),
-                        facade.buscarTipoID(usuario, usuarios.getAttribute("contraseña").toString()),
-                        facade.buscarIdCliente(usuario, usuarios.getAttribute("contraseña").toString()));
-                facade.buscarCiudades(usuarios.getAttribute("usuario").toString(),
-                        usuarios.getAttribute("contraseña").toString());
-                facade.buscarTelefono(usuario, usuarios.getAttribute("contraseña").toString(),
-                        facade.buscarIdCliente(usuario, usuarios.getAttribute("contraseña").toString()));
-                facade.buscarDatosCliente(usuario, usuarios.getAttribute("contraseña").toString(),
-                        facade.buscarIdCliente(usuario, usuarios.getAttribute("contraseña").toString()));
+                long idCliente = facade.buscarIdCliente(usuario, contraseña);
+                String tipoId = facade.buscarTipoID(usuario, contraseña);
+
+                facade.buscarDireccionResidencia(usuario, contraseña, tipoId, idCliente);
+                facade.buscarDireccionEnvio(usuario, contraseña, tipoId, idCliente);
+                facade.buscarCiudades(usuario, contraseña);
+                facade.buscarDatosCliente(usuario, contraseña, idCliente);
+                facade.buscarTelefono(usuario, contraseña, idCliente);
+
             } catch (Exception e1) {
         %>
         <script type="text/javascript">
@@ -148,9 +141,10 @@
         <%
             }//end catch            
         %>
-
+        <!--------------------------------Información del usuario------------------------------------------>
         <div class="container mt-5">
             <div class="card">
+                <!---------------------------------Menú--------------------------------------------------------->
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
@@ -164,6 +158,7 @@
                         </li>
                     </ul>
                 </div>
+                <!----------------------------------Datos personales------------------------------------------------->
                 <div class="card-body">
                     <div class="tab-content pt-4">
                         <div class="tab-pane fade in show active" id="datosPersonales" role="tabpanel">
@@ -186,9 +181,7 @@
                                                             <span aria-hidden="true" class="white-text">&times;</span>
                                                         </button>
                                                     </div>
-
                                                     <!--Body-->
-
                                                     <form action="../registrar_telefono" method="post">
                                                         <div class="modal-body">
                                                             <div class="md-form mb-5 amber-input active-amber-input">
@@ -220,14 +213,14 @@
                                                     <% if (cli.getSegundo_nombre_array().get(j) == null && cli.getSegundo_apellido_array().get(j) == null) {%>
                                                     <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getPrimer_apellido_array().get(j)%></td>
                                                     <% } else if (cli.getSegundo_nombre_array().get(j) == null) {%>
-                                                        <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getPrimer_apellido_array().get(j) + " "
-                                                        + cli.getSegundo_apellido_array().get(j)%></td>
+                                                    <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getPrimer_apellido_array().get(j) + " "
+                                                                + cli.getSegundo_apellido_array().get(j)%></td>
                                                         <% } else if (cli.getSegundo_apellido_array().get(j) == null) {%>
-                                                        <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getSegundo_nombre_array().get(j) + " "
-                                                        + cli.getPrimer_apellido_array().get(j)%></td>
+                                                    <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getSegundo_nombre_array().get(j) + " "
+                                                                + cli.getPrimer_apellido_array().get(j)%></td>
                                                         <% } else {%>
-                                                        <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getSegundo_nombre_array().get(j) + " "
-                                                        + cli.getPrimer_apellido_array().get(j) + " " + cli.getSegundo_apellido_array().get(j)%></td>
+                                                    <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getSegundo_nombre_array().get(j) + " "
+                                                                + cli.getPrimer_apellido_array().get(j) + " " + cli.getSegundo_apellido_array().get(j)%></td>
                                                         <%} //end if %>
                                                 </tr>
                                                 <tr>
@@ -249,20 +242,24 @@
                                                                     <td><%= tel.getNumeroTelefonoArray().get(k)%></td>
                                                                 </tr>
                                                                 <%} //end for %>
-                                                            </tbody>
-                                                        </table>
-                                                        <% } //end if %>
-                                                    </td>
+                                                                <tr>
+                                                            <a class="btn btn-info btn-sm align-middle ml-0" href="perfil_user.jsp" role="button" data-toggle="modal" data-target="#modalTelefono">Registrar telefono</a>
                                                 </tr>
-                                                <%} //end for%>
                                             </tbody>
+                                        </table>
+                                        <% } //end if %>
+                                        </td>
+                                        </tr>
+                                        <%} //end for%>
+                                        </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!----------------------------Encabezado-------------------------------->
-                        <div class="tab-pane fade in show" id="direcciones" role="tabpanel">
+                        <!------------------------------------------Direcciones----------------------------------->            
+                        <div class="tab-pane fade" id="direcciones" role="tabpanel">
+                            <!-----------------------------------------------Menú de direcciones--------------------------->
                             <div class="d-flex justify-content-between">
                                 <a class="btn btn-primary" data-toggle="collapse" href="#direccionResidencia" role="button" aria-expanded="false"
                                    aria-controls="direccionResidencia">Dirección de residencia</a>
@@ -271,73 +268,12 @@
                                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse"
                                         aria-expanded="false" aria-controls="direccionResidencia direccionEnvio">Todas las direcciones</button>
                             </div>
-                            <!----------------------------Direcciones de Residencia-------------------------------->
+                            <!-------------------------------Direcciones contenido---------------------------------->
                             <div class="row">
                                 <div class="col">
                                     <div class="collapse multi-collapse" id="direccionResidencia">
                                         <div class="card card-body">
                                             <table class="table table-borderless">
-                                                <!------------------------------------Modal--------------------------------------------->
-                                                <div class="modal fade" id="modalDireccion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                                                     aria-hidden="true">
-                                                    <div class="modal-dialog modal-notify" role="document">
-                                                        <!--Content-->
-                                                        <div class="modal-content">
-                                                            <!--Header-->
-                                                            <div class="modal-header text-center warning-color">
-                                                                <h4 class="modal-title white-text w-100 font-weight-bold py-2">Registra tu dirección</h4>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true" class="white-text">&times;</span>
-                                                                </button>
-                                                            </div>
-
-                                                            <!--Body-->
-
-                                                            <form action="../registrar_direccion" method="post">
-                                                                <div class="modal-body">
-                                                                    <div class="md-form mb-5 amber-input active-amber-input">
-                                                                        <i class="fas fa-home prefix"></i>
-                                                                        <input type="text" id="direccion" name="direccion" class="form-control validate" required>
-                                                                        <label for="direccion" data-error="wrong" data-success="right">Dirección</label>
-                                                                    </div>
-
-                                                                    <div class="md-form amber-textarea active-amber-textarea">
-                                                                        <i class="fas fa-pencil-alt prefix"></i>
-                                                                        <textarea class="md-textarea form-control validate" maxlength="50" id="extras" name="extras" rows="3"></textarea>
-                                                                        <label for="extras" data-error="wrong" data-success="right">Datos adicionales</label>
-                                                                    </div>
-
-                                                                    <div class="md-form">
-                                                                        <select class="browser-default custom-select mb-4 validate" name="id_ciudad" id="id_ciudad" required>
-                                                                            <option selected hidden disabled>Escoge tu ciudad</option>
-                                                                            <%
-                                                                                for (int i = 0; i < ciudades.getId_ciudad_array().size(); i++) {
-                                                                            %>
-                                                                            <option value="<%= ciudades.getId_ciudad_array().get(i).toString()%>"><%= ciudades.getNombre_array().get(i)%></option>
-                                                                            <%}//End for ciudad%>
-                                                                        </select>
-                                                                    </div>
-                                                                    <p>Tipo de dirección</p>
-                                                                    <!-- Group of default radios - option 1 -->
-                                                                    <div class="custom-control custom-radio">
-                                                                        <input type="radio" class="custom-control-input" id="residencia" name="tipo_direccion" value="R" checked>
-                                                                        <label class="custom-control-label" for="residencia">Residencia</label>
-                                                                    </div>
-                                                                    <!-- Group of default radios - option 2 -->
-                                                                    <div class="custom-control custom-radio">
-                                                                        <input type="radio" class="custom-control-input" id="envio" name="tipo_direccion" value="E">
-                                                                        <label class="custom-control-label" for="envio">Envio</label>
-                                                                    </div>
-                                                                </div>
-                                                                <!--Footer-->
-                                                                <div class="modal-footer justify-content-center">
-                                                                    <button class="btn btn-warning waves-effect" type="submit">Registrar</button>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                        <!--/.Content-->
-                                                    </div>
-                                                </div>
                                                 <% if (dir.getDireccion_completa_array().isEmpty()) {%>
                                                 <tr>
                                                     <td>No tienes direcciones registradas</td>
@@ -362,7 +298,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!----------------------------Direcciones de envio-------------------------------->
                                 <div class="col">
                                     <div class="collapse multi-collapse" id="direccionEnvio">
                                         <div class="card card-body">
@@ -393,8 +328,62 @@
                                 </div>
                             </div>
                         </div>
+                        <!------------------------------------Modal--------------------------------------------->
+                        <div class="modal fade" id="modalDireccion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-notify" role="document">
+                                <!--Content-->
+                                <div class="modal-content">
+                                    <!--Header-->
+                                    <div class="modal-header text-center warning-color">
+                                        <h4 class="modal-title white-text w-100 font-weight-bold py-2">Registra tu dirección</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" class="white-text">&times;</span>
+                                        </button>
+                                    </div>
+                                    <!--Body-->
+                                    <form action="../registrar_direccion" method="post">
+                                        <div class="modal-body">
+                                            <div class="md-form mb-5 amber-input active-amber-input">
+                                                <i class="fas fa-home prefix"></i>
+                                                <input type="text" id="direccion" name="direccion" class="form-control validate" required>
+                                                <label for="direccion" data-error="wrong" data-success="right">Dirección</label>
+                                            </div>
+                                            <div class="md-form amber-textarea active-amber-textarea">
+                                                <i class="fas fa-pencil-alt prefix"></i>
+                                                <textarea class="md-textarea form-control validate" maxlength="50" id="extras" name="extras" rows="3"></textarea>
+                                                <label for="extras" data-error="wrong" data-success="right">Datos adicionales</label>
+                                            </div>
+                                            <div class="md-form">
+                                                <select class="browser-default custom-select mb-4 validate" name="id_ciudad" id="id_ciudad" required>
+                                                    <option selected hidden disabled>Escoge tu ciudad</option>
+                                                    <%
+                                                        for (int i = 0; i < ciudades.getId_ciudad_array().size(); i++) {
+                                                    %>
+                                                    <option value="<%= ciudades.getId_ciudad_array().get(i).toString()%>"><%= ciudades.getNombre_array().get(i)%></option>
+                                                    <%}//End for ciudad%>
+                                                </select>
+                                            </div>
+                                            <p>Tipo de dirección</p>                                                                    
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="residencia" name="tipo_direccion" value="R" checked>
+                                                <label class="custom-control-label" for="residencia">Residencia</label>
+                                            </div>                                                                    
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="envio" name="tipo_direccion" value="E">
+                                                <label class="custom-control-label" for="envio">Envio</label>
+                                            </div>
+                                        </div>
+                                        <!--Footer-->
+                                        <div class="modal-footer justify-content-center">
+                                            <button class="btn btn-warning waves-effect" type="submit">Registrar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!--------------------------------------Medios de pago---------------------------------------->
                         <div class="tab-pane fade" id="mediosPago" role="tabpanel">
-
                         </div>
                     </div>
                 </div>

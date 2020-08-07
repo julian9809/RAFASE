@@ -45,6 +45,7 @@ public class registrar_telefono extends HttpServlet {
             
             String usuario = sesion.getAttribute("usuario").toString();
             String contraseña = sesion.getAttribute("contraseña").toString();
+            
             Long telefono = Long.valueOf(request.getParameter("telefono"));
             
             DAOFacade facade = new DAOFacade();
@@ -53,18 +54,14 @@ public class registrar_telefono extends HttpServlet {
             tel.setNumeroTelefono(telefono);
             tel.setEnUso("S");
             
-            try {                
-                System.out.println("paso1");
-                long algo = facade.buscarIdCliente(usuario, contraseña);
-                System.out.println("paso2");
-                tel.setIdCedula(algo);
-                System.out.println("paso3");
+            try {
+                tel.setIdCedula(facade.buscarIdCliente(usuario, contraseña));
                 tel.setTipoID(facade.buscarTipoID(usuario, contraseña));
+                facade.insertarTelefono(usuario, contraseña);
+                response.sendRedirect("templates/perfil_user.jsp");
             } catch (CaException ex) {
-                System.out.println("error " + ex);
+                Logger.getLogger(registrar_telefono.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            response.sendRedirect("templates/perfil_user.jsp");
         }
     }
 
