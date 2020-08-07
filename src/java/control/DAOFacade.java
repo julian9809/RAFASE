@@ -72,6 +72,10 @@ public class DAOFacade {
         clienteDAO.buscarTelefono(usuario, password, cedula);
     }
     
+    public void quitarTelefono(String usuario, String contraseña, long cedula, long telefono) throws CaException {
+        clienteDAO.quitarTelefono(usuario, contraseña, cedula, telefono);
+    }
+    
     public void insertarTarjetaCredito(String usuario, String password) throws CaException {
         clienteDAO.insertarTarjetaCredito(usuario, password);
     }

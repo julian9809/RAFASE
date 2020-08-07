@@ -177,6 +177,22 @@ public class ClienteDAO {
         }
     }
     
+    public void quitarTelefono(String usuario, String password, long cedula, long telefono) throws CaException {
+        try {
+            String strSQL = "UPDATE TEL SET TEL.EN_USO = 'N' WHERE NUMERO_TELEFONO = ? AND ID_CEDULA = ?";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
+                prepStmt.setLong(1, telefono);
+                prepStmt.setLong(2, cedula);
+                prepStmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new CaException("ClienteDAO", "No se pudo realizar la busqueda" + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance().liberarConexion();
+        }
+    }
+    
     public void insertarTarjetaCredito(String usuario, String password) throws CaException {
         try {
             String strSQL = "INSERT INTO TC(ID_TARJETA,NOMBRETITULAR,NUMERO_TARJETA, FECH_EXP, TIPO_ID, ID_CEDULA) VALUES (ID_TARJETA.NEXTVAL,?,?,?,?,?)";

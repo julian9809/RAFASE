@@ -213,14 +213,14 @@
                                                     <% if (cli.getSegundo_nombre_array().get(j) == null && cli.getSegundo_apellido_array().get(j) == null) {%>
                                                     <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getPrimer_apellido_array().get(j)%></td>
                                                     <% } else if (cli.getSegundo_nombre_array().get(j) == null) {%>
-                                                    <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getPrimer_apellido_array().get(j) + " "
-                                                                + cli.getSegundo_apellido_array().get(j)%></td>
+                                                        <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getPrimer_apellido_array().get(j) + " "
+                                                            + cli.getSegundo_apellido_array().get(j)%></td>
                                                         <% } else if (cli.getSegundo_apellido_array().get(j) == null) {%>
-                                                    <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getSegundo_nombre_array().get(j) + " "
-                                                                + cli.getPrimer_apellido_array().get(j)%></td>
+                                                        <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getSegundo_nombre_array().get(j) + " "
+                                                            + cli.getPrimer_apellido_array().get(j)%></td>
                                                         <% } else {%>
-                                                    <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getSegundo_nombre_array().get(j) + " "
-                                                                + cli.getPrimer_apellido_array().get(j) + " " + cli.getSegundo_apellido_array().get(j)%></td>
+                                                        <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getSegundo_nombre_array().get(j) + " "
+                                                            + cli.getPrimer_apellido_array().get(j) + " " + cli.getSegundo_apellido_array().get(j)%></td>
                                                         <%} //end if %>
                                                 </tr>
                                                 <tr>
@@ -234,24 +234,25 @@
                                                         <a class="btn btn-info btn-sm align-middle ml-0" href="perfil_user.jsp" role="button" data-toggle="modal" data-target="#modalTelefono">Registrar telefono</a>
                                                         <% } else { %>
                                                         <table class="table table-hover text-center">
-                                                            <tbody>                                                            
+                                                            <tbody>                                                                
                                                                 <%
                                                                     for (int k = 0; k < tel.getNumeroTelefonoArray().size(); k++) {
                                                                 %>                                                            
                                                                 <tr>
                                                                     <td><%= tel.getNumeroTelefonoArray().get(k)%></td>
+                                                                    <td><a role="button" class="btn btn-danger btn-sm px-2"  href="../registrar_telefono?accion=quitar&telefono=<%= tel.getNumeroTelefonoArray().get(k) %>"><i class="fas fa-minus" aria-hidden="true"></i></a></td>
                                                                 </tr>
-                                                                <%} //end for %>
+                                                                <%} //end for %>    
                                                                 <tr>
-                                                            <a class="btn btn-info btn-sm align-middle ml-0" href="perfil_user.jsp" role="button" data-toggle="modal" data-target="#modalTelefono">Registrar telefono</a>
+                                                                    <td><a class="btn btn-info btn-sm align-middle ml-0" href="perfil_user.jsp" role="button" data-toggle="modal" data-target="#modalTelefono">Registrar telefono</a></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <% } //end if %>
+                                                    </td>
                                                 </tr>
+                                                <%} //end for%>
                                             </tbody>
-                                        </table>
-                                        <% } //end if %>
-                                        </td>
-                                        </tr>
-                                        <%} //end for%>
-                                        </tbody>
                                         </table>
                                     </div>
                                 </div>

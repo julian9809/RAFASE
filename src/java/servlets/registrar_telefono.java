@@ -41,26 +41,37 @@ public class registrar_telefono extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             request.setCharacterEncoding("UTF-8");
-            HttpSession sesion = request.getSession();            
-            
+            HttpSession sesion = request.getSession();
+            DAOFacade facade = new DAOFacade();
+            Telefono tel = facade.getTelefono();
+
             String usuario = sesion.getAttribute("usuario").toString();
             String contraseña = sesion.getAttribute("contraseña").toString();
-            
-            Long telefono = Long.valueOf(request.getParameter("telefono"));
-            
-            DAOFacade facade = new DAOFacade();
-            Telefono tel = facade.getTelefono();            
-            
-            tel.setNumeroTelefono(telefono);
-            tel.setEnUso("S");
-            
-            try {
-                tel.setIdCedula(facade.buscarIdCliente(usuario, contraseña));
-                tel.setTipoID(facade.buscarTipoID(usuario, contraseña));
-                facade.insertarTelefono(usuario, contraseña);
-                response.sendRedirect("templates/perfil_user.jsp");
-            } catch (CaException ex) {
-                Logger.getLogger(registrar_telefono.class.getName()).log(Level.SEVERE, null, ex);
+
+            String accion = request.getParameter("accion");
+
+            if (accion == null) {
+                Long telefono = Long.valueOf(request.getParameter("telefono"));
+
+                tel.setNumeroTelefono(telefono);
+                tel.setEnUso("S");
+
+                try {
+                    tel.setIdCedula(facade.buscarIdCliente(usuario, contraseña));
+                    tel.setTipoID(facade.buscarTipoID(usuario, contraseña));
+                    facade.insertarTelefono(usuario, contraseña);
+                    response.sendRedirect("templates/perfil_user.jsp");
+                } catch (CaException ex) {
+                    Logger.getLogger(registrar_telefono.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                Long telefono = Long.valueOf(request.getParameter("telefono"));
+                try {
+                    facade.quitarTelefono(usuario, contraseña, facade.buscarIdCliente(usuario, contraseña), telefono);
+                    response.sendRedirect("templates/perfil_user.jsp");
+                } catch (CaException ex) {
+                    Logger.getLogger(registrar_telefono.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }
