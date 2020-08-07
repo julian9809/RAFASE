@@ -185,6 +185,7 @@ public class ClienteDAO {
                 prepStmt.setLong(1, telefono);
                 prepStmt.setLong(2, cedula);
                 prepStmt.executeUpdate();
+                ServiceLocator.getInstance().commit();
             }
         } catch (SQLException e) {
             throw new CaException("ClienteDAO", "No se pudo realizar la busqueda" + e.getMessage());
