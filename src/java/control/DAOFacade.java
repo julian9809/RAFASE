@@ -100,17 +100,21 @@ public class DAOFacade {
     public void consultarPedido(String usuario, long usuario_id) throws CaException{
         pedidoDAO.consultarPedido(usuario, usuario_id);
     }
+    
+    public long consultarIdPedido(String usuario, long usuario_id) throws CaException {
+        return pedidoDAO.consultarIdPedido(usuario, usuario_id);
+    }
 
     public boolean existeCarrito(String nickname, String password, long usuario_id) throws CaException{
         return pedidoDAO.existeCarrito(nickname, password, usuario_id);
     }
 
-    public void insertarPedido(String usuario, Pedido ped) throws CaException{
-        pedidoDAO.insertarPedido(usuario, ped);
+    public void insertarPedido(String usuario) throws CaException{
+        pedidoDAO.insertarPedido(usuario);
     }
 
-    public void insertarProductosPedido(String usuario, DetallePedido deped) throws CaException{
-        pedidoDAO.insertarProductosPedido(usuario, deped);
+    public void insertarProductosPedido(String usuario) throws CaException{
+        pedidoDAO.insertarProductosPedido(usuario);
     }
 
     public void consultarProductosPedido(String usuario, String password, DetallePedido deped) throws CaException{
@@ -125,12 +129,12 @@ public class DAOFacade {
         pedidoDAO.consultarCarrito(usuario, id_ciudad);
     }
 
-    public boolean verificarExistencia(double id_pedido, double id_producto) throws CaException{
+    public boolean verificarExistencia(long id_pedido, long id_producto) throws CaException{
         return pedidoDAO.verificarExistencia(id_pedido, id_producto);
     }
 
-    public void actualizarCantidad(double id_pedido, double id_producto) throws CaException{
-        pedidoDAO.actualizarCantidad(id_pedido, id_producto);
+    public void actualizarCantidad(long id_pedido, long id_producto, long cantidad) throws CaException{
+        pedidoDAO.actualizarCantidad(id_pedido, id_producto, cantidad);
     }
     
     //-------------------------------ProductoDAO--------------------------------

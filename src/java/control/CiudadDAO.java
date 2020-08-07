@@ -34,7 +34,7 @@ public class CiudadDAO {
                 while (rs.next()) {
                     ciudad.getId_ciudad_array().add(rs.getLong(1));
                     ciudad.getNombre_array().add(rs.getString(2));
-                    ciudad.getId_tienda_array().add(rs.getDouble(3));
+                    ciudad.getId_tienda_array().add(rs.getLong(3));
                 }
             }
         } catch (SQLException e) {

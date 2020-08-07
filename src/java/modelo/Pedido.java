@@ -14,25 +14,25 @@ import java.util.Date;
  */
 public class Pedido {
     private long id_pedido;
-    private double estado_pedido;
+    private String estado_pedido;
     private Date fecha_pedido;
     private double total_pedido;
-    private double id_ciudad;
-    private double id_cedula;
+    private long id_ciudad;
+    private long id_cedula;
     private String tipo_id;
     
     private ArrayList<Long> id_pedido_array = new ArrayList<>();
-    private ArrayList<Double> estado_pedido_array = new ArrayList<>();
+    private ArrayList<String> estado_pedido_array = new ArrayList<>();
     private ArrayList<Date> fecha_pedido_array = new ArrayList<>();
     private ArrayList<Double> total_pedido_array = new ArrayList<>();
-    private ArrayList<Double> id_ciudad_array = new ArrayList<>();
-    private ArrayList<Double> id_cedula_array = new ArrayList<>();
+    private ArrayList<Long> id_ciudad_array = new ArrayList<>();
+    private ArrayList<Long> id_cedula_array = new ArrayList<>();
     private ArrayList<String> tipo_id_array = new ArrayList<>();
     
     public Pedido() {
     }
 
-    public double getId_pedido() {
+    public long getId_pedido() {
         return id_pedido;
     }
 
@@ -40,11 +40,11 @@ public class Pedido {
         this.id_pedido = id_pedido;
     }
 
-    public double getEstado_pedido() {
+    public String getEstado_pedido() {
         return estado_pedido;
     }
 
-    public void setEstado_pedido(double estado_pedido) {
+    public void setEstado_pedido(String estado_pedido) {
         this.estado_pedido = estado_pedido;
     }
 
@@ -64,19 +64,19 @@ public class Pedido {
         this.total_pedido = total_pedido;
     }
 
-    public double getId_ciudad() {
+    public long getId_ciudad() {
         return id_ciudad;
     }
 
-    public void setId_ciudad(double id_ciudad) {
+    public void setId_ciudad(long id_ciudad) {
         this.id_ciudad = id_ciudad;
     }
     
-    public double getId_cedula() {
+    public long getId_cedula() {
         return id_cedula;
     }
 
-    public void setId_cedula(double id_cedula) {
+    public void setId_cedula(long id_cedula) {
         this.id_cedula = id_cedula;
     }
 
@@ -96,11 +96,11 @@ public class Pedido {
         this.id_pedido_array = id_pedido_array;
     }
 
-    public ArrayList<Double> getEstado_pedido_array() {
+    public ArrayList<String> getEstado_pedido_array() {
         return estado_pedido_array;
     }
 
-    public void setEstado_pedido_array(ArrayList<Double> estado_pedido_array) {
+    public void setEstado_pedido_array(ArrayList<String> estado_pedido_array) {
         this.estado_pedido_array = estado_pedido_array;
     }
 
@@ -120,19 +120,19 @@ public class Pedido {
         this.total_pedido_array = total_pedido_array;
     }
 
-    public ArrayList<Double> getId_ciudad_array() {
+    public ArrayList<Long> getId_ciudad_array() {
         return id_ciudad_array;
     }
 
-    public void setId_ciudad_array(ArrayList<Double> id_ciudad_array) {
+    public void setId_ciudad_array(ArrayList<Long> id_ciudad_array) {
         this.id_ciudad_array = id_ciudad_array;
     }
 
-    public ArrayList<Double> getId_cedula_array() {
+    public ArrayList<Long> getId_cedula_array() {
         return id_cedula_array;
     }
 
-    public void setId_cedula_array(ArrayList<Double> id_cedula_array) {
+    public void setId_cedula_array(ArrayList<Long> id_cedula_array) {
         this.id_cedula_array = id_cedula_array;
     }
 

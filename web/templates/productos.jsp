@@ -158,7 +158,7 @@
                         <!-- Grid column -->
                         <div class="col-lg-4 col-md-6 mb-4">
 
-                            <form method="post" action = "../AgregarProducto">
+                            <form id="agregar_producto_<%= inventarioRafase.getProducto().getId_producto_array().get(i) %>" method="post" action = "../AgregarProducto">
                                 <!-- Card -->
                                 <div class="card card-cascade">
                                     <!-- Card image -->
@@ -196,14 +196,14 @@
                                             <div class="d-flex justify-content-between mt-2">
                                                 <div class="def-number-input number-input safari_only">
                                                     <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus form-control"></button>
-                                                    <input type="number" class="form-control quantity" min="0" max="99" placeholder="Cant" value="" name="Cantidad" id="Cantidad" required>
+                                                    <input type="number" class="form-control quantity" min="0" max="99" placeholder="Cant" value="" name="cantidad" id="cantidad" required>
                                                     <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus form-control"></button>
                                                 </div>
                                                 <!--Entradas escondidad-->
                                                 <input type="hidden" name = "id_producto" id="id_producto" value=<%= inventarioRafase.getProducto().getId_producto_array().get(i)%>>
                                                 <input type="hidden" name = "busqueda" id="busqueda" value=<%= producto_buscado%>>
                                                 <!--Entradas escondidad-->
-                                                <button class="btn btn-success btn-sm my-auto btnRedondo" type="submit" title="Añadir al carrito">
+                                                <button class="btn btn-success btn-sm my-auto btnRedondo" type="submit" form="agregar_producto_<%= inventarioRafase.getProducto().getId_producto_array().get(i) %>" title="Añadir al carrito">
                                                     <i class="fas fa-cart-arrow-down fa-2x"></i>
                                                 </button>
                                             </div>
@@ -290,11 +290,9 @@
                     <%  
                         Carrito carrito = facade.getCarrito();
                         try {
-                            System.out.println("no pasado el carrito");
                             if (facade.existeCarrito(usuario, sesion.getAttribute("contraseña").toString(), facade.buscarIdCliente(usuario, sesion.getAttribute("contraseña").toString()))) {
                                 facade.consultarCarrito(usuario, facade.buscarIdCiudad(usuario, sesion.getAttribute("contaseña").toString(), sesion.getAttribute("Ciudad").toString()));
-                                System.out.println("paso el carrito");
-                                if (!carrito.getId_pedido_array().isEmpty()) {  
+                                if (!carrito.getId_pedido_array().isEmpty()) {
                     %>   
                     <div class="modal-body table-responsive">
 
@@ -328,25 +326,29 @@
                             <!-- Table body -->
                             <tbody>
                                 <!-- First row -->
-                                <%                                    //for (int i = 0; i < carrito.getId_pedido_array().size(); i++) {
+                                <%
+                                    for (int i = 0; i < carrito.getId_pedido_array().size(); i++) {
                                 %>
                                 <tr>
                                     <th scope="row">
-                                        <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg" alt="" class="img-fluid z-depth-0">
+                                        <img src="../img/Productos/<%= carrito.getNombre_categoria_array().get(i)
+                                                + "/" + carrito.getNombre_subcategoria_array().get(i)
+                                                + "/" + carrito.getId_producto_array().get(i)
+                                                + "/" + carrito.getFoto_array().get(i)%>" alt="" class="img-fluid z-depth-0">
                                     </th>
                                     <td>
                                         <h5 class="font-weight-bold">
-                                            <%//= carrito.getNombre_producto_array().get(i)%>
+                                            <%= carrito.getNombre_producto_array().get(i)%>
                                         </h5>
-                                        <p class="text-muted"><%//= carrito.getMarca_producto_array().get(i)%></p>
+                                        <p class="text-muted"><%= carrito.getMarca_producto_array().get(i)%></p>
                                     </td>
-                                    <td><%//= carrito.getNombre_subcategoria_array().get(i)%></td>
+                                    <td><%= carrito.getNombre_subcategoria_array().get(i)%></td>
                                     <td></td>
-                                    <td>$<%//=carrito.getPrecio_base_array().get(i) + (carrito.getPrecio_base_array().get(i) * carrito.getIva_array().get(i))%></td>
+                                    <td>$<%= carrito.getPrecio_base_array().get(i) + (carrito.getPrecio_base_array().get(i) * carrito.getIva_array().get(i))%></td>
                                     <td>
-                                        <input type="number" value="<%//= carrito.getCantidad_array().get(i)%>" aria-label="Search" class="form-control" style="width: 100px">
+                                        <input type="number" value="<%= carrito.getCantidad_array().get(i)%>" aria-label="Search" class="form-control" style="width: 100px">
                                     </td>
-                                    <td class="font-weight-bold">$<%//= carrito.getCantidad_array().get(i)*(carrito.getPrecio_base_array().get(i) + (carrito.getPrecio_base_array().get(i) * carrito.getIva_array().get(i))) %>
+                                    <td class="font-weight-bold">$<%= carrito.getCantidad_array().get(i) * (carrito.getPrecio_base_array().get(i) + (carrito.getPrecio_base_array().get(i) * carrito.getIva_array().get(i)))%>
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-sm btn-primary btnRedondo" data-toggle="tooltip" data-placement="top"
@@ -356,7 +358,7 @@
                                 </tr>
                                 <!-- /.First row -->
                                 <%
-                                    //}//End for carrito
+                                    }//End for carrito
                                 %>
                             </tbody>
                             <!-- /.Table body -->
@@ -365,23 +367,7 @@
 
                     </div>
                     <!-- /.Shopping Cart table -->
-                    <%
-                            }
-                        }
-                        System.out.println("paso el if");
-                    } catch (Exception e1) {
-                    %>
-                    <script  type = "text/javascript"
-                             > alertify.alert("Error", "<%= "Error-- > " + e1 + e1.getMessage()%>", function () {
-                                     alertify.message('OK');
-                                 });
-                    </script>
-                    <%
-                        } finally {
-                            System.out.println("paso alfin");
-                        }//End catch
-                        //}//End if !carrito.isEmpty
-                    %>
+                    <!-- Footer carrito-->
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Volver</button>
                         <div class="ml-auto">
@@ -393,6 +379,21 @@
                             <i class="fas fa-angle-right right"></i>
                         </button>
                     </div>
+                    <%
+                            }//End If carrito.isEmpty
+                        }//End If carrito existe con filas (igual que el if anterior)
+                    } catch (Exception e1) {
+                    %>
+                    <script  type = "text/javascript">
+                        alertify.alert("Error", "<%= "Error-- > " + e1 + e1.getMessage()%>", function () {
+                            alertify.message('OK');
+                        });
+                    </script>
+                    <%
+                        } finally {
+
+                        }//End catch
+                    %>
                 </div>
             </div>
         </div>

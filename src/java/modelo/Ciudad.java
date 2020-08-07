@@ -15,11 +15,11 @@ public class Ciudad {
     
     private long id_ciudad;
     private String nombre;
-    private double id_tienda;
+    private Long id_tienda;
     
     private ArrayList<Long> id_ciudad_array = new ArrayList<>();
     private ArrayList<String> nombre_array = new ArrayList<>();
-    private ArrayList<Double> id_tienda_array = new ArrayList<>();
+    private ArrayList<Long> id_tienda_array = new ArrayList<>();
 
     public Ciudad() {
     }
@@ -44,7 +44,7 @@ public class Ciudad {
         return id_tienda;
     }
 
-    public void setId_tienda(double id_tienda) {
+    public void setId_tienda(long id_tienda) {
         this.id_tienda = id_tienda;
     }
 
@@ -64,11 +64,11 @@ public class Ciudad {
         this.nombre_array = nombre_array;
     }
 
-    public ArrayList<Double> getId_tienda_array() {
+    public ArrayList<Long> getId_tienda_array() {
         return id_tienda_array;
     }
 
-    public void setId_tienda_array(ArrayList<Double> id_tienda_array) {
+    public void setId_tienda_array(ArrayList<Long> id_tienda_array) {
         this.id_tienda_array = id_tienda_array;
     }
     

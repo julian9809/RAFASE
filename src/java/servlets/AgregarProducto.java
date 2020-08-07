@@ -51,39 +51,40 @@ public class AgregarProducto extends HttpServlet {
             if (usuario.equals("visitante")) {
                 response.sendRedirect("templates/sign.jsp");
             } else {
-                String id_producto = request.getParameter("id_producto");
+                long id_producto = Long.valueOf(request.getParameter("id_producto"));
+                long cantidad = Long.valueOf(request.getParameter("cantidad"));
                 DAOFacade facade = new DAOFacade();
-                DetallePedido deped = new DetallePedido();
-                Pedido ped = new Pedido();
-                if(true/*facade.consultarPedidos(facade.buscarIdCliente(usuario))*/){
-                    facade.consultarPedido(usuario, 1/*facade.buscarIdCliente(usuario)*/);
-                    deped.setId_pedido(ped.getId_pedido());
-                    deped.setCantidad(1);
-                    deped.setId_producto(Double.valueOf(id_producto));
-                    
-                    if(facade.verificarExistencia(ped.getId_pedido(), deped.getId_producto())){
-                        facade.actualizarCantidad(ped.getId_pedido(), deped.getId_producto());
+                DetallePedido detalle_pedido = facade.getDetallePedido();
+                Pedido pedido = facade.getPedido();
+                long id_cliente = facade.buscarIdCliente(usuario, sesion.getAttribute("contraseña").toString());
+                if(facade.existeCarrito(usuario, sesion.getAttribute("contraseña").toString(), id_cliente)){
+                    facade.consultarPedido(usuario, id_cliente);
+                    detalle_pedido.setId_pedido(pedido.getId_pedido());
+                    detalle_pedido.setCantidad(cantidad);
+                    detalle_pedido.setId_producto(id_producto);
+                    if(facade.verificarExistencia(pedido.getId_pedido(), detalle_pedido.getId_producto())){
+                        facade.actualizarCantidad(pedido.getId_pedido(), detalle_pedido.getId_producto(), detalle_pedido.getCantidad());
                     }else{
-                        facade.insertarProductosPedido(usuario, deped);
+                        facade.insertarProductosPedido(usuario);
                     }                    
                 }
                 else{                    
-                    ped.setEstado_pedido(0);
-                    ped.setTotal_pedido(1);
-                    //ped.setId_cedula(facade.buscarIdCliente(usuario));
-                    ped.setId_ciudad(1);
+                    pedido.setEstado_pedido("CA");
+                    pedido.setTotal_pedido(1);
+                    pedido.setId_cedula(id_cliente);
+                    pedido.setId_ciudad(facade.buscarIdCiudad(usuario, sesion.getAttribute("contraseña").toString(), sesion.getAttribute("Ciudad").toString()));
+                    pedido.setTipo_id(facade.buscarTipoID(usuario, sesion.getAttribute("contraseña").toString()));
                     
-                    facade.insertarPedido(usuario, ped);
-                    Pedido ped2 = new Pedido();
-                    //facade.consultarPedido(usuario, facade.buscarIdCliente(usuario));
-                    
-                    deped.setId_pedido(ped2.getId_pedido());
-                    deped.setCantidad(1);
-                    deped.setId_producto(Double.parseDouble(id_producto));
-                    if(facade.verificarExistencia(ped2.getId_pedido(), deped.getId_producto())){
-                        facade.actualizarCantidad(ped.getId_pedido(), deped.getId_producto());
+                    facade.insertarPedido(usuario);
+                    long id_pedido = facade.consultarIdPedido(usuario, id_cliente);
+                    System.out.println("el id del pedido es: "+id_pedido);
+                    detalle_pedido.setId_pedido(facade.consultarIdPedido(usuario, id_cliente));
+                    detalle_pedido.setCantidad(cantidad);
+                    detalle_pedido.setId_producto(id_producto);
+                    if(facade.verificarExistencia(id_pedido, id_producto)){
+                        facade.actualizarCantidad(pedido.getId_pedido(), detalle_pedido.getId_producto(), detalle_pedido.getCantidad());
                     }else{
-                        facade.insertarProductosPedido(usuario, deped);
+                        facade.insertarProductosPedido(usuario);
                     }  
                 }          
                 response.sendRedirect("templates/productos.jsp?busqueda=" + producto_buscado);
