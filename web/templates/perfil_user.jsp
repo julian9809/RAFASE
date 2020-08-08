@@ -4,6 +4,7 @@
     Author     : david
 --%>
 
+<%@page import="modelo.TarjetaCredito"%>
 <%@page import="modelo.Telefono"%>
 <%@page import="modelo.Cliente"%>
 <%@page import="modelo.Ciudad"%>
@@ -118,6 +119,7 @@
             Direccion dir = facade.getDireccion();
             Direccion dirEnv = facade.getDireccionEnvio();
             Cliente cli = facade.getCliente();
+            TarjetaCredito tarCre = facade.getTarjetaCredito();
             Telefono tel = facade.getTelefono();
             Ciudad ciudades = facade.getCiudad();
 
@@ -128,6 +130,7 @@
                 facade.buscarDireccionResidencia(usuario, contraseña, tipoId, idCliente);
                 facade.buscarDireccionEnvio(usuario, contraseña, tipoId, idCliente);
                 facade.buscarCiudades(usuario, contraseña);
+                facade.buscarTarjetaCredito(usuario, contraseña, idCliente);
                 facade.buscarDatosCliente(usuario, contraseña, idCliente);
                 facade.buscarTelefono(usuario, contraseña, idCliente);
 
@@ -167,38 +170,7 @@
                                     <div class="card">
                                         <div class="card-header info-color white-text text-center">
                                             Tus datos personales
-                                        </div>
-                                        <!------------------------------------Modal--------------------------------------------->
-                                        <div class="modal fade" id="modalTelefono" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                                             aria-hidden="true">
-                                            <div class="modal-dialog modal-notify" role="document">
-                                                <!--Content-->
-                                                <div class="modal-content">
-                                                    <!--Header-->
-                                                    <div class="modal-header text-center warning-color">
-                                                        <h4 class="modal-title white-text w-100 font-weight-bold py-2">Registra tu teléfono</h4>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true" class="white-text">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <!--Body-->
-                                                    <form action="../registrar_telefono" method="post">
-                                                        <div class="modal-body">
-                                                            <div class="md-form mb-5 amber-input active-amber-input">
-                                                                <i class="fas fa-phone prefix"></i>
-                                                                <input type="text" id="telefono" name="telefono" class="form-control validate" required>
-                                                                <label for="telefono" data-error="wrong" data-success="right">Teléfono</label>
-                                                            </div>
-                                                        </div>
-                                                        <!--Footer-->
-                                                        <div class="modal-footer justify-content-center">
-                                                            <button class="btn btn-warning waves-effect" type="submit">Registrar</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <!--/.Content-->
-                                            </div>
-                                        </div>
+                                        </div>                                        
                                         <table class="table table-borderless text-center">
                                             <tbody>
                                                 <%
@@ -227,6 +199,7 @@
                                                     <td scope="row" class="font-weight-bold">Email</td>
                                                     <td><%= cli.getEmail_array().get(j)%></td>
                                                 </tr>
+                                                <!------------------------------------------Teléfono----------------------------->
                                                 <tr>
                                                     <td scope="row" class="font-weight-bold">Telefono(s)</td>
                                                     <td>
@@ -240,7 +213,7 @@
                                                                 %>                                                            
                                                                 <tr>
                                                                     <td><%= tel.getNumeroTelefonoArray().get(k)%></td>
-                                                                    <td><a role="button" class="btn btn-danger btn-sm px-2"  href="../registrar_telefono?accion=quitar&telefono=<%= tel.getNumeroTelefonoArray().get(k) %>"><i class="fas fa-minus" aria-hidden="true"></i></a></td>
+                                                                    <td><a role="button" class="btn btn-danger btn-sm px-2"  href="../registrar_telefono?accion=quitar&telefono=<%= tel.getNumeroTelefonoArray().get(k)%>"><i class="fas fa-minus" aria-hidden="true"></i></a></td>
                                                                 </tr>
                                                                 <%} //end for %>    
                                                                 <tr>
@@ -256,6 +229,37 @@
                                         </table>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <!------------------------------------Modal teléfono--------------------------------------------->
+                        <div class="modal fade" id="modalTelefono" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-notify" role="document">
+                                <!--Content-->
+                                <div class="modal-content">
+                                    <!--Header-->
+                                    <div class="modal-header text-center warning-color">
+                                        <h4 class="modal-title white-text w-100 font-weight-bold py-2">Registra tu teléfono</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" class="white-text">&times;</span>
+                                        </button>
+                                    </div>
+                                    <!--Body-->
+                                    <form action="../registrar_telefono" method="post">
+                                        <div class="modal-body">
+                                            <div class="md-form mb-5 amber-input active-amber-input">
+                                                <i class="fas fa-phone prefix"></i>
+                                                <input type="text" id="telefono" name="telefono" class="form-control validate" required>
+                                                <label for="telefono" data-error="wrong" data-success="right">Teléfono</label>
+                                            </div>
+                                        </div>
+                                        <!--Footer-->
+                                        <div class="modal-footer justify-content-center">
+                                            <button class="btn btn-warning waves-effect" type="submit">Registrar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!--/.Content-->
                             </div>
                         </div>
                         <!------------------------------------------Direcciones----------------------------------->            
@@ -329,7 +333,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!------------------------------------Modal--------------------------------------------->
+                        <!------------------------------------Modal direcciones--------------------------------------------->
                         <div class="modal fade" id="modalDireccion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                              aria-hidden="true">
                             <div class="modal-dialog modal-notify" role="document">
@@ -385,6 +389,81 @@
                         </div>
                         <!--------------------------------------Medios de pago---------------------------------------->
                         <div class="tab-pane fade" id="mediosPago" role="tabpanel">
+                            <div class="d-flex justify-content-center">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="card text-center">
+                                        <div class="card-header warning-color white-text">
+                                            Tarjetas de credito
+                                        </div>                                    
+                                        <div class="card-body">
+                                            <table class="table table-borderless text-center">
+                                                <tbody>
+                                                    <% 
+                                                        if (tarCre.getIdCedulaArray().isEmpty()) {
+                                                    %>
+                                                    <tr>
+                                                        <td>No hay tarjetas de credito registradas</td>
+                                                        <td><a class="btn btn-info btn-sm align-middle ml-0" href="perfil_user.jsp" role="button" data-toggle="modal" data-target="#modalTarjeta">Registrar tarjeta de credito</a></td>
+                                                    </tr>
+                                                    <% } //end if %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!------------------------------------Modal tarjetas de credito--------------------------------------------->
+                        <div class="modal fade" id="modalTarjeta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-notify" role="document">
+                                <!--Content-->
+                                <div class="modal-content">
+                                    <!--Header-->
+                                    <div class="modal-header text-center warning-color">
+                                        <h4 class="modal-title white-text w-100 font-weight-bold py-2">Registra tu tarjeta de credito</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" class="white-text">&times;</span>
+                                        </button>
+                                    </div>
+                                    <!--Body-->
+                                    <form action="../registrar_tarjetaCredito" method="post">
+                                        <div class="modal-body">
+                                            <div class="md-form mb-5 amber-input active-amber-input">
+                                                <label for="nombre" data-error="wrong" data-success="right">Nombre en la tarjeta</label>
+                                                <input type="text" class="form-control validate" id="nombre"  name="nombre" placeholder="" required>
+                                                <div class="invalid-feedback">
+                                                    Nombre en la tarjeta es requerido
+                                                </div>
+                                            </div>
+                                            <div class="md-form mb-5 amber-input active-amber-input">
+                                                <label for="numero" data-error="wrong" data-success="right">Número de la tarjeta de credito</label>
+                                                <input type="text" class="form-control validate" id="numero" name="numero" placeholder="" required>
+                                                <div class="invalid-feedback">
+                                                    Número de la tarjeta de credito requerido
+                                                </div>
+                                            </div>                                            
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <div class="md-form mb-5 amber-input active-amber-input">
+                                                        <label for="mes" data-error="wrong" data-success="right">MM</label>
+                                                        <input type="text" class="form-control validate" id="mes" name="mes" placeholder="" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="md-form mb-5 amber-input active-amber-input">
+                                                        <label for="año" data-error="wrong" data-success="right">AA</label>
+                                                        <input type="text" class="form-control validate" id="año" name="año" placeholder="" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--Footer-->
+                                            <div class="modal-footer justify-content-center">
+                                                <button class="btn btn-warning waves-effect" type="submit">Registrar</button>
+                                            </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
