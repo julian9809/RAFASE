@@ -141,7 +141,7 @@ public class ClienteDAO {
 
     public void insertarTelefono(String usuario, String password) throws CaException {
         try {
-            String strSQL = "INSERT INTO TEL(ID_TELEFONO, NUMERO_TELEFONO, EN_USO, ID_CEDULA, TIPO_ID) VALUES (ID_TELEFONO.NEXTVAL, ?, ?, ?, ?)";
+            String strSQL = "INSERT INTO TEL(ID_TELEFONO, NUMERO_TELEFONO, TELEFONO_EN_USO, ID_CEDULA, TIPO_ID) VALUES (ID_TELEFONO.NEXTVAL, ?, ?, ?, ?)";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.setLong(1, telefono.getNumeroTelefono());
@@ -161,7 +161,7 @@ public class ClienteDAO {
 
     public void buscarTelefono(String usuario, String password, long cedula) throws CaException {
         try {
-            String strSQL = "SELECT NUMERO_TELEFONO FROM TEL, USUR WHERE USUR.ID_CEDULA = TEL.ID_CEDULA AND USUR.TIPO_ID = TEL.TIPO_ID AND USUR.ID_CEDULA = ? AND TEL.EN_USO = 'S'";
+            String strSQL = "SELECT NUMERO_TELEFONO FROM TEL, USUR WHERE USUR.ID_CEDULA = TEL.ID_CEDULA AND USUR.TIPO_ID = TEL.TIPO_ID AND USUR.ID_CEDULA = ? AND TEL.TELEFONO_EN_USO = 'S'";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.setLong(1, cedula);
@@ -179,7 +179,7 @@ public class ClienteDAO {
     
     public void quitarTelefono(String usuario, String password, long cedula, long telefono) throws CaException {
         try {
-            String strSQL = "UPDATE TEL SET TEL.EN_USO = 'N' WHERE NUMERO_TELEFONO = ? AND ID_CEDULA = ?";
+            String strSQL = "UPDATE TEL SET TEL.TELEFONO_EN_USO = 'N' WHERE NUMERO_TELEFONO = ? AND ID_CEDULA = ?";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.setLong(1, telefono);
@@ -196,7 +196,7 @@ public class ClienteDAO {
     
     public void insertarTarjetaCredito(String usuario, String password) throws CaException {
         try {
-            String strSQL = "INSERT INTO TC(ID_TARJETA,NOMBRETITULAR,NUMERO_TARJETA, FECH_EXP, TIPO_ID, ID_CEDULA) VALUES (ID_TARJETA.NEXTVAL,?,?,TO_DATE(?,'MM/YY'),?,?)";
+            String strSQL = "INSERT INTO TC(ID_TARJETA,NOMBRETITULAR,NUMERO_TARJETA, FECH_EXP, TIPO_ID, ID_CEDULA, TARJETA_EN_USO) VALUES (ID_TARJETA.NEXTVAL,?,?,TO_DATE(?,'MM/YY'),?,?,'S')";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.setString(1, tarjetaCredito.getNombreTitular());

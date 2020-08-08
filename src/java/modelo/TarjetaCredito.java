@@ -21,10 +21,10 @@ public class TarjetaCredito {
     private long idCedula;
     
     private ArrayList<String> nombreTitularArray = new ArrayList<>();
-    private ArrayList<Long> numeroTarjetaArray = new ArrayList<>();;
-    private ArrayList<String> fechaExpArray = new ArrayList<>();;
-    private ArrayList<String> tipoIDArray = new ArrayList<>();;
-    private ArrayList<Long> idCedulaArray = new ArrayList<>();;
+    private ArrayList<Long> numeroTarjetaArray = new ArrayList<>();
+    private ArrayList<String> fechaExpArray = new ArrayList<>();
+    private ArrayList<String> tipoIDArray = new ArrayList<>();
+    private ArrayList<Long> idCedulaArray = new ArrayList<>();
 
     public TarjetaCredito() {}
 
@@ -66,7 +66,7 @@ public class TarjetaCredito {
 
     public void setIdCedula(long idCedula) {
         this.idCedula = idCedula;
-    }
+    }  
 
     public ArrayList<String> getNombreTitularArray() {
         return nombreTitularArray;
@@ -108,5 +108,4 @@ public class TarjetaCredito {
         this.idCedulaArray = idCedulaArray;
     }
             
-    
 }
