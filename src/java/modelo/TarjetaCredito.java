@@ -16,13 +16,13 @@ public class TarjetaCredito {
     
     private String nombreTitular;
     private long numeroTarjeta;
-    private Date fechaExp;
+    private String fechaExp;
     private String tipoID;
     private long idCedula;
     
     private ArrayList<String> nombreTitularArray = new ArrayList<>();
     private ArrayList<Long> numeroTarjetaArray = new ArrayList<>();;
-    private ArrayList<Date> fechaExpArray = new ArrayList<>();;
+    private ArrayList<String> fechaExpArray = new ArrayList<>();;
     private ArrayList<String> tipoIDArray = new ArrayList<>();;
     private ArrayList<Long> idCedulaArray = new ArrayList<>();;
 
@@ -44,11 +44,11 @@ public class TarjetaCredito {
         this.numeroTarjeta = numeroTarjeta;
     }
 
-    public Date getFechaExp() {
+    public String getFechaExp() {
         return fechaExp;
     }
 
-    public void setFechaExp(Date fechaExp) {
+    public void setFechaExp(String fechaExp) {
         this.fechaExp = fechaExp;
     }
 
@@ -84,11 +84,11 @@ public class TarjetaCredito {
         this.numeroTarjetaArray = numeroTarjetaArray;
     }
 
-    public ArrayList<Date> getFechaExpArray() {
+    public ArrayList<String> getFechaExpArray() {
         return fechaExpArray;
     }
 
-    public void setFechaExpArray(ArrayList<Date> fechaExpArray) {
+    public void setFechaExpArray(ArrayList<String> fechaExpArray) {
         this.fechaExpArray = fechaExpArray;
     }
 

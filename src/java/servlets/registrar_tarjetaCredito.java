@@ -5,15 +5,20 @@
  */
 package servlets;
 
+import control.DAOFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import modelo.TarjetaCredito;
+import util.CaException;
 
 /**
  *
@@ -38,15 +43,27 @@ public class registrar_tarjetaCredito extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             request.setCharacterEncoding("UTF-8");            
             HttpSession sesion = request.getSession();
+            DAOFacade facade = new DAOFacade(); 
+            TarjetaCredito tarCre = facade.getTarjetaCredito();
             
             String usuario = sesion.getAttribute("usuario").toString();
             String contraseña = sesion.getAttribute("contraseña").toString();
             String nombre = request.getParameter("nombre");
-            String numero = request.getParameter("numero");
-            System.out.println("prueba1");
-            Date fecha = Date.valueOf(request.getParameter("mes") + "/" + request.getParameter("año"));
-            System.out.println("prueba");
-            System.out.println(fecha);
+            Long numero = Long.valueOf(request.getParameter("numero"));
+            String fecha = request.getParameter("mes") + "/" + request.getParameter("año");
+            
+            tarCre.setNombreTitular(nombre);
+            tarCre.setNumeroTarjeta(numero);
+            tarCre.setFechaExp(fecha);
+            try {
+                tarCre.setIdCedula(facade.buscarIdCliente(usuario, contraseña));
+                tarCre.setTipoID(facade.buscarTipoID(usuario, contraseña));
+                facade.insertarTarjetaCredito(usuario, contraseña);
+                
+                response.sendRedirect("templates/perfil_user.jsp");
+            } catch (CaException ex) {
+                Logger.getLogger(registrar_tarjetaCredito.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
         }
     }

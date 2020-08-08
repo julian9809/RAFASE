@@ -196,12 +196,12 @@ public class ClienteDAO {
     
     public void insertarTarjetaCredito(String usuario, String password) throws CaException {
         try {
-            String strSQL = "INSERT INTO TC(ID_TARJETA,NOMBRETITULAR,NUMERO_TARJETA, FECH_EXP, TIPO_ID, ID_CEDULA) VALUES (ID_TARJETA.NEXTVAL,?,?,?,?,?)";
+            String strSQL = "INSERT INTO TC(ID_TARJETA,NOMBRETITULAR,NUMERO_TARJETA, FECH_EXP, TIPO_ID, ID_CEDULA) VALUES (ID_TARJETA.NEXTVAL,?,?,TO_DATE(?,'MM/YY'),?,?)";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.setString(1, tarjetaCredito.getNombreTitular());
                 prepStmt.setLong(2, tarjetaCredito.getNumeroTarjeta());
-                prepStmt.setDate(3, (Date) tarjetaCredito.getFechaExp());
+                prepStmt.setString(3, tarjetaCredito.getFechaExp());
                 prepStmt.setString(4, tarjetaCredito.getTipoID());
                 prepStmt.setLong(5, tarjetaCredito.getIdCedula());
                 prepStmt.executeUpdate();
@@ -225,7 +225,7 @@ public class ClienteDAO {
                 while (rs.next()) {
                     tarjetaCredito.getNombreTitularArray().add(rs.getString(1));
                     tarjetaCredito.getNumeroTarjetaArray().add(rs.getLong(2));
-                    tarjetaCredito.getFechaExpArray().add(rs.getDate(3));
+                    tarjetaCredito.getFechaExpArray().add(rs.getString(3));
                 }
             }
         } catch (SQLException e) {
