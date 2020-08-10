@@ -21,6 +21,16 @@
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
         <!-- Material Design Bootstrap -->
         <link rel="stylesheet" href="../css/mdb/mdb.min.css">
+        <!---------------------- Alertify CSS ---------------------->
+        <!-- CSS -->
+        <link rel="stylesheet" href="../css/alertify/alertify.min.css"/>
+        <!-- Default theme -->
+        <link rel="stylesheet" href="../css/alertify/themes/default.min.css"/>
+        <!-- Semantic UI theme -->
+        <link rel="stylesheet" href="../css/alertify/themes/semantic.min.css"/>
+        <!-- Bootstrap theme -->
+        <link rel="stylesheet" href="../css/alertify/themes/bootstrap.min.css"/>
+        <!---------------------- Alertify CSS ---------------------->
         <!-- Custom styles for this template -->
         <link rel="stylesheet" href="../css/custom/registro_user.css">
         <link rel="stylesheet" href="../css/custom/checkPassword.css">
@@ -35,9 +45,12 @@
         <script type="text/javascript" src="../js/bootstrap.min.js"></script>
         <!-- MDB core JavaScript -->
         <script type="text/javascript" src="../js/mdb.min.js"></script>
+        <!-- Alertifyjs JavaScript -->
+        <script type="text/javascript" src="../js/alertifyjs/alertify.min.js"></script>
         <!-- Custom Javacript-->
         <script type="text/javascript" src="../js/custom/checkPassword.js"></script>
         <script type="text/javascript" src="../js/custom/viewPassword.js"></script>
+        <script type="text/javascript" src="../js/custom/validatePassword.js"></script>
     </head>
     <body>
         <div class="container register">
@@ -53,7 +66,7 @@
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                             <h3 class="register-heading">¡Registrate como cliente!</h3>
-                            <form id="registro_user" class="row register-form" action="../registro_user" method="post">
+                            <form id="registro_user" class="row register-form" action="../registro_user" method="post" onsubmit="return validatePassword();">
                                 <div class="col-md-6">
                                     <div class="md-form md-bg">
                                         <input type="text" class="form-control white" name="nombre" id="nombre" required/>
@@ -121,5 +134,22 @@
                 </div>
             </div>
         </div>
+        <!--Scripts de respuesta del servlet-->
+        <%
+            try {
+                //Si e = 1, el username ya existe
+                if (request.getParameter("e").equals("1")) {
+        %>
+        <script  type = "text/javascript">
+            alertify.alert("Error", "El nombre de usuario escrito ya esta en uso, intente con otro nombre", function () {
+                alertify.message('Intente con otro nombre');
+
+            });
+        </script>
+        <%
+                }//End if e == 1
+            } catch (Exception e) {
+            }
+        %>
     </body>
 </html>

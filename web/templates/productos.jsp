@@ -9,7 +9,6 @@
 <%@page import="modelo.Pedido"%>
 <%@page import="control.DAOFacade"%>
 <%@page import="modelo.Carrito"%>
-<%@page import="java.util.ArrayList"%>
 <%@page import="modelo.Producto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -202,6 +201,7 @@
                                                 <!--Entradas escondidad-->
                                                 <input type="hidden" name = "id_producto" id="id_producto" value=<%= inventarioRafase.getProducto().getId_producto_array().get(i)%>>
                                                 <input type="hidden" name = "busqueda" id="busqueda" value=<%= producto_buscado%>>
+                                                <input type="hidden" name = "categoria" id="categoria" value=<%= categoria %>>
                                                 <!--Entradas escondidad-->
                                                 <button class="btn btn-success btn-sm my-auto btnRedondo" type="submit" form="agregar_producto_<%= inventarioRafase.getProducto().getId_producto_array().get(i) %>" title="Añadir al carrito">
                                                     <i class="fas fa-cart-arrow-down fa-2x"></i>
@@ -281,7 +281,7 @@
         <div class="modal fade" id="modalCarrito" tabindex="-1" role="dialog" aria-labelledby="modalCarritoLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg modal-notify modal-success" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header default-color-dark">
                         <h5 class="modal-title text-white font-weight-bold" id="modalCarritoLabel">Tu carrito</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -291,8 +291,7 @@
                         Carrito carrito = facade.getCarrito();
                         try {
                             if (facade.existeCarrito(usuario, sesion.getAttribute("contraseña").toString(), facade.buscarIdCliente(usuario, sesion.getAttribute("contraseña").toString()))) {
-                                facade.consultarCarrito(usuario, facade.buscarIdCiudad(usuario, sesion.getAttribute("contaseña").toString(), sesion.getAttribute("Ciudad").toString()));
-                                if (!carrito.getId_pedido_array().isEmpty()) {
+                                facade.consultarCarrito(usuario, facade.buscarIdCiudad(usuario, sesion.getAttribute("contraseña").toString(), sesion.getAttribute("Ciudad").toString()));
                     %>   
                     <div class="modal-body table-responsive">
 
@@ -380,7 +379,6 @@
                         </button>
                     </div>
                     <%
-                            }//End If carrito.isEmpty
                         }//End If carrito existe con filas (igual que el if anterior)
                     } catch (Exception e1) {
                     %>

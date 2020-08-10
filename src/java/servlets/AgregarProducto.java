@@ -47,6 +47,7 @@ public class AgregarProducto extends HttpServlet {
             
             String usuario = sesion.getAttribute("usuario").toString();
             String producto_buscado = request.getParameter("busqueda");
+            String categoria_buscada = request.getParameter("categoria");
             
             if (usuario.equals("visitante")) {
                 response.sendRedirect("templates/sign.jsp");
@@ -54,16 +55,16 @@ public class AgregarProducto extends HttpServlet {
                 long id_producto = Long.valueOf(request.getParameter("id_producto"));
                 long cantidad = Long.valueOf(request.getParameter("cantidad"));
                 DAOFacade facade = new DAOFacade();
-                DetallePedido detalle_pedido = facade.getDetallePedido();
                 Pedido pedido = facade.getPedido();
+                DetallePedido detalle_pedido = facade.getDetallePedido();
                 long id_cliente = facade.buscarIdCliente(usuario, sesion.getAttribute("contraseña").toString());
                 if(facade.existeCarrito(usuario, sesion.getAttribute("contraseña").toString(), id_cliente)){
                     facade.consultarPedido(usuario, id_cliente);
-                    detalle_pedido.setId_pedido(pedido.getId_pedido());
+                    detalle_pedido.setId_pedido(pedido.getId_pedido_array().get(0));
                     detalle_pedido.setCantidad(cantidad);
                     detalle_pedido.setId_producto(id_producto);
-                    if(facade.verificarExistencia(pedido.getId_pedido(), detalle_pedido.getId_producto())){
-                        facade.actualizarCantidad(pedido.getId_pedido(), detalle_pedido.getId_producto(), detalle_pedido.getCantidad());
+                    if(facade.verificarExistencia(pedido.getId_pedido_array().get(0), detalle_pedido.getId_producto())){
+                        facade.actualizarCantidad(pedido.getId_pedido_array().get(0), detalle_pedido.getId_producto(), detalle_pedido.getCantidad());
                     }else{
                         facade.insertarProductosPedido(usuario);
                     }                    
@@ -87,7 +88,7 @@ public class AgregarProducto extends HttpServlet {
                         facade.insertarProductosPedido(usuario);
                     }  
                 }          
-                response.sendRedirect("templates/productos.jsp?busqueda=" + producto_buscado);
+                response.sendRedirect("templates/productos.jsp?busqueda=" + producto_buscado +"&categoria=" + categoria_buscada);
             }
         }
     }

@@ -28,6 +28,8 @@ public class PedidoDAO {
 
     public PedidoDAO() {
         pedido = new Pedido();
+        detalle_pedido = new DetallePedido();
+        carrito = new Carrito();
     }
 
     public void consultarPedido(String usuario, long usuario_id) throws CaException {
@@ -117,9 +119,9 @@ public class PedidoDAO {
             String strSQL = "INSERT INTO depe(ID_PEDIDO, ID_PRODUCTO, CANTIDAD) VALUES (?,?,?)";
             Connection conexion = ServiceLocator.getInstance("admin_db", "dbadministrator").tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
-                prepStmt.setLong(1, (long) detalle_pedido.getCantidad());
-                prepStmt.setLong(2, (long) detalle_pedido.getId_pedido());
-                prepStmt.setLong(3, (long) detalle_pedido.getId_producto());
+                prepStmt.setLong(1, (long) detalle_pedido.getId_pedido());
+                prepStmt.setLong(2, (long) detalle_pedido.getId_producto());
+                prepStmt.setLong(3, (long) detalle_pedido.getCantidad());
                 prepStmt.executeUpdate();
             }
             ServiceLocator.getInstance("admin_db", "dbadministrator").commit();
