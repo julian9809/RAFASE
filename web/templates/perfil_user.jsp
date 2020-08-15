@@ -443,7 +443,7 @@
                                             <div class="md-form mb-5 amber-input active-amber-input">
                                                 <i class="fas fa-id-card prefix"></i>
                                                 <label for="nombre" data-error="wrong" data-success="right">Nombre en la tarjeta</label>
-                                                <input type="text" class="form-control validate" id="nombre"  name="nombre" placeholder="" required>
+                                                <input type="text" class="form-control validate" id="nombre"  name="nombre" required>
                                                 <div class="invalid-feedback">
                                                     Nombre en la tarjeta es requerido
                                                 </div>
@@ -451,22 +451,22 @@
                                             <div class="md-form mb-5 amber-input active-amber-input">
                                                 <i class="fas fa-credit-card prefix"></i>
                                                 <label for="numero" data-error="wrong" data-success="right">Número de la tarjeta de credito</label>
-                                                <input type="number" class="form-control validate" min="100000000000" max="999999999999" id="numero" name="numero" placeholder="" required>
+                                                <input type="number" class="form-control validate" min="100000000000" max="999999999999" id="numero" name="numero" required>
                                                 <div class="invalid-feedback">
                                                     Número de la tarjeta de credito requerido
                                                 </div>
                                             </div>                                            
                                             <div class="row">
-                                                <div class="col-md-2">
+                                                <div class="col-2 col-md-2">
                                                     <div class="md-form mb-5 amber-input active-amber-input">
                                                         <label for="mes" data-error="wrong" data-success="right">MM</label>
-                                                        <input type="number" class="form-control validate" min="1" max="12" id="mes" name="mes" placeholder="" required>
+                                                        <input type="number" class="form-control validate" min="1" max="12" id="mes" name="mes" required>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-2">
+                                                <div class="col-2 col-md-2">
                                                     <div class="md-form mb-5 amber-input active-amber-input">
                                                         <label for="año" data-error="wrong" data-success="right">AA</label>
-                                                        <input type="number" class="form-control validate" min="20" max="28" id="año" name="año" placeholder="" required>
+                                                        <input type="number" class="form-control validate" min="20" max="28" id="año" name="año" required>
                                                     </div>
                                                 </div>
                                             </div>
