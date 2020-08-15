@@ -5,8 +5,8 @@
  */
 function validatePassword() {
     var password, confirme_password;
-    password = document.getElementById("password");
-    confirme_password = document.getElementById("confirme_password");
+    password = document.getElementById("password").value;
+    confirme_password = document.getElementById("confirme_password").value;
     if (password === confirme_password) {
         return true;
     } else {
