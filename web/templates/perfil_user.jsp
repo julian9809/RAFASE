@@ -399,12 +399,23 @@
                                             <table class="table table-borderless text-center">
                                                 <tbody>
                                                     <% 
-                                                        if (tarCre.getIdCedulaArray().isEmpty()) {
+                                                        if (tarCre.getNombreTitularArray().isEmpty()) {
                                                     %>
                                                     <tr>
                                                         <td>No hay tarjetas de credito registradas</td>
                                                         <td><a class="btn btn-info btn-sm align-middle ml-0" href="perfil_user.jsp" role="button" data-toggle="modal" data-target="#modalTarjeta">Registrar tarjeta de credito</a></td>
                                                     </tr>
+                                                    <% } else { %>
+                                                    <% for (int i = 0; i < tarCre.getNombreTitularArray().size(); i++) { %>
+                                                    <tr>
+                                                        <td>Tarjeta No.</td>
+                                                        <td><%= tarCre.getNumeroTarjetaArray().get(i) %></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Titular</td>
+                                                        <td><%= tarCre.getNombreTitularArray().get(i) %></td>
+                                                    </tr>
+                                                    <% } //end for%>
                                                     <% } //end if %>
                                                 </tbody>
                                             </table>
