@@ -25,6 +25,7 @@ grant create trigger to administradorBD;
 
 create user admin_db identified by dbadministrator;
 grant administradorBD to admin_db;
+grant create view to admin_db;
 alter user admin_db
 default tablespace RAFASE_administrador
 temporary tablespace RAFASE_administradorTemp
