@@ -126,9 +126,11 @@
                         sesion.getAttribute("contraseña").toString(),
                         producto_buscado, ciudad, "", categoria);
             } catch (Exception e1) {
+                String error = e1.toString();
+                error = error.replaceAll("\n", "");
         %>
         <script type="text/javascript">
-            alertify.alert("Error", "<%= "Error --> " + e1 + e1.getMessage() %>", function () {
+            alertify.alert("Error", "<%= "Error --> " + error%>", function () {
                 alertify.message('OK');
             });
         </script>
@@ -290,7 +292,7 @@
                     <%  
                         Carrito carrito = facade.getCarrito();
                         try {
-                                facade.consultarCarrito(usuario, facade.buscarIdCiudad(usuario, sesion.getAttribute("contraseña").toString(), sesion.getAttribute("Ciudad").toString()));
+                            facade.consultarCarrito(usuario, facade.buscarIdCiudad(usuario, sesion.getAttribute("contraseña").toString(), sesion.getAttribute("Ciudad").toString()));
                     %>   
                     <div class="modal-body table-responsive">
 
@@ -357,7 +359,7 @@
                                 </tr>
                                 <!-- /.First row -->
                                 <%
-                                    total = total + (carrito.getCantidad_array().get(i)*(carrito.getPrecio_base_array().get(i) + (carrito.getPrecio_base_array().get(i) * carrito.getIva_array().get(i))));
+                                        total = total + (carrito.getCantidad_array().get(i) * (carrito.getPrecio_base_array().get(i) + (carrito.getPrecio_base_array().get(i) * carrito.getIva_array().get(i))));
                                     }//End for carrito
                                 %>
                             </tbody>
@@ -372,7 +374,7 @@
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Volver</button>
                         <div class="ml-auto">
                             <h4 class="font-weight-bold">
-                                Total: $<%= total %>
+                                Total: $<%= total%>
                             </h4>
                         </div>
                         <a type="button" class="float-right btn btn-success" href="pago.jsp">Pagar
@@ -381,9 +383,11 @@
                     </div>
                     <%
                     } catch (Exception e1) {
+                        String error = e1.toString();
+                        error = error.replaceAll("\n", "");
                     %>
                     <script  type = "text/javascript">
-                        alertify.alert("Error", "<%= "Error-- > " + e1 + e1.getMessage()%>", function () {
+                        alertify.alert("Error", "<%= "Error-- > " + error %>", function () {
                             alertify.message('OK');
                         });
                     </script>

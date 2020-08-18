@@ -135,9 +135,11 @@
                 facade.buscarTelefono(usuario, contraseña, idCliente);
 
             } catch (Exception e1) {
+                String error = e1.toString();
+                error = error.replaceAll("\n", "");
         %>
         <script type="text/javascript">
-            alertify.alert("Error", "<%= "Error --> " + e1 + e1.getMessage()%>", function () {
+            alertify.alert("Error", "<%= "Error --> " + error %>", function () {
                 alertify.message('OK');
             });
         </script>
@@ -185,14 +187,14 @@
                                                     <% if (cli.getSegundo_nombre_array().get(j) == null && cli.getSegundo_apellido_array().get(j) == null) {%>
                                                     <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getPrimer_apellido_array().get(j)%></td>
                                                     <% } else if (cli.getSegundo_nombre_array().get(j) == null) {%>
-                                                    <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getPrimer_apellido_array().get(j) + " "
-                                                                + cli.getSegundo_apellido_array().get(j)%></td>
+                                                        <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getPrimer_apellido_array().get(j) + " "
+                                                            + cli.getSegundo_apellido_array().get(j)%></td>
                                                         <% } else if (cli.getSegundo_apellido_array().get(j) == null) {%>
-                                                    <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getSegundo_nombre_array().get(j) + " "
-                                                                + cli.getPrimer_apellido_array().get(j)%></td>
+                                                        <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getSegundo_nombre_array().get(j) + " "
+                                                            + cli.getPrimer_apellido_array().get(j)%></td>
                                                         <% } else {%>
-                                                    <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getSegundo_nombre_array().get(j) + " "
-                                                                + cli.getPrimer_apellido_array().get(j) + " " + cli.getSegundo_apellido_array().get(j)%></td>
+                                                        <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getSegundo_nombre_array().get(j) + " "
+                                                            + cli.getPrimer_apellido_array().get(j) + " " + cli.getSegundo_apellido_array().get(j)%></td>
                                                         <%} //end if %>
                                                 </tr>
                                                 <tr>
@@ -406,14 +408,14 @@
                                                         <td><a class="btn btn-info btn-sm align-middle ml-0" href="perfil_user.jsp" role="button" data-toggle="modal" data-target="#modalTarjeta">Registrar tarjeta de credito</a></td>
                                                     </tr>
                                                     <% } else { %>
-                                                    <% for (int i = 0; i < tarCre.getNombreTitularArray().size(); i++) { %>
+                                                    <% for (int i = 0; i < tarCre.getNombreTitularArray().size(); i++) {%>
                                                     <tr>
                                                         <td>Tarjeta No.</td>
-                                                        <td><%= tarCre.getNumeroTarjetaArray().get(i) %></td>
+                                                        <td><%= tarCre.getNumeroTarjetaArray().get(i)%></td>
                                                     </tr>
                                                     <tr>
                                                         <td>Titular</td>
-                                                        <td><%= tarCre.getNombreTitularArray().get(i) %></td>
+                                                        <td><%= tarCre.getNombreTitularArray().get(i)%></td>
                                                     </tr>
                                                     <% } //end for%>
                                                     <% } //end if %>
