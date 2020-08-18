@@ -290,7 +290,6 @@
                     <%  
                         Carrito carrito = facade.getCarrito();
                         try {
-                            if (facade.existeCarrito(usuario, sesion.getAttribute("contraseña").toString(), facade.buscarIdCliente(usuario, sesion.getAttribute("contraseña").toString()))) {
                                 facade.consultarCarrito(usuario, facade.buscarIdCiudad(usuario, sesion.getAttribute("contraseña").toString(), sesion.getAttribute("Ciudad").toString()));
                     %>   
                     <div class="modal-body table-responsive">
@@ -381,7 +380,6 @@
                         </a>
                     </div>
                     <%
-                        }//End If carrito existe con filas (igual que el if anterior)
                     } catch (Exception e1) {
                     %>
                     <script  type = "text/javascript">
