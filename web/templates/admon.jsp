@@ -4,6 +4,8 @@
     Author     : julia
 --%>
 
+<%@page import="util.CaException"%>
+<%@page import="java.sql.SQLException"%>
 <%@page import="modelo.Admon"%>
 <%@page import="control.DAOFacade"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -37,6 +39,26 @@
         <link href="../css/mdb.min.css" rel="stylesheet">
         <!-- Your custom styles (optional) -->
         <link href="../css/style.min.css" rel="stylesheet">
+        <!---------------------- Alertify CSS ---------------------->
+        <!-- CSS -->
+        <link rel="stylesheet" href="../css/alertify/alertify.min.css"/>
+        <!-- Default theme -->
+        <link rel="stylesheet" href="../css/alertify/themes/default.min.css"/>
+        <!-- Semantic UI theme -->
+        <link rel="stylesheet" href="../css/alertify/themes/semantic.min.css"/>
+        <!-- Bootstrap theme -->
+        <link rel="stylesheet" href="../css/alertify/themes/bootstrap.min.css"/>
+        <!-------------------------------Scripts--------------------------------->
+        <!-- jQuery -->
+        <script type="text/javascript" src="../js/jquery.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="../js/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="../js/mdb.min.js"></script>
+        <!-- Alertifyjs JavaScript -->
+        <script type="text/javascript" src="../js/alertifyjs/alertify.min.js"></script>
         <style>
 
             .map-container{
@@ -52,28 +74,7 @@
                 width:100%;
                 position:absolute;
             }
-        </style>
-        <!---------------------- Alertify CSS ---------------------->
-        <!-- CSS -->
-        <link rel="stylesheet" href="../css/alertify/alertify.min.css"/>
-        <!-- Default theme -->
-        <link rel="stylesheet" href="../css/alertify/themes/default.min.css"/>
-        <!-- Semantic UI theme -->
-        <link rel="stylesheet" href="../css/alertify/themes/semantic.min.css"/>
-        <!-- Bootstrap theme -->
-        <link rel="stylesheet" href="../css/alertify/themes/bootstrap.min.css"/>
-        <!---------------------- Alertify CSS ---------------------->
-        <!-------------------------------Scripts--------------------------------->
-        <!-- jQuery -->
-        <script type="text/javascript" src="../js/jquery.js"></script>
-        <!-- Bootstrap tooltips -->
-        <script type="text/javascript" src="../js/popper.min.js"></script>
-        <!-- Bootstrap core JavaScript -->
-        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-        <!-- MDB core JavaScript -->
-        <script type="text/javascript" src="../js/mdb.min.js"></script>
-        <!-- Alertifyjs JavaScript -->
-        <script type="text/javascript" src="../js/alertifyjs/alertify.min.js"></script>
+        </style>        
     </head>
 
     <body class="grey lighten-3">
@@ -384,10 +385,12 @@
                 try {
                     facade.buscarAdministradores(usuario, contraseña);
                     System.out.println("los busco");
-                } catch (Exception e1) {
+                } catch (CaException e1) {
+                   String error = e1.toString();
+                   error = error.replaceAll("\n", "");
             %>
             <script type="text/javascript">
-                alertify.alert("Error", "<%= "Error --> " + e1.getMessage()%>", function () {
+                alertify.alert("Error","<%= "Error --> " + error %>", function () {
                     alertify.message('OK');
                 });
             </script>

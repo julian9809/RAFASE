@@ -39,7 +39,7 @@ public class AdmonDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new CaException("ciudadDAO", " no se pudo conseguir administradores: " + e.getMessage());
+            throw new CaException("admonDAO", " no se pudo conseguir administradores: " + e.getMessage());
         } finally {
             ServiceLocator.getInstance().liberarConexion();
         }

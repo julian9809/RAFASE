@@ -128,7 +128,7 @@
             } catch (Exception e1) {
         %>
         <script type="text/javascript">
-            alertify.alert("Error", "<%= "Error --> " + e1 + e1.getMessage()%>", function () {
+            alertify.alert("Error", "<%= "Error --> " + e1 + e1.getMessage() %>", function () {
                 alertify.message('OK');
             });
         </script>
