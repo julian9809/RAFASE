@@ -112,16 +112,16 @@
                     <img src="../img/rafase.gif" class="img-fluid" alt="">
                 </a>
 
-                <div class="list-group list-group-flush">
-                    <a onclick="statistics()" class="list-group-item active waves-effect">
+                <div class="list-group list-group-flush" id="list-tab" role="tablist">
+                    <a href="" onclick="statistics()" class="list-group-item waves-effect active list-group-item-action" data-toggle="list" role="tab">
                         <i class="fas fa-chart-pie mr-3"></i>Estadísticas</a>
-                    <a onclick="perfil()" class="list-group-item waves-effect">
+                    <a href="" onclick="perfil()" class="list-group-item waves-effect list-group-item-action" data-toggle="list" role="tab">
                         <i class="fas fa-user mr-3"></i>Perfil de administrador</a>
-                    <a href="#" class="list-group-item list-group-item-action waves-effect">
+                    <a href="" class="list-group-item list-group-item-action waves-effect list-group-item-action" data-toggle="list" role="tab">
                         <i class="fas fa-shipping-fast mr-3"></i>Proveedores</a>
-                    <a href="#" class="list-group-item list-group-item-action waves-effect">
+                    <a href="" class="list-group-item list-group-item-action waves-effect list-group-item-action" data-toggle="list" role="tab">
                         <i class="fas fa-clipboard-list mr-3"></i>Stock</a>
-                    <a href="#" class="list-group-item list-group-item-action waves-effect">
+                    <a href="" class="list-group-item list-group-item-action waves-effect list-group-item-action" data-toggle="list" role="tab">
                         <i class="fas fa-map mr-3"></i>Sucursales</a>
                 </div>
 
@@ -342,15 +342,39 @@
 
             </div>
 
-            <div class="container-fluid mt-5" id="perfil">
-                holi
+            <!--Administrador-->
+            <div class="container-fluid mt-5 py-lg-5" id="perfil">
+                <div class="card">
+                    <div class="card-header">
+                        Administrador
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead class="grey lighten-2">
+                                <tr>
+                                    <th>Datos personales</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td scope="row" class="font-weight-bold">Nombre </td>
+                                    <td>Benito Camelas</td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" class="font-weight-bold">Email </td>
+                                    <td>wyecarjo@yopmail.com</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
 
         </main>
         <!--Main layout-->
 
         <!--Footer-->
-        <footer class="page-footer text-center font-small primary-color-dark darken-2 mt-4 wow fadeIn">
+        <footer class="page-footer text-center font-small primary-color-dark darken-2 mt-5 wow fadeIn">
 
             <!--Call to action-->
             <div class="pt-4">
@@ -387,28 +411,28 @@
         <script type="text/javascript" src="../js/mdb.min.js"></script>
         <!-- Initializations -->
         <script type="text/javascript">
-            // Animations initialization
-            new WOW().init();
+                        // Animations initialization
+                        new WOW().init();
 
         </script>
 
         <!-- Charts -->
         <script>
-            
+
             $("#perfil").hide();
 
             function statistics() {
-                if($("#statistics").is(":hidden")) {
+                if ($("#statistics").is(":hidden")) {
                     $("#perfil").hide();
                     $("#statistics").show();
-                }              
+                }
             }
-            
+
             function perfil() {
-                if($("#perfil").is(":hidden")) {
+                if ($("#perfil").is(":hidden")) {
                     $("#statistics").hide();
                     $("#perfil").show();
-                }                
+                }
             }
 
             // Line
