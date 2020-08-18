@@ -4,8 +4,22 @@
     Author     : julia
 --%>
 
+<%@page import="modelo.Admon"%>
+<%@page import="control.DAOFacade"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    HttpSession sesion = request.getSession();
+    String ciudad = "no ciudad";
+    if (sesion.getAttribute("Ciudad") != null) {
+        ciudad = sesion.getAttribute("Ciudad").toString();
+    } else {
+        out.print("<script>location.replace('../index.jsp');</script>");
+    }
+
+    String usuario = sesion.getAttribute("usuario").toString();
+    String contraseña = sesion.getAttribute("contraseña").toString();
+%>
 <html lang="es">
 
     <head>
@@ -39,6 +53,27 @@
                 position:absolute;
             }
         </style>
+        <!---------------------- Alertify CSS ---------------------->
+        <!-- CSS -->
+        <link rel="stylesheet" href="../css/alertify/alertify.min.css"/>
+        <!-- Default theme -->
+        <link rel="stylesheet" href="../css/alertify/themes/default.min.css"/>
+        <!-- Semantic UI theme -->
+        <link rel="stylesheet" href="../css/alertify/themes/semantic.min.css"/>
+        <!-- Bootstrap theme -->
+        <link rel="stylesheet" href="../css/alertify/themes/bootstrap.min.css"/>
+        <!---------------------- Alertify CSS ---------------------->
+        <!-------------------------------Scripts--------------------------------->
+        <!-- jQuery -->
+        <script type="text/javascript" src="../js/jquery.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="../js/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="../js/mdb.min.js"></script>
+        <!-- Alertifyjs JavaScript -->
+        <script type="text/javascript" src="../js/alertifyjs/alertify.min.js"></script>
     </head>
 
     <body class="grey lighten-3">
@@ -342,6 +377,24 @@
 
             </div>
 
+            <%
+                DAOFacade facade = new DAOFacade();
+                Admon adm = facade.getAdmon();
+
+                try {
+                    facade.buscarAdministradores(usuario, contraseña);
+                    System.out.println("los busco");
+                } catch (Exception e1) {
+            %>
+            <script type="text/javascript">
+                alertify.alert("Error", "<%= "Error --> " + e1.getMessage()%>", function () {
+                    alertify.message('OK');
+                });
+            </script>
+            <%
+                }//end catch            
+            %>
+
             <!--Administrador-->
             <div class="container-fluid mt-5 py-lg-5" id="perfil">
                 <div class="card">
@@ -356,14 +409,24 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <% if (adm.getId_administrador_array().isEmpty()) {%>
                                 <tr>
-                                    <td scope="row" class="font-weight-bold">Nombre </td>
-                                    <td>Benito Camelas</td>
+                                    <td>No se encuentran administradores</td>
+                                </tr>
+                                <%} else {%>
+                                <%
+                                    for (int i = 0; i < adm.getId_administrador_array().size(); i++) {
+                                %>
+                                <tr>
+                                    <td scope="row" class="font-weight-bold">Nombre</td>
+                                    <td><%= adm.getNombre_completo_array().get(i) %></td>
                                 </tr>
                                 <tr>
-                                    <td scope="row" class="font-weight-bold">Email </td>
-                                    <td>wyecarjo@yopmail.com</td>
+                                    <td scope="row" class="font-weight-bold">Email</td>
+                                    <td><%= adm.getCorreo_array().get(i) %></td>
                                 </tr>
+                                <%} //end for%>
+                                <%} //end if%>
                             </tbody>
                         </table>
                     </div>
@@ -411,8 +474,8 @@
         <script type="text/javascript" src="../js/mdb.min.js"></script>
         <!-- Initializations -->
         <script type="text/javascript">
-                        // Animations initialization
-                        new WOW().init();
+                // Animations initialization
+                new WOW().init();
 
         </script>
 

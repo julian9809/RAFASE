@@ -21,8 +21,8 @@ public class AdmonDAO {
     
     private Admon admon;
 
-    public AdmonDAO(Admon admon) {
-        this.admon = admon;
+    public AdmonDAO() {
+        admon = new Admon();
     }
     
     public void buscarAdministradores(String usuario, String password) throws CaException {

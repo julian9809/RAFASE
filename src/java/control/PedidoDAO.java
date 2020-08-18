@@ -86,7 +86,7 @@ public class PedidoDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new CaException("No pudo recuperar  pedido\n " + e.getMessage() + "linea67");
+            throw new CaException("No pudo recuperar  pedido: " + e.getMessage());
         } finally {
             ServiceLocator.getInstance().liberarConexion();
         }

@@ -5,6 +5,7 @@
  */
 package control;
 
+import modelo.Admon;
 import modelo.Carrito;
 import modelo.Ciudad;
 import modelo.Cliente;
@@ -28,11 +29,13 @@ public class DAOFacade {
     private ClienteDAO clienteDAO;
     private PedidoDAO pedidoDAO;
     private ProductosDAO productosDAO;
+    private AdmonDAO admonDAO;
 
     public DAOFacade() {
         ciudadDAO = new CiudadDAO();
         clienteDAO = new ClienteDAO();
         pedidoDAO = new PedidoDAO();
+        admonDAO = new AdmonDAO();
         productosDAO = new ProductosDAO();
     }
     
@@ -65,6 +68,10 @@ public class DAOFacade {
     
     public long buscarIdCiudad(String usuario, String password, String nombre_ciudad) throws CaException {
         return ciudadDAO.buscarIdCiudad(usuario, password, nombre_ciudad);
+    }
+    //--------------------------------AdmonDAO----------------------------------
+    public void buscarAdministradores(String nickname, String userPassword) throws CaException {
+        admonDAO.buscarAdministradores(nickname, userPassword);
     }
     //--------------------------------ClienteDAO--------------------------------
     public boolean buscarExisteCliente(String usuario, String password, String nickname) throws CaException {
@@ -214,6 +221,10 @@ public class DAOFacade {
     
     public TarjetaCredito getTarjetaCredito(){
         return clienteDAO.getTarjetaCredito();
+    }
+    
+    public Admon getAdmon(){
+        return admonDAO.getAdmon();
     }
     
 }
