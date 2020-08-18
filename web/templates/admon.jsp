@@ -384,15 +384,16 @@
 
                 try {
                     facade.buscarAdministradores(usuario, contraseña);
-                    System.out.println("los busco");
                 } catch (CaException e1) {
-                   String error = e1.toString();
-                   error = error.replaceAll("\n", "");
+                    String error = e1.toString();
+                    error = error.replaceAll("\n", "");
             %>
             <script type="text/javascript">
-                alertify.alert("Error","<%= "Error --> " + error %>", function () {
-                    alertify.message('OK');
-                });
+                alertify.alert("Error", "<%= "Error --> " + error%>", function () {
+                    alertify.error('Acceso denegado');
+                }).set({onshow: null, onclose: function () {
+                        setTimeout(() => {  window.location = 'index.jsp'; }, 1000);                        
+                    }});
             </script>
             <%
                 }//end catch            
@@ -422,11 +423,11 @@
                                 %>
                                 <tr>
                                     <td scope="row" class="font-weight-bold">Nombre</td>
-                                    <td><%= adm.getNombre_completo_array().get(i) %></td>
+                                    <td><%= adm.getNombre_completo_array().get(i)%></td>
                                 </tr>
                                 <tr>
                                     <td scope="row" class="font-weight-bold">Email</td>
-                                    <td><%= adm.getCorreo_array().get(i) %></td>
+                                    <td><%= adm.getCorreo_array().get(i)%></td>
                                 </tr>
                                 <%} //end for%>
                                 <%} //end if%>
@@ -439,32 +440,7 @@
         </main>
         <!--Main layout-->
 
-        <!--Footer-->
-        <footer class="page-footer text-center font-small primary-color-dark darken-2 mt-5 wow fadeIn">
-
-            <!--Call to action-->
-            <div class="pt-4">
-
-            </div>
-            <!--/.Call to action-->
-
-            <hr class="my-4">
-
-            <!-- Social icons -->
-            <div class="pb-4">
-
-            </div>
-            <!-- Social icons -->
-
-            <!--Copyright-->
-            <div class="footer-copyright py-3">
-                © 2020 Copyright:
-                <a href="#" target="_blank"> RAFASE </a>
-            </div>
-            <!--/.Copyright-->
-
-        </footer>
-        <!--/.Footer-->
+        
 
         <!-- SCRIPTS -->
         <!-- JQuery -->
@@ -486,6 +462,7 @@
         <script>
 
             $("#perfil").hide();
+            $("#statistics").hide();
 
             function statistics() {
                 if ($("#statistics").is(":hidden")) {
