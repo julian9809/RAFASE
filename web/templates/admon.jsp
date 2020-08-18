@@ -113,9 +113,9 @@
                 </a>
 
                 <div class="list-group list-group-flush">
-                    <a href="#" class="list-group-item active waves-effect">
-                        <i class="fas fa-chart-pie mr-3"></i>Estadisticas</a>
-                    <a href="#" class="list-group-item list-group-item-action waves-effect">
+                    <a onclick="statistics()" class="list-group-item active waves-effect">
+                        <i class="fas fa-chart-pie mr-3"></i>Estadísticas</a>
+                    <a onclick="perfil()" class="list-group-item waves-effect">
                         <i class="fas fa-user mr-3"></i>Perfil de administrador</a>
                     <a href="#" class="list-group-item list-group-item-action waves-effect">
                         <i class="fas fa-shipping-fast mr-3"></i>Proveedores</a>
@@ -133,11 +133,11 @@
 
         <!--Main layout-->
         <main class="pt-5 mx-lg-5">
-            <div class="container-fluid mt-5">               
+            <div class="container-fluid mt-5" id="statistics">               
 
                 <!--Grid row-->
                 <div class="row wow fadeIn">
-                    
+
                     <!--Grid column-->
                     <div class="col-md-6 mb-4">
 
@@ -149,36 +149,32 @@
 
                                 <!-- Table  -->
                                 <table class="table table-hover">
-                                    <!-- Table head -->
-                                    <thead class="blue lighten-4">
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Lorem</th>
-                                            <th>Ipsum</th>
-                                            <th>Dolor</th>
-                                        </tr>
-                                    </thead>
-                                    <!-- Table head -->
 
                                     <!-- Table body -->
                                     <tbody>
                                         <tr>
-                                            <th scope="row">1</th>
-                                            <td>Cell 1</td>
+                                            <td>Valor total vendido</td>
                                             <td>Cell 2</td>
-                                            <td>Cell 3</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">2</th>
-                                            <td>Cell 4</td>
+                                            <td>Producto más vendido</td>
                                             <td>Cell 5</td>
-                                            <td>Cell 6</td>
                                         </tr>
                                         <tr>
-                                            <th scope="row">3</th>
-                                            <td>Cell 7</td>
+                                            <td>Producto menos vendido</td>
                                             <td>Cell 8</td>
-                                            <td>Cell 9</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cliente con mayor volumen de compras</td>
+                                            <td>Cell 8</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Pagos rechazados</td>
+                                            <td>Cell 8</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tiempo promedio de entrega del pedido</td>
+                                            <td>Cell 8</td>
                                         </tr>
                                     </tbody>
                                     <!-- Table body -->
@@ -198,7 +194,7 @@
 
                         <!--Card-->
                         <div class="card">
-                            
+
                             <!-- Card header -->
                             <div class="card-header text-center">
                                 Bar chart
@@ -222,7 +218,7 @@
 
                 <!--Grid row-->
                 <div class="row wow fadeIn">  
-                    
+
                     <!--Grid column-->
                     <div class="col-lg-6 col-md-6 mb-4">
 
@@ -246,7 +242,7 @@
 
                     </div>
                     <!--Grid column--> 
-                    
+
                     <!--Grid column-->
                     <div class="col-lg-6 col-md-6 mb-4">
 
@@ -340,11 +336,16 @@
 
                     </div>
                     <!--Grid column-->
-                    
+
                 </div>
                 <!--Grid row-->                
 
             </div>
+
+            <div class="container-fluid mt-5" id="perfil">
+                holi
+            </div>
+
         </main>
         <!--Main layout-->
 
@@ -353,7 +354,7 @@
 
             <!--Call to action-->
             <div class="pt-4">
-                
+
             </div>
             <!--/.Call to action-->
 
@@ -361,7 +362,7 @@
 
             <!-- Social icons -->
             <div class="pb-4">
-                
+
             </div>
             <!-- Social icons -->
 
@@ -393,6 +394,23 @@
 
         <!-- Charts -->
         <script>
+            
+            $("#perfil").hide();
+
+            function statistics() {
+                if($("#statistics").is(":hidden")) {
+                    $("#perfil").hide();
+                    $("#statistics").show();
+                }              
+            }
+            
+            function perfil() {
+                if($("#perfil").is(":hidden")) {
+                    $("#statistics").hide();
+                    $("#perfil").show();
+                }                
+            }
+
             // Line
             var ctx = document.getElementById("myChart").getContext('2d');
             var myChart = new Chart(ctx, {
@@ -439,14 +457,13 @@
                 data: {
                     labels: ["Red", "Green", "Yellow", "Grey", "Dark Grey"],
                     datasets: [{
-                            data: [300, 50, 100, 40, 120],
+                            data: [100, 50, 100, 40, 120],
                             backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
                             hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
                         }]
                 },
                 options: {
-                    responsive: true,
-                    legend: false
+                    responsive: true
                 }
             });
 
@@ -566,7 +583,7 @@
                     "labels": ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Grey"],
                     "datasets": [{
                             "label": "My First Dataset",
-                            "data": [22, 33, 55, 12, 86, 23, 14],
+                            "data": [22, 33, 55, 12, 86, 80, 14],
                             "fill": false,
                             "backgroundColor": ["rgba(255, 99, 132, 0.2)", "rgba(255, 159, 64, 0.2)",
                                 "rgba(255, 205, 86, 0.2)", "rgba(75, 192, 192, 0.2)",
