@@ -42,18 +42,27 @@ public class IniciarSesion extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String username = request.getParameter("username");
             String password = request.getParameter("password");
-            
+
             DAOFacade facade = new DAOFacade();
             HttpSession sesion = request.getSession();
-            
-            if(facade.buscarExisteCliente(sesion.getAttribute("usuario")
+
+            if (facade.buscarExisteCliente(sesion.getAttribute("usuario")
                     .toString(), sesion.getAttribute("contraseña").toString(),
-                    username, password)){
-                sesion.setAttribute("usuario", username);
-                sesion.setAttribute("contraseña", password);
-                response.sendRedirect("templates/index.jsp");
-            }
-            else{
+                    username, password)) {
+                facade.cerrarConexion();
+                facade.nombreUsuario(username);
+                facade.passwordUsuario(password);
+                if (facade.realizarConexion()) {
+                    sesion.setAttribute("usuario", username);
+                    sesion.setAttribute("contraseña", password);
+                    response.sendRedirect("templates/index.jsp");
+                } else {
+                    facade.cerrarConexion();
+                    facade.nombreUsuario("visitante");
+                    facade.passwordUsuario("abc123");
+                    facade.realizarConexion();
+                }
+            } else {
                 response.sendRedirect("templates/sign.jsp");
             }
         }

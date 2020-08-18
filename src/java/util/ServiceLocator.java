@@ -27,29 +27,18 @@ public class ServiceLocator {
     private boolean conexionLibre = true;
 
     /**
+     * Usuario y contraseña de quien esta conectado
+     */
+    private String usuario = "";
+    private String password = "";
+
+    /**
      * @return instancia del ServiceLocator para el manejo de la conexion
      */
     public static ServiceLocator getInstance() {
-        if(instance==null){
+        if (instance == null) {
             try {
                 instance = new ServiceLocator();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return instance;
-    }
-    
-    /**
-     * @param usuario
-     * @param password
-     * @return instancia del ServiceLocator para el manejo de la conexion
-     */
-    public static ServiceLocator getInstance(String usuario,String password) {
-        if(instance==null){
-            try {
-                instance = new ServiceLocator(usuario,password);
-                return instance;
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -61,21 +50,10 @@ public class ServiceLocator {
      * @throws Exception dice si no se pudo crear la conexion
      */
     private ServiceLocator() throws Exception {
-        try {
-            // Se registra el Driver y se crea la conexion
-            String url = "jdbc:oracle:thin:@localhost:1521:xe";
-            String usuario = "admin_db";
-            String password = "dbadministrator";
-            Class.forName("oracle.jdbc.driver.OracleDriver").newInstance();
-            conexion = DriverManager.getConnection(url, usuario, password);
-            conexion.setAutoCommit(false);
-        } catch (Exception e) {
-            throw new CaException("ServiceLocator", "ERROR_CONEXION_BD " + e);
-        }
     }
-    
+
     private ServiceLocator(String usuario, String password) throws Exception {
-        try {            
+        try {
             // Se registra el Driver y se crea la conexion
             String url = "jdbc:oracle:thin:@localhost:1521:xe";
             Class.forName("oracle.jdbc.driver.OracleDriver").newInstance();
@@ -86,6 +64,42 @@ public class ServiceLocator {
         }
     }
 
+    public synchronized boolean realizarConexion() {
+        try {
+            /*Primera conexión que se hace al iniciar la aplicación
+                por seguridad se iniciar como visitante*/
+            if (conexion == null) {
+                String user = "visitante";
+                String pass = "abc123";
+                String url = "jdbc:oracle:thin:@localhost:1521:XE";
+                Class.forName("oracle.jdbc.OracleDriver").newInstance();
+                conexion = DriverManager.getConnection(url, user, pass);
+                conexion.setAutoCommit(false);
+                System.out.println("CONEXION USUARIO1: " + usuario);
+                /*Verificación de que la conexión no es null (cuando se cierra
+                    una conexión queda como close, no como null)*/
+            } else if (conexion != null) {
+                /*Verificación de que la conexión a sido cerrada, de ser asi
+                    tomara los valores que se le setean a usuario y password*/
+                if (conexion.isClosed()) {
+                    String user = usuario;
+                    String pass = password;
+                    System.out.println("USER: " + user + " y su contraseña es: " + pass);
+                    String url = "jdbc:oracle:thin:@localhost:1521:XE";
+                    Class.forName("oracle.jdbc.OracleDriver").newInstance();
+                    conexion = DriverManager.getConnection(url, user, pass);
+                    conexion.setAutoCommit(false);
+                    System.out.println("CONEXION USUARIO2: " + usuario);
+                }
+            }
+            /*Retorna que fue posible hacer la conexión como true*/
+            return true;
+        } catch (Exception e) {
+            System.out.println("NO FUE POSIBLE REALIZAR LA CONEXION (ServiceLocator): " + e.getMessage());
+            /*Retorna que fue no posible hacer la conexión como false*/
+            return false;
+        }
+    }
 
     /**
      * Toma la conexion para que ningun otro proceso la puedan utilizar
@@ -167,4 +181,24 @@ public class ServiceLocator {
         }
     }
 
+    /**
+     * Seter y geter del nombre de usuario y la contraseña.
+     *
+     * @return
+     */
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

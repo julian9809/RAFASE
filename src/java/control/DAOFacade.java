@@ -16,6 +16,7 @@ import modelo.Pedido;
 import modelo.TarjetaCredito;
 import modelo.Telefono;
 import util.CaException;
+import util.ServiceLocator;
 
 /**
  *
@@ -33,6 +34,28 @@ public class DAOFacade {
         clienteDAO = new ClienteDAO();
         pedidoDAO = new PedidoDAO();
         productosDAO = new ProductosDAO();
+    }
+    
+    //-----------------------Conexión ServiceLocator----------------------------
+    public boolean realizarConexion(){
+        return ServiceLocator.getInstance().realizarConexion();
+    }
+    
+    public void cerrarConexion(){
+        ServiceLocator.getInstance().close();
+    }
+    
+    public void nombreUsuario(String username){
+        ServiceLocator.getInstance().setUsuario(username);
+    }
+    
+    public void passwordUsuario(String password){
+        ServiceLocator.getInstance().setPassword(password);
+    }
+    
+    public void setearAdminDB(){
+        ServiceLocator.getInstance().setUsuario("admin_db");
+        ServiceLocator.getInstance().setPassword("dbadministrator");
     }
     
     //---------------------------------CiudadDAO--------------------------------
@@ -192,4 +215,5 @@ public class DAOFacade {
     public TarjetaCredito getTarjetaCredito(){
         return clienteDAO.getTarjetaCredito();
     }
+    
 }
