@@ -185,14 +185,14 @@
                                                     <% if (cli.getSegundo_nombre_array().get(j) == null && cli.getSegundo_apellido_array().get(j) == null) {%>
                                                     <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getPrimer_apellido_array().get(j)%></td>
                                                     <% } else if (cli.getSegundo_nombre_array().get(j) == null) {%>
-                                                        <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getPrimer_apellido_array().get(j) + " "
-                                                            + cli.getSegundo_apellido_array().get(j)%></td>
+                                                    <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getPrimer_apellido_array().get(j) + " "
+                                                                + cli.getSegundo_apellido_array().get(j)%></td>
                                                         <% } else if (cli.getSegundo_apellido_array().get(j) == null) {%>
-                                                        <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getSegundo_nombre_array().get(j) + " "
-                                                            + cli.getPrimer_apellido_array().get(j)%></td>
+                                                    <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getSegundo_nombre_array().get(j) + " "
+                                                                + cli.getPrimer_apellido_array().get(j)%></td>
                                                         <% } else {%>
-                                                        <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getSegundo_nombre_array().get(j) + " "
-                                                            + cli.getPrimer_apellido_array().get(j) + " " + cli.getSegundo_apellido_array().get(j)%></td>
+                                                    <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getSegundo_nombre_array().get(j) + " "
+                                                                + cli.getPrimer_apellido_array().get(j) + " " + cli.getSegundo_apellido_array().get(j)%></td>
                                                         <%} //end if %>
                                                 </tr>
                                                 <tr>
@@ -443,7 +443,8 @@
                                             <div class="md-form mb-5 amber-input active-amber-input">
                                                 <i class="fas fa-id-card prefix"></i>
                                                 <label for="nombre" data-error="wrong" data-success="right">Nombre en la tarjeta</label>
-                                                <input type="text" class="form-control validate" id="nombre"  name="nombre" required>
+                                                <input type="text" class="form-control validate mb-0" id="nombreTarCre"  name="nombreTarCre" required>
+                                                <small class="text-muted">Nombre completo en la parte de atras de la tarjeta</small>
                                                 <div class="invalid-feedback">
                                                     Nombre en la tarjeta es requerido
                                                 </div>
@@ -463,6 +464,7 @@
                                                         <input type="number" class="form-control validate" min="1" max="12" id="mes" name="mes" required>
                                                     </div>
                                                 </div>
+                                                <label class="my-auto">/</label>
                                                 <div class="col-2 col-md-2">
                                                     <div class="md-form mb-5 amber-input active-amber-input">
                                                         <label for="año" data-error="wrong" data-success="right">AA</label>
@@ -474,6 +476,7 @@
                                             <div class="modal-footer justify-content-center">
                                                 <button class="btn btn-warning waves-effect" type="submit">Registrar</button>
                                             </div>
+                                        </div>
                                     </form>
                                 </div>
                             </div>

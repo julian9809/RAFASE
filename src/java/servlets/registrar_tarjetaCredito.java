@@ -48,11 +48,11 @@ public class registrar_tarjetaCredito extends HttpServlet {
             
             String usuario = sesion.getAttribute("usuario").toString();
             String contraseña = sesion.getAttribute("contraseña").toString();
-            String nombre = request.getParameter("nombre");
+            String nombreTarCre = request.getParameter("nombreTarCre");
             Long numero = Long.valueOf(request.getParameter("numero"));
             String fecha = request.getParameter("mes") + "/" + request.getParameter("año");
             
-            tarCre.setNombreTitular(nombre);
+            tarCre.setNombreTitular(nombreTarCre);
             tarCre.setNumeroTarjeta(numero);
             tarCre.setFechaExp(fecha);
             try {

@@ -4,6 +4,9 @@
     Author     : julia
 --%>
 
+<%@page import="modelo.Carrito"%>
+<%@page import="modelo.Ciudad"%>
+<%@page import="control.DAOFacade"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
@@ -17,7 +20,7 @@
     }
 
     String usuario = sesion.getAttribute("usuario").toString();
-    
+
 %>
 <html>
     <head>
@@ -110,22 +113,302 @@
             </div>
         </nav>
         <!-------------------------------Contenido-------------------------------------->
-        <div class="container mt-5">
-            <div class="card">
-                <div class="card-header text-left">
-                    Tu carrito
-                </div>
-                <div class="card-body text-left">
-                    <h3>Contenido del carrito</h3>
-                    <hr class="my-2">
-                    <div class="text-right">
-                        <button type="button" class="btn btn-success">Pagar</button>
+        <%
+            DAOFacade facade = new DAOFacade();
+            Ciudad ciudadObj = facade.getCiudad();
+            try {
+                facade.buscarCiudades(sesion.getAttribute("usuario").toString(),
+                        sesion.getAttribute("contraseña").toString());
+            } catch (Exception e1) {
+        %>
+        <script type="text/javascript">
+            alertify.alert("Error", "<%= "Error --> " + e1 + e1.getMessage()%>", function () {
+                alertify.message('OK');
+            });
+        </script>
+        <%
+            }//End catch
+        %>
+        <div class="container-fluid mt-3">
+
+
+            <!--Section: Content-->
+            <section class="dark-grey-text">
+
+                <div class="card">
+                    <div class="card-body">
+
+                        <!--Grid row-->
+                        <div class="row">
+
+                            <!--Grid column-->
+                            <div class="col-lg-8">
+
+                                <!-- Pills navs -->
+                                <ul class="nav nav-pills nav-justified pills-primary font-weight-bold">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-toggle="tab" href="#tabCheckoutBilling" role="tab">1. Facturación</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#tabCheckoutPayment" role="tab">2. Metodo de pago</a>
+                                    </li>
+                                </ul>
+                                <!--Formulario con id para el pago, se coloca en los input el id del form-->
+                                <form id="pagar"></form>
+                                <!-- Pills panels -->
+                                <div class="tab-content pt-4">
+                                    <!--Panel 1-->
+                                    <div class="tab-pane fade in show active" id="tabCheckoutBilling" role="tabpanel">
+
+                                        <!--Card content-->
+
+                                        <!--Grid row-->
+                                        <div class="row">
+
+                                            <!--Grid column-->
+                                            <div class="col-md-6">
+
+                                                <!--firstName-->
+                                                <div class="md-form md-bg mt-0">
+                                                    <input type="text" class="form-control" name="nombre" id="nombre" form="pagar" required/>
+                                                    <label for="nombre">Nombre(s)</label>
+                                                </div>
+
+                                            </div>
+                                            <!--Grid column-->
+
+                                            <!--Grid column-->
+                                            <div class="col-md-6">
+
+                                                <!--lastName-->
+                                                <div class="md-form md-bg mt-0">
+                                                    <input type="text" class="form-control" name="apellido" id="apellido" form="pagar" required/>
+                                                    <label for="apellido">Apellido(s)</label>
+                                                </div>
+
+                                            </div>
+                                            <!--Grid column-->
+
+                                        </div>
+                                        <!--Grid row-->
+
+                                        <!--Username-->
+                                        <div class="md-form md-bg mt-0">
+                                            <input type="text" class="form-control" value="" name="username" id="username" form="pagar" required/>
+                                            <label for="username">Nombre de usuario</label>
+                                        </div>
+
+                                        <!--email-->
+                                        <div class="md-form md-bg">
+                                            <input type="email" class="form-control" value="" name="email" id="email" form="pagar" required/>
+                                            <label for="email">Correo Electronico</label>
+                                        </div>
+
+                                        <!--address-->
+                                        <div class="md-form md-bg">
+                                            <input type="text" id="direccion" name="direccion" class="form-control" form="pagar" required>
+                                            <label for="direccion">Dirección</label>
+                                        </div>
+                                        <!--Datos adicionales-->
+                                        <div class="md-form md-bg">
+                                            <textarea class="md-textarea form-control" maxlength="50" id="extras" name="extras" rows="2" form="pagar"></textarea>
+                                            <label for="extras">Datos adicionales</label>
+                                        </div>
+
+                                        <!--Grid row-->
+                                        <div class="row">
+
+                                            <!--Grid column-->
+                                            <div class="col-lg-6 col-md-6 mb-6">
+
+                                                <label for="country">Ciudad</label>
+                                                <select class="custom-select d-block" name="ciudad" id="ciudad" form="pagar" required>
+                                                    <option value="" selected hidden disabled>Escoge tu ciudad</option>
+                                                    <%
+                                                        for (int i = 0; i < ciudadObj.getId_ciudad_array().size(); i++) {
+                                                    %>
+                                                    <option value="<%= ciudadObj.getNombre_array().get(i)%>"><%= ciudadObj.getNombre_array().get(i)%></option>
+                                                    <%}//End for ciudad%>
+                                                </select>
+
+                                            </div>
+                                            <!--Grid column-->
+
+                                            <!--Grid column-->
+                                            <div class="col-lg-6 col-md-6 mb-6">
+
+                                                <label for="zip">Código postal</label>
+                                                <input type="text" class="form-control" id="zip" form="pagar" required>
+
+                                            </div>
+                                            <!--Grid column-->
+
+                                        </div>
+                                        <!--Grid row-->
+
+                                        <hr>
+
+                                        <div class="custom-control custom-checkbox mb-1">
+                                            <input type="checkbox" class="custom-control-input" id="chekboxRules" form="pagar" required>
+                                            <label class="custom-control-label" for="chekboxRules">Acepto los terminos y condiciones</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox mb-1">
+                                            <input type="checkbox" class="custom-control-input" id="safeTheInfo" form="pagar">
+                                            <label class="custom-control-label" for="safeTheInfo">Guardar esta información para una proxima vez</label>
+                                        </div>
+
+                                        <hr>
+                                    </div>
+                                    <!--/.Panel 1-->
+
+                                    <!--Panel 2-->
+                                    <div class="tab-pane fade" id="tabCheckoutPayment" role="tabpanel">
+
+                                        <div class="form-group">
+                                            <div class="custom-control custom-radio mb-2">
+                                                <input name="tipoPago" type="radio" class="custom-control-input" id="tipoPago1" value="C" form="pagar" required>
+                                                <label class="custom-control-label" for="tipoPago1">Tarjeta de Credito</label>
+                                            </div>
+                                            <div class="custom-control custom-radio mb-2">
+                                                <input name="tipoPago" type="radio" class="custom-control-input" id="tipoPago2" value="D" form="pagar" disabled required>
+                                                <label class="custom-control-label" for="tipoPago2">Tarjeta de Debito (Próximamente)</label>
+                                            </div>
+                                            <div class="custom-control custom-radio mb-2">
+                                                <input name="tipoPago" type="radio" class="custom-control-input" id="tipoPago3" value="P" form="pagar" disabled required>
+                                                <label class="custom-control-label" for="tipoPago3">Paypal (Próximamente)</label>
+                                            </div>
+                                            <div class="custom-control custom-radio mb-2">
+                                                <input name="tipoPago" type="radio" class="custom-control-input" id="tipoPago4" value="E" form="pagar" disabled required>
+                                                <label class="custom-control-label" for="tipoPago4">PSE (Próximamente)</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="md-form md-bg">
+                                                    <input type="text" class="form-control mb-0" id="nombreTarCre"  name="nombreTarCre" form="pagar" required>
+                                                    <label for="nombre">Nombre en la tarjeta</label>
+                                                    <small class="text-muted">Nombre completo en la parte de atras de la tarjeta</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="md-form md-bg">
+                                                    <input type="number" class="form-control" min="100000000000" max="999999999999" id="numero" name="numero" form="pagar" required>
+                                                    <label for="numero">Número de la tarjeta de credito</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-3 col-md-2">
+                                                <div class="md-form md-bg">
+                                                    <label for="mes" data-error="wrong" data-success="right">MM</label>
+                                                    <input type="number" class="form-control" min="1" max="12" id="mes" name="mes" form="pagar" required>
+                                                </div>
+                                            </div>
+                                            <label class="my-auto">/</label>
+                                            <div class="col-3 col-md-2">
+                                                <div class="md-form md-bg">
+                                                    <label for="año" data-error="wrong" data-success="right">AA</label>
+                                                    <input type="number" class="form-control" min="20" max="28" id="año" name="año" form="pagar" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-3 col-md-3">
+                                                <div class="md-form md-bg">
+                                                    <input type="text" class="form-control" id="CVV" form="pagar" required>
+                                                    <label for="CVV">CVV</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+
+                                    </div>
+                                    <!--/.Panel 2-->
+                                </div>
+                                <!-- Pills panels -->
+
+
+                            </div>
+                            <!--Grid column-->
+                            <%  
+                                Carrito carrito = facade.getCarrito();
+                                try {
+                                    facade.consultarCarrito(usuario, facade.buscarIdCiudad(usuario, sesion.getAttribute("contraseña").toString(), sesion.getAttribute("Ciudad").toString()));
+                            %>
+                            <!--Grid column-->
+                            <div class="col-lg-4 mb-4">
+
+                                <button class="btn btn-primary btn-lg btn-block" type="submit" form="pagar">Pagar</button>
+
+                                <!--Card-->
+                                <div class="card z-depth-0 border border-light rounded-0">
+
+                                    <!--Card content-->
+                                    <div class="card-body">
+                                        <h4 class="mb-4 mt-1 h5 text-center font-weight-bold">Summary</h4>
+
+                                        <hr>
+                                        <%
+                                            double total = 0;
+                                            for (int i = 0; i < carrito.getId_pedido_array().size(); i++) {
+                                        %>
+                                        <dl class="row">
+                                            <dd class="col-sm-6">
+                                                <%= carrito.getNombre_producto_array().get(i) %>
+                                            </dd>
+                                            <dd class="col-sm-2">
+                                                x<%= carrito.getCantidad_array().get(i) %>
+                                            </dd>
+                                            <dd class="col-sm-4">
+                                                $ <%= carrito.getPrecio_base_array().get(i) + (carrito.getPrecio_base_array().get(i) * carrito.getIva_array().get(i)) %>
+                                            </dd>
+                                        </dl>
+
+                                        <hr>
+                                        <%
+                                            total = total + (carrito.getCantidad_array().get(i)*(carrito.getPrecio_base_array().get(i) + (carrito.getPrecio_base_array().get(i) * carrito.getIva_array().get(i))));
+                                            }//End for carrito
+                                        %>
+                                        
+                                        <dl class="row">
+                                            <dt class="col-sm-8">
+                                                Total
+                                            </dt>
+                                            <dt class="col-sm-4">
+                                                $ <%= total %>
+                                            </dt>
+                                        </dl>
+                                    </div>
+
+                                </div>
+                                <!--/.Card-->
+
+
+
+                            </div>
+                            <!--Grid column-->
+                            <%
+                            } catch (Exception e1) {
+                            %>
+                            <script  type = "text/javascript">
+                                alertify.alert("Error", "<%= "Error-- > " + e1 + e1.getMessage()%>", function () {
+                                    alertify.message('OK');
+                                });
+                            </script>
+                            <%
+                                } finally {
+
+                                }//End catch
+                            %>
+                        </div>
+                        <!--Grid row-->
+
                     </div>
                 </div>
-                <div class="card-footer text-center text-muted">
-                    Tu carrito esta disponible hasta...
-                </div>
-            </div>
+
+            </section>
+            <!--Section: Content-->
+
+
         </div>
         <!--------------------------------FOOTER--------------------------------->
         <footer class="footer">
