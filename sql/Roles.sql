@@ -15,7 +15,7 @@ create temporary tablespace RAFASE_usuariosTemp tempfile 'C:\oraclexe\app\oracle
 create role administradorBD;
 grant create session to administradorBD with admin option;
 grant create any table to administradorBD;
-grant create any view to administradorBD;
+grant create any view to administradorBD with admin option;
 grant create role to administradorBD;
 grant create user to administradorBD;
 grant create public synonym to administradorBD;
@@ -85,6 +85,7 @@ grant select on usur to usuarioGeneral;
 
 create role cliente;
 grant create session to cliente;
+grant create any view to cliente;
 grant select on prod to cliente;
 grant select on categ to cliente;
 grant select on ciu to cliente;
