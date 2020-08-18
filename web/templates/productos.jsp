@@ -398,7 +398,7 @@
         <% }//End if isVisitante %>        
     </body>
     <!--------------------------------FOOTER--------------------------------->
-    <footer class="page-footer text-center font-small primary-color-dark darken-2 mt-4 wow fadeIn">
+    <footer class="page-footer text-center font-small info-color-dark darken-2 mt-4 wow fadeIn">
         <div class="footer-copyright py-3">
             <p class="float-right"><a href="#">Volver al arriba</a></p>
             <p>&copy; 2020 RAFASE, Inc. &middot; <a href="#">Privacidad</a> &middot; <a href="#">Términos y Condiciones</a></p>
