@@ -13,7 +13,7 @@
     HttpSession sesion = request.getSession();
     DAOFacade facade = new DAOFacade();
     Ciudad ciudad = facade.getCiudad();
-    
+
     if (sesion.getAttribute("usuario") == null) {
         facade.realizarConexion();
         sesion.setAttribute("usuario", "visitante");
@@ -80,11 +80,13 @@
                     facade.buscarCiudades(sesion.getAttribute("usuario").toString(),
                             sesion.getAttribute("contraseña").toString());
                 } catch (Exception e1) {
+                    String error = e1.toString();
+                    error = error.replaceAll("\n", "");
             %>
             <script type="text/javascript">
-                        alertify.alert("Error", "<%= "Error --> " + e1 + e1.getMessage()%>", function () {
-                            alertify.message('OK');
-                        });
+                alertify.alert("Error", "<%= "Error --> " + error %>", function () {
+                    alertify.message('OK');
+                });
             </script>
             <%
                 }//End catch

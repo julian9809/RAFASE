@@ -120,9 +120,11 @@
                 facade.buscarCiudades(sesion.getAttribute("usuario").toString(),
                         sesion.getAttribute("contraseña").toString());
             } catch (Exception e1) {
+                String error = e1.toString();
+                error = error.replaceAll("\n", "");
         %>
         <script type="text/javascript">
-            alertify.alert("Error", "<%= "Error --> " + e1 + e1.getMessage()%>", function () {
+            alertify.alert("Error", "<%= "Error --> " + error%>", function () {
                 alertify.message('OK');
             });
         </script>
@@ -353,28 +355,28 @@
                                         %>
                                         <dl class="row">
                                             <dd class="col-sm-6">
-                                                <%= carrito.getNombre_producto_array().get(i) %>
+                                                <%= carrito.getNombre_producto_array().get(i)%>
                                             </dd>
                                             <dd class="col-sm-2">
-                                                x<%= carrito.getCantidad_array().get(i) %>
+                                                x<%= carrito.getCantidad_array().get(i)%>
                                             </dd>
                                             <dd class="col-sm-4">
-                                                $ <%= carrito.getPrecio_base_array().get(i) + (carrito.getPrecio_base_array().get(i) * carrito.getIva_array().get(i)) %>
+                                                $ <%= carrito.getPrecio_base_array().get(i) + (carrito.getPrecio_base_array().get(i) * carrito.getIva_array().get(i))%>
                                             </dd>
                                         </dl>
 
                                         <hr>
                                         <%
-                                            total = total + (carrito.getCantidad_array().get(i)*(carrito.getPrecio_base_array().get(i) + (carrito.getPrecio_base_array().get(i) * carrito.getIva_array().get(i))));
+                                                total = total + (carrito.getCantidad_array().get(i) * (carrito.getPrecio_base_array().get(i) + (carrito.getPrecio_base_array().get(i) * carrito.getIva_array().get(i))));
                                             }//End for carrito
                                         %>
-                                        
+
                                         <dl class="row">
                                             <dt class="col-sm-8">
                                                 Total
                                             </dt>
                                             <dt class="col-sm-4">
-                                                $ <%= total %>
+                                                $ <%= total%>
                                             </dt>
                                         </dl>
                                     </div>
@@ -388,9 +390,11 @@
                             <!--Grid column-->
                             <%
                             } catch (Exception e1) {
+                                String error = e1.toString();
+                                error = error.replaceAll("\n", "");
                             %>
                             <script  type = "text/javascript">
-                                alertify.alert("Error", "<%= "Error-- > " + e1 + e1.getMessage()%>", function () {
+                                alertify.alert("Error", "<%= "Error-- > " + error %>", function () {
                                     alertify.message('OK');
                                 });
                             </script>
