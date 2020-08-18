@@ -79,7 +79,7 @@ public class registro_user extends HttpServlet {
             if (!facade.buscarExisteCliente(sesion.getAttribute("usuario")
                     .toString(), sesion.getAttribute("contraseña").toString(),
                     username)) {
-                
+
                 Cliente cli = facade.getCliente();
                 cli.setPrimer_nombre(primerNombre);
                 cli.setSegundo_nombre(segundoNombre);
@@ -93,21 +93,44 @@ public class registro_user extends HttpServlet {
                 cli.setFecha_nacimiento((Date.valueOf(fecha_nacimiento)));
                 cli.setPassword(password);
 
-                facade.crearUsuario();
+                //Conectarse como admin para crear usuario
+                facade.cerrarConexion();
+                facade.setearAdminDB();
+                if (facade.realizarConexion()) {
+                    //Crear usuario y carritos con AdminDB
+                    facade.crearUsuario();
 
-                sesion.setAttribute("usuario", username);
-                sesion.setAttribute("contraseña", password);
-
-                Ciudad ciudad = facade.getCiudad();
-                facade.buscarCiudades(username, password);
-
-                //Se crea un carrito para todas la ciudades
-                for (int i = 0; i < ciudad.getId_ciudad_array().size(); i++) {
-                    facade.crearCarrito(username, cli.getId_cedula(),
-                            ciudad.getId_ciudad_array().get(i));
+                    //Cierra conexión y setea los datos del usuario
+                    facade.cerrarConexion();
+                    facade.nombreUsuario(username);
+                    facade.passwordUsuario(password);
+                    if (facade.realizarConexion()) {
+                        Ciudad ciudad = facade.getCiudad();
+                        facade.buscarCiudades(username, password);
+                        //Se crea un carrito para todas la ciudades
+                        for (int i = 0; i < ciudad.getId_ciudad_array().size(); i++) {
+                            facade.crearCarrito(username, cli.getId_cedula(),
+                                    ciudad.getId_ciudad_array().get(i));
+                        }
+                        
+                        sesion.setAttribute("usuario", username);
+                        sesion.setAttribute("contraseña", password);
+                        response.sendRedirect("templates/index.jsp");
+                    } else {
+                        facade.cerrarConexion();
+                        facade.nombreUsuario("visitante");
+                        facade.passwordUsuario("abc123");
+                        facade.realizarConexion();
+                        response.sendRedirect("templates/index.jsp");
+                    }
+                } else {
+                    facade.cerrarConexion();
+                    facade.nombreUsuario("visitante");
+                    facade.passwordUsuario("abc123");
+                    facade.realizarConexion();
+                    response.sendRedirect("templates/index.jsp");
                 }
 
-                response.sendRedirect("templates/index.jsp");
             } else {
                 response.sendRedirect("templates/registro_user.jsp?e=1");
             }

@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import control.DAOFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -36,13 +37,28 @@ public class cerrarSesion extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             HttpSession sesion = request.getSession();
-            
-            sesion.setAttribute("usuario","visitante");
-            sesion.setAttribute("contraseña","abc123");
-            
-            response.sendRedirect("templates/index.jsp");
-            
-            
+
+            DAOFacade facade = new DAOFacade();
+            /*Cierra sesión y conecta como visitante, si falla
+                lo vuelve a intentar*/
+            facade.cerrarConexion();
+            facade.nombreUsuario("visitante");
+            facade.passwordUsuario("abc123");
+            if (facade.realizarConexion()) {
+                sesion.setAttribute("usuario", "visitante");
+                sesion.setAttribute("contraseña", "abc123");
+                response.sendRedirect("templates/index.jsp");
+            } else {
+                facade.cerrarConexion();
+                facade.nombreUsuario("visitante");
+                facade.passwordUsuario("abc123");
+                facade.realizarConexion();
+
+                sesion.setAttribute("usuario", "visitante");
+                sesion.setAttribute("contraseña", "abc123");
+                response.sendRedirect("templates/index.jsp");
+            }
+
         }
     }
 
