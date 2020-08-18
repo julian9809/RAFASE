@@ -157,7 +157,7 @@
                         <!-- Grid column -->
                         <div class="col-lg-4 col-md-6 mb-4">
 
-                            <form id="agregar_producto_<%= inventarioRafase.getProducto().getId_producto_array().get(i) %>" method="post" action = "../AgregarProducto">
+                            <form id="agregar_producto_<%= inventarioRafase.getProducto().getId_producto_array().get(i)%>" method="post" action = "../AgregarProducto">
                                 <!-- Card -->
                                 <div class="card card-cascade">
                                     <!-- Card image -->
@@ -201,9 +201,9 @@
                                                 <!--Entradas escondidad-->
                                                 <input type="hidden" name = "id_producto" id="id_producto" value=<%= inventarioRafase.getProducto().getId_producto_array().get(i)%>>
                                                 <input type="hidden" name = "busqueda" id="busqueda" value=<%= producto_buscado%>>
-                                                <input type="hidden" name = "categoria" id="categoria" value=<%= categoria %>>
+                                                <input type="hidden" name = "categoria" id="categoria" value=<%= categoria%>>
                                                 <!--Entradas escondidad-->
-                                                <button class="btn btn-success btn-sm my-auto btnRedondo" type="submit" form="agregar_producto_<%= inventarioRafase.getProducto().getId_producto_array().get(i) %>" title="Añadir al carrito">
+                                                <button class="btn btn-success btn-sm my-auto btnRedondo" type="submit" form="agregar_producto_<%= inventarioRafase.getProducto().getId_producto_array().get(i)%>" title="Añadir al carrito">
                                                     <i class="fas fa-cart-arrow-down fa-2x"></i>
                                                 </button>
                                             </div>
@@ -395,11 +395,13 @@
                 </div>
             </div>
         </div>
-        <% }//End if isVisitante %>
-        <!--------------------------------FOOTER--------------------------------->
-        <footer class="container footer">
+        <% }//End if isVisitante %>        
+    </body>
+    <!--------------------------------FOOTER--------------------------------->
+    <footer class="page-footer text-center font-small primary-color-dark darken-2 mt-4 wow fadeIn">
+        <div class="footer-copyright py-3">
             <p class="float-right"><a href="#">Volver al arriba</a></p>
             <p>&copy; 2020 RAFASE, Inc. &middot; <a href="#">Privacidad</a> &middot; <a href="#">Términos y Condiciones</a></p>
-        </footer>
-    </body>
+        </div>
+    </footer>
 </html>

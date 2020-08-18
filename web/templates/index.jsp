@@ -70,7 +70,7 @@
                         <a class="nav-link" href="pago.jsp">Ir a Pagar<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Control</a>
+                        <a class="nav-link" href="admon.jsp">Control</a>
                     </li>
                 </ul>
                 <form action="../BuscarProducto" method="post" class="form-inline my-2 my-lg-0 ml-auto">
