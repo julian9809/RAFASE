@@ -72,7 +72,6 @@ public class PagoDAO {
                             
                             String strSQLTRES = obtenerSentenciaFactura(pedido_id);
                             ServiceLocator.getInstance().tomarConexion();
-                            System.out.println(strSQLTRES);
                             try (PreparedStatement prepStmtTRES = conexion.prepareStatement(strSQLTRES)) {
                                 prepStmtTRES.executeUpdate();
                             }
