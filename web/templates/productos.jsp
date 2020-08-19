@@ -327,7 +327,6 @@
                             <tbody>
                                 <!-- First row -->
                                 <%
-                                    double total = 0;
                                     for (int i = 0; i < carrito.getId_pedido_array().size(); i++) {
                                 %>
                                 <tr>
@@ -359,7 +358,6 @@
                                 </tr>
                                 <!-- /.First row -->
                                 <%
-                                        total = total + (carrito.getCantidad_array().get(i) * (carrito.getPrecio_base_array().get(i) + (carrito.getPrecio_base_array().get(i) * carrito.getIva_array().get(i))));
                                     }//End for carrito
                                 %>
                             </tbody>
@@ -374,7 +372,7 @@
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Volver</button>
                         <div class="ml-auto">
                             <h4 class="font-weight-bold">
-                                Total: $<%= total%>
+                                Total: $<%= facade.obtenerTotalPedido(carrito.getId_pedido_array().get(0)) %>
                             </h4>
                         </div>
                         <a type="button" class="float-right btn btn-success" href="pago.jsp">Pagar

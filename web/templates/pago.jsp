@@ -350,7 +350,6 @@
 
                                         <hr>
                                         <%
-                                            double total = 0;
                                             for (int i = 0; i < carrito.getId_pedido_array().size(); i++) {
                                         %>
                                         <dl class="row">
@@ -367,7 +366,6 @@
 
                                         <hr>
                                         <%
-                                                total = total + (carrito.getCantidad_array().get(i) * (carrito.getPrecio_base_array().get(i) + (carrito.getPrecio_base_array().get(i) * carrito.getIva_array().get(i))));
                                             }//End for carrito
                                         %>
 
@@ -376,7 +374,7 @@
                                                 Total
                                             </dt>
                                             <dt class="col-sm-4">
-                                                $ <%= total%>
+                                                $ <%= facade.obtenerTotalPedido(carrito.getId_pedido_array().get(0)) %>
                                             </dt>
                                         </dl>
                                     </div>
