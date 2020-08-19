@@ -342,9 +342,9 @@
                                     <td class="font-weight-bold">$<%= carrito.getCantidad_array().get(i) * (carrito.getPrecio_base_array().get(i) + (carrito.getPrecio_base_array().get(i) * carrito.getIva_array().get(i)))%>
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-sm btn-primary btnRedondo" data-toggle="tooltip" data-placement="top"
-                                                title="Remove item">X
-                                        </button>
+                                        <a type="button" class="btn btn-sm btn-danger btnRedondo" data-toggle="tooltip" data-placement="top" title="Remove item" href="../AgregarProducto?cantidadQuitar=<%= carrito.getCantidad_array().get(i)%>&id_producto=<%= carrito.getId_producto_array().get(i)%>&id_pedido=<%= carrito.getId_pedido_array().get(i)%>">
+                                            -
+                                        </a>
                                     </td>
                                 </tr>
                                 <!-- /.First row -->

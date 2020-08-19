@@ -77,6 +77,29 @@ public class ProductosDAO {
             ServiceLocator.getInstance().liberarConexion();
         }
     }
+    
+    public void quitarProducto(long id_producto, long id_pedido, long cantidad) throws CaException {
+        try {
+            String strSQL;
+            if (cantidad == 1) {
+                strSQL = "DELETE FROM DEPE WHERE DEPE.ID_PRODUCTO = ? AND DEPE.ID_PEDIDO = ?";
+            } else {
+                strSQL = "UPDATE DEPE SET DEPE.CANTIDAD = " + (cantidad-1) + " WHERE DEPE.ID_PRODUCTO = ? AND DEPE.ID_PEDIDO = ?";
+            }
+            
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
+                prepStmt.setLong(1, id_producto);
+                prepStmt.setLong(2, id_pedido);
+                prepStmt.executeUpdate();
+                ServiceLocator.getInstance().commit();
+            }
+        } catch (SQLException e) {
+            throw new CaException("productoDAO", "No se pudo realizar la busqueda" + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance().liberarConexion();
+        }
+    }
 
     public Producto getProducto() {
         return producto;
