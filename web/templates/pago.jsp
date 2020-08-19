@@ -4,6 +4,8 @@
     Author     : julia
 --%>
 
+<%@page import="modelo.TarjetaCredito"%>
+<%@page import="modelo.Telefono"%>
 <%@page import="modelo.Cliente"%>
 <%@page import="modelo.Direccion"%>
 <%@page import="modelo.Carrito"%>
@@ -107,8 +109,12 @@
                         <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="rounded-circle z-depth-0"
                              alt="avatar image" height="35"> <%=usuario%> </a>
                     <div class="dropdown-menu dropdown-menu-left dropdown-menu-lg-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+                        <%if (usuario.equals("RAFASEadmin")) {%>
+                        <a class="dropdown-item" href="../cerrarSesion?usuario=visitante">Cerrar sesión</a>
+                        <%} else {%>
                         <a class="dropdown-item" href="perfil_user.jsp">Mi cuenta</a>
                         <a class="dropdown-item" href="../cerrarSesion?usuario=visitante">Cerrar sesión</a>
+                        <%} //end if %>
                     </div>
                 </div>
                 <%}//End If visitante%>
@@ -120,14 +126,18 @@
             Ciudad ciudadObj = facade.getCiudad();
             Cliente cliente = facade.getCliente();
             Direccion dir = facade.getDireccion();
+            Telefono telefono = facade.getTelefono();
+            TarjetaCredito tarCre = facade.getTarjetaCredito();
             try {
                 long idCliente = facade.buscarIdCliente(usuario, "");
                 String tipoId = facade.buscarTipoID(usuario, "");
-                
+
                 facade.buscarCiudades(sesion.getAttribute("usuario").toString(),
                         sesion.getAttribute("contraseña").toString());
                 facade.buscarDatosCliente(usuario, "", idCliente);
                 facade.buscarDirecciones(usuario, "", tipoId, idCliente);
+                facade.buscarTelefono(usuario, "", idCliente);
+                facade.buscarTarjetaCredito(usuario, "", idCliente);
             } catch (Exception e1) {
                 String error = e1.toString();
                 error = error.replaceAll("\n", "");
@@ -172,7 +182,8 @@
                                     <div class="tab-pane fade in show active" id="tabCheckoutBilling" role="tabpanel">
 
                                         <!--Card content-->
-
+                                        <h1 class="font-weight-bold text-center mb-4 pb-2">Datos quien recibe el pedido</h1>
+                                        
                                         <!--Grid row-->
                                         <div class="row">
 
@@ -190,7 +201,6 @@
 
                                             <!--Grid column-->
                                             <div class="col-md-6">
-
                                                 <!--lastName-->
                                                 <div class="md-form md-bg mt-0">
                                                     <input type="text" class="form-control" name="apellido" id="apellido" form="pagar" required/>
@@ -202,18 +212,6 @@
 
                                         </div>
                                         <!--Grid row-->
-
-                                        <!--Username-->
-                                        <div class="md-form md-bg mt-0">
-                                            <input type="text" class="form-control" value="" name="username" id="username" form="pagar" required/>
-                                            <label for="username">Nombre de usuario</label>
-                                        </div>
-
-                                        <!--email-->
-                                        <div class="md-form md-bg">
-                                            <input type="email" class="form-control" value="" name="email" id="email" form="pagar" required/>
-                                            <label for="email">Correo Electronico</label>
-                                        </div>
 
                                         <!--address-->
                                         <%
@@ -238,11 +236,35 @@
                                             <%
                                                 for (int i = 0; i < dir.getDireccion_completa_array().size(); i++) {
                                             %>
-                                            <option value="<%= dir.getDireccion_completa_array().get(i)%>"><%= dir.getDireccion_completa_array().get(i)%></option>
-                                            <%}//End for ciudad%>
+                                            <option value="<%= dir.getDireccion_completa_array().get(i)%>"><%= dir.getDireccion_completa_array().get(i) + " " + dir.getExtras_array().get(0)%><input id="extras" value="<%= dir.getExtras_array().get(0)%>" hidden></option>
+                                            <%}//End for direcciones%>
                                         </select>
                                         <%
                                             }//End if hay direcciones
+                                        %>
+
+                                        <!--Telefono-->
+                                        <%
+                                            if (telefono.getNumeroTelefonoArray().isEmpty()) {
+                                        %>
+                                        <div class="md-form md-bg">
+                                            <input type="text" id="telefono" name="telefono" class="form-control" form="pagar" required>
+                                            <label for="telefono">Telefono de contacto</label>
+                                        </div>
+                                        <%
+                                        } else {
+                                        %>
+                                        <label for="telefono">Telefono de contacto</label>
+                                        <select class="custom-select d-block mb-3" name="telefono" id="telefono" form="pagar" required>
+                                            <option value="" selected hidden disabled>Escoge tu telefono</option>
+                                            <%
+                                                for (int i = 0; i < telefono.getNumeroTelefonoArray().size(); i++) {
+                                            %>
+                                            <option value="<%= telefono.getNumeroTelefonoArray().get(i)%>"><%= telefono.getNumeroTelefonoArray().get(i)%></option>
+                                            <%}//End for telefono%>
+                                        </select>
+                                        <%
+                                            }//End if hay telefono
                                         %>
 
                                         <!--Grid row-->
@@ -319,10 +341,28 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
+                                                <%
+                                                    if (tarCre.getNumeroTarjetaArray().isEmpty()) {
+                                                %>
                                                 <div class="md-form md-bg">
                                                     <input type="number" class="form-control" min="100000000000" max="999999999999" id="numeroTarCre" name="numeroTarCre" form="pagar" required>
                                                     <label for="numeroTarCre">Número de la tarjeta de credito</label>
                                                 </div>
+                                                <%
+                                                } else {
+                                                %>
+                                                <label for="numeroTarCre">Número de la tarjeta de credito</label>
+                                                <select class="custom-select d-block mb-3" name="numeroTarCre" id="numeroTarCre" form="pagar" required>
+                                                    <option value="" selected hidden disabled>Escoge tu tarjeta de credito</option>
+                                                    <%
+                                                        for (int i = 0; i < tarCre.getNumeroTarjetaArray().size(); i++) {
+                                                    %>
+                                                    <option value="<%= tarCre.getNumeroTarjetaArray().get(i)%>"><%= tarCre.getNumeroTarjetaArray().get(i)%></option>
+                                                    <%}//End for tarjeta credito%>
+                                                </select>
+                                                <%
+                                                    }//End if hay tarjeta credito
+                                                %>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -357,7 +397,7 @@
 
                             </div>
                             <!--Grid column-->
-                            <%  
+                            <%
                                 Carrito carrito = facade.getCarrito();
 
                                 try {
@@ -437,7 +477,7 @@
                                 } finally {
 
                                 }//End catch
-                            %>
+%>
                         </div>
                         <!--Grid row-->
 
