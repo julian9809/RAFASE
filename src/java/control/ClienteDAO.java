@@ -100,7 +100,26 @@ public class ClienteDAO {
             ServiceLocator.getInstance().liberarConexion();
         }
     }
-
+    
+    public void buscarDirecciones(String usuario, String password, String tipo, long cedula) throws CaException {
+        try {
+            String strSQL = "SELECT DIRECCION_COMPLETA,EXTRAS FROM DIR, USUR WHERE DIR.ID_CEDULA = USUR.ID_CEDULA AND DIR.TIPO_ID = USUR.TIPO_ID AND USUR.ID_CEDULA = ?";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
+                prepStmt.setLong(1, cedula);
+                ResultSet rs = prepStmt.executeQuery();
+                while (rs.next()) {
+                    direccion.getDireccion_completa_array().add(rs.getString(1));
+                    direccion.getExtras_array().add(rs.getString(2));
+                }
+            }
+        } catch (SQLException e) {
+            throw new CaException("ClienteDAO", "No se pudo realizar la busqueda" + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance().liberarConexion();
+        }
+    }
+    
     public void buscarDireccionResidencia(String usuario, String password, String tipo, long cedula) throws CaException {
         try {
             String strSQL = "SELECT DIRECCION_COMPLETA,EXTRAS FROM DIR, USUR WHERE DIR.ID_CEDULA = USUR.ID_CEDULA AND DIR.TIPO_ID = USUR.TIPO_ID AND USUR.ID_CEDULA = ? AND DIR.TIPO_DIRECCION = 'R'";

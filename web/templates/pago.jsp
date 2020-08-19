@@ -4,6 +4,8 @@
     Author     : julia
 --%>
 
+<%@page import="modelo.Cliente"%>
+<%@page import="modelo.Direccion"%>
 <%@page import="modelo.Carrito"%>
 <%@page import="modelo.Ciudad"%>
 <%@page import="control.DAOFacade"%>
@@ -116,9 +118,16 @@
         <%
             DAOFacade facade = new DAOFacade();
             Ciudad ciudadObj = facade.getCiudad();
+            Cliente cliente = facade.getCliente();
+            Direccion dir = facade.getDireccion();
             try {
+                long idCliente = facade.buscarIdCliente(usuario, "");
+                String tipoId = facade.buscarTipoID(usuario, "");
+                
                 facade.buscarCiudades(sesion.getAttribute("usuario").toString(),
                         sesion.getAttribute("contraseña").toString());
+                facade.buscarDatosCliente(usuario, "", idCliente);
+                facade.buscarDirecciones(usuario, "", tipoId, idCliente);
             } catch (Exception e1) {
                 String error = e1.toString();
                 error = error.replaceAll("\n", "");
@@ -207,15 +216,34 @@
                                         </div>
 
                                         <!--address-->
+                                        <%
+                                            if (dir.getDireccion_completa_array().isEmpty()) {
+                                        %>
                                         <div class="md-form md-bg">
                                             <input type="text" id="direccion" name="direccion" class="form-control" form="pagar" required>
-                                            <label for="direccion">Dirección</label>
+                                            <label for="direccion">Dirección para el envio</label>
                                         </div>
+
                                         <!--Datos adicionales-->
                                         <div class="md-form md-bg">
                                             <textarea class="md-textarea form-control" maxlength="50" id="extras" name="extras" rows="2" form="pagar"></textarea>
                                             <label for="extras">Datos adicionales</label>
                                         </div>
+                                        <%
+                                        } else {
+                                        %>
+                                        <label for="direccion">Dirección</label>
+                                        <select class="custom-select d-block mb-3" name="direccion" id="direccion" form="pagar" required>
+                                            <option value="" selected hidden disabled>Escoge tu dirección para el envio</option>
+                                            <%
+                                                for (int i = 0; i < dir.getDireccion_completa_array().size(); i++) {
+                                            %>
+                                            <option value="<%= dir.getDireccion_completa_array().get(i)%>"><%= dir.getDireccion_completa_array().get(i)%></option>
+                                            <%}//End for ciudad%>
+                                        </select>
+                                        <%
+                                            }//End if hay direcciones
+                                        %>
 
                                         <!--Grid row-->
                                         <div class="row">
@@ -227,7 +255,9 @@
                                                 <select class="custom-select d-block" name="ciudadEnv" id="ciudadEnv" form="pagar" required>
                                                     <option value="" selected hidden disabled>Escoge tu ciudad</option>
                                                     <%
-                                                        for (int i = 0; i < ciudadObj.getId_ciudad_array().size(); i++) {
+                                                        for (int i = 0;
+                                                                i < ciudadObj.getId_ciudad_array()
+                                                                        .size(); i++) {
                                                     %>
                                                     <option value="<%= ciudadObj.getNombre_array().get(i)%>"><%= ciudadObj.getNombre_array().get(i)%></option>
                                                     <%}//End for ciudad%>
@@ -329,6 +359,7 @@
                             <!--Grid column-->
                             <%  
                                 Carrito carrito = facade.getCarrito();
+
                                 try {
                                     facade.consultarCarrito(usuario, facade.buscarIdCiudad(usuario, sesion.getAttribute("contraseña").toString(), sesion.getAttribute("Ciudad").toString()));
                             %>
@@ -371,9 +402,9 @@
                                             </dt>
                                             <dt class="col-sm-4">
                                                 $ <%
-                                                    if(!carrito.getId_pedido_array().isEmpty()){
+                                                    if (!carrito.getId_pedido_array().isEmpty()) {
                                                         out.print(facade.obtenerTotalPedido(carrito.getId_pedido_array().get(0)));
-                                                    }else{
+                                                    } else {
                                                         out.print("0");
                                                     }
                                                 %>
@@ -394,9 +425,13 @@
                                 error = error.replaceAll("\n", "");
                             %>
                             <script  type = "text/javascript">
-                                alertify.alert("Error", "<%= "Error-- > " + error%>", function () {
-                                    alertify.message('OK');
-                                });
+                                alertify.alert("Error", "<%= "Error --> " + error%>", function () {
+                                    alertify.error('Acceso denegado');
+                                }).set({onshow: null, onclose: function () {
+                                        setTimeout(() => {
+                                            window.location = 'index.jsp';
+                                        }, 1000);
+                                    }});
                             </script>
                             <%
                                 } finally {
