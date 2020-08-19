@@ -263,6 +263,23 @@ public class PedidoDAO {
             ServiceLocator.getInstance().liberarConexion();
         }
     }
+    
+   public void actualizarEstadoPedido(String usuario, long pedido_id, float total_pedido) throws CaException {
+        try {
+            String strSQL = "UPDATE PED SET ESTADO_PEDIDO = 'PP', TOTAL_PEDIDO = ? WHERE ID_PEDIDO = ?";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
+                prepStmt.setFloat(1, total_pedido);
+                prepStmt.setLong(2, pedido_id);
+                prepStmt.executeUpdate();
+            }
+            ServiceLocator.getInstance().commit();
+        } catch (SQLException e) {
+            throw new CaException("PedidoDAO", "No se pudo actualizar el estado del pedido\n" + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance().liberarConexion();
+        }
+    }
 
     public Pedido getPedido() {
         return pedido;

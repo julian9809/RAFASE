@@ -31,6 +31,7 @@ public class DAOFacade {
     private PedidoDAO pedidoDAO;
     private ProductosDAO productosDAO;
     private AdmonDAO admonDAO;
+    private PagoDAO pagoDAO;
 
     public DAOFacade() {
         ciudadDAO = new CiudadDAO();
@@ -38,6 +39,7 @@ public class DAOFacade {
         pedidoDAO = new PedidoDAO();
         admonDAO = new AdmonDAO();
         productosDAO = new ProductosDAO();
+        pagoDAO = new PagoDAO();
     }
     
     //-----------------------Conexión ServiceLocator----------------------------
@@ -139,6 +141,11 @@ public class DAOFacade {
         return clienteDAO.buscarTipoID(usuario, password);
     }
     
+    //---------------------------------PagoDAO----------------------------------
+    
+    public double obtenerTotalPedido(String usuario, long pedido_id) throws CaException {
+        return pagoDAO.obtenerTotalPedido(usuario, pedido_id);
+    }
     //---------------------------------PedidoDAO--------------------------------
     public void consultarPedido(String usuario, long usuario_id) throws CaException{
         pedidoDAO.consultarPedido(usuario, usuario_id);
@@ -178,6 +185,10 @@ public class DAOFacade {
 
     public void actualizarCantidad(long id_pedido, long id_producto, long cantidad) throws CaException{
         pedidoDAO.actualizarCantidad(id_pedido, id_producto, cantidad);
+    }
+    
+    public void actualizarEstadoPedido(String usuario, long pedido_id, float total_pedido) throws CaException {
+        pedidoDAO.actualizarEstadoPedido(usuario, pedido_id, total_pedido);
     }
     
     //-------------------------------ProductoDAO--------------------------------
