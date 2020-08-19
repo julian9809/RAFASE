@@ -158,14 +158,16 @@
                 <div class="list-group list-group-flush" id="list-tab" role="tablist">
                     <a href="" onclick="statistics()" class="list-group-item waves-effect list-group-item-action" data-toggle="list" role="tab">
                         <i class="fas fa-chart-pie mr-3"></i>Estadísticas</a>
-                    <a href="" onclick="perfil()" class="list-group-item waves-effect list-group-item-action" data-toggle="list" role="tab">
-                        <i class="fas fa-user mr-3"></i>Perfil de administrador</a>
+                    <a href="" onclick="clientes()" class="list-group-item list-group-item-action waves-effect list-group-item-action" data-toggle="list" role="tab">
+                        <i class="fas fa-users mr-3"></i>Clientes</a>
                     <a href="" onclick="proveedores()" class="list-group-item list-group-item-action waves-effect list-group-item-action" data-toggle="list" role="tab">
                         <i class="fas fa-shipping-fast mr-3"></i>Proveedores</a>
                     <a href="" onclick="stock()" class="list-group-item list-group-item-action waves-effect list-group-item-action" data-toggle="list" role="tab">
                         <i class="fas fa-clipboard-list mr-3"></i>Stock</a>
-                    <a href="" class="list-group-item list-group-item-action waves-effect list-group-item-action" data-toggle="list" role="tab">
+                    <a href="" onclick="sucursales()" class="list-group-item list-group-item-action waves-effect list-group-item-action" data-toggle="list" role="tab">
                         <i class="fas fa-map mr-3"></i>Sucursales</a>
+                    <a href="" onclick="perfil()" class="list-group-item waves-effect list-group-item-action" data-toggle="list" role="tab">
+                        <i class="fas fa-user mr-3"></i>Perfil de administrador</a>
                 </div>
 
             </div>
@@ -551,6 +553,16 @@
                 </div>
             </div>
             <!-- modal proveedores -->
+            
+            <!--Clientes-->
+            <div class="container-fluid mt-5 py-lg-5" id="clientes">
+                <div class="card">
+                    <div class="card-header warning-color white-text">
+                        Clientes
+                    </div>
+                </div>
+            </div>
+            <!--Clientes-->
 
             <!--Stock-->
             <div class="container-fluid mt-5 py-lg-5" id="stock">
@@ -602,6 +614,27 @@
             </div>
             <!--Stock-->
 
+            <!--Sucursales-->
+            <div class="container-fluid mt-5 py-lg-5" id="sucursales">
+                <div class="card">
+                    <!-- Card header -->
+                    <div class="card-header info-color white-text">Nuestra sede pricipal</div>
+
+                    <!--Card content-->
+                    <div class="card-body">
+                        <!--Google map-->
+                        <div id="map-container-google-2" class="z-depth-1-half map-container" style="height: 500px">
+                            <iframe src="https://maps.google.com/maps?q=bogota&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
+                                    style="border:0" allowfullscreen></iframe>
+                        </div>
+
+                        <!--Google Maps-->
+
+                    </div>
+                </div>
+            </div>
+            <!--Sucursales-->
+
 
         </main>
         <!--Main layout-->
@@ -631,9 +664,13 @@
             $("#perfil").hide();
             $("#statistics").hide();
             $("#stock").hide();
+            $("#sucursales").hide();
+            $("#clientes").hide();
 
             function statistics() {
                 if ($("#statistics").is(":hidden")) {
+                    $("#clientes").hide();
+                    $("#sucursales").hide();
                     $("#proveedores").hide();
                     $("#perfil").hide();
                     $("#stock").hide();
@@ -643,6 +680,8 @@
 
             function perfil() {
                 if ($("#perfil").is(":hidden")) {
+                    $("#clientes").hide();
+                    $("#sucursales").hide();
                     $("#proveedores").hide();
                     $("#statistics").hide();
                     $("#stock").hide();
@@ -652,6 +691,8 @@
 
             function proveedores() {
                 if ($("#proveedores").is(":hidden")) {
+                    $("#clientes").hide();
+                    $("#sucursales").hide();
                     $("#perfil").hide();
                     $("#statistics").hide();
                     $("#stock").hide();
@@ -661,10 +702,34 @@
 
             function stock() {
                 if ($("#stock").is(":hidden")) {
+                    $("#clientes").hide();
+                    $("#sucursales").hide();
                     $("#perfil").hide();
                     $("#statistics").hide();
                     $("#proveedores").hide();
                     $("#stock").show();
+                }
+            }
+            
+            function sucursales() {
+                if ($("#sucursales").is(":hidden")) {
+                    $("#clientes").hide();
+                    $("#perfil").hide();
+                    $("#statistics").hide();
+                    $("#proveedores").hide();
+                    $("#stock").hide();
+                    $("#sucursales").show();
+                }
+            }
+            
+            function clientes() {
+                if ($("#clientes").is(":hidden")) {
+                    $("#sucursales").hide();
+                    $("#perfil").hide();
+                    $("#statistics").hide();
+                    $("#proveedores").hide();
+                    $("#stock").hide();
+                    $("#clientes").show();
                 }
             }
 
