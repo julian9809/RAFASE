@@ -142,10 +142,10 @@ public class DAOFacade {
     }
     
     //---------------------------------PagoDAO----------------------------------
-    
-    public double obtenerTotalPedido(String usuario, long pedido_id) throws CaException {
-        return pagoDAO.obtenerTotalPedido(usuario, pedido_id);
+    public double obtenerTotalPedido(long pedido_id) throws CaException {
+        return pagoDAO.obtenerTotalPedido(pedido_id);
     }
+    
     //---------------------------------PedidoDAO--------------------------------
     public void consultarPedido(String usuario, long usuario_id) throws CaException{
         pedidoDAO.consultarPedido(usuario, usuario_id);
