@@ -46,7 +46,7 @@ public class PagoDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new CaException("No pudo consultar el pedido\n " + e.getMessage());
+            throw new CaException("No pudo obtener la factura\n " + e.getMessage());
         } finally {
             ServiceLocator.getInstance().liberarConexion();
         }
@@ -69,11 +69,14 @@ public class PagoDAO {
                             prepStmtDOS.setLong(1, pedido_id);
                             prepStmtDOS.executeUpdate();
                             ServiceLocator.getInstance().liberarConexion();
-                            
+                            System.out.println("no obtiene 3");
                             String strSQLTRES = obtenerSentenciaFactura(pedido_id);
+                            System.out.println("obtiene 3");
                             ServiceLocator.getInstance().tomarConexion();
                             try (PreparedStatement prepStmtTRES = conexion.prepareStatement(strSQLTRES)) {
+                                System.out.println("no hace 3");
                                 prepStmtTRES.executeUpdate();
+                                System.out.println("hace 3");
                             }
                             ServiceLocator.getInstance().commit();
                         }

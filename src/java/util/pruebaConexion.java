@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package util;
+
 import control.DAOFacade;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -21,24 +22,21 @@ public class pruebaConexion {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws CaException {
-        
+
         //DIRECCIONES
-        
-        
         //Insercion de direcciones
         DAOFacade facade = new DAOFacade();
-        
+
         facade.realizarConexion();
         //Conexion de las pruebas
         facade.cerrarConexion();
         facade.setearAdminDB();
         facade.realizarConexion();
-        
+
         //facade.nombreUsuario(username);
         //facade.passwordUsuario(password);
-        
-        
-        facade.actualizarEnvio(123, "test", "holi", "asdasd", "D","bacata");
+        facade.actualizarEstadoPedido(7, facade.obtenerTotalPedido(7));
+        boolean recibido = facade.confirmarTajertaConBanco(Long.parseLong("897812564112"), 654, "11/26", 7);
     }
-    
+
 }
