@@ -20,6 +20,9 @@ public class Prove {
     private ArrayList<String> nombre_array = new ArrayList<>();
     private ArrayList<String> direccion_array = new ArrayList<>();
 
+    public Prove() {
+    }   
+
     public Long getId_proveedor() {
         return id_proveedor;
     }
