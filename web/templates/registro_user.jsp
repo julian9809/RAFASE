@@ -87,9 +87,10 @@
                                             <option class="text-muted font-weight-lighter" value="CE" required>Cedula de extranjeria</option>
                                         </select>
                                     </div>
-                                    <div class="md-form md-bg">
-                                        <input type="email" class="form-control white" value="" name="email" id="email" required/>
-                                        <label for="email">Correo Electronico</label>
+                                    
+                                    <div class="md-form md-bg mb-0">
+                                        <input type="date" class="form-control text-muted white mb-0" max="2002-01-01" value="" name="fecha_nacimiento" id="fecha_nacimiento" required/>
+                                        <small for="fecha_nacimiento" class="text-muted">Fecha de nacimiento</small>
                                     </div>
                                     <div class="form-group">
                                         <div class="custom-control custom-radio custom-control-inline"> 
@@ -108,12 +109,12 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="md-form md-bg">
-                                        <input type="text" class="form-control white" value="" name="username" id="username" required/>
-                                        <label for="username">Nombre de usuario</label>
+                                        <input type="email" class="form-control white" value="" name="email" id="email" required/>
+                                        <label for="email">Correo Electronico</label>
                                     </div>
                                     <div class="md-form md-bg">
-                                        <input type="date" class="form-control white" max="2002-01-01" value="" name="fecha_nacimiento" id="fecha_nacimiento" required/>
-                                        <label for="fecha_nacimiento">Fecha de nacimiento</label>
+                                        <input type="text" class="form-control white" value="" name="username" id="username" required/>
+                                        <label for="username">Nombre de usuario</label>
                                     </div>
                                     <div class="md-form md-bg mb-0">
                                         <input type="password" class="form-control white mb-0" value="" name="password" id="password" autocomplete="new-password" required/>

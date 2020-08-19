@@ -6,10 +6,8 @@
 
 <%@page import="util.CaException"%>
 <%@page import="modelo.InventarioRafase"%>
-<%@page import="modelo.Pedido"%>
 <%@page import="control.DAOFacade"%>
 <%@page import="modelo.Carrito"%>
-<%@page import="modelo.Producto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
