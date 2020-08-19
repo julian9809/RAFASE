@@ -24,6 +24,7 @@ grant create sequence to administradorBD;
 grant create procedure to administradorBD;
 grant create trigger to administradorBD;
 grant execute any procedure to administradorBD with admin option;
+grant ADMINISTER DATABASE TRIGGER to administradorBD;
 
 create user admin_db identified by dbadministrator;
 grant administradorBD to admin_db;
@@ -116,6 +117,8 @@ grant insert on env to cliente;
 grant insert on ped to cliente;
 grant insert on tc to cliente;
 grant insert on tel to cliente;
+
+grant delete on depe to cliente;
 --USUARIOS 
 
 create user RAFASEadmin identified by contrasena

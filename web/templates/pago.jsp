@@ -156,7 +156,7 @@
                                     </li>
                                 </ul>
                                 <!--Formulario con id para el pago, se coloca en los input el id del form-->
-                                <form id="pagar"></form>
+                                <form id="pagar" action="../pagarPedido" method="post"></form>
                                 <!-- Pills panels -->
                                 <div class="tab-content pt-4">
                                     <!--Panel 1-->
@@ -223,8 +223,8 @@
                                             <!--Grid column-->
                                             <div class="col-lg-6 col-md-6 mb-6">
 
-                                                <label for="country">Ciudad</label>
-                                                <select class="custom-select d-block" name="ciudad" id="ciudad" form="pagar" required>
+                                                <label for="ciudadEnv">Ciudad de envio</label>
+                                                <select class="custom-select d-block" name="ciudadEnv" id="ciudadEnv" form="pagar" required>
                                                     <option value="" selected hidden disabled>Escoge tu ciudad</option>
                                                     <%
                                                         for (int i = 0; i < ciudadObj.getId_ciudad_array().size(); i++) {
@@ -272,30 +272,26 @@
                                                 <label class="custom-control-label" for="tipoPago1">Tarjeta de Credito</label>
                                             </div>
                                             <div class="custom-control custom-radio mb-2">
-                                                <input name="tipoPago" type="radio" class="custom-control-input" id="tipoPago2" value="D" form="pagar" disabled required>
-                                                <label class="custom-control-label" for="tipoPago2">Tarjeta de Debito (Próximamente)</label>
+                                                <input name="tipoPago" type="radio" class="custom-control-input" id="tipoPago2" value="P" form="pagar" disabled required>
+                                                <label class="custom-control-label" for="tipoPago2">Paypal (Próximamente)</label>
                                             </div>
                                             <div class="custom-control custom-radio mb-2">
-                                                <input name="tipoPago" type="radio" class="custom-control-input" id="tipoPago3" value="P" form="pagar" disabled required>
-                                                <label class="custom-control-label" for="tipoPago3">Paypal (Próximamente)</label>
-                                            </div>
-                                            <div class="custom-control custom-radio mb-2">
-                                                <input name="tipoPago" type="radio" class="custom-control-input" id="tipoPago4" value="E" form="pagar" disabled required>
-                                                <label class="custom-control-label" for="tipoPago4">PSE (Próximamente)</label>
+                                                <input name="tipoPago" type="radio" class="custom-control-input" id="tipoPago3" value="D" form="pagar" disabled required>
+                                                <label class="custom-control-label" for="tipoPago3">PSE (Próximamente)</label>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="md-form md-bg">
                                                     <input type="text" class="form-control mb-0" id="nombreTarCre"  name="nombreTarCre" form="pagar" required>
-                                                    <label for="nombre">Nombre en la tarjeta</label>
+                                                    <label for="nombreTarCre">Nombre en la tarjeta</label>
                                                     <small class="text-muted">Nombre completo en la parte de atras de la tarjeta</small>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="md-form md-bg">
-                                                    <input type="number" class="form-control" min="100000000000" max="999999999999" id="numero" name="numero" form="pagar" required>
-                                                    <label for="numero">Número de la tarjeta de credito</label>
+                                                    <input type="number" class="form-control" min="100000000000" max="999999999999" id="numeroTarCre" name="numeroTarCre" form="pagar" required>
+                                                    <label for="numeroTarCre">Número de la tarjeta de credito</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -316,7 +312,7 @@
 
                                             <div class="col-3 col-md-3">
                                                 <div class="md-form md-bg">
-                                                    <input type="text" class="form-control" id="CVV" form="pagar" required>
+                                                    <input type="number" class="form-control" name="CVV" id="CVV" form="pagar" pattern="[0-9]{3}" max="999" required>
                                                     <label for="CVV">CVV</label>
                                                 </div>
                                             </div>
