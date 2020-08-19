@@ -16,6 +16,7 @@ create role administradorBD;
 grant create session to administradorBD with admin option;
 grant create any table to administradorBD;
 grant create any view to administradorBD with admin option;
+grant select any sequence to administradorBD with admin option;
 grant create role to administradorBD;
 grant create user to administradorBD;
 grant create public synonym to administradorBD;

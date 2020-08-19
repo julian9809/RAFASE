@@ -51,6 +51,7 @@ grant select on usur to usuarioGeneral;
 create role cliente;
 grant create session to cliente;
 grant create any view to cliente;
+grant select any sequence to cliente;
 grant select on prod to cliente;
 grant select on categ to cliente;
 grant select on ciu to cliente;
