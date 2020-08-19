@@ -392,7 +392,9 @@
                 alertify.alert("Error", "<%= "Error --> " + error%>", function () {
                     alertify.error('Acceso denegado');
                 }).set({onshow: null, onclose: function () {
-                        setTimeout(() => {  window.location = 'index.jsp'; }, 1000);                        
+                        setTimeout(() => {
+                            window.location = 'index.jsp';
+                        }, 1000);
                     }});
             </script>
             <%
@@ -436,11 +438,25 @@
                     </div>
                 </div>
             </div>
+            <!--Administrador-->
+            
+            <!--Proveedores-->
+            <div class="container-fluid mt-5 py-lg-5" id="proveedores">
+                <div class="header">
+                    <div class="card-header">
+                        Listado de proveedores
+                    </div>
+                    <div class="card-body">
+                        
+                    </div>
+                </div>
+            </div>
+            <!--Proveedores-->
 
         </main>
         <!--Main layout-->
 
-        
+
 
         <!-- SCRIPTS -->
         <!-- JQuery -->
