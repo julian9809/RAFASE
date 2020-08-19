@@ -65,9 +65,10 @@ public class pagarPedido extends HttpServlet {
             } else {
                 segundoApellido = apellidos[1];
             }
-            String username = request.getParameter("username");
-            String email = request.getParameter("email");
+            String nombreCompleto = nombre + " " + apellido;
+
             String direccion = request.getParameter("direccion");
+            long telefono = Long.valueOf(request.getParameter("telefono"));
             String extras = request.getParameter("extras");
             String ciudadEnv = request.getParameter("ciudadEnv");
 
@@ -86,23 +87,21 @@ public class pagarPedido extends HttpServlet {
             facade.setearAdminDB();
             facade.realizarConexion();
 
-            //facade.nombreUsuario(username);
-            //facade.passwordUsuario(password);
-            facade.realizarConexion();
-
             //Pago del pedido y simulación del banco
             facade.actualizarEstadoPedido(pedido_id, facade.obtenerTotalPedido(pedido_id));
             if (facade.confirmarTajertaConBanco(numeroTarCre, cvv, fechaTarCre, pedido_id)) {
                 //Exito xd
                 System.out.println("pago con exito");
-                facade.nombreUsuario(username);
+                facade.actualizarEnvio(telefono, direccion, extras, nombreCompleto, tipoPago);
+                System.out.println("envio exito");
+                facade.nombreUsuario(usuario);
                 facade.passwordUsuario(password);
                 facade.realizarConexion();
                 response.sendRedirect("templates/index.jsp");
             } else {
                 //Sad xd
                 System.out.println("pago malo");
-                facade.nombreUsuario(username);
+                facade.nombreUsuario(usuario);
                 facade.passwordUsuario(password);
                 facade.realizarConexion();
                 response.sendRedirect("templates/productos.jsp");
