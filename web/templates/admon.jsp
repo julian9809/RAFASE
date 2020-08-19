@@ -415,7 +415,7 @@
             <!--Administrador-->
             <div class="container-fluid mt-5 py-lg-5" id="perfil">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header warning-color white-text">
                         Administrador
                     </div>
                     <div class="card-body">
