@@ -85,8 +85,8 @@ public class DAOFacade {
         admonDAO.insertarProveedor();
     }
     
-    public boolean existeAdmin(String usuario) throws CaException {
-        return admonDAO.existeAdmin(usuario);
+    public boolean existeAdmin(String usuario, String password) throws CaException {
+        return admonDAO.existeAdmin(usuario, password);
     }
     
     public double obtenerValorTotalVentas() throws CaException {

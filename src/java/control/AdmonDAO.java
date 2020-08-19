@@ -86,12 +86,13 @@ public class AdmonDAO {
         }
     }
     
-    public boolean existeAdmin(String usuario) throws CaException {
+    public boolean existeAdmin(String usuario, String password) throws CaException {
         try {
-            String strSQL = "SELECT COUNT(*) FROM admon WHERE admon.NOMBRE_ADMINISTRADOR = ?";
+            String strSQL = "SELECT COUNT(*) FROM admon WHERE admon.NOMBRE_ADMINISTRADOR = ? and admon.CONTRASENA = ?";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.setString(1, usuario);
+                prepStmt.setString(2, password);
                 ResultSet rs = prepStmt.executeQuery();
                 while (rs.next()) {
                     return rs.getLong(1) != 0;

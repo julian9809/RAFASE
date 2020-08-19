@@ -78,7 +78,7 @@ public class ClienteDAO {
         }
         return false;
     }
-
+    
     public void insertarDireccion(String usuario, String password) throws CaException {
         try {
             String strSQL = "INSERT INTO DIR(ID_DIRECCION,DIRECCION_COMPLETA, EXTRAS, TIPO_DIRECCION, ID_CIUDAD, ID_CEDULA, TIPO_ID) VALUES(admin_db.ID_DIRECCION.NEXTVAL,?,?,?,?,?,?)";
