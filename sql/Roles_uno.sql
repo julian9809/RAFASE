@@ -23,6 +23,7 @@ grant create public synonym to administradorBD;
 grant create sequence to administradorBD;
 grant create procedure to administradorBD;
 grant create trigger to administradorBD;
+grant execute any procedure to administradorBD with admin option;
 
 create user admin_db identified by dbadministrator;
 grant administradorBD to admin_db;

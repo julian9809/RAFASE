@@ -19,7 +19,7 @@ public class PagoDAO {
     
     public double obtenerTotalPedido(long pedido_id) throws CaException {
         try {
-            String strSQL = "SELECT PK_PAQUETERAFASE.FU_TOTALPRODUCTOS(" + pedido_id + ") FROM DUAL";
+            String strSQL = "SELECT admin_db.PK_PAQUETERAFASE.FU_TOTALPRODUCTOS(" + pedido_id + ") FROM DUAL";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 ResultSet rs = prepStmt.executeQuery();
