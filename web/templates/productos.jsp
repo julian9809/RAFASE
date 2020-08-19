@@ -342,12 +342,14 @@
                                     <td class="font-weight-bold">$<%= carrito.getCantidad_array().get(i) * (carrito.getPrecio_base_array().get(i) + (carrito.getPrecio_base_array().get(i) * carrito.getIva_array().get(i)))%>
                                     </td>
                                     <td>
-                                        <a type="button" class="btn btn-sm btn-danger btnRedondo" data-toggle="tooltip" data-placement="top" title="Remove item" href="../AgregarProducto?cantidadQuitar=<%= carrito.getCantidad_array().get(i)%>&id_producto=<%= carrito.getId_producto_array().get(i)%>&id_pedido=<%= carrito.getId_pedido_array().get(i)%>">
-                                            <span class="font-weight-bold">+</span>
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                        <a type="button" class="btn btn-sm btn-success btnRedondo" data-toggle="tooltip" data-placement="top" title="Remove item" href="../AgregarProducto?cantidadQuitar=<%= carrito.getCantidad_array().get(i)+1 %>&id_producto=<%= carrito.getId_producto_array().get(i)%>&id_pedido=<%= carrito.getId_pedido_array().get(i)%>">
+                                            <i class="fas fa-plus"></i>
                                         </a>
-                                        <a type="button" class="btn btn-sm btn-danger btnRedondo" data-toggle="tooltip" data-placement="top" title="Remove item" href="../AgregarProducto?cantidadQuitar=<%= carrito.getCantidad_array().get(i)%>&id_producto=<%= carrito.getId_producto_array().get(i)%>&id_pedido=<%= carrito.getId_pedido_array().get(i)%>">
-                                            <span class="font-weight-bold">-</span>
+                                        <a type="button" class="btn btn-sm btn-danger btnRedondo" data-toggle="tooltip" data-placement="top" title="Remove item" href="../AgregarProducto?cantidadQuitar=<%= carrito.getCantidad_array().get(i)-1 %>&id_producto=<%= carrito.getId_producto_array().get(i)%>&id_pedido=<%= carrito.getId_pedido_array().get(i)%>">
+                                            <i class="fas fa-minus"></i>
                                         </a>
+                                        </div>
                                     </td>
                                 </tr>
                                 <!-- /.First row -->

@@ -100,7 +100,7 @@ public class AgregarProducto extends HttpServlet {
                 System.out.println("cantidad: " + cantidad_quitar);
                 System.out.println("ciudad: " + id_pedidoQuitar);
                 facade.quitarProducto(Long.valueOf(id_productoQuitar), Long.valueOf(id_pedidoQuitar), Long.valueOf(cantidad_quitar));
-                response.sendRedirect("templates/pago.jsp");
+                response.sendRedirect("templates/productos.jsp?busqueda=" + "" + "&categoria=" + "");
             }
         }
     }

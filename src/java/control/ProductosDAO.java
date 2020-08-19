@@ -81,10 +81,10 @@ public class ProductosDAO {
     public void quitarProducto(long id_producto, long id_pedido, long cantidad) throws CaException {
         try {
             String strSQL;
-            if (cantidad == 1) {
+            if (cantidad == 0) {
                 strSQL = "DELETE FROM DEPE WHERE DEPE.ID_PRODUCTO = ? AND DEPE.ID_PEDIDO = ?";
             } else {
-                strSQL = "UPDATE DEPE SET DEPE.CANTIDAD = " + (cantidad-1) + " WHERE DEPE.ID_PRODUCTO = ? AND DEPE.ID_PEDIDO = ?";
+                strSQL = "UPDATE DEPE SET DEPE.CANTIDAD = " + cantidad + " WHERE DEPE.ID_PRODUCTO = ? AND DEPE.ID_PEDIDO = ?";
             }
             
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
