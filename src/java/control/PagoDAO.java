@@ -60,7 +60,7 @@ public class PagoDAO {
      */
     public boolean confirmarTajertaConBanco(long numero_tarjeta, long cvv, String fecha_exp, long pedido_id) throws CaException {
         try {
-            String strSQL = "SELECT PK_PAQUETERAFASE.FU_COMPROBARPAGO(" + numero_tarjeta + "," + cvv + ",TO_DATE('" + fecha_exp + "','MM/YY')) FROM DUAL";
+            String strSQL = "SELECT admin_db.PK_PAQUETERAFASE.FU_COMPROBARPAGO(" + numero_tarjeta + "," + cvv + ",TO_DATE('" + fecha_exp + "','MM/YY')) FROM DUAL";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             System.out.println("tercer sout");
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
