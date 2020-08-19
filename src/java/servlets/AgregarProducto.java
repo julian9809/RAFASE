@@ -44,53 +44,63 @@ public class AgregarProducto extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             request.setCharacterEncoding("UTF-8");
             HttpSession sesion = request.getSession();
-            
+
             String usuario = sesion.getAttribute("usuario").toString();
             String producto_buscado = request.getParameter("busqueda");
             String categoria_buscada = request.getParameter("categoria");
-            
-            if (usuario.equals("visitante")) {
-                response.sendRedirect("templates/sign.jsp");
-            } else {
-                long id_producto = Long.valueOf(request.getParameter("id_producto"));
-                long cantidad = Long.valueOf(request.getParameter("cantidad"));
-                DAOFacade facade = new DAOFacade();
-                Pedido pedido = facade.getPedido();
-                DetallePedido detalle_pedido = facade.getDetallePedido();
-                long id_cliente = facade.buscarIdCliente(usuario, sesion.getAttribute("contraseña").toString());
-                long id_ciudad = facade.buscarIdCiudad(usuario, sesion.getAttribute("contraseña").toString(), sesion.getAttribute("Ciudad").toString());
-                System.out.println("id_cliente: "+ id_cliente + " id ciudad: " + id_ciudad);
-                if(facade.existeCarrito(id_cliente, id_ciudad)){
-                    facade.consultarPedido(id_cliente, id_ciudad);
-                    detalle_pedido.setId_pedido(pedido.getId_pedido_array().get(0));
-                    detalle_pedido.setCantidad(cantidad);
-                    detalle_pedido.setId_producto(id_producto);
-                    if(facade.verificarExistencia(pedido.getId_pedido_array().get(0), detalle_pedido.getId_producto())){
-                        facade.actualizarCantidad(pedido.getId_pedido_array().get(0), detalle_pedido.getId_producto(), detalle_pedido.getCantidad());
-                    }else{
-                        facade.insertarProductosPedido(usuario);
-                    }                    
+            String id_productoQuitar = request.getParameter("id_producto");
+            String id_pedidoQuitar = request.getParameter("id_pedido");
+            String cantidad_quitar = request.getParameter("cantidadQuitar");
+
+            DAOFacade facade = new DAOFacade();
+            Pedido pedido = facade.getPedido();
+            DetallePedido detalle_pedido = facade.getDetallePedido();
+
+            if (cantidad_quitar == null) {
+                if (usuario.equals("visitante")) {
+                    response.sendRedirect("templates/sign.jsp");
+                } else {
+                    long id_producto = Long.valueOf(request.getParameter("id_producto"));
+                    long cantidad = Long.valueOf(request.getParameter("cantidad"));
+                    long id_cliente = facade.buscarIdCliente(usuario, sesion.getAttribute("contraseña").toString());
+                    long id_ciudad = facade.buscarIdCiudad(usuario, sesion.getAttribute("contraseña").toString(), sesion.getAttribute("Ciudad").toString());
+                    System.out.println("id_cliente: " + id_cliente + " id ciudad: " + id_ciudad);
+                    if (facade.existeCarrito(id_cliente, id_ciudad)) {
+                        facade.consultarPedido(id_cliente, id_ciudad);
+                        detalle_pedido.setId_pedido(pedido.getId_pedido_array().get(0));
+                        detalle_pedido.setCantidad(cantidad);
+                        detalle_pedido.setId_producto(id_producto);
+                        if (facade.verificarExistencia(pedido.getId_pedido_array().get(0), detalle_pedido.getId_producto())) {
+                            facade.actualizarCantidad(pedido.getId_pedido_array().get(0), detalle_pedido.getId_producto(), detalle_pedido.getCantidad());
+                        } else {
+                            facade.insertarProductosPedido(usuario);
+                        }
+                    } else {
+                        pedido.setEstado_pedido("CA");
+                        pedido.setTotal_pedido(1);
+                        pedido.setId_cedula(id_cliente);
+                        pedido.setId_ciudad(facade.buscarIdCiudad(usuario, sesion.getAttribute("contraseña").toString(), sesion.getAttribute("Ciudad").toString()));
+                        pedido.setTipo_id(facade.buscarTipoID(usuario, sesion.getAttribute("contraseña").toString()));
+
+                        facade.insertarPedido(usuario);
+                        long id_pedido = facade.consultarIdPedido(id_cliente, id_ciudad);
+                        System.out.println("el id del pedido es: " + id_pedido);
+                        detalle_pedido.setId_pedido(facade.consultarIdPedido(id_cliente, id_ciudad));
+                        detalle_pedido.setCantidad(cantidad);
+                        detalle_pedido.setId_producto(id_producto);
+                        if (facade.verificarExistencia(id_pedido, id_producto)) {
+                            facade.actualizarCantidad(pedido.getId_pedido(), detalle_pedido.getId_producto(), detalle_pedido.getCantidad());
+                        } else {
+                            facade.insertarProductosPedido(usuario);
+                        }
+                    }
+                    response.sendRedirect("templates/productos.jsp?busqueda=" + producto_buscado + "&categoria=" + categoria_buscada);
                 }
-                else{                    
-                    pedido.setEstado_pedido("CA");
-                    pedido.setTotal_pedido(1);
-                    pedido.setId_cedula(id_cliente);
-                    pedido.setId_ciudad(facade.buscarIdCiudad(usuario, sesion.getAttribute("contraseña").toString(), sesion.getAttribute("Ciudad").toString()));
-                    pedido.setTipo_id(facade.buscarTipoID(usuario, sesion.getAttribute("contraseña").toString()));
-                    
-                    facade.insertarPedido(usuario);
-                    long id_pedido = facade.consultarIdPedido(id_cliente, id_ciudad);
-                    System.out.println("el id del pedido es: "+id_pedido);
-                    detalle_pedido.setId_pedido(facade.consultarIdPedido(id_cliente, id_ciudad));
-                    detalle_pedido.setCantidad(cantidad);
-                    detalle_pedido.setId_producto(id_producto);
-                    if(facade.verificarExistencia(id_pedido, id_producto)){
-                        facade.actualizarCantidad(pedido.getId_pedido(), detalle_pedido.getId_producto(), detalle_pedido.getCantidad());
-                    }else{
-                        facade.insertarProductosPedido(usuario);
-                    }  
-                }          
-                response.sendRedirect("templates/productos.jsp?busqueda=" + producto_buscado +"&categoria=" + categoria_buscada);
+            } else {
+                System.out.println("cantidad: " + cantidad_quitar);
+                System.out.println("ciudad: " + id_pedidoQuitar);
+                facade.quitarProducto(Long.valueOf(id_productoQuitar), Long.valueOf(id_pedidoQuitar), Long.valueOf(cantidad_quitar));
+                response.sendRedirect("templates/pago.jsp");
             }
         }
     }

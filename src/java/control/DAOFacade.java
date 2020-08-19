@@ -231,6 +231,10 @@ public class DAOFacade {
                 ciudad,subcategoria_buscada,categoria_buscada);
     }
     
+    public void quitarProducto(long id_producto, long id_pedido, long cantidad) throws CaException {
+        productosDAO.quitarProducto(id_producto, id_pedido, cantidad);
+    }
+    
     public Cliente getCliente(){
         return clienteDAO.getCliente();
     }
