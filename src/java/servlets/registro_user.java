@@ -99,20 +99,19 @@ public class registro_user extends HttpServlet {
                 if (facade.realizarConexion()) {
                     //Crear usuario y carritos con AdminDB
                     facade.crearUsuario();
-
+                    
+                    Ciudad ciudad = facade.getCiudad();
+                    facade.buscarCiudades(username, password);
+                    //Se crea un carrito para todas la ciudades
+                    for (int i = 0; i < ciudad.getId_ciudad_array().size(); i++) {
+                        facade.crearCarrito(username, cli.getId_cedula(),
+                                ciudad.getId_ciudad_array().get(i));
+                    }
                     //Cierra conexión y setea los datos del usuario
                     facade.cerrarConexion();
                     facade.nombreUsuario(username);
                     facade.passwordUsuario(password);
                     if (facade.realizarConexion()) {
-                        Ciudad ciudad = facade.getCiudad();
-                        facade.buscarCiudades(username, password);
-                        //Se crea un carrito para todas la ciudades
-                        for (int i = 0; i < ciudad.getId_ciudad_array().size(); i++) {
-                            facade.crearCarrito(username, cli.getId_cedula(),
-                                    ciudad.getId_ciudad_array().get(i));
-                        }
-                        
                         sesion.setAttribute("usuario", username);
                         sesion.setAttribute("contraseña", password);
                         response.sendRedirect("templates/index.jsp");

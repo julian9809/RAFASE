@@ -6,24 +6,23 @@
 
 <%@page import="util.CaException"%>
 <%@page import="modelo.InventarioRafase"%>
+<%@page import="modelo.Pedido"%>
 <%@page import="control.DAOFacade"%>
 <%@page import="modelo.Carrito"%>
+<%@page import="modelo.Producto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
     HttpSession sesion = request.getSession();
     String ciudad = "no ciudad";
-
     if (sesion.getAttribute("Ciudad") != null) {
         ciudad = sesion.getAttribute("Ciudad").toString();
     } else {
         out.print("<script>location.replace('../index.jsp');</script>");
     }
-
     String producto_buscado = request.getParameter("busqueda");
     String categoria = request.getParameter("categoria");
     String usuario = sesion.getAttribute("usuario").toString();
-
 %>
 <html>
     <head>
@@ -119,7 +118,7 @@
         <%
             DAOFacade facade = new DAOFacade();
             InventarioRafase inventarioRafase = facade.getInventario_rafase();
-            
+
             try {
                 facade.buscarProducto(sesion.getAttribute("usuario").toString(),
                         sesion.getAttribute("contraseña").toString(),
@@ -138,17 +137,14 @@
         %>        
         <!--------------------------------Productos--------------------------------->
         <div class="container-fluid my-5">
-
             <!--Section: Content-->
             <section class="dark-grey-text text-center">
-
                 <!-- Section heading -->
                 <h1 class="font-weight-bold mb-4 pb-2">Productos</h1>
                 <!-- Section description -->
                 <p class="grey-text w-responsive mx-auto mb-5">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ante nulla, sagittis et commodo ac, sollicitudin at purus. Quisque elementum diam eget luctus feugiat. Donec turpis dolor, pulvinar vitae luctus vitae, imperdiet id est. Aenean interdum sem sed sapien suscipit, sit amet aliquet diam blandit. Maecenas mollis, sem sed volutpat cursus, felis sem euismod magna, vel condimentum nulla quam a mauris. Mauris sit amet dapibus augue. Curabitur quam libero, feugiat sed efficitur a, porta ac elit. Nam at fringilla urna, non convallis elit. Donec sed nisi gravida, ullamcorper ex et, aliquam metus. Nulla at quam metus. Donec dictum ipsum tristique nisl posuere, at congue risus tincidunt.
                 </p>
-
                 <!-- Grid row -->
                 <div class="row justify-content-center">
                     <div class="card-deck col-12 text-center">
@@ -157,7 +153,6 @@
                         %>
                         <!-- Grid column -->
                         <div class="col-lg-4 col-md-6 mb-4">
-
                             <form id="agregar_producto_<%= inventarioRafase.getProducto().getId_producto_array().get(i)%>" method="post" action = "../AgregarProducto">
                                 <!-- Card -->
                                 <div class="card card-cascade">
@@ -294,9 +289,7 @@
                             facade.consultarCarrito(usuario, facade.buscarIdCiudad(usuario, sesion.getAttribute("contraseña").toString(), sesion.getAttribute("Ciudad").toString()));
                     %>   
                     <div class="modal-body table-responsive">
-
                         <table class="table table-hover my-0">
-
                             <!-- Table head -->
                             <thead class="mdb-color text-white">
                                 <tr>
@@ -321,7 +314,6 @@
                                 </tr>
                             </thead>
                             <!-- /.Table head -->
-
                             <!-- Table body -->
                             <tbody>
                                 <!-- First row -->
@@ -371,7 +363,13 @@
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Volver</button>
                         <div class="ml-auto">
                             <h4 class="font-weight-bold">
-                                Total: $<%= facade.obtenerTotalPedido(carrito.getId_pedido_array().get(0)) %>
+                                Total: $<%
+                                    if (!carrito.getId_pedido_array().isEmpty()) {
+                                        out.print(facade.obtenerTotalPedido(carrito.getId_pedido_array().get(0)));
+                                    } else {
+                                        out.print("0");
+                                    }
+                                %>
                             </h4>
                         </div>
                         <a type="button" class="float-right btn btn-success" href="pago.jsp">Pagar
@@ -384,13 +382,12 @@
                         error = error.replaceAll("\n", "");
                     %>
                     <script  type = "text/javascript">
-                        alertify.alert("Error", "<%= "Error-- > " + error %>", function () {
+                        alertify.alert("Error", "<%= "Error-- > " + error%>", function () {
                             alertify.message('OK');
                         });
                     </script>
                     <%
                         } finally {
-
                         }//End catch
                     %>
                 </div>

@@ -374,7 +374,13 @@
                                                 Total
                                             </dt>
                                             <dt class="col-sm-4">
-                                                $ <%= facade.obtenerTotalPedido(carrito.getId_pedido_array().get(0)) %>
+                                                $ <%
+                                                    if(!carrito.getId_pedido_array().isEmpty()){
+                                                        out.print(facade.obtenerTotalPedido(carrito.getId_pedido_array().get(0)));
+                                                    }else{
+                                                        out.print("0");
+                                                    }
+                                                %>
                                             </dt>
                                         </dl>
                                     </div>
@@ -392,7 +398,7 @@
                                 error = error.replaceAll("\n", "");
                             %>
                             <script  type = "text/javascript">
-                                alertify.alert("Error", "<%= "Error-- > " + error %>", function () {
+                                alertify.alert("Error", "<%= "Error-- > " + error%>", function () {
                                     alertify.message('OK');
                                 });
                             </script>

@@ -177,10 +177,15 @@ public class PedidoDAO {
                     + "usur.ID_CEDULA = " + cedula + " AND "
                     + "ciu.ID_CIUDAD = " + id_ciudad + " AND "
                     + "ped.ESTADO_PEDIDO = 'CA')";
+            String strSQLDOS = "GRANT SELECT ON admin_db.CARRITO_" + usuario + "_" + id_ciudad + " TO " + usuario;
             System.out.println("la sentencia es: " + strSQL);
+            System.out.println("la sentencia dos es: " + strSQLDOS);
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
-                prepStmt.executeUpdate();
+                try (PreparedStatement prepStmtDOS = conexion.prepareStatement(strSQLDOS)) {
+                    prepStmt.executeUpdate();
+                    prepStmtDOS.executeUpdate();
+                }
             }
             ServiceLocator.getInstance().commit();
         } catch (SQLException e) {
@@ -192,7 +197,7 @@ public class PedidoDAO {
 
     public void consultarCarrito(String usuario, long id_ciudad) throws CaException {
         try {
-            String strSQL = "SELECT * FROM CARRITO_" + usuario + "_" + id_ciudad;
+            String strSQL = "SELECT * FROM admin_db.CARRITO_" + usuario + "_" + id_ciudad;
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 ResultSet rs = prepStmt.executeQuery();
@@ -220,7 +225,7 @@ public class PedidoDAO {
             ServiceLocator.getInstance().liberarConexion();
         }
     }
-
+    
     public boolean verificarExistencia(double id_pedido, long id_producto) throws CaException {
         try {
             String strSQL = "SELECT COUNT(*) FROM depe WHERE ID_PEDIDO = " + id_pedido + " AND ID_PRODUCTO = " + id_producto;
@@ -264,12 +269,14 @@ public class PedidoDAO {
         }
     }
     
-   public void actualizarEstadoPedido(String usuario, long pedido_id, float total_pedido) throws CaException {
+   public void actualizarEstadoPedido(long pedido_id, double total_pedido) throws CaException {
         try {
-            String strSQL = "UPDATE PED SET ESTADO_PEDIDO = 'PP', TOTAL_PEDIDO = ? WHERE ID_PEDIDO = ?";
+            String strSQL = "UPDATE PED SET ESTADO_PEDIDO = 'PP', TOTAL_PEDIDO = ? WHERE ID_PEDIDO = ? AND ESTADO_PEDIDO = 'CA'";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
-                prepStmt.setFloat(1, total_pedido);
+                System.out.println(total_pedido);
+                System.out.println(pedido_id);
+                prepStmt.setDouble(1, total_pedido);
                 prepStmt.setLong(2, pedido_id);
                 prepStmt.executeUpdate();
             }

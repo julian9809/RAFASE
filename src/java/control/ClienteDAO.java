@@ -240,7 +240,6 @@ public class ClienteDAO {
             String strSQL = "INSERT INTO usur(ID_CEDULA, TIPO_ID, PRIMER_NOMB, SEGUNDO_NOMB, PRIMER_APELL, SEGUNDO_APELL, PASSWORD, FECH_NAC, GENERO, EMAIL, NICKNAME) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             String strSQLDOS = "CREATE USER " + cliente.getNickname() +" IDENTIFIED BY " + cliente.getPassword() + "  DEFAULT TABLESPACE RAFASE_usuarios TEMPORARY TABLESPACE RAFASE_usuariosTemp QUOTA 2M ON RAFASE_usuarios";
             String strSQLTRES = "GRANT CLIENTE TO " + cliente.getNickname();
-            String strSQLCUATRO = "GRANT CREATE ANY VIEW TO " + cliente.getNickname();
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.setLong(1, cliente.getId_cedula());
@@ -256,13 +255,10 @@ public class ClienteDAO {
                 prepStmt.setString(11, cliente.getNickname());
                 try(PreparedStatement prepStmtDOS = conexion.prepareStatement(strSQLDOS)){
                     try(PreparedStatement prepStmtTRES = conexion.prepareStatement(strSQLTRES)){
-                        try(PreparedStatement prepStmtCUATRO = conexion.prepareStatement(strSQLCUATRO)){
                         prepStmt.executeUpdate();
                         prepStmtDOS.execute();
                         prepStmtTRES.execute();
-                        prepStmtCUATRO.execute();
                         ServiceLocator.getInstance().commit();
-                        }
                     }
                 }
             }
