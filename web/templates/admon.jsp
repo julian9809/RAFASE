@@ -382,7 +382,7 @@
             <%
                 DAOFacade facade = new DAOFacade();
                 Admon adm = facade.getAdmon();
-                Prove pro = facade.getProve();
+                Prove prove = facade.getProve();
 
                 try {
                     facade.buscarAdministradores(usuario, contraseña);
@@ -418,13 +418,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <% if (adm.getId_administrador_array().isEmpty()) {%>
+                                <% if (adm.getId_administrador_array().isEmpty()) { %>
                                 <tr>
                                     <td>No se encuentran administradores</td>
                                 </tr>
-                                <%} else {%>
-                                <%
-                                    for (int i = 0; i < adm.getId_administrador_array().size(); i++) {
+                                <% } else { %>
+                                <%                                 
+                                   for (int i = 0; i < adm.getId_administrador_array().size(); i++) {
                                 %>
                                 <tr>
                                     <td scope="row" class="font-weight-bold">Nombre</td>
@@ -434,15 +434,15 @@
                                     <td scope="row" class="font-weight-bold">Email</td>
                                     <td><%= adm.getCorreo_array().get(i)%></td>
                                 </tr>
-                                <%} //end for%>
-                                <%} //end if%>
+                                <% } //end for %>
+                                <% } //end if %>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
             <!--Administrador-->
-
+            
             <!--Proveedores-->
             <div class="container-fluid mt-5 py-lg-5" id="proveedores">
                 <div class="header">
@@ -452,7 +452,7 @@
                     <div class="card-body">
                         <table class="table">
                             <tbody>
-                                <% if (pro..isEmpty()) { %>
+                                <% if () { %>
                                 <tr>
                                     <td>No hay proveedores agregados</td>
                                     <td></td>
