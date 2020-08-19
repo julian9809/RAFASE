@@ -16,7 +16,7 @@ public class PagoDAO {
     
     public PagoDAO(){
     }
-        public double consultarPedido(String usuario, long pedido_id) throws CaException {
+    public double obtenerTotalPedido(String usuario, long pedido_id) throws CaException {
         try {
             String strSQL = "SELECT PK_PAQUETERAFASE.FU_TOTALPRODUCTOS(" + pedido_id + ") FROM DUAL";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
@@ -33,5 +33,4 @@ public class PagoDAO {
         }
         return 0;
     }
-   
 }
