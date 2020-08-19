@@ -10,14 +10,17 @@
 <%@page session="true"%> 
 <!DOCTYPE html>
 <%
-    HttpSession usuarios = request.getSession();
-    
-    if(usuarios.getAttribute("usuario")==null){
-        usuarios.setAttribute("usuario", "visitante");
-        usuarios.setAttribute("contraseña", "abc123");
-    }else{
-        usuarios.getAttribute("usuario");
-        usuarios.getAttribute("contraseña");
+    HttpSession sesion = request.getSession();
+    DAOFacade facade = new DAOFacade();
+    Ciudad ciudad = facade.getCiudad();
+
+    if (sesion.getAttribute("usuario") == null) {
+        facade.realizarConexion();
+        sesion.setAttribute("usuario", "visitante");
+        sesion.setAttribute("contraseña", "abc123");
+    } else {
+        sesion.getAttribute("usuario");
+        sesion.getAttribute("contraseña");
     }
 %>
 <html>
@@ -37,13 +40,13 @@
         <link rel="stylesheet" href="css/mdb/mdb.min.css">
         <!---------------------- Alertify CSS ---------------------->
         <!-- CSS -->
-        <link rel="stylesheet" href="../css/alertify/alertify.min.css"/>
+        <link rel="stylesheet" href="css/alertify/alertify.min.css"/>
         <!-- Default theme -->
-        <link rel="stylesheet" href="../css/alertify/themes/default.min.css"/>
+        <link rel="stylesheet" href="css/alertify/themes/default.min.css"/>
         <!-- Semantic UI theme -->
-        <link rel="stylesheet" href="../css/alertify/themes/semantic.min.css"/>
+        <link rel="stylesheet" href="css/alertify/themes/semantic.min.css"/>
         <!-- Bootstrap theme -->
-        <link rel="stylesheet" href="../css/alertify/themes/bootstrap.min.css"/>
+        <link rel="stylesheet" href="css/alertify/themes/bootstrap.min.css"/>
         <!---------------------- Alertify CSS ---------------------->
         <!-- Customs styles for this template -->
         <link rel="stylesheet" href="css/custom/cover.css">
@@ -51,15 +54,15 @@
         <link href="https://fonts.googleapis.com/css2?family=Averia+Libre&display=swap" rel="stylesheet">
         <!-------------------------------Scripts--------------------------------->
         <!-- jQuery -->
-        <script type="text/javascript" src="../js/jquery.js"></script>
+        <script type="text/javascript" src="js/jquery.js"></script>
         <!-- Bootstrap tooltips -->
-        <script type="text/javascript" src="../js/popper.min.js"></script>
+        <script type="text/javascript" src="js/popper.min.js"></script>
         <!-- Bootstrap core JavaScript -->
-        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
         <!-- MDB core JavaScript -->
-        <script type="text/javascript" src="../js/mdb.min.js"></script>
+        <script type="text/javascript" src="js/mdb.min.js"></script>
         <!-- Alertifyjs JavaScript -->
-        <script type="text/javascript" src="../js/alertifyjs/alertify.min.js"></script>
+        <script type="text/javascript" src="js/alertifyjs/alertify.min.js"></script>
     </head>
     <body class="text-center">
         <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
@@ -73,19 +76,19 @@
                 </div>
             </header>
             <%
-                DAOFacade facade = new DAOFacade();
-                Ciudad ciudad = facade.getCiudad();
                 try {
-                    facade.buscarCiudades(usuarios.getAttribute("usuario").toString(),
-                            usuarios.getAttribute("contraseña").toString());
+                    facade.buscarCiudades(sesion.getAttribute("usuario").toString(),
+                            sesion.getAttribute("contraseña").toString());
                 } catch (Exception e1) {
-                    %>
-                    <script type="text/javascript">
-                        alertify.alert("Error","<%= "Error --> " + e1 + e1.getMessage() %>", function(){
-                            alertify.message('OK');
-                        });
-                    </script>
-                    <%
+                    String error = e1.toString();
+                    error = error.replaceAll("\n", "");
+            %>
+            <script type="text/javascript">
+                alertify.alert("Error", "<%= "Error --> " + error %>", function () {
+                    alertify.message('OK');
+                });
+            </script>
+            <%
                 }//End catch
             %>
             <main role="main" class="inner cover">
@@ -94,10 +97,10 @@
                 <form class="lead btn-group" action="Ciudad" method="post">
                     <select class="btn btn-lg btn-light" name="ciudad" id="ciudad">
                         <option selected hidden disabled>Escoge tu ciudad</option>
-                        <%  
+                        <%
                             for (int i = 0; i < ciudad.getId_ciudad_array().size(); i++) {
                         %>
-                        <option value="<%= ciudad.getNombre_array().get(i) %>"><%= ciudad.getNombre_array().get(i) %></option>
+                        <option value="<%= ciudad.getNombre_array().get(i)%>"><%= ciudad.getNombre_array().get(i)%></option>
                         <%}//End for ciudad%>
                     </select>
                     <button class="btn btn-lg btn-success" type="summit">Continuar</button>

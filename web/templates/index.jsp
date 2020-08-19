@@ -8,7 +8,6 @@
 <!DOCTYPE html>
 <%
     HttpSession sesion = request.getSession();
-    HttpSession usuarios = request.getSession();
     String ciudad = "no ciudad";
 
     if (!sesion.getAttribute("Ciudad").equals("no ciudad")) {
@@ -17,7 +16,7 @@
         out.print("<script>location.replace('../index.jsp');</script>");
     }
 
-    String usuario = usuarios.getAttribute("usuario").toString();
+    String usuario = sesion.getAttribute("usuario").toString();
 %>
 <html>
     <head>
@@ -71,14 +70,14 @@
                         <a class="nav-link" href="pago.jsp">Ir a Pagar<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Control</a>
+                        <a class="nav-link" href="admon.jsp">Control</a>
                     </li>
                 </ul>
                 <form action="../BuscarProducto" method="post" class="form-inline my-2 my-lg-0 ml-auto">
                     <div class="input-group form-sm form-2">
                         <input class="form-control" type="text" placeholder="Buscar productos" name="producto_buscado" id="producto_buscado" aria-label="Search">
                         <div class="input-group-append">
-                            <button class="input-group-text grey lighten-5 mr-2">
+                            <button class="input-group-text form-control grey lighten-5 mr-2">
                                 <i class="fas fa-search text-grey" aria-hidden="true"></i>
                             </button>
                         </div>

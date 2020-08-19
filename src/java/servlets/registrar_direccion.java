@@ -5,13 +5,19 @@
  */
 package servlets;
 
+import control.DAOFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import modelo.Direccion;
+import util.CaException;
 
 /**
  *
@@ -34,15 +40,33 @@ public class registrar_direccion extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet registrar_direccion</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet registrar_direccion at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            request.setCharacterEncoding("UTF-8");
+            HttpSession sesion = request.getSession();
+
+            String usuario = sesion.getAttribute("usuario").toString();
+            String contraseña = sesion.getAttribute("contraseña").toString();
+            String direccion = request.getParameter("direccion");
+            String extra = request.getParameter("extras");
+            Long ciudad = Long.valueOf(request.getParameter("id_ciudad"));
+            String tipo = request.getParameter("tipo_direccion");
+
+            DAOFacade facade = new DAOFacade();
+            Direccion dir = facade.getDireccion();
+
+            dir.setDireccion_completa(direccion);
+            dir.setExtras(extra);
+            dir.setId_ciudad(ciudad);
+            dir.setTipo_direccion(tipo);
+
+            try {
+                dir.setId_cedula(facade.buscarIdCliente(usuario, contraseña));
+                dir.setTipo_id(facade.buscarTipoID(usuario, contraseña));
+                facade.insertarDireccion(usuario, contraseña);
+                response.sendRedirect("templates/perfil_user.jsp");
+            } catch (CaException ex) {
+                System.out.println("error " + ex);
+            }
+
         }
     }
 

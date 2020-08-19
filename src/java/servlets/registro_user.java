@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import modelo.Ciudad;
 import modelo.Cliente;
 import util.CaException;
 
@@ -41,26 +42,25 @@ public class registro_user extends HttpServlet {
             throws ServletException, IOException, CaException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */     
+            /* TODO output your page here. You may use following sample code. */
             //Seteo de variables del formulario
+            request.setCharacterEncoding("UTF-8");
             String nombre = request.getParameter("nombre");
             String[] nombres = nombre.split(" ");
             String primerNombre = nombres[0];
             String segundoNombre;
-            if(nombres.length == 1){
+            if (nombres.length == 1) {
                 segundoNombre = "";
-            }
-            else{
+            } else {
                 segundoNombre = nombres[1];
             }
             String apellido = request.getParameter("apellido");
             String[] apellidos = apellido.split(" ");
             String primerApellido = apellidos[0];
             String segundoApellido;
-            if(apellidos.length == 1){
+            if (apellidos.length == 1) {
                 segundoApellido = "";
-            }
-            else{
+            } else {
                 segundoApellido = apellidos[1];
             }
             Long cedula = Long.valueOf(request.getParameter("cedula"));
@@ -72,40 +72,67 @@ public class registro_user extends HttpServlet {
             String password = request.getParameter("password");
             String confirme_password = request.getParameter("confirme_password");
             //Fin seteo de variables del formulario
-            
-            HttpSession usuarios = request.getSession();
+
+            HttpSession sesion = request.getSession();
             DAOFacade facade = new DAOFacade();
             //Buscar NO existe un usuario ya con ese nickname
-            if(!facade.buscarExisteCliente(usuarios.getAttribute("usuario")
-                    .toString(), usuarios.getAttribute("contraseña").toString(),
+            if (!facade.buscarExisteCliente(sesion.getAttribute("usuario")
+                    .toString(), sesion.getAttribute("contraseña").toString(),
                     username)) {
-                //Revisar que las constraseñas suministradas coinsidan
-                if (password.equals(confirme_password)) {
-                    Cliente cli = facade.getCliente();
-                    cli.setPrimer_nombre(primerNombre);
-                    cli.setSegundo_nombre(segundoNombre);
-                    cli.setPrimer_apellido(primerApellido);
-                    cli.setSegundo_apellido(segundoApellido);
-                    cli.setTipo_id(tipo_id);
-                    cli.setId_cedula(cedula);
-                    cli.setEmail(email);
-                    cli.setGenero(gender);
-                    cli.setNickname(username);
-                    cli.setFecha_nacimiento((Date.valueOf(fecha_nacimiento)));
-                    cli.setPassword(password);
 
+                Cliente cli = facade.getCliente();
+                cli.setPrimer_nombre(primerNombre);
+                cli.setSegundo_nombre(segundoNombre);
+                cli.setPrimer_apellido(primerApellido);
+                cli.setSegundo_apellido(segundoApellido);
+                cli.setTipo_id(tipo_id);
+                cli.setId_cedula(cedula);
+                cli.setEmail(email);
+                cli.setGenero(gender);
+                cli.setNickname(username);
+                cli.setFecha_nacimiento((Date.valueOf(fecha_nacimiento)));
+                cli.setPassword(password);
+
+                //Conectarse como admin para crear usuario
+                facade.cerrarConexion();
+                facade.setearAdminDB();
+                if (facade.realizarConexion()) {
+                    //Crear usuario y carritos con AdminDB
                     facade.crearUsuario();
 
-                    usuarios.setAttribute("usuario", username);
-                    usuarios.setAttribute("contraseña", password);
-
-                    //facade.crearCarrito(nickname, cli.getId_cedula());
-                    response.sendRedirect("templates/index.jsp");
+                    //Cierra conexión y setea los datos del usuario
+                    facade.cerrarConexion();
+                    facade.nombreUsuario(username);
+                    facade.passwordUsuario(password);
+                    if (facade.realizarConexion()) {
+                        Ciudad ciudad = facade.getCiudad();
+                        facade.buscarCiudades(username, password);
+                        //Se crea un carrito para todas la ciudades
+                        for (int i = 0; i < ciudad.getId_ciudad_array().size(); i++) {
+                            facade.crearCarrito(username, cli.getId_cedula(),
+                                    ciudad.getId_ciudad_array().get(i));
+                        }
+                        
+                        sesion.setAttribute("usuario", username);
+                        sesion.setAttribute("contraseña", password);
+                        response.sendRedirect("templates/index.jsp");
+                    } else {
+                        facade.cerrarConexion();
+                        facade.nombreUsuario("visitante");
+                        facade.passwordUsuario("abc123");
+                        facade.realizarConexion();
+                        response.sendRedirect("templates/index.jsp");
+                    }
                 } else {
-                    response.sendRedirect("templates/registro_user.jsp");
+                    facade.cerrarConexion();
+                    facade.nombreUsuario("visitante");
+                    facade.passwordUsuario("abc123");
+                    facade.realizarConexion();
+                    response.sendRedirect("templates/index.jsp");
                 }
-            }else {
-                response.sendRedirect("templates/registro_user.jsp");
+
+            } else {
+                response.sendRedirect("templates/registro_user.jsp?e=1");
             }
         }
     }

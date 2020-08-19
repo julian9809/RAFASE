@@ -4,25 +4,25 @@
     Author     : david
 --%>
 
+<%@page import="modelo.TarjetaCredito"%>
+<%@page import="modelo.Telefono"%>
+<%@page import="modelo.Cliente"%>
+<%@page import="modelo.Ciudad"%>
 <%@page import="modelo.Direccion"%>
 <%@page import="control.DAOFacade"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
     HttpSession sesion = request.getSession();
-    HttpSession usuarios = request.getSession();
     String ciudad = "no ciudad";
-
     if (sesion.getAttribute("Ciudad") != null) {
         ciudad = sesion.getAttribute("Ciudad").toString();
     } else {
         out.print("<script>location.replace('../index.jsp');</script>");
     }
 
-    String producto_buscado = request.getParameter("busqueda");
-    String categoria = request.getParameter("categoria");
-    String usuario = usuarios.getAttribute("usuario").toString();
-
+    String usuario = sesion.getAttribute("usuario").toString();
+    String contraseña = sesion.getAttribute("contraseña").toString();
 %>
 <html>
     <head>
@@ -50,7 +50,7 @@
         <link rel="stylesheet" href="../css/alertify/themes/bootstrap.min.css"/>
         <!---------------------- Alertify CSS ---------------------->
         <!-- Customs styles for this template -->
-        <link rel="stylesheet" href="../css/custom/productos.css">
+        <link rel="stylesheet" href="../css/custom/perfil_user.css">
         <!-- Customs fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Averia+Libre&display=swap" rel="stylesheet">
         <!-------------------------------Scripts--------------------------------->
@@ -89,7 +89,7 @@
                     <div class="input-group form-sm form-2">
                         <input class="form-control" type="text" placeholder="Buscar productos" name="producto_buscado" id="producto_buscado" aria-label="Search">
                         <div class="input-group-append">
-                            <button class="input-group-text grey lighten-5 mr-2">
+                            <button class="input-group-text form-control grey lighten-5 mr-2">
                                 <i class="fas fa-search text-grey" aria-hidden="true"></i>
                             </button>
                         </div>
@@ -117,23 +117,39 @@
         <%
             DAOFacade facade = new DAOFacade();
             Direccion dir = facade.getDireccion();
+            Direccion dirEnv = facade.getDireccionEnvio();
+            Cliente cli = facade.getCliente();
+            TarjetaCredito tarCre = facade.getTarjetaCredito();
+            Telefono tel = facade.getTelefono();
+            Ciudad ciudades = facade.getCiudad();
 
             try {
-                facade.buscarDireccionResidencia(usuario, usuarios.getAttribute("contraseña").toString(),
-                        facade.buscarTipoID(usuario, usuarios.getAttribute("contraseña").toString()),
-                        facade.buscarIdCliente(usuario, usuarios.getAttribute("contraseña").toString()));
+                long idCliente = facade.buscarIdCliente(usuario, contraseña);
+                String tipoId = facade.buscarTipoID(usuario, contraseña);
+
+                facade.buscarDireccionResidencia(usuario, contraseña, tipoId, idCliente);
+                facade.buscarDireccionEnvio(usuario, contraseña, tipoId, idCliente);
+                facade.buscarCiudades(usuario, contraseña);
+                facade.buscarTarjetaCredito(usuario, contraseña, idCliente);
+                facade.buscarDatosCliente(usuario, contraseña, idCliente);
+                facade.buscarTelefono(usuario, contraseña, idCliente);
+
             } catch (Exception e1) {
+                String error = e1.toString();
+                error = error.replaceAll("\n", "");
         %>
         <script type="text/javascript">
-            alertify.alert("Error", "<%= "Error --> " + e1 + e1.getMessage()%>", function () {
+            alertify.alert("Error", "<%= "Error --> " + error %>", function () {
                 alertify.message('OK');
             });
         </script>
         <%
-            }
+            }//end catch            
         %>
+        <!--------------------------------Información del usuario------------------------------------------>
         <div class="container mt-5">
             <div class="card">
+                <!---------------------------------Menú--------------------------------------------------------->
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
@@ -147,28 +163,110 @@
                         </li>
                     </ul>
                 </div>
+                <!----------------------------------Datos personales------------------------------------------------->
                 <div class="card-body">
                     <div class="tab-content pt-4">
                         <div class="tab-pane fade in show active" id="datosPersonales" role="tabpanel">
-                            <table class="table table-borderless">
-                                <tbody>
-                                    <tr>
-                                        <td>Nickname</td>
-                                        <td><%=usuario%></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Nombre</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Email</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Telefono</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="d-flex justify-content-center">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="card">
+                                        <div class="card-header info-color white-text text-center">
+                                            Tus datos personales
+                                        </div>                                        
+                                        <table class="table table-borderless text-center">
+                                            <tbody>
+                                                <%
+                                                    for (int j = 0; j < cli.getPrimer_nombre_array().size(); j++) {
+                                                %>
+                                                <tr>
+                                                    <td scope="row" class="font-weight-bold">Nickname</td>
+                                                    <td><%=usuario%></td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row" class="font-weight-bold">Nombre</td>
+                                                    <% if (cli.getSegundo_nombre_array().get(j) == null && cli.getSegundo_apellido_array().get(j) == null) {%>
+                                                    <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getPrimer_apellido_array().get(j)%></td>
+                                                    <% } else if (cli.getSegundo_nombre_array().get(j) == null) {%>
+                                                        <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getPrimer_apellido_array().get(j) + " "
+                                                            + cli.getSegundo_apellido_array().get(j)%></td>
+                                                        <% } else if (cli.getSegundo_apellido_array().get(j) == null) {%>
+                                                        <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getSegundo_nombre_array().get(j) + " "
+                                                            + cli.getPrimer_apellido_array().get(j)%></td>
+                                                        <% } else {%>
+                                                        <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getSegundo_nombre_array().get(j) + " "
+                                                            + cli.getPrimer_apellido_array().get(j) + " " + cli.getSegundo_apellido_array().get(j)%></td>
+                                                        <%} //end if %>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row" class="font-weight-bold">Email</td>
+                                                    <td><%= cli.getEmail_array().get(j)%></td>
+                                                </tr>
+                                                <!------------------------------------------Teléfono----------------------------->
+                                                <tr>
+                                                    <td scope="row" class="font-weight-bold">Telefono(s)</td>
+                                                    <td>
+                                                        <% if (tel.getNumeroTelefonoArray().isEmpty()) { %>
+                                                        <a class="btn btn-info btn-sm align-middle ml-0" href="perfil_user.jsp" role="button" data-toggle="modal" data-target="#modalTelefono">Registrar telefono</a>
+                                                        <% } else { %>
+                                                        <table class="table table-hover text-center">
+                                                            <tbody>                                                                
+                                                                <%
+                                                                    for (int k = 0; k < tel.getNumeroTelefonoArray().size(); k++) {
+                                                                %>                                                            
+                                                                <tr>
+                                                                    <td><%= tel.getNumeroTelefonoArray().get(k)%></td>
+                                                                    <td><a role="button" class="btn btn-danger btn-sm px-2"  href="../registrar_telefono?accion=quitar&telefono=<%= tel.getNumeroTelefonoArray().get(k)%>"><i class="fas fa-minus" aria-hidden="true"></i></a></td>
+                                                                </tr>
+                                                                <%} //end for %>    
+                                                                <tr>
+                                                                    <td><a class="btn btn-info btn-sm align-middle ml-0" href="perfil_user.jsp" role="button" data-toggle="modal" data-target="#modalTelefono">Registrar telefono</a></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <% } //end if %>
+                                                    </td>
+                                                </tr>
+                                                <%} //end for%>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="tab-pane fade in show" id="direcciones" role="tabpanel">
+                        <!------------------------------------Modal teléfono--------------------------------------------->
+                        <div class="modal fade" id="modalTelefono" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-notify" role="document">
+                                <!--Content-->
+                                <div class="modal-content">
+                                    <!--Header-->
+                                    <div class="modal-header text-center warning-color">
+                                        <h4 class="modal-title white-text w-100 font-weight-bold py-2">Registra tu teléfono</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" class="white-text">&times;</span>
+                                        </button>
+                                    </div>
+                                    <!--Body-->
+                                    <form action="../registrar_telefono" method="post">
+                                        <div class="modal-body">
+                                            <div class="md-form mb-5 amber-input active-amber-input">
+                                                <i class="fas fa-phone prefix"></i>
+                                                <input type="text" id="telefono" name="telefono" class="form-control validate" required>
+                                                <label for="telefono" data-error="wrong" data-success="right">Teléfono</label>
+                                            </div>
+                                        </div>
+                                        <!--Footer-->
+                                        <div class="modal-footer justify-content-center">
+                                            <button class="btn btn-warning waves-effect" type="submit">Registrar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!--/.Content-->
+                            </div>
+                        </div>
+                        <!------------------------------------------Direcciones----------------------------------->            
+                        <div class="tab-pane fade" id="direcciones" role="tabpanel">
+                            <!-----------------------------------------------Menú de direcciones--------------------------->
                             <div class="d-flex justify-content-between">
                                 <a class="btn btn-primary" data-toggle="collapse" href="#direccionResidencia" role="button" aria-expanded="false"
                                    aria-controls="direccionResidencia">Dirección de residencia</a>
@@ -177,7 +275,7 @@
                                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse"
                                         aria-expanded="false" aria-controls="direccionResidencia direccionEnvio">Todas las direcciones</button>
                             </div>
-
+                            <!-------------------------------Direcciones contenido---------------------------------->
                             <div class="row">
                                 <div class="col">
                                     <div class="collapse multi-collapse" id="direccionResidencia">
@@ -186,62 +284,7 @@
                                                 <% if (dir.getDireccion_completa_array().isEmpty()) {%>
                                                 <tr>
                                                     <td>No tienes direcciones registradas</td>
-                                                    <td><a class="btn btn-info btn-sm align-middle ml-0" href="perfil_user.jsp" role="button" data-toggle="modal" data-target="#modalDireccion">Registrar dirección</a></td>
-                                                    <!------------------------------------Modal--------------------------------------------->
-                                                <div class="modal fade" id="modalDireccion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                                                     aria-hidden="true">
-                                                    <div class="modal-dialog modal-notify modal-warning" role="document">
-                                                        <!--Content-->
-                                                        <div class="modal-content">
-                                                            <!--Header-->
-                                                            <div class="modal-header text-center">
-                                                                <h4 class="modal-title white-text w-100 font-weight-bold py-2">Registra tu dirección</h4>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true" class="white-text">&times;</span>
-                                                                </button>
-                                                            </div>
-
-                                                            <!--Body-->
-
-                                                            <form action="../registrar_direccion" method="post">
-                                                                <div class="modal-body">
-                                                                    <div class="md-form mb-5">
-                                                                        <i class="fas fa-home prefix grey-text"></i>
-                                                                        <input type="text" id="form3" class="form-control validate">
-                                                                        <label data-error="wrong" data-success="right" for="form3">Dirección</label>
-                                                                    </div>
-
-                                                                    <div class="form-group">
-                                                                        <textarea class="form-control rounded-0 validate" maxlength="50" id="exampleFormControlTextarea2" rows="3" placeholder="Datos adicionales"></textarea>
-                                                                    </div>
-
-                                                                    <div class="md-form">
-                                                                        <i class="fas fa-city prefix grey-text"></i>
-                                                                        <input type="text" id="form2" class="form-control validate">
-                                                                        <label data-error="wrong" data-success="right" for="form2">Ciudad</label>
-                                                                    </div>
-
-                                                                    <!-- Group of default radios - option 1 -->
-                                                                    <div class="custom-control custom-radio">
-                                                                        <input type="radio" class="custom-control-input" id="residencia" name="tipo_direccion" checked>
-                                                                        <label class="custom-control-label" for="defaultGroupExample1">Residencia</label>
-                                                                    </div>
-
-                                                                    <!-- Group of default radios - option 2 -->
-                                                                    <div class="custom-control custom-radio">
-                                                                        <input type="radio" class="custom-control-input" id="envio" name="tipo_direccion">
-                                                                        <label class="custom-control-label" for="defaultGroupExample2">Envio</label>
-                                                                    </div>
-                                                                </div>
-                                                                <!--Footer-->
-                                                                <div class="modal-footer justify-content-center">
-                                                                    <button class="btn btn-warning waves-effect" type="submit">Registrar</button>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                        <!--/.Content-->
-                                                    </div>
-                                                </div>
+                                                    <td><a class="btn btn-info btn-sm align-middle ml-0" href="perfil_user.jsp" role="button" data-toggle="modal" data-target="#modalDireccion">Registrar dirección</a></td>                                                    
                                                 </tr>
                                                 <%} else {%>
                                                 <%
@@ -265,15 +308,180 @@
                                 <div class="col">
                                     <div class="collapse multi-collapse" id="direccionEnvio">
                                         <div class="card card-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil
-                                            anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                                            <table class="table table-borderless">
+                                                <% if (dirEnv.getDireccion_completa_array().isEmpty()) {%>
+                                                <tr>
+                                                    <td>No tienes direcciones registradas</td>
+                                                    <td><a class="btn btn-info btn-sm align-middle ml-0" href="perfil_user.jsp" role="button" data-toggle="modal" data-target="#modalDireccion">Registrar dirección</a></td>
+                                                </tr>
+                                                <%} else {%>
+                                                <%
+                                                    for (int i = 0; i < dirEnv.getDireccion_completa_array().size(); i++) {
+                                                %>
+                                                <tr>
+                                                    <td><%=dirEnv.getDireccion_completa_array().get(i)%></td>
+                                                </tr>
+                                                <tr class="grey lighten-2">
+                                                    <td>Datos adicionales</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><%=dirEnv.getExtras_array().get(i)%></td>
+                                                </tr>
+                                                <%} //end for%>
+                                                <%} //end if%>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!------------------------------------Modal direcciones--------------------------------------------->
+                        <div class="modal fade" id="modalDireccion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-notify" role="document">
+                                <!--Content-->
+                                <div class="modal-content">
+                                    <!--Header-->
+                                    <div class="modal-header text-center warning-color">
+                                        <h4 class="modal-title white-text w-100 font-weight-bold py-2">Registra tu dirección</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" class="white-text">&times;</span>
+                                        </button>
+                                    </div>
+                                    <!--Body-->
+                                    <form action="../registrar_direccion" method="post">
+                                        <div class="modal-body">
+                                            <div class="md-form mb-5 amber-input active-amber-input">
+                                                <i class="fas fa-home prefix"></i>
+                                                <input type="text" id="direccion" name="direccion" class="form-control validate" required>
+                                                <label for="direccion" data-error="wrong" data-success="right">Dirección</label>
+                                            </div>
+                                            <div class="md-form amber-textarea active-amber-textarea">
+                                                <i class="fas fa-pencil-alt prefix"></i>
+                                                <textarea class="md-textarea form-control validate" maxlength="50" id="extras" name="extras" rows="3"></textarea>
+                                                <label for="extras" data-error="wrong" data-success="right">Datos adicionales</label>
+                                            </div>
+                                            <div class="md-form">
+                                                <select class="browser-default custom-select mb-4 validate" name="id_ciudad" id="id_ciudad" required>
+                                                    <option selected hidden disabled>Escoge tu ciudad</option>
+                                                    <%
+                                                        for (int i = 0; i < ciudades.getId_ciudad_array().size(); i++) {
+                                                    %>
+                                                    <option value="<%= ciudades.getId_ciudad_array().get(i).toString()%>"><%= ciudades.getNombre_array().get(i)%></option>
+                                                    <%}//End for ciudad%>
+                                                </select>
+                                            </div>
+                                            <p>Tipo de dirección</p>                                                                    
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="residencia" name="tipo_direccion" value="R" checked>
+                                                <label class="custom-control-label" for="residencia">Residencia</label>
+                                            </div>                                                                    
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="envio" name="tipo_direccion" value="E">
+                                                <label class="custom-control-label" for="envio">Envio</label>
+                                            </div>
+                                        </div>
+                                        <!--Footer-->
+                                        <div class="modal-footer justify-content-center">
+                                            <button class="btn btn-warning waves-effect" type="submit">Registrar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!--------------------------------------Medios de pago---------------------------------------->
                         <div class="tab-pane fade" id="mediosPago" role="tabpanel">
-
+                            <div class="d-flex justify-content-center">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="card text-center">
+                                        <div class="card-header warning-color white-text">
+                                            Tarjetas de credito
+                                        </div>                                    
+                                        <div class="card-body">
+                                            <table class="table table-borderless text-center">
+                                                <tbody>
+                                                    <% 
+                                                        if (tarCre.getNombreTitularArray().isEmpty()) {
+                                                    %>
+                                                    <tr>
+                                                        <td>No hay tarjetas de credito registradas</td>
+                                                        <td><a class="btn btn-info btn-sm align-middle ml-0" href="perfil_user.jsp" role="button" data-toggle="modal" data-target="#modalTarjeta">Registrar tarjeta de credito</a></td>
+                                                    </tr>
+                                                    <% } else { %>
+                                                    <% for (int i = 0; i < tarCre.getNombreTitularArray().size(); i++) {%>
+                                                    <tr>
+                                                        <td>Tarjeta No.</td>
+                                                        <td><%= tarCre.getNumeroTarjetaArray().get(i)%></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Titular</td>
+                                                        <td><%= tarCre.getNombreTitularArray().get(i)%></td>
+                                                    </tr>
+                                                    <% } //end for%>
+                                                    <% } //end if %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!------------------------------------Modal tarjetas de credito--------------------------------------------->
+                        <div class="modal fade" id="modalTarjeta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-notify" role="document">
+                                <!--Content-->
+                                <div class="modal-content">
+                                    <!--Header-->
+                                    <div class="modal-header text-center warning-color">
+                                        <h4 class="modal-title white-text w-100 font-weight-bold py-2">Registra tu tarjeta de credito</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" class="white-text">&times;</span>
+                                        </button>
+                                    </div>
+                                    <!--Body-->
+                                    <form action="../registrar_tarjetaCredito" method="post">
+                                        <div class="modal-body">
+                                            <div class="md-form mb-5 amber-input active-amber-input">
+                                                <i class="fas fa-id-card prefix"></i>
+                                                <label for="nombre" data-error="wrong" data-success="right">Nombre en la tarjeta</label>
+                                                <input type="text" class="form-control validate mb-0" id="nombreTarCre"  name="nombreTarCre" required>
+                                                <small class="text-muted">Nombre completo en la parte de atras de la tarjeta</small>
+                                                <div class="invalid-feedback">
+                                                    Nombre en la tarjeta es requerido
+                                                </div>
+                                            </div>
+                                            <div class="md-form mb-5 amber-input active-amber-input">
+                                                <i class="fas fa-credit-card prefix"></i>
+                                                <label for="numero" data-error="wrong" data-success="right">Número de la tarjeta de credito</label>
+                                                <input type="number" class="form-control validate" min="100000000000" max="999999999999" id="numero" name="numero" required>
+                                                <div class="invalid-feedback">
+                                                    Número de la tarjeta de credito requerido
+                                                </div>
+                                            </div>                                            
+                                            <div class="row">
+                                                <div class="col-2 col-md-2">
+                                                    <div class="md-form mb-5 amber-input active-amber-input">
+                                                        <label for="mes" data-error="wrong" data-success="right">MM</label>
+                                                        <input type="number" class="form-control validate" min="1" max="12" id="mes" name="mes" required>
+                                                    </div>
+                                                </div>
+                                                <label class="my-auto">/</label>
+                                                <div class="col-2 col-md-2">
+                                                    <div class="md-form mb-5 amber-input active-amber-input">
+                                                        <label for="año" data-error="wrong" data-success="right">AA</label>
+                                                        <input type="number" class="form-control validate" min="20" max="28" id="año" name="año" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--Footer-->
+                                            <div class="modal-footer justify-content-center">
+                                                <button class="btn btn-warning waves-effect" type="submit">Registrar</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

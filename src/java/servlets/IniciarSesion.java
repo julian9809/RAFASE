@@ -41,21 +41,52 @@ public class IniciarSesion extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String username = request.getParameter("username");
-            String inputPassword = request.getParameter("inputPassword");
+            String password = request.getParameter("password");
+
             DAOFacade facade = new DAOFacade();
-            
-            HttpSession usuarios = request.getSession();
-            
-            if(facade.buscarExisteCliente(usuarios.getAttribute("usuario")
-                    .toString(), usuarios.getAttribute("contraseña").toString(),
-                    username, inputPassword)){
-                usuarios.setAttribute("usuario", username);
-                usuarios.setAttribute("contraseña", inputPassword);
-                response.sendRedirect("templates/index.jsp");
+            HttpSession sesion = request.getSession();
+
+            if (facade.buscarExisteCliente(sesion.getAttribute("usuario")
+                    .toString(), sesion.getAttribute("contraseña").toString(),
+                    username, password)) {
+                facade.cerrarConexion();
+                facade.nombreUsuario(username);
+                facade.passwordUsuario(password);
+                if (facade.realizarConexion()) {
+                    sesion.setAttribute("usuario", username);
+                    sesion.setAttribute("contraseña", password);
+                    response.sendRedirect("templates/index.jsp");
+                } else {
+                    facade.cerrarConexion();
+                    facade.nombreUsuario("visitante");
+                    facade.passwordUsuario("abc123");
+                    facade.realizarConexion();
+                }
+            } else {
+                if (facade.existeAdmin(username)) {
+                    facade.cerrarConexion();
+                    facade.nombreUsuario(username);
+                    facade.passwordUsuario(password);
+                    if (facade.realizarConexion()) {
+                        sesion.setAttribute("usuario", username);
+                        sesion.setAttribute("contraseña", password);
+                        response.sendRedirect("templates/index.jsp");
+                    } else {
+                        facade.cerrarConexion();
+                        facade.nombreUsuario("visitante");
+                        facade.passwordUsuario("abc123");
+                        facade.realizarConexion();
+                    }
+                } else {
+                    response.sendRedirect("templates/sign.jsp");
+                }
             }
-            else{
-                response.sendRedirect("templates/sign.jsp");
-            }
+        } catch (Exception e) {
+            DAOFacade facade = new DAOFacade();
+            facade.cerrarConexion();
+            facade.nombreUsuario("visitante");
+            facade.passwordUsuario("abc123");
+            facade.realizarConexion();
         }
     }
 

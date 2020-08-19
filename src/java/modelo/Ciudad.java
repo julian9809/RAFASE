@@ -13,13 +13,13 @@ import java.util.ArrayList;
  */
 public class Ciudad {
     
-    private double id_ciudad;
+    private long id_ciudad;
     private String nombre;
-    private double id_tienda;
+    private Long id_tienda;
     
-    private ArrayList<Double> id_ciudad_array = new ArrayList<>();
+    private ArrayList<Long> id_ciudad_array = new ArrayList<>();
     private ArrayList<String> nombre_array = new ArrayList<>();
-    private ArrayList<Double> id_tienda_array = new ArrayList<>();
+    private ArrayList<Long> id_tienda_array = new ArrayList<>();
 
     public Ciudad() {
     }
@@ -28,7 +28,7 @@ public class Ciudad {
         return id_ciudad;
     }
 
-    public void setId_ciudad(double id_ciudad) {
+    public void setId_ciudad(long id_ciudad) {
         this.id_ciudad = id_ciudad;
     }
 
@@ -44,15 +44,15 @@ public class Ciudad {
         return id_tienda;
     }
 
-    public void setId_tienda(double id_tienda) {
+    public void setId_tienda(long id_tienda) {
         this.id_tienda = id_tienda;
     }
 
-    public ArrayList<Double> getId_ciudad_array() {
+    public ArrayList<Long> getId_ciudad_array() {
         return id_ciudad_array;
     }
 
-    public void setId_ciudad_array(ArrayList<Double> id_ciudad_array) {
+    public void setId_ciudad_array(ArrayList<Long> id_ciudad_array) {
         this.id_ciudad_array = id_ciudad_array;
     }
 
@@ -64,11 +64,11 @@ public class Ciudad {
         this.nombre_array = nombre_array;
     }
 
-    public ArrayList<Double> getId_tienda_array() {
+    public ArrayList<Long> getId_tienda_array() {
         return id_tienda_array;
     }
 
-    public void setId_tienda_array(ArrayList<Double> id_tienda_array) {
+    public void setId_tienda_array(ArrayList<Long> id_tienda_array) {
         this.id_tienda_array = id_tienda_array;
     }
     

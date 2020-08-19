@@ -25,12 +25,14 @@ public class ClienteDAO {
 
     private Cliente cliente;
     private Direccion direccion;
+    private Direccion direccionEnvio;
     private Telefono telefono;
     private TarjetaCredito tarjetaCredito;
 
     public ClienteDAO() {
         cliente = new Cliente();
         direccion = new Direccion();
+        direccionEnvio = new Direccion();
         telefono = new Telefono();
         tarjetaCredito = new TarjetaCredito();
     }
@@ -126,8 +128,8 @@ public class ClienteDAO {
                 prepStmt.setLong(1, cedula);
                 ResultSet rs = prepStmt.executeQuery();
                 while (rs.next()) {
-                    direccion.getDireccion_completa_array().add(rs.getString(1));
-                    direccion.getExtras_array().add(rs.getString(2));
+                    direccionEnvio.getDireccion_completa_array().add(rs.getString(1));
+                    direccionEnvio.getExtras_array().add(rs.getString(2));
                 }
             }
         } catch (SQLException e) {
@@ -139,7 +141,7 @@ public class ClienteDAO {
 
     public void insertarTelefono(String usuario, String password) throws CaException {
         try {
-            String strSQL = "INSERT INTO TEL(ID_TELEFONO, NUMERO_TELEFONO, EN_USO, ID_CEDULA, TIPO_ID) VALUES (ID_TELEFONO.NEXTVAL, ?, ?, ?, ?)";
+            String strSQL = "INSERT INTO TEL(ID_TELEFONO, NUMERO_TELEFONO, TELEFONO_EN_USO, ID_CEDULA, TIPO_ID) VALUES (ID_TELEFONO.NEXTVAL, ?, ?, ?, ?)";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.setLong(1, telefono.getNumeroTelefono());
@@ -159,7 +161,7 @@ public class ClienteDAO {
 
     public void buscarTelefono(String usuario, String password, long cedula) throws CaException {
         try {
-            String strSQL = "SELECT NUMERO_TELEFONO FROM TEL, USUR WHERE USUR.ID_CEDULA = TEL.ID_CEDULA AND USUR.TIPO_ID = TEL.TIPO_ID AND USUR.ID_CEDULA = ? AND TEL.EN_USO = 'S'";
+            String strSQL = "SELECT NUMERO_TELEFONO FROM TEL, USUR WHERE USUR.ID_CEDULA = TEL.ID_CEDULA AND USUR.TIPO_ID = TEL.TIPO_ID AND USUR.ID_CEDULA = ? AND TEL.TELEFONO_EN_USO = 'S'";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.setLong(1, cedula);
@@ -175,14 +177,31 @@ public class ClienteDAO {
         }
     }
     
+    public void quitarTelefono(String usuario, String password, long cedula, long telefono) throws CaException {
+        try {
+            String strSQL = "UPDATE TEL SET TEL.TELEFONO_EN_USO = 'N' WHERE NUMERO_TELEFONO = ? AND ID_CEDULA = ?";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
+                prepStmt.setLong(1, telefono);
+                prepStmt.setLong(2, cedula);
+                prepStmt.executeUpdate();
+                ServiceLocator.getInstance().commit();
+            }
+        } catch (SQLException e) {
+            throw new CaException("ClienteDAO", "No se pudo realizar la busqueda" + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance().liberarConexion();
+        }
+    }
+    
     public void insertarTarjetaCredito(String usuario, String password) throws CaException {
         try {
-            String strSQL = "INSERT INTO TC(ID_TARJETA,NOMBRETITULAR,NUMERO_TARJETA, FECH_EXP, TIPO_ID, ID_CEDULA) VALUES (ID_TARJETA.NEXTVAL,?,?,?,?,?)";
+            String strSQL = "INSERT INTO TC(ID_TARJETA,NOMBRETITULAR,NUMERO_TARJETA, FECH_EXP, TIPO_ID, ID_CEDULA, TARJETA_EN_USO) VALUES (ID_TARJETA.NEXTVAL,?,?,TO_DATE(?,'MM/YY'),?,?,'S')";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.setString(1, tarjetaCredito.getNombreTitular());
                 prepStmt.setLong(2, tarjetaCredito.getNumeroTarjeta());
-                prepStmt.setDate(3, (Date) tarjetaCredito.getFechaExp());
+                prepStmt.setString(3, tarjetaCredito.getFechaExp());
                 prepStmt.setString(4, tarjetaCredito.getTipoID());
                 prepStmt.setLong(5, tarjetaCredito.getIdCedula());
                 prepStmt.executeUpdate();
@@ -206,7 +225,7 @@ public class ClienteDAO {
                 while (rs.next()) {
                     tarjetaCredito.getNombreTitularArray().add(rs.getString(1));
                     tarjetaCredito.getNumeroTarjetaArray().add(rs.getLong(2));
-                    tarjetaCredito.getFechaExpArray().add(rs.getDate(3));
+                    tarjetaCredito.getFechaExpArray().add(rs.getString(3));
                 }
             }
         } catch (SQLException e) {
@@ -250,7 +269,31 @@ public class ClienteDAO {
             ServiceLocator.getInstance().liberarConexion();
         }
     }
-
+        
+    public void buscarDatosCliente(String usuario, String password, long cedula) throws CaException {
+        try {
+            String strSQL = "SELECT PRIMER_NOMB, SEGUNDO_NOMB, PRIMER_APELL, SEGUNDO_APELL, FECH_NAC, GENERO, EMAIL FROM USUR WHERE ID_CEDULA = ?";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
+                prepStmt.setLong(1, cedula);
+                ResultSet rs = prepStmt.executeQuery();
+                while (rs.next()) {
+                    cliente.getPrimer_nombre_array().add(rs.getString(1));
+                    cliente.getSegundo_nombre_array().add(rs.getString(2));
+                    cliente.getPrimer_apellido_array().add(rs.getString(3));
+                    cliente.getSegundo_apellido_array().add(rs.getString(4));
+                    cliente.getFecha_nacimiento_array().add(rs.getDate(5));
+                    cliente.getGenero_array().add(rs.getString(6));
+                    cliente.getEmail_array().add(rs.getString(7));
+                }
+            }
+        } catch (SQLException e) {
+            throw new CaException("ClienteDAO", "No se pudo realizar la busqueda" + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance().liberarConexion();
+        }
+    }
+    
     public long buscarIdCliente(String usuario, String password) throws CaException {
         long id_cliente=-1;
         try {
@@ -304,7 +347,14 @@ public class ClienteDAO {
     public void setDireccion(Direccion direccion) {
         this.direccion = direccion;
     }
-    
+
+    public Direccion getDireccionEnvio() {
+        return direccionEnvio;
+    }
+
+    public void setDireccionEnvio(Direccion direccionEnvio) {
+        this.direccionEnvio = direccionEnvio;
+    }    
     
     public Telefono getTelefono() {
         return telefono;
@@ -320,5 +370,6 @@ public class ClienteDAO {
 
     public void setTarjetaCredito(TarjetaCredito tarjetaCredito) {
         this.tarjetaCredito = tarjetaCredito;
-    }
+    }   
+    
 }

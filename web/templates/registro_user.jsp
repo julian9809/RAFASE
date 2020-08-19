@@ -21,10 +21,36 @@
         <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
         <!-- Material Design Bootstrap -->
         <link rel="stylesheet" href="../css/mdb/mdb.min.css">
+        <!---------------------- Alertify CSS ---------------------->
+        <!-- CSS -->
+        <link rel="stylesheet" href="../css/alertify/alertify.min.css"/>
+        <!-- Default theme -->
+        <link rel="stylesheet" href="../css/alertify/themes/default.min.css"/>
+        <!-- Semantic UI theme -->
+        <link rel="stylesheet" href="../css/alertify/themes/semantic.min.css"/>
+        <!-- Bootstrap theme -->
+        <link rel="stylesheet" href="../css/alertify/themes/bootstrap.min.css"/>
+        <!---------------------- Alertify CSS ---------------------->
         <!-- Custom styles for this template -->
         <link rel="stylesheet" href="../css/custom/registro_user.css">
+        <link rel="stylesheet" href="../css/custom/checkPassword.css">
         <!-- Customs fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Averia+Libre&display=swap" rel="stylesheet">
+        <!-------------------------------Scripts--------------------------------->
+        <!-- jQuery -->
+        <script type="text/javascript" src="../js/jquery.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="../js/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="../js/mdb.min.js"></script>
+        <!-- Alertifyjs JavaScript -->
+        <script type="text/javascript" src="../js/alertifyjs/alertify.min.js"></script>
+        <!-- Custom Javacript-->
+        <script type="text/javascript" src="../js/custom/checkPassword.js"></script>
+        <script type="text/javascript" src="../js/custom/viewPassword.js"></script>
+        <script type="text/javascript" src="../js/custom/validatePassword.js"></script>
     </head>
     <body>
         <div class="container register">
@@ -40,7 +66,7 @@
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                             <h3 class="register-heading">¡Registrate como cliente!</h3>
-                            <form class="row register-form" action="../registro_user" method="post">
+                            <form id="registro_user" class="row register-form" action="../registro_user" method="post" onsubmit="return validatePassword();">
                                 <div class="col-md-6">
                                     <div class="md-form md-bg">
                                         <input type="text" class="form-control white" name="nombre" id="nombre" required/>
@@ -55,10 +81,10 @@
                                             <input type="text" class="form-control white mb-0" name="cedula" id="cedula" required/>
                                             <label for="cedula">Cedula</label>
                                         </div>
-                                        <select class="form-control white" name="tipo_id" id="tipo_id" required>
-                                            <option value="" disabled selected>Tipo de documento...</option>
-                                            <option value="CC" required>Cedula</option>
-                                            <option value="CE" required>Cedula de extranjeria</option>
+                                        <select class="browser-default custom-select custom-select-lg input-group-prepend text-muted font-weight-lighter white" name="tipo_id" id="tipo_id" required>
+                                            <option class="text-muted font-weight-lighter" value="" hidden disabled selected>Tipo ID</option>
+                                            <option class="text-muted font-weight-lighter" value="CC" required>Cedula</option>
+                                            <option class="text-muted font-weight-lighter" value="CE" required>Cedula de extranjeria</option>
                                         </select>
                                     </div>
                                     <div class="md-form md-bg">
@@ -66,19 +92,17 @@
                                         <label for="email">Correo Electronico</label>
                                     </div>
                                     <div class="form-group">
-                                        <div class="maxl">
-                                            <label class="radio inline"> 
-                                                <input type="radio" name="gender" value="M" id="gender" required>
-                                                <span> Hombre </span> 
-                                            </label>
-                                            <label class="radio inline"> 
-                                                <input type="radio" name="gender" value="F" id="gender" required>
-                                                <span> Mujer </span> 
-                                            </label>
-                                            <label class="radio inline"> 
-                                                <input type="radio" name="gender" value="O" id="gender" required>
-                                                <span> Otro </span> 
-                                            </label>    
+                                        <div class="custom-control custom-radio custom-control-inline"> 
+                                            <input type="radio" class="custom-control-input" name="gender" value="M" id="gender1" required>
+                                            <label class="custom-control-label" for="gender1"> Hombre </label>
+                                        </div>
+                                        <div class="custom-control custom-radio custom-control-inline"> 
+                                            <input type="radio" class="custom-control-input" name="gender" value="F" id="gender2" required>
+                                            <label class="custom-control-label" for="gender2"> Mujer </label>
+                                        </div>
+                                        <div class="custom-control custom-radio custom-control-inline"> 
+                                            <input type="radio" class="custom-control-input" name="gender" value="O" id="gender3" required>
+                                            <label class="custom-control-label" for="gender3"> Otro </label>
                                         </div>
                                     </div>
                                 </div>
@@ -91,13 +115,16 @@
                                         <input type="date" class="form-control white" max="2002-01-01" value="" name="fecha_nacimiento" id="fecha_nacimiento" required/>
                                         <label for="fecha_nacimiento">Fecha de nacimiento</label>
                                     </div>
-                                    <div class="md-form md-bg">
-                                        <input type="password" class="form-control white" value="" name="password" id="password" autocomplete="new-password" required/>
+                                    <div class="md-form md-bg mb-0">
+                                        <input type="password" class="form-control white mb-0" value="" name="password" id="password" autocomplete="new-password" required/>
                                         <label for="password">Contraseña</label>
+                                        <div id="show_password" class="fa fa-eye-slash password-icon"></div>
+                                        <div id="strengthMessage"></div>
                                     </div>
                                     <div class="md-form md-bg">
-                                        <input type="password" class="form-control white" value="" name="confirme_password" id="confirme_password" autocomplete="new-password" required/>
+                                        <input type="password" class="form-control white mb-0" value="" name="confirme_password" id="confirme_password" autocomplete="new-password" required/>
                                         <label for="confirme_password">Confirmar Contraseña</label>
+                                        <div id="show_confirme_password" class="fa fa-eye-slash password-icon"></div>
                                     </div>
                                     <button class="btn btn-outline-success my-2 my-sm-0 btnRegister" type="submit">Registrarse</button>
                                 </div>
@@ -107,14 +134,22 @@
                 </div>
             </div>
         </div>
-        <!-------------------------------Scripts--------------------------------->
-        <!-- jQuery -->
-        <script type="text/javascript" src="../js/jquery.js"></script>
-        <!-- Bootstrap tooltips -->
-        <script type="text/javascript" src="../js/popper.min.js"></script>
-        <!-- Bootstrap core JavaScript -->
-        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-        <!-- MDB core JavaScript -->
-        <script type="text/javascript" src="../js/mdb.min.js"></script>
+        <!--Scripts de respuesta del servlet-->
+        <%
+            try {
+                //Si e = 1, el username ya existe
+                if (request.getParameter("e").equals("1")) {
+        %>
+        <script  type = "text/javascript">
+            alertify.alert("Error", "El nombre de usuario escrito ya esta en uso, intente con otro nombre", function () {
+                alertify.message('Intente con otro nombre');
+
+            });
+        </script>
+        <%
+                }//End if e == 1
+            } catch (Exception e) {
+            }
+        %>
     </body>
 </html>

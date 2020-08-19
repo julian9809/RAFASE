@@ -7,4 +7,53 @@ and open the template in the editor.
     Created on : 27/06/2020, 09:57:37 AM
     Author     : david
 */
+body{
+    background-color: #E6E6E6;
+}
 
+img#logo{
+    position: static;
+    left: 1rem;
+    display: block;
+    max-width : 3rem;
+    width: 100%;
+    border: 0.1rem solid #fff;
+    border-radius: 0.3rem;
+    margin-right: 0.4rem;
+}
+/*Color naranja de textarea*/
+.active-pink-textarea.md-form textarea.md-textarea:focus:not([readonly])+label {
+  color: #f48fb1;
+}
+
+.active-amber-textarea.md-form label.active {
+  color: #ffa000;
+}
+.amber-textarea textarea.md-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid #ffa000;
+  box-shadow: 0 1px 0 0 #ffa000;
+}
+.amber-textarea.md-form .prefix.active {
+  color: #ffa000;
+}
+.active-amber-textarea.md-form textarea.md-textarea:focus:not([readonly])+label {
+  color: #ffa000;
+}
+/*Color naranja input*/
+.active-pink-input.md-form input.form-control:focus:not([readonly])+label {
+  color: #f48fb1;
+}
+
+.active-amber-input.md-form label.active {
+  color: #ffa000;
+}
+.amber-input input.form-control:focus:not([readonly]) {
+  border-bottom: 1px solid #ffa000;
+  box-shadow: 0 1px 0 0 #ffa000;
+}
+.amber-input.md-form .prefix.active {
+  color: #ffa000;
+}
+.active-amber-input.md-form input.form-control:focus:not([readonly])+label {
+  color: #ffa000;
+}
