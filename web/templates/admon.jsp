@@ -25,7 +25,7 @@
 
     String usuario = sesion.getAttribute("usuario").toString();
     String contraseña = sesion.getAttribute("contraseña").toString();
-    
+
     String ciudad_stock = request.getParameter("ciudad_stock");
 
 %>
@@ -385,8 +385,7 @@
 
             </div>
 
-            <%
-                DAOFacade facade = new DAOFacade();
+            <%                DAOFacade facade = new DAOFacade();
                 Admon adm = facade.getAdmon();
                 Proveedor proveedor = facade.getProveedor();
                 Ciudad ciu = facade.getCiudad();
@@ -395,7 +394,7 @@
                 try {
                     facade.buscarAdministradores(usuario, contraseña);
                     facade.buscarProveedores(usuario, contraseña);
-                    facade.buscarCiudades(usuario, contraseña);                    
+                    facade.buscarCiudades(usuario, contraseña);
                 } catch (CaException e1) {
                     String error = e1.toString();
                     error = error.replaceAll("\n", "");
@@ -516,7 +515,7 @@
                         </div>
                         <!--Body-->
                         <form action="../registrar_proveedor" method="post">
-                            <div class="modal-body">
+                            <div class="modal-body">                                
                                 <div class="md-form mb-5 amber-input active-amber-input">
                                     <i class="fas fa-portrait prefix"></i>
                                     <label for="nombreProveedor" data-error="wrong" data-success="right">Nombre de proveedor</label>
@@ -526,6 +525,14 @@
                                         Nombre del proveedor es requerido
                                     </div>
                                 </div>
+                                <div class="md-form mb-5 amber-input active-amber-input">
+                                    <i class="fas fa-id-card prefix"></i>
+                                    <label for="numero" data-error="wrong" data-success="right">NIT</label>
+                                    <input type="number" class="form-control validate" id="numero" name="numero" required>
+                                    <div class="invalid-feedback">
+                                        NIT requerido
+                                    </div>
+                                </div> 
                                 <div class="md-form mb-5 amber-input active-amber-input">
                                     <i class="fas fa-home prefix"></i>
                                     <label for="direccionProveedor" data-error="wrong" data-success="right">Dirección del proveedor</label>
@@ -566,28 +573,28 @@
                                 </tr>
                             </thead>
                             <tbody>                            
-                            <%  
-                                for (int j = 0; j < ciu.getId_ciudad_array().size(); j++) {
-                                facade.buscarProducto(usuario, contraseña, "", ciu.getNombre_array().get(j), "", "");
-                            %>
-                            <tr>
-                                <td colspan="8" class="text-center info-color white-text font-weight-bold"><%= ciu.getNombre_array().get(j) %></td>
-                            </tr>
-                            <%
-                                for (int i = 0; i < inventarioRafase.getProducto().getId_producto_array().size(); i++) {
-                            %>
-                            <tr>
-                                <th scope="row"><%= i + 1%></th>
-                                <td><%= inventarioRafase.getProducto().getNombre_producto_array().get(i)%></td>
-                                <td><%= inventarioRafase.getCategoria().getNombre_categoria_array().get(i)%></td>
-                                <td><%= inventarioRafase.getSubcategoria().getNombre_subcategoria_array().get(i)%></td>
-                                <td><%= inventarioRafase.getProducto().getMarca_producto_array().get(i)%></td>
-                                <td><%= inventarioRafase.getProducto().getReferencia_producto_array().get(i)%></td>
-                                <td><%= inventarioRafase.getInventario().getExistencias_array().get(i)%></td>
-                                <td><%= inventarioRafase.getInventario().getPrecio_base_array().get(i)%></td>
-                            </tr>
-                            <% } //end for %>
-                            <% } //end for %>
+                                <%  
+                                    for (int j = 0; j < ciu.getId_ciudad_array().size(); j++) {
+                                        facade.buscarProducto(usuario, contraseña, "", ciu.getNombre_array().get(j), "", "");
+                                %>
+                                <tr>
+                                    <td colspan="8" class="text-center info-color white-text font-weight-bold"><%= ciu.getNombre_array().get(j)%></td>
+                                </tr>
+                                <%
+                                    for (int i = 0; i < inventarioRafase.getProducto().getId_producto_array().size(); i++) {
+                                %>
+                                <tr>
+                                    <th scope="row"><%= i + 1%></th>
+                                    <td><%= inventarioRafase.getProducto().getNombre_producto_array().get(i)%></td>
+                                    <td><%= inventarioRafase.getCategoria().getNombre_categoria_array().get(i)%></td>
+                                    <td><%= inventarioRafase.getSubcategoria().getNombre_subcategoria_array().get(i)%></td>
+                                    <td><%= inventarioRafase.getProducto().getMarca_producto_array().get(i)%></td>
+                                    <td><%= inventarioRafase.getProducto().getReferencia_producto_array().get(i)%></td>
+                                    <td><%= inventarioRafase.getInventario().getExistencias_array().get(i)%></td>
+                                    <td><%= inventarioRafase.getInventario().getPrecio_base_array().get(i)%></td>
+                                </tr>
+                                <% } //end for %>
+                                <% } //end for %>
                             </tbody>
                         </table>
                     </div>

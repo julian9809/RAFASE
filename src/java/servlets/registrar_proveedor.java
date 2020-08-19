@@ -8,6 +8,8 @@ package servlets;
 import control.DAOFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import modelo.Proveedor;
+import util.CaException;
 
 /**
  *
@@ -44,12 +47,21 @@ public class registrar_proveedor extends HttpServlet {
             String contraseña = sesion.getAttribute("contraseña").toString();
             String nombre = request.getParameter("nombreProveedor");
             String direccion = request.getParameter("direccionProveedor");
+            Long nit = Long.valueOf(request.getParameter("numero"));
             
             DAOFacade facade = new DAOFacade();
             Proveedor prove = facade.getProveedor();
             
+            prove.setId_proveedor(nit);
+            prove.setNombre(nombre);
+            prove.setDirección(direccion);
             
-            
+            try {
+                facade.insertarProveedor();
+                response.sendRedirect("templates/admon.jsp");
+            } catch (CaException ex) {
+                Logger.getLogger(registrar_proveedor.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
