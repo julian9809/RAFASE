@@ -264,12 +264,14 @@ public class PedidoDAO {
         }
     }
     
-   public void actualizarEstadoPedido(String usuario, long pedido_id, float total_pedido) throws CaException {
+   public void actualizarEstadoPedido(long pedido_id, double total_pedido) throws CaException {
         try {
-            String strSQL = "UPDATE PED SET ESTADO_PEDIDO = 'PP', TOTAL_PEDIDO = ? WHERE ID_PEDIDO = ?";
+            String strSQL = "UPDATE PED SET ESTADO_PEDIDO = 'PP', TOTAL_PEDIDO = ? WHERE ID_PEDIDO = ? AND ESTADO_PEDIDO = 'CA'";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
-                prepStmt.setFloat(1, total_pedido);
+                System.out.println(total_pedido);
+                System.out.println(pedido_id);
+                prepStmt.setDouble(1, total_pedido);
                 prepStmt.setLong(2, pedido_id);
                 prepStmt.executeUpdate();
             }
