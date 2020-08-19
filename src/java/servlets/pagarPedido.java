@@ -65,8 +65,8 @@ public class pagarPedido extends HttpServlet {
             } else {
                 segundoApellido = apellidos[1];
             }
-            String username = request.getParameter("username");
-            String email = request.getParameter("email");
+            String nombreCompleto = nombre + " " + apellido;
+            
             String direccion = request.getParameter("direccion");
             String extras = request.getParameter("extras");
             String ciudadEnv = request.getParameter("ciudadEnv");
@@ -95,14 +95,14 @@ public class pagarPedido extends HttpServlet {
             if (facade.confirmarTajertaConBanco(numeroTarCre, cvv, fechaTarCre, pedido_id)) {
                 //Exito xd
                 System.out.println("pago con exito");
-                facade.nombreUsuario(username);
+                facade.nombreUsuario(usuario);
                 facade.passwordUsuario(password);
                 facade.realizarConexion();
                 response.sendRedirect("templates/index.jsp");
             } else {
                 //Sad xd
                 System.out.println("pago malo");
-                facade.nombreUsuario(username);
+                facade.nombreUsuario(usuario);
                 facade.passwordUsuario(password);
                 facade.realizarConexion();
                 response.sendRedirect("templates/productos.jsp");
