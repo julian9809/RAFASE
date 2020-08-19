@@ -79,6 +79,8 @@ grant insert on env to cliente;
 grant insert on ped to cliente;
 grant insert on tc to cliente;
 grant insert on tel to cliente;
+
+grant delete on depe to cliente;
 --USUARIOS 
 
 create user RAFASEadmin identified by contrasena
