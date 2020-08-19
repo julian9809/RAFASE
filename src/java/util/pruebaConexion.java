@@ -32,8 +32,7 @@ public class pruebaConexion {
         //Conexion de las pruebas
         facade.realizarConexion();
         facade.cerrarConexion();
-        facade.nombreUsuario("yami");
-        facade.passwordUsuario("abc123");
+        facade.setearAdminDB();
         facade.realizarConexion();
         
         //facade.nombreUsuario(username);
@@ -43,7 +42,7 @@ public class pruebaConexion {
         
         Carrito carrito = facade.getCarrito();
         facade.consultarCarrito("yami", 1);
-        System.out.println("aqui llego");
+        
         double total = facade.obtenerTotalPedido(carrito.getId_pedido_array().get(0));
         System.out.println("total: "+total);
         /*
