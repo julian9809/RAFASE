@@ -67,6 +67,25 @@ public class AdmonDAO {
         }
     }
     
+    public void insertarProveedor() throws CaException {
+        try {
+            String strSQL = "INSERT INTO PROVE(ID_PROVEEDOR, NOMBRE_PROVEEDOR, DIRECCION_PROVEEDOR) VALUES (?,?,?)";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
+                prepStmt.setLong(1, proveedor.getId_proveedor());
+                prepStmt.setString(2, proveedor.getNombre());
+                prepStmt.setString(3, proveedor.getDirección());
+                prepStmt.executeUpdate();
+                ServiceLocator.getInstance().commit();
+            }
+        } catch (SQLException e) {
+            ServiceLocator.getInstance().rollback();
+            throw new CaException("admonDAO", "No se pudo insertar el proveedor\n" + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance().liberarConexion();
+        }
+    }
+    
     public boolean existeAdmin(String usuario) throws CaException {
         try {
             String strSQL = "SELECT COUNT(*) FROM admon WHERE admon.NOMBRE_ADMINISTRADOR = ?";

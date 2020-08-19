@@ -4,6 +4,8 @@
     Author     : julia
 --%>
 
+<%@page import="modelo.Ciudad"%>
+<%@page import="modelo.InventarioRafase"%>
 <%@page import="modelo.Proveedor"%>
 <%@page import="util.CaException"%>
 <%@page import="java.sql.SQLException"%>
@@ -12,6 +14,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
+    request.setCharacterEncoding("UTF-8");
     HttpSession sesion = request.getSession();
     String ciudad = "no ciudad";
     if (sesion.getAttribute("Ciudad") != null) {
@@ -22,6 +25,9 @@
 
     String usuario = sesion.getAttribute("usuario").toString();
     String contraseña = sesion.getAttribute("contraseña").toString();
+
+    String ciudad_stock = request.getParameter("ciudad_stock");
+
 %>
 <html lang="es">
 
@@ -150,13 +156,13 @@
                 </a>
 
                 <div class="list-group list-group-flush" id="list-tab" role="tablist">
-                    <a href="" onclick="statistics()" class="list-group-item waves-effect active list-group-item-action" data-toggle="list" role="tab">
+                    <a href="" onclick="statistics()" class="list-group-item waves-effect list-group-item-action" data-toggle="list" role="tab">
                         <i class="fas fa-chart-pie mr-3"></i>Estadísticas</a>
                     <a href="" onclick="perfil()" class="list-group-item waves-effect list-group-item-action" data-toggle="list" role="tab">
                         <i class="fas fa-user mr-3"></i>Perfil de administrador</a>
                     <a href="" onclick="proveedores()" class="list-group-item list-group-item-action waves-effect list-group-item-action" data-toggle="list" role="tab">
                         <i class="fas fa-shipping-fast mr-3"></i>Proveedores</a>
-                    <a href="" class="list-group-item list-group-item-action waves-effect list-group-item-action" data-toggle="list" role="tab">
+                    <a href="" onclick="stock()" class="list-group-item list-group-item-action waves-effect list-group-item-action" data-toggle="list" role="tab">
                         <i class="fas fa-clipboard-list mr-3"></i>Stock</a>
                     <a href="" class="list-group-item list-group-item-action waves-effect list-group-item-action" data-toggle="list" role="tab">
                         <i class="fas fa-map mr-3"></i>Sucursales</a>
@@ -379,13 +385,16 @@
 
             </div>
 
-            <%
-                DAOFacade facade = new DAOFacade();
+            <%                DAOFacade facade = new DAOFacade();
                 Admon adm = facade.getAdmon();
                 Proveedor proveedor = facade.getProveedor();
+                Ciudad ciu = facade.getCiudad();
+                InventarioRafase inventarioRafase = facade.getInventario_rafase();
+
                 try {
                     facade.buscarAdministradores(usuario, contraseña);
                     facade.buscarProveedores(usuario, contraseña);
+                    facade.buscarCiudades(usuario, contraseña);
                 } catch (CaException e1) {
                     String error = e1.toString();
                     error = error.replaceAll("\n", "");
@@ -406,7 +415,7 @@
             <!--Administrador-->
             <div class="container-fluid mt-5 py-lg-5" id="perfil">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header warning-color white-text">
                         Administrador
                     </div>
                     <div class="card-body">
@@ -506,7 +515,7 @@
                         </div>
                         <!--Body-->
                         <form action="../registrar_proveedor" method="post">
-                            <div class="modal-body">
+                            <div class="modal-body">                                
                                 <div class="md-form mb-5 amber-input active-amber-input">
                                     <i class="fas fa-portrait prefix"></i>
                                     <label for="nombreProveedor" data-error="wrong" data-success="right">Nombre de proveedor</label>
@@ -517,7 +526,15 @@
                                     </div>
                                 </div>
                                 <div class="md-form mb-5 amber-input active-amber-input">
-                                    <i class="fas fa-credit-card prefix"></i>
+                                    <i class="fas fa-id-card prefix"></i>
+                                    <label for="numero" data-error="wrong" data-success="right">NIT</label>
+                                    <input type="number" class="form-control validate" id="numero" name="numero" required>
+                                    <div class="invalid-feedback">
+                                        NIT requerido
+                                    </div>
+                                </div> 
+                                <div class="md-form mb-5 amber-input active-amber-input">
+                                    <i class="fas fa-home prefix"></i>
                                     <label for="direccionProveedor" data-error="wrong" data-success="right">Dirección del proveedor</label>
                                     <input type="text" class="form-control validate" id="direccionProveedor" name="direccionProveedor" required>
                                     <div class="invalid-feedback">
@@ -533,6 +550,58 @@
                     </div>
                 </div>
             </div>
+            <!-- modal proveedores -->
+
+            <!--Stock-->
+            <div class="container-fluid mt-5 py-lg-5" id="stock">
+                <div class="card">
+                    <div class="card-header success-color white-text">
+                        Stock
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead class="grey lighten-2">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Producto</th>
+                                    <th scope="col">Categoria</th>
+                                    <th scope="col">Subcategoria</th>
+                                    <th scope="col">Marca</th>
+                                    <th scope="col">Referencia</th>
+                                    <th scope="col">Existencias</th>
+                                    <th scope="col">Precio base</th>
+                                </tr>
+                            </thead>
+                            <tbody>                            
+                                <%  
+                                    for (int j = 0; j < ciu.getId_ciudad_array().size(); j++) {
+                                        facade.buscarProducto(usuario, contraseña, "", ciu.getNombre_array().get(j), "", "");
+                                %>
+                                <tr>
+                                    <td colspan="8" class="text-center info-color white-text font-weight-bold"><%= ciu.getNombre_array().get(j)%></td>
+                                </tr>
+                                <%
+                                    for (int i = 0; i < inventarioRafase.getProducto().getId_producto_array().size(); i++) {
+                                %>
+                                <tr>
+                                    <th scope="row"><%= i + 1%></th>
+                                    <td><%= inventarioRafase.getProducto().getNombre_producto_array().get(i)%></td>
+                                    <td><%= inventarioRafase.getCategoria().getNombre_categoria_array().get(i)%></td>
+                                    <td><%= inventarioRafase.getSubcategoria().getNombre_subcategoria_array().get(i)%></td>
+                                    <td><%= inventarioRafase.getProducto().getMarca_producto_array().get(i)%></td>
+                                    <td><%= inventarioRafase.getProducto().getReferencia_producto_array().get(i)%></td>
+                                    <td><%= inventarioRafase.getInventario().getExistencias_array().get(i)%></td>
+                                    <td><%= inventarioRafase.getInventario().getPrecio_base_array().get(i)%></td>
+                                </tr>
+                                <% } //end for %>
+                                <% } //end for %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--Stock-->
+
 
         </main>
         <!--Main layout-->
@@ -561,11 +630,13 @@
             $("#proveedores").hide();
             $("#perfil").hide();
             $("#statistics").hide();
+            $("#stock").hide();
 
             function statistics() {
                 if ($("#statistics").is(":hidden")) {
                     $("#proveedores").hide();
                     $("#perfil").hide();
+                    $("#stock").hide();
                     $("#statistics").show();
                 }
             }
@@ -574,6 +645,7 @@
                 if ($("#perfil").is(":hidden")) {
                     $("#proveedores").hide();
                     $("#statistics").hide();
+                    $("#stock").hide();
                     $("#perfil").show();
                 }
             }
@@ -582,7 +654,17 @@
                 if ($("#proveedores").is(":hidden")) {
                     $("#perfil").hide();
                     $("#statistics").hide();
+                    $("#stock").hide();
                     $("#proveedores").show();
+                }
+            }
+
+            function stock() {
+                if ($("#stock").is(":hidden")) {
+                    $("#perfil").hide();
+                    $("#statistics").hide();
+                    $("#proveedores").hide();
+                    $("#stock").show();
                 }
             }
 

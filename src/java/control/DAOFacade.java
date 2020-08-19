@@ -81,6 +81,10 @@ public class DAOFacade {
         admonDAO.buscarProveedores(nickname, userPassword);
     }
     
+    public void insertarProveedor() throws CaException {
+        admonDAO.insertarProveedor();
+    }
+    
     public boolean existeAdmin(String usuario) throws CaException {
         return admonDAO.existeAdmin(usuario);
     }
@@ -166,6 +170,10 @@ public class DAOFacade {
         return pagoDAO.obtenerTotalPedido(pedido_id);
     }
     
+    public boolean confirmarTajertaConBanco(long numero_tarjeta, long cvv, String fecha_exp, long pedido_id) throws CaException {
+        return pagoDAO.confirmarTajertaConBanco(numero_tarjeta, cvv, fecha_exp, pedido_id);
+    }
+    
     //---------------------------------PedidoDAO--------------------------------
     public void consultarPedido(String usuario, long usuario_id) throws CaException{
         pedidoDAO.consultarPedido(usuario, usuario_id);
@@ -207,8 +215,8 @@ public class DAOFacade {
         pedidoDAO.actualizarCantidad(id_pedido, id_producto, cantidad);
     }
     
-    public void actualizarEstadoPedido(String usuario, long pedido_id, float total_pedido) throws CaException {
-        pedidoDAO.actualizarEstadoPedido(usuario, pedido_id, total_pedido);
+    public void actualizarEstadoPedido(long pedido_id, double total_pedido) throws CaException {
+        pedidoDAO.actualizarEstadoPedido(pedido_id, total_pedido);
     }
     
     //-------------------------------ProductoDAO--------------------------------
