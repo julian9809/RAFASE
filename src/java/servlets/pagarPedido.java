@@ -92,7 +92,7 @@ public class pagarPedido extends HttpServlet {
             if (facade.confirmarTajertaConBanco(numeroTarCre, cvv, fechaTarCre, pedido_id)) {
                 //Exito xd
                 System.out.println("pago con exito");
-                facade.actualizarEnvio(telefono, direccion, extras, nombreCompleto, tipoPago);
+                facade.actualizarEnvio(telefono, direccion, extras, nombreCompleto, tipoPago, ciudadEnv);
                 System.out.println("envio exito");
                 facade.nombreUsuario(usuario);
                 facade.passwordUsuario(password);

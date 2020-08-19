@@ -182,8 +182,8 @@ public class DAOFacade {
         return pagoDAO.obtenerSentenciaFactura(pedido_id);
     }
     
-    public void actualizarEnvio(long telefono, String direccion, String direccionExtras, String nombreDestino, String metodo) throws CaException {
-        pagoDAO.actualizarEnvio(telefono, direccion, direccionExtras, nombreDestino, metodo);
+    public void actualizarEnvio(long telefono, String direccion, String direccionExtras, String nombreDestino, String metodo, String ciudad) throws CaException {
+        pagoDAO.actualizarEnvio(telefono, direccion, direccionExtras, nombreDestino, metodo, ciudad);
     }
     //---------------------------------PedidoDAO--------------------------------
     public void consultarPedido(long usuario_id, long ciudad_id) throws CaException{

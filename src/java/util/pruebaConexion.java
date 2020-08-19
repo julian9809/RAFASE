@@ -38,7 +38,7 @@ public class pruebaConexion {
         //facade.passwordUsuario(password);
         
         
-        facade.actualizarEnvio(123, "test", "holi", "asdasd", "D");
+        facade.actualizarEnvio(123, "test", "holi", "asdasd", "D","bacata");
     }
     
 }

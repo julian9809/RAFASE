@@ -99,9 +99,9 @@ public class PagoDAO {
         return false;
     }
     
-    public void actualizarEnvio(long telefono, String direccion, String direccionExtras, String nombreDestino, String metodo) throws CaException {
+    public void actualizarEnvio(long telefono, String direccion, String direccionExtras, String nombreDestino, String metodo, String ciudad) throws CaException {
         try {
-            String strSQL = "UPDATE ENV SET TELEFONO_DESTINO = ?, NOMBRE_DESTINO = ?, DIRECCION_ENVIO = ?, EXTRAS = ?, METODO_PAGO = ? WHERE ID_ENVIO = (SELECT MAX(ID_ENVIO) FROM ENV)";
+            String strSQL = "UPDATE ENV SET TELEFONO_DESTINO = ?, NOMBRE_DESTINO = ?, DIRECCION_ENVIO = ?, EXTRAS = ?, METODO_PAGO = ?, CIUDAD_DESTINO = ? WHERE ID_ENVIO = (SELECT MAX(ID_ENVIO) FROM ENV)";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.setLong(1, telefono);
@@ -109,6 +109,7 @@ public class PagoDAO {
                 prepStmt.setString(3, direccion);
                 prepStmt.setString(4, direccionExtras);
                 prepStmt.setString(5, metodo);
+                prepStmt.setString(6, ciudad);
                 prepStmt.executeUpdate();
             }
             ServiceLocator.getInstance().commit();
