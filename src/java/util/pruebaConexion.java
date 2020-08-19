@@ -35,8 +35,8 @@ public class pruebaConexion {
 
         //facade.nombreUsuario(username);
         //facade.passwordUsuario(password);
-        facade.actualizarEstadoPedido(7, facade.obtenerTotalPedido(7));
-        boolean recibido = facade.confirmarTajertaConBanco(Long.parseLong("897812564112"), 654, "11/26", 7);
+        facade.actualizarEstadoPedido(23, facade.obtenerTotalPedido(23));
+        boolean recibido = facade.confirmarTajertaConBanco(Long.parseLong("761373757573"), 789, "07/23", 23);
     }
 
 }

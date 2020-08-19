@@ -37,11 +37,13 @@ public class PagoDAO {
     
     public String obtenerSentenciaFactura(long pedido_id) throws CaException {
         try {
+            System.out.println("primer sout");
             String strSQL = "SELECT PK_PAQUETERAFASE.FU_CREARFACTURA(" + pedido_id + ") FROM DUAL";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 ResultSet rs = prepStmt.executeQuery();
                 while (rs.next()) {
+                    System.out.println("segundo sout");
                     return rs.getString(1);
                 }
             }
@@ -60,14 +62,18 @@ public class PagoDAO {
         try {
             String strSQL = "SELECT PK_PAQUETERAFASE.FU_COMPROBARPAGO(" + numero_tarjeta + "," + cvv + ",TO_DATE('" + fecha_exp + "','MM/YY')) FROM DUAL";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            System.out.println("tercer sout");
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 ResultSet rs = prepStmt.executeQuery();
                 while (rs.next()) {
                     if(rs.getString(1).equals("TRUE")){
                         String strSQLDOS = "UPDATE PED SET ESTADO_PEDIDO = 'PA' WHERE ID_PEDIDO = ? AND ESTADO_PEDIDO = 'PP'";
                         try (PreparedStatement prepStmtDOS = conexion.prepareStatement(strSQLDOS)) {
+                            System.out.println("4 sout");
                             prepStmtDOS.setLong(1, pedido_id);
+                            System.out.println("5 sout");
                             prepStmtDOS.executeUpdate();
+                            System.out.println("6 sout");
                             ServiceLocator.getInstance().liberarConexion();
                             System.out.println("no obtiene 3");
                             String strSQLTRES = obtenerSentenciaFactura(pedido_id);
