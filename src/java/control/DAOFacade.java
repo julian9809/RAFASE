@@ -14,6 +14,7 @@ import modelo.Direccion;
 import modelo.InventarioRafase;
 import modelo.Producto;
 import modelo.Pedido;
+import modelo.Prove;
 import modelo.TarjetaCredito;
 import modelo.Telefono;
 import util.CaException;
@@ -72,6 +73,10 @@ public class DAOFacade {
     //--------------------------------AdmonDAO----------------------------------
     public void buscarAdministradores(String nickname, String userPassword) throws CaException {
         admonDAO.buscarAdministradores(nickname, userPassword);
+    }
+    
+    public void buscarProveedores(String nickname, String userPassword) throws CaException {
+        admonDAO.buscarProveedores(nickname, userPassword);
     }
     
     public boolean existeAdmin(String usuario) throws CaException {
@@ -229,6 +234,10 @@ public class DAOFacade {
     
     public Admon getAdmon(){
         return admonDAO.getAdmon();
+    }
+    
+    public Prove getProve(){
+        return admonDAO.getProve();
     }
     
 }

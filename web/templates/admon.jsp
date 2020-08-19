@@ -4,6 +4,7 @@
     Author     : julia
 --%>
 
+<%@page import="modelo.Prove"%>
 <%@page import="util.CaException"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="modelo.Admon"%>
@@ -153,7 +154,7 @@
                         <i class="fas fa-chart-pie mr-3"></i>Estadísticas</a>
                     <a href="" onclick="perfil()" class="list-group-item waves-effect list-group-item-action" data-toggle="list" role="tab">
                         <i class="fas fa-user mr-3"></i>Perfil de administrador</a>
-                    <a href="" class="list-group-item list-group-item-action waves-effect list-group-item-action" data-toggle="list" role="tab">
+                    <a href="" onclick="proveedores()" class="list-group-item list-group-item-action waves-effect list-group-item-action" data-toggle="list" role="tab">
                         <i class="fas fa-shipping-fast mr-3"></i>Proveedores</a>
                     <a href="" class="list-group-item list-group-item-action waves-effect list-group-item-action" data-toggle="list" role="tab">
                         <i class="fas fa-clipboard-list mr-3"></i>Stock</a>
@@ -381,9 +382,11 @@
             <%
                 DAOFacade facade = new DAOFacade();
                 Admon adm = facade.getAdmon();
+                Prove pro = facade.getProve();
 
                 try {
                     facade.buscarAdministradores(usuario, contraseña);
+                    facade.buscarProveedores(usuario, contraseña);
                 } catch (CaException e1) {
                     String error = e1.toString();
                     error = error.replaceAll("\n", "");
@@ -439,7 +442,7 @@
                 </div>
             </div>
             <!--Administrador-->
-            
+
             <!--Proveedores-->
             <div class="container-fluid mt-5 py-lg-5" id="proveedores">
                 <div class="header">
@@ -447,7 +450,16 @@
                         Listado de proveedores
                     </div>
                     <div class="card-body">
-                        
+                        <table class="table">
+                            <tbody>
+                                <% if (pro..isEmpty()) { %>
+                                <tr>
+                                    <td>No hay proveedores agregados</td>
+                                    <td></td>
+                                </tr>
+                                <% } //end if %>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -477,11 +489,13 @@
         <!-- Charts -->
         <script>
 
+            $("#proveedores").hide();
             $("#perfil").hide();
             $("#statistics").hide();
 
             function statistics() {
                 if ($("#statistics").is(":hidden")) {
+                    $("#proveedores").hide();
                     $("#perfil").hide();
                     $("#statistics").show();
                 }
@@ -489,8 +503,17 @@
 
             function perfil() {
                 if ($("#perfil").is(":hidden")) {
+                    $("#proveedores").hide();
                     $("#statistics").hide();
                     $("#perfil").show();
+                }
+            }
+            
+            function proveedores() {
+                if ($("#proveedores").is(":hidden")) {
+                    $("#perfil").hide();
+                    $("#statistics").hide();
+                    $("#proveedores").show();
                 }
             }
 

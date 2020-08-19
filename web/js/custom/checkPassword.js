@@ -33,15 +33,15 @@ $(document).ready(function () {
         if (strength < 2) {
             $('#strengthMessage').removeClass();
             $('#strengthMessage').addClass('Weak');
-            return 'Eres debil Sasuke';
+            return 'Debil';
         } else if (strength === 2) {
             $('#strengthMessage').removeClass();
             $('#strengthMessage').addClass('Good');
-            return 'nice';
+            return 'Aceptable';
         } else {
             $('#strengthMessage').removeClass();
             $('#strengthMessage').addClass('Strong');
-            return 'Nice Dick Bro';
+            return 'Fuerte';
         }
     }
 });

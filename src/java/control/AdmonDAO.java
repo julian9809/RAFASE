@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import modelo.Admon;
+import modelo.Prove;
 import util.CaException;
 import util.ServiceLocator;
 
@@ -20,14 +21,35 @@ import util.ServiceLocator;
 public class AdmonDAO {
     
     private Admon admon;
+    private Prove prove;
 
     public AdmonDAO() {
         admon = new Admon();
+        prove = new Prove();
     }
     
     public void buscarAdministradores(String usuario, String password) throws CaException {
         try {
             String strSQL = "SELECT * FROM admon";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
+                ResultSet rs = prepStmt.executeQuery();
+                while (rs.next()) {
+                    prove.getId_proveedor_array().add(rs.getLong(1));
+                    prove.getNombre_array().add(rs.getString(2));
+                    prove.getDireccion_array().add(rs.getString(3));
+                }
+            }
+        } catch (SQLException e) {
+            throw new CaException("admonDAO", " no se pudo conseguir proveedores: " + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance().liberarConexion();
+        }
+    }
+    
+    public void buscarProveedores(String usuario, String password) throws CaException {
+        try {
+            String strSQL = "SELECT * FROM prove";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 ResultSet rs = prepStmt.executeQuery();
@@ -70,6 +92,14 @@ public class AdmonDAO {
 
     public void setAdmon(Admon admon) {
         this.admon = admon;
+    }
+
+    public Prove getProve() {
+        return prove;
+    }
+
+    public void setProve(Prove prove) {
+        this.prove = prove;
     }
     
     
