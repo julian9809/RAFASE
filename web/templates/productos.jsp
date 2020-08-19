@@ -121,6 +121,7 @@
         <%
             DAOFacade facade = new DAOFacade();
             InventarioRafase inventarioRafase = facade.getInventario_rafase();
+            
             try {
                 facade.buscarProducto(sesion.getAttribute("usuario").toString(),
                         sesion.getAttribute("contraseña").toString(),
