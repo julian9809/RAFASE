@@ -179,16 +179,16 @@ public class DAOFacade {
     }
     
     //---------------------------------PedidoDAO--------------------------------
-    public void consultarPedido(String usuario, long usuario_id) throws CaException{
-        pedidoDAO.consultarPedido(usuario, usuario_id);
+    public void consultarPedido(long usuario_id, long ciudad_id) throws CaException{
+        pedidoDAO.consultarPedido(usuario_id, ciudad_id);
     }
     
-    public long consultarIdPedido(String usuario, long usuario_id) throws CaException {
-        return pedidoDAO.consultarIdPedido(usuario, usuario_id);
+    public long consultarIdPedido(long usuario_id, long ciudad_id) throws CaException {
+        return pedidoDAO.consultarIdPedido(usuario_id, ciudad_id);
     }
 
-    public boolean existeCarrito(String nickname, String password, long usuario_id) throws CaException{
-        return pedidoDAO.existeCarrito(nickname, password, usuario_id);
+    public boolean existeCarrito(long usuario_id, long ciudad_id) throws CaException{
+        return pedidoDAO.existeCarrito(usuario_id, ciudad_id);
     }
 
     public void insertarPedido(String usuario) throws CaException{

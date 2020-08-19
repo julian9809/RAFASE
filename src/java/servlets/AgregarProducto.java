@@ -58,8 +58,10 @@ public class AgregarProducto extends HttpServlet {
                 Pedido pedido = facade.getPedido();
                 DetallePedido detalle_pedido = facade.getDetallePedido();
                 long id_cliente = facade.buscarIdCliente(usuario, sesion.getAttribute("contraseña").toString());
-                if(facade.existeCarrito(usuario, sesion.getAttribute("contraseña").toString(), id_cliente)){
-                    facade.consultarPedido(usuario, id_cliente);
+                long id_ciudad = facade.buscarIdCiudad(usuario, sesion.getAttribute("contraseña").toString(), sesion.getAttribute("Ciudad").toString());
+                System.out.println("id_cliente: "+ id_cliente + " id ciudad: " + id_ciudad);
+                if(facade.existeCarrito(id_cliente, id_ciudad)){
+                    facade.consultarPedido(id_cliente, id_ciudad);
                     detalle_pedido.setId_pedido(pedido.getId_pedido_array().get(0));
                     detalle_pedido.setCantidad(cantidad);
                     detalle_pedido.setId_producto(id_producto);
@@ -77,9 +79,9 @@ public class AgregarProducto extends HttpServlet {
                     pedido.setTipo_id(facade.buscarTipoID(usuario, sesion.getAttribute("contraseña").toString()));
                     
                     facade.insertarPedido(usuario);
-                    long id_pedido = facade.consultarIdPedido(usuario, id_cliente);
+                    long id_pedido = facade.consultarIdPedido(id_cliente, id_ciudad);
                     System.out.println("el id del pedido es: "+id_pedido);
-                    detalle_pedido.setId_pedido(facade.consultarIdPedido(usuario, id_cliente));
+                    detalle_pedido.setId_pedido(facade.consultarIdPedido(id_cliente, id_ciudad));
                     detalle_pedido.setCantidad(cantidad);
                     detalle_pedido.setId_producto(id_producto);
                     if(facade.verificarExistencia(id_pedido, id_producto)){

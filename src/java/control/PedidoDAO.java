@@ -32,9 +32,9 @@ public class PedidoDAO {
         carrito = new Carrito();
     }
 
-    public void consultarPedido(String usuario, long usuario_id) throws CaException {
+    public void consultarPedido(long usuario_id, long ciudad_id) throws CaException {
         try {
-            String strSQL = "SELECT * FROM ped, usur WHERE ped.ID_CEDULA=usur.ID_CEDULA and usur.ID_CEDULA=" + usuario_id + " and ped.ESTADO_PEDIDO='CA'";
+            String strSQL = "SELECT * FROM ped, usur, ciu WHERE ped.ID_CEDULA=usur.ID_CEDULA  AND ciu.ID_CIUDAD=ped.ID_CIUDAD AND usur.ID_CEDULA= " + usuario_id + " AND ciu.ID_CIUDAD= " + ciudad_id + " AND ped.ESTADO_PEDIDO='CA'";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 ResultSet rs = prepStmt.executeQuery();
@@ -54,10 +54,10 @@ public class PedidoDAO {
         }
     }
 
-    public long consultarIdPedido(String usuario, long usuario_id) throws CaException {
+    public long consultarIdPedido(long usuario_id, long ciudad_id) throws CaException {
         long id_pedido = -1;
         try {
-            String strSQL = "SELECT ped.ID_PEDIDO FROM ped, usur WHERE ped.ID_CEDULA=usur.ID_CEDULA and usur.ID_CEDULA=" + usuario_id + " and ped.ESTADO_PEDIDO='CA'";
+            String strSQL = "SELECT ped.ID_PEDIDO FROM ped, usur, ciu WHERE ped.ID_CEDULA=usur.ID_CEDULA  AND ciu.ID_CIUDAD=ped.ID_CIUDAD AND usur.ID_CEDULA= " + usuario_id + " AND ciu.ID_CIUDAD= " + ciudad_id + " AND ped.ESTADO_PEDIDO='CA'";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 ResultSet rs = prepStmt.executeQuery();
@@ -75,9 +75,9 @@ public class PedidoDAO {
     //antes consultarPedidos redundante
     //solo consulta existencia del pedido en estado = carrito
 
-    public boolean existeCarrito(String nickname, String password, long usuario_id) throws CaException {
+    public boolean existeCarrito(long usuario_id, long ciudad_id) throws CaException {
         try {
-            String strSQL = "SELECT COUNT(*) FROM ped, usur WHERE ped.ID_CEDULA=usur.ID_CEDULA and usur.ID_CEDULA= " + usuario_id + " and ped.ESTADO_PEDIDO='CA'";
+            String strSQL = "SELECT COUNT(*) FROM ped, usur, ciu WHERE ped.ID_CEDULA=usur.ID_CEDULA AND ciu.ID_CIUDAD=ped.ID_CIUDAD AND usur.ID_CEDULA=" + usuario_id + " AND ciu.ID_CIUDAD=" + ciudad_id + " AND ped.ESTADO_PEDIDO='CA'";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 ResultSet rs = prepStmt.executeQuery();
