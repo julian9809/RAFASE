@@ -95,7 +95,7 @@ public class PedidoDAO {
 
     public void insertarPedido(String usuario) throws CaException {
         try {
-            String strSQL = "INSERT INTO ped VALUES(ID_PEDIDO.NEXTVAL,?,SYSDATE,?,?,?,?)";
+            String strSQL = "INSERT INTO ped VALUES(admin_db.ID_PEDIDO.NEXTVAL,?,SYSDATE,?,?,?,?)";
 
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {

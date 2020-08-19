@@ -81,7 +81,7 @@ public class ClienteDAO {
 
     public void insertarDireccion(String usuario, String password) throws CaException {
         try {
-            String strSQL = "INSERT INTO DIR(ID_DIRECCION,DIRECCION_COMPLETA, EXTRAS, TIPO_DIRECCION, ID_CIUDAD, ID_CEDULA, TIPO_ID) VALUES(ID_DIRECCION.NEXTVAL,?,?,?,?,?,?)";
+            String strSQL = "INSERT INTO DIR(ID_DIRECCION,DIRECCION_COMPLETA, EXTRAS, TIPO_DIRECCION, ID_CIUDAD, ID_CEDULA, TIPO_ID) VALUES(admin_db.ID_DIRECCION.NEXTVAL,?,?,?,?,?,?)";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.setString(1, direccion.getDireccion_completa());
@@ -141,7 +141,7 @@ public class ClienteDAO {
 
     public void insertarTelefono(String usuario, String password) throws CaException {
         try {
-            String strSQL = "INSERT INTO TEL(ID_TELEFONO, NUMERO_TELEFONO, TELEFONO_EN_USO, ID_CEDULA, TIPO_ID) VALUES (ID_TELEFONO.NEXTVAL, ?, ?, ?, ?)";
+            String strSQL = "INSERT INTO TEL(ID_TELEFONO, NUMERO_TELEFONO, TELEFONO_EN_USO, ID_CEDULA, TIPO_ID) VALUES (admin_db.ID_TELEFONO.NEXTVAL, ?, ?, ?, ?)";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.setLong(1, telefono.getNumeroTelefono());
@@ -196,7 +196,7 @@ public class ClienteDAO {
     
     public void insertarTarjetaCredito(String usuario, String password) throws CaException {
         try {
-            String strSQL = "INSERT INTO TC(ID_TARJETA,NOMBRETITULAR,NUMERO_TARJETA, FECH_EXP, TIPO_ID, ID_CEDULA, TARJETA_EN_USO) VALUES (ID_TARJETA.NEXTVAL,?,?,TO_DATE(?,'MM/YY'),?,?,'S')";
+            String strSQL = "INSERT INTO TC(ID_TARJETA,NOMBRETITULAR,NUMERO_TARJETA, FECH_EXP, TIPO_ID, ID_CEDULA, TARJETA_EN_USO) VALUES (admin_db.ID_TARJETA.NEXTVAL,?,?,TO_DATE(?,'MM/YY'),?,?,'S')";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 prepStmt.setString(1, tarjetaCredito.getNombreTitular());

@@ -60,6 +60,9 @@ grant select on subcat to cliente;
 grant select on tc to cliente;
 grant select on tel to cliente;
 grant select on usur to cliente;
+grant select on depe to cliente;
+grant select on ped to cliente;
+grant select on env to cliente;
 
 grant update on depe to cliente;
 grant update on dir to cliente;
