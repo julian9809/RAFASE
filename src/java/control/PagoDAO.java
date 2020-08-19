@@ -77,8 +77,6 @@ public class PagoDAO {
                             }
                             ServiceLocator.getInstance().commit();
                         }
-                        ServiceLocator.getInstance().commit();
-                        
                         
                         return true;
                     }
@@ -101,5 +99,26 @@ public class PagoDAO {
         return false;
     }
     
+    public void actualizarEnvio(long telefono, String direccion, String direccionExtras, String nombreDestino, String metodo) throws CaException {
+        try {
+            String strSQL = "UPDATE ENV SET TELEFONO_DESTINO = ?, NOMBRE_DESTINO = ?, DIRECCION_ENVIO = ?, EXTRAS = ?, METODO_PAGO = ? WHERE ID_ENVIO = (SELECT MAX(ID_ENVIO) FROM ENV)";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
+                prepStmt.setLong(1, telefono);
+                prepStmt.setString(2, nombreDestino);
+                prepStmt.setString(3, direccion);
+                prepStmt.setString(4, direccionExtras);
+                prepStmt.setString(5, metodo);
+            System.out.println("aca");
+                prepStmt.executeUpdate();
+            System.out.println("aca2");
+            }
+            ServiceLocator.getInstance().commit();
+        } catch (SQLException e) {
+            throw new CaException("PedidoDAO", "No se pudo actualizar el estado del pedido\n" + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance().liberarConexion();
+        }
+    }
     
 }
