@@ -109,9 +109,7 @@ public class PagoDAO {
                 prepStmt.setString(3, direccion);
                 prepStmt.setString(4, direccionExtras);
                 prepStmt.setString(5, metodo);
-            System.out.println("aca");
                 prepStmt.executeUpdate();
-            System.out.println("aca2");
             }
             ServiceLocator.getInstance().commit();
         } catch (SQLException e) {
