@@ -86,6 +86,99 @@ public class AdmonDAO {
         return false;
     }
     
+    public double obtenerValorTotalVentas() throws CaException {
+        try {
+            String strSQL = "SELECT SUM(TOTAL_PEDIDO) FROM ped WHERE ESTADO_PEDIDO = 'PA'";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
+                ResultSet rs = prepStmt.executeQuery();
+                while (rs.next()) {
+                    return rs.getFloat(1);
+                }
+            }
+        } catch (SQLException e) {
+            throw new CaException("No pudo consultar el pedido\n " + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance().liberarConexion();
+        }
+        return 0;
+    }
+    
+    public void obtenerProductosMasVendidos() throws CaException {
+        try {
+            String strSQL = "SELECT CANTIDADES, NOMPROD FROM (SELECT MAX(CANTIDADES) AS CANTIDADES, NOMPROD FROM (SELECT SUM(DEPE.CANTIDAD) AS CANTIDADES, PROD.NOMBRE_PRODUCTO AS NOMPROD FROM DEPE, PROD WHERE DEPE.ID_PRODUCTO = PROD.ID_PRODUCTO GROUP BY PROD.NOMBRE_PRODUCTO) GROUP BY NOMPROD ORDER BY CANTIDADES DESC) WHERE ROWNUM <= 3";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
+                ResultSet rs = prepStmt.executeQuery();
+                while (rs.next()) {
+                    admon.getCantidadProductoMasVendidoArray().add(rs.getLong(1));
+                    admon.getNombreProductoMasVendidoArray().add(rs.getString(1));
+                }
+            }
+        } catch (SQLException e) {
+            throw new CaException("No pudo consultar el pedido\n " + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance().liberarConexion();
+        }
+    }
+    
+    public void obtenerProductosMenosVendidos() throws CaException {
+        try {
+            String strSQL = "SELECT CANTIDADES, NOMPROD FROM (SELECT MIN(CANTIDADES) AS CANTIDADES, NOMPROD FROM (SELECT SUM(DEPE.CANTIDAD) AS CANTIDADES, PROD.NOMBRE_PRODUCTO AS NOMPROD FROM DEPE, PROD WHERE DEPE.ID_PRODUCTO = PROD.ID_PRODUCTO GROUP BY PROD.NOMBRE_PRODUCTO) GROUP BY NOMPROD ORDER BY CANTIDADES ASC) WHERE ROWNUM <= 3";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
+                ResultSet rs = prepStmt.executeQuery();
+                while (rs.next()) {
+                    admon.getCantidadProductoMenosVendidoArray().add(rs.getLong(1));
+                    admon.getNombreProductoMenosVendidoArray().add(rs.getString(1));
+                }
+            }
+        } catch (SQLException e) {
+            throw new CaException("No pudo consultar el pedido\n " + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance().liberarConexion();
+        }
+    }
+    
+    public long obtenerCantidadPagosRechazados() throws CaException {
+        try {
+            String strSQL = "SELECT COUNT(PED.ESTADO_PEDIDO) FROM PED WHERE PED.ESTADO_PEDIDO = 'RE'";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
+                ResultSet rs = prepStmt.executeQuery();
+                while (rs.next()) {
+                    return rs.getLong(1);
+                }
+            }
+        } catch (SQLException e) {
+            throw new CaException("No pudo consultar el pedido\n " + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance().liberarConexion();
+        }
+        return 0;
+    }
+    
+    public void clientesConMasCompras() throws CaException {
+        try {
+            String strSQL = "SELECT PRIMNOM, SEGNOM, PRIMAPE, SEGAPE, CANTIDAD FROM (SELECT COUNT(PED.ID_CEDULA) AS CANTIDAD, USUR.PRIMER_NOMB AS PRIMNOM, USUR.SEGUNDO_NOMB AS SEGNOM, USUR.PRIMER_APELL AS PRIMAPE, USUR.SEGUNDO_APELL AS SEGAPE FROM USUR, PED WHERE PED.ID_CEDULA = USUR.ID_CEDULA AND PED.TIPO_ID = USUR.TIPO_ID AND PED.ESTADO_PEDIDO = 'PA' GROUP BY USUR.PRIMER_NOMB, USUR.SEGUNDO_NOMB, USUR.PRIMER_APELL, USUR.SEGUNDO_APELL ORDER BY CANTIDAD DESC) WHERE  ROWNUM <= 3";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
+                ResultSet rs = prepStmt.executeQuery();
+                while (rs.next()) {
+                    admon.getPrimerNombreArray().add(rs.getString(1));
+                    admon.getSegundoNombreArray().add(rs.getString(2));
+                    admon.getPrimerApellidoArray().add(rs.getString(3));
+                    admon.getSegundoApellidoArray().add(rs.getString(4));
+                    admon.getCantidadComprasArray().add(rs.getLong(1));
+                }
+            }
+        } catch (SQLException e) {
+            throw new CaException("No pudo consultar el pedido\n " + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance().liberarConexion();
+        }
+    }
+    
     public Admon getAdmon() {
         return admon;
     }
