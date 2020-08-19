@@ -63,8 +63,30 @@ public class IniciarSesion extends HttpServlet {
                     facade.realizarConexion();
                 }
             } else {
-                response.sendRedirect("templates/sign.jsp");
+                if (facade.existeAdmin(username)) {
+                    facade.cerrarConexion();
+                    facade.nombreUsuario(username);
+                    facade.passwordUsuario(password);
+                    if (facade.realizarConexion()) {
+                        sesion.setAttribute("usuario", username);
+                        sesion.setAttribute("contraseña", password);
+                        response.sendRedirect("templates/index.jsp");
+                    } else {
+                        facade.cerrarConexion();
+                        facade.nombreUsuario("visitante");
+                        facade.passwordUsuario("abc123");
+                        facade.realizarConexion();
+                    }
+                } else {
+                    response.sendRedirect("templates/sign.jsp");
+                }
             }
+        } catch (Exception e) {
+            DAOFacade facade = new DAOFacade();
+            facade.cerrarConexion();
+            facade.nombreUsuario("visitante");
+            facade.passwordUsuario("abc123");
+            facade.realizarConexion();
         }
     }
 
