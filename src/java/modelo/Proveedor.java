@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author julia
  */
-public class Prove {
+public class Proveedor {
     private Long id_proveedor;
     private String nombre;
     private String dirección;
@@ -20,7 +20,7 @@ public class Prove {
     private ArrayList<String> nombre_array = new ArrayList<>();
     private ArrayList<String> direccion_array = new ArrayList<>();
 
-    public Prove() {
+    public Proveedor() {
     }   
 
     public Long getId_proveedor() {

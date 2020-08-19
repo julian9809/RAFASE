@@ -14,7 +14,7 @@ import modelo.Direccion;
 import modelo.InventarioRafase;
 import modelo.Producto;
 import modelo.Pedido;
-import modelo.Prove;
+import modelo.Proveedor;
 import modelo.TarjetaCredito;
 import modelo.Telefono;
 import util.CaException;
@@ -247,8 +247,8 @@ public class DAOFacade {
         return admonDAO.getAdmon();
     }
     
-    public Prove getProve(){
-        return admonDAO.getProve();
+    public Proveedor getProveedor(){
+        return admonDAO.getProveedor();
     }
     
 }

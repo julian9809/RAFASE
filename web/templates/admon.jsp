@@ -4,7 +4,7 @@
     Author     : julia
 --%>
 
-<%@page import="modelo.Prove"%>
+<%@page import="modelo.Proveedor"%>
 <%@page import="util.CaException"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="modelo.Admon"%>
@@ -382,8 +382,7 @@
             <%
                 DAOFacade facade = new DAOFacade();
                 Admon adm = facade.getAdmon();
-                Prove prove = facade.getProve();
-
+                Proveedor proveedor = facade.getProveedor();
                 try {
                     facade.buscarAdministradores(usuario, contraseña);
                     facade.buscarProveedores(usuario, contraseña);
@@ -423,8 +422,8 @@
                                     <td>No se encuentran administradores</td>
                                 </tr>
                                 <% } else { %>
-                                <%                                 
-                                   for (int i = 0; i < adm.getId_administrador_array().size(); i++) {
+                                <%
+                                    for (int i = 0; i < adm.getId_administrador_array().size(); i++) {
                                 %>
                                 <tr>
                                     <td scope="row" class="font-weight-bold">Nombre</td>
@@ -442,7 +441,9 @@
                 </div>
             </div>
             <!--Administrador-->
-            
+            <%
+                proveedor.getId_proveedor_array();
+            %>
             <!--Proveedores-->
             <div class="container-fluid mt-5 py-lg-5" id="proveedores">
                 <div class="header">
@@ -508,7 +509,7 @@
                     $("#perfil").show();
                 }
             }
-            
+
             function proveedores() {
                 if ($("#proveedores").is(":hidden")) {
                     $("#perfil").hide();

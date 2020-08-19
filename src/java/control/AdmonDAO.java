@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import modelo.Admon;
-import modelo.Prove;
+import modelo.Proveedor;
 import util.CaException;
 import util.ServiceLocator;
 
@@ -21,11 +21,11 @@ import util.ServiceLocator;
 public class AdmonDAO {
     
     private Admon admon;
-    private Prove prove;
+    private Proveedor proveedor;
 
     public AdmonDAO() {
         admon = new Admon();
-        prove = new Prove();
+        proveedor = new Proveedor();
     }
     
     public void buscarAdministradores(String usuario, String password) throws CaException {
@@ -55,9 +55,9 @@ public class AdmonDAO {
             try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
                 ResultSet rs = prepStmt.executeQuery();
                 while (rs.next()) {                    
-                    prove.getId_proveedor_array().add(rs.getLong(1));
-                    prove.getNombre_array().add(rs.getString(2));
-                    prove.getDireccion_array().add(rs.getString(3));
+                    proveedor.getId_proveedor_array().add(rs.getLong(1));
+                    proveedor.getNombre_array().add(rs.getString(2));
+                    proveedor.getDireccion_array().add(rs.getString(3));
                 }
             }
         } catch (SQLException e) {
@@ -94,14 +94,12 @@ public class AdmonDAO {
         this.admon = admon;
     }
 
-    public Prove getProve() {
-        return prove;
+    public Proveedor getProveedor() {
+        return proveedor;
     }
 
-    public void setProve(Prove prove) {
-        this.prove = prove;
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
     }
-    
-    
     
 }
