@@ -82,7 +82,7 @@
                         <a class="nav-link" href="pago.jsp">Ir a pagar<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Control</a>
+                        <a class="nav-link" href="admon.jsp">Control</a>
                     </li>
                 </ul>
                 <form action="../BuscarProducto" method="post" class="form-inline my-2 my-lg-0 ml-auto">
@@ -97,8 +97,8 @@
                 </form>
                 <%if (usuario.equals("visitante")) {%>
                 <div class="btn-group btn-sm" role="group">
-                    <a class="btn btn-outline-info btn-sm align-middle ml-0" href="sign.jsp" role="button">Iniciar sesión</a>
-                    <a class="btn btn-outline-primary btn-sm align-middle" href="registro_user.jsp" role="button">Registrarse</a>
+                    <a class="btn btn-info btn-sm align-middle ml-0" href="sign.jsp" role="button">Iniciar sesión</a>
+                    <a class="btn btn-primary btn-sm align-middle" href="registro_user.jsp" role="button">Registrarse</a>
                 </div>
                 <%} else {%>
                 <div class="nav-item dropdown avatar">
