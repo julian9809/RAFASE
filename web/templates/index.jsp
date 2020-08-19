@@ -85,8 +85,8 @@
                 </form>
                 <%if (usuario.equals("visitante")) {%>
                 <div class="btn-group" role="group">
-                    <a class="btn btn-outline-info btn-sm align-middle ml-0" href="sign.jsp" role="button">Iniciar sesión</a>
-                    <a class="btn btn-outline-primary btn-sm align-middle" href="registro_user.jsp" role="button">Registrarse</a>
+                    <a class="btn btn-info btn-sm align-middle ml-0" href="sign.jsp" role="button">Iniciar sesión</a>
+                    <a class="btn btn-primary btn-sm align-middle" href="registro_user.jsp" role="button">Registrarse</a>
                 </div>
                 <%} else {%>
                 <div class="nav-item dropdown avatar">

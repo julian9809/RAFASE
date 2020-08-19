@@ -28,6 +28,12 @@
 
     String ciudad_stock = request.getParameter("ciudad_stock");
 
+    DAOFacade facade = new DAOFacade();
+    Admon adm = facade.getAdmon();
+    Proveedor proveedor = facade.getProveedor();
+    Ciudad ciu = facade.getCiudad();
+    InventarioRafase inventarioRafase = facade.getInventario_rafase();
+
 %>
 <html lang="es">
 
@@ -199,7 +205,7 @@
                                     <tbody>
                                         <tr>
                                             <td>Valor total vendido</td>
-                                            <td>Cell 2</td>
+                                            <td><%= facade.obtenerValorTotalVentas() %></td>
                                         </tr>
                                         <tr>
                                             <td>Producto más vendido</td>
@@ -215,7 +221,7 @@
                                         </tr>
                                         <tr>
                                             <td>Pagos rechazados</td>
-                                            <td>Cell 8</td>
+                                            <td><%= facade.obtenerCantidadPagosRechazados() %></td>
                                         </tr>
                                         <tr>
                                             <td>Tiempo promedio de entrega del pedido</td>
@@ -387,11 +393,7 @@
 
             </div>
 
-            <%                DAOFacade facade = new DAOFacade();
-                Admon adm = facade.getAdmon();
-                Proveedor proveedor = facade.getProveedor();
-                Ciudad ciu = facade.getCiudad();
-                InventarioRafase inventarioRafase = facade.getInventario_rafase();
+            <%
 
                 try {
                     facade.buscarAdministradores(usuario, contraseña);
@@ -553,7 +555,7 @@
                 </div>
             </div>
             <!-- modal proveedores -->
-            
+
             <!--Clientes-->
             <div class="container-fluid mt-5 py-lg-5" id="clientes">
                 <div class="card">
@@ -710,7 +712,7 @@
                     $("#stock").show();
                 }
             }
-            
+
             function sucursales() {
                 if ($("#sucursales").is(":hidden")) {
                     $("#clientes").hide();
@@ -721,7 +723,7 @@
                     $("#sucursales").show();
                 }
             }
-            
+
             function clientes() {
                 if ($("#clientes").is(":hidden")) {
                     $("#sucursales").hide();
