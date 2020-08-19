@@ -444,7 +444,7 @@
                                         <div class="modal-body">
                                             <div class="md-form mb-5 amber-input active-amber-input">
                                                 <i class="fas fa-id-card prefix"></i>
-                                                <label for="nombre" data-error="wrong" data-success="right">Nombre en la tarjeta</label>
+                                                <label for="nombreTarCre" data-error="wrong" data-success="right">Nombre en la tarjeta</label>
                                                 <input type="text" class="form-control validate mb-0" id="nombreTarCre"  name="nombreTarCre" required>
                                                 <small class="text-muted">Nombre completo en la parte de atras de la tarjeta</small>
                                                 <div class="invalid-feedback">

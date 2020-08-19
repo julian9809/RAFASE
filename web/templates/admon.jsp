@@ -441,30 +441,98 @@
                 </div>
             </div>
             <!--Administrador-->
-            <%
-                proveedor.getId_proveedor_array();
-            %>
+
             <!--Proveedores-->
             <div class="container-fluid mt-5 py-lg-5" id="proveedores">
-                <div class="header">
-                    <div class="card-header">
+                <div class="card">
+                    <div class="card-header info-color-dark white-text">
                         Listado de proveedores
                     </div>
                     <div class="card-body">
+                        <% 
+                            if (proveedor.getId_proveedor_array().isEmpty()) {
+                        %>
                         <table class="table">
                             <tbody>
-                                <% if () { %>
                                 <tr>
                                     <td>No hay proveedores agregados</td>
-                                    <td></td>
+                                    <td><a class="btn btn-info btn-sm align-middle ml-0" href="admon.jsp" role="button" data-toggle="modal" data-target="#modalProveedor">Registrar proveedor</a></td>
                                 </tr>
-                                <% } //end if %>
                             </tbody>
                         </table>
+                        <% } else { %>
+                        <table class="table">
+                            <thead class="grey lighten-2">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Dirección</th>
+                                </tr>                            
+                            </thead>
+                            <tbody>
+                                <%
+                                    for (int i = 0; i < proveedor.getId_proveedor_array().size(); i++) {
+                                %>                        
+                                <tr>
+                                    <th scope="row"><%= i + 1%></th>
+                                    <td><%= proveedor.getNombre_array().get(i)%></td>
+                                    <td><%= proveedor.getDireccion_array().get(i)%></td>
+                                </tr>
+
+                                <% } //end for %>
+                            </tbody>
+                        </table>
+                        <div class="text-center">
+                            <a class="btn btn-info btn-sm align-middle ml-0" href="admon.jsp" role="button" data-toggle="modal" data-target="#modalProveedor">Registrar proveedor</a>
+                        </div>
+                        <% } //end if %>                            
                     </div>
                 </div>
             </div>
             <!--Proveedores-->
+
+            <!------------------------------------Modal proveedores--------------------------------------------->
+            <div class="modal fade" id="modalProveedor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-notify" role="document">
+                    <!--Content-->
+                    <div class="modal-content">
+                        <!--Header-->
+                        <div class="modal-header text-center info-color">
+                            <h4 class="modal-title white-text w-100 font-weight-bold py-2">Registra proveedor</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true" class="white-text">&times;</span>
+                            </button>
+                        </div>
+                        <!--Body-->
+                        <form action="../registrar_proveedor" method="post">
+                            <div class="modal-body">
+                                <div class="md-form mb-5 amber-input active-amber-input">
+                                    <i class="fas fa-portrait prefix"></i>
+                                    <label for="nombreProveedor" data-error="wrong" data-success="right">Nombre de proveedor</label>
+                                    <input type="text" class="form-control validate mb-0" id="nombreProveedor"  name="nombreProveedor" required>
+                                    <small class="text-muted">Nombre completo del proveedor</small>
+                                    <div class="invalid-feedback">
+                                        Nombre del proveedor es requerido
+                                    </div>
+                                </div>
+                                <div class="md-form mb-5 amber-input active-amber-input">
+                                    <i class="fas fa-credit-card prefix"></i>
+                                    <label for="direccionProveedor" data-error="wrong" data-success="right">Dirección del proveedor</label>
+                                    <input type="text" class="form-control validate" id="direccionProveedor" name="direccionProveedor" required>
+                                    <div class="invalid-feedback">
+                                        Dirección del proveedor requerido
+                                    </div>
+                                </div>
+                                <!--Footer-->
+                                <div class="modal-footer justify-content-center">
+                                    <button class="btn btn-info waves-effect" type="submit">Registrar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
         </main>
         <!--Main layout-->
