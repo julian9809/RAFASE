@@ -16,6 +16,7 @@ public class PagoDAO {
     
     public PagoDAO(){
     }
+    
     public double obtenerTotalPedido(long pedido_id) throws CaException {
         try {
             String strSQL = "SELECT PK_PAQUETERAFASE.FU_TOTALPRODUCTOS(" + pedido_id + ") FROM DUAL";
