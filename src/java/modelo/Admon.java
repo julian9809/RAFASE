@@ -17,6 +17,30 @@ public class Admon {
     private String correo;
     private String contraseña;
     
+    private String nombreProductoMasVendido;
+    private Long cantidadProductoMasVendido;
+    
+    private String nombreProductoMenosVendido;
+    private Long cantidadProductoMenosVendido;
+    
+    private String primerNombre;
+    private String segundoNombre;
+    private String primerApellido;
+    private String segundoApellido;
+    private Long cantidadCompras;
+    
+    private ArrayList<String> nombreProductoMasVendidoArray = new ArrayList<>();
+    private ArrayList<Long> cantidadProductoMasVendidoArray = new ArrayList<>();
+    
+    private ArrayList<String> nombreProductoMenosVendidoArray = new ArrayList<>();
+    private ArrayList<Long> cantidadProductoMenosVendidoArray = new ArrayList<>();
+    
+    private ArrayList<String> primerNombreArray = new ArrayList<>();
+    private ArrayList<String> segundoNombreArray = new ArrayList<>();
+    private ArrayList<String> primerApellidoArray = new ArrayList<>();
+    private ArrayList<String> segundoApellidoArray = new ArrayList<>();
+    private ArrayList<Long> cantidadComprasArray = new ArrayList<>();
+    
     private ArrayList<Long> id_administrador_array = new ArrayList<>();
     private ArrayList<String> nombre_completo_array = new ArrayList<>();
     private ArrayList<String> correo_array = new ArrayList<>();
@@ -88,5 +112,150 @@ public class Admon {
     public void setContraseña_array(ArrayList<String> contraseña_array) {
         this.contraseña_array = contraseña_array;
     }   
+
+    public String getNombreProductoMasVendido() {
+        return nombreProductoMasVendido;
+    }
+
+    public void setNombreProductoMasVendido(String nombreProductoMasVendido) {
+        this.nombreProductoMasVendido = nombreProductoMasVendido;
+    }
+
+    public Long getCantidadProductoMasVendido() {
+        return cantidadProductoMasVendido;
+    }
+
+    public void setCantidadProductoMasVendido(Long cantidadProductoMasVendido) {
+        this.cantidadProductoMasVendido = cantidadProductoMasVendido;
+    }
+
+    public String getNombreProductoMenosVendido() {
+        return nombreProductoMenosVendido;
+    }
+
+    public void setNombreProductoMenosVendido(String nombreProductoMenosVendido) {
+        this.nombreProductoMenosVendido = nombreProductoMenosVendido;
+    }
+
+    public Long getCantidadProductoMenosVendido() {
+        return cantidadProductoMenosVendido;
+    }
+
+    public void setCantidadProductoMenosVendido(Long cantidadProductoMenosVendido) {
+        this.cantidadProductoMenosVendido = cantidadProductoMenosVendido;
+    }
+
+    public String getPrimerNombre() {
+        return primerNombre;
+    }
+
+    public void setPrimerNombre(String primerNombre) {
+        this.primerNombre = primerNombre;
+    }
+
+    public String getSegundoNombre() {
+        return segundoNombre;
+    }
+
+    public void setSegundoNombre(String segundoNombre) {
+        this.segundoNombre = segundoNombre;
+    }
+
+    public String getPrimerApellido() {
+        return primerApellido;
+    }
+
+    public void setPrimerApellido(String primerApellido) {
+        this.primerApellido = primerApellido;
+    }
+
+    public String getSegundoApellido() {
+        return segundoApellido;
+    }
+
+    public void setSegundoApellido(String segundoApellido) {
+        this.segundoApellido = segundoApellido;
+    }
+
+    public Long getCantidadCompras() {
+        return cantidadCompras;
+    }
+
+    public void setCantidadCompras(Long cantidadCompras) {
+        this.cantidadCompras = cantidadCompras;
+    }
+
+    public ArrayList<String> getNombreProductoMasVendidoArray() {
+        return nombreProductoMasVendidoArray;
+    }
+
+    public void setNombreProductoMasVendidoArray(ArrayList<String> nombreProductoMasVendidoArray) {
+        this.nombreProductoMasVendidoArray = nombreProductoMasVendidoArray;
+    }
+
+    public ArrayList<Long> getCantidadProductoMasVendidoArray() {
+        return cantidadProductoMasVendidoArray;
+    }
+
+    public void setCantidadProductoMasVendidoArray(ArrayList<Long> cantidadProductoMasVendidoArray) {
+        this.cantidadProductoMasVendidoArray = cantidadProductoMasVendidoArray;
+    }
+
+    public ArrayList<String> getNombreProductoMenosVendidoArray() {
+        return nombreProductoMenosVendidoArray;
+    }
+
+    public void setNombreProductoMenosVendidoArray(ArrayList<String> nombreProductoMenosVendidoArray) {
+        this.nombreProductoMenosVendidoArray = nombreProductoMenosVendidoArray;
+    }
+
+    public ArrayList<Long> getCantidadProductoMenosVendidoArray() {
+        return cantidadProductoMenosVendidoArray;
+    }
+
+    public void setCantidadProductoMenosVendidoArray(ArrayList<Long> cantidadProductoMenosVendidoArray) {
+        this.cantidadProductoMenosVendidoArray = cantidadProductoMenosVendidoArray;
+    }
+
+    public ArrayList<String> getPrimerNombreArray() {
+        return primerNombreArray;
+    }
+
+    public void setPrimerNombreArray(ArrayList<String> primerNombreArray) {
+        this.primerNombreArray = primerNombreArray;
+    }
+
+    public ArrayList<String> getSegundoNombreArray() {
+        return segundoNombreArray;
+    }
+
+    public void setSegundoNombreArray(ArrayList<String> segundoNombreArray) {
+        this.segundoNombreArray = segundoNombreArray;
+    }
+
+    public ArrayList<String> getPrimerApellidoArray() {
+        return primerApellidoArray;
+    }
+
+    public void setPrimerApellidoArray(ArrayList<String> primerApellidoArray) {
+        this.primerApellidoArray = primerApellidoArray;
+    }
+
+    public ArrayList<String> getSegundoApellidoArray() {
+        return segundoApellidoArray;
+    }
+
+    public void setSegundoApellidoArray(ArrayList<String> segundoApellidoArray) {
+        this.segundoApellidoArray = segundoApellidoArray;
+    }
+
+    public ArrayList<Long> getCantidadComprasArray() {
+        return cantidadComprasArray;
+    }
+
+    public void setCantidadComprasArray(ArrayList<Long> cantidadComprasArray) {
+        this.cantidadComprasArray = cantidadComprasArray;
+    }
+    
     
 }

@@ -84,6 +84,26 @@ public class DAOFacade {
     public boolean existeAdmin(String usuario) throws CaException {
         return admonDAO.existeAdmin(usuario);
     }
+    
+    public double obtenerValorTotalVentas() throws CaException {
+        return admonDAO.obtenerValorTotalVentas();
+    }
+    
+    public void obtenerProductosMasVendidos() throws CaException {
+        admonDAO.obtenerProductosMasVendidos();
+    }
+    
+    public void obtenerProductosMenosVendidos() throws CaException {
+        admonDAO.obtenerProductosMenosVendidos();
+    }
+    
+    public long obtenerCantidadPagosRechazados() throws CaException {
+        return admonDAO.obtenerCantidadPagosRechazados();
+    }
+    
+    public void clientesConMasCompras() throws CaException {
+        admonDAO.clientesConMasCompras();
+    }
     //--------------------------------ClienteDAO--------------------------------
     public boolean buscarExisteCliente(String usuario, String password, String nickname) throws CaException {
         return clienteDAO.buscarExisteCliente(usuario, password, nickname);
