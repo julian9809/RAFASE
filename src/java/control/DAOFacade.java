@@ -73,6 +73,10 @@ public class DAOFacade {
     public void buscarAdministradores(String nickname, String userPassword) throws CaException {
         admonDAO.buscarAdministradores(nickname, userPassword);
     }
+    
+    public boolean existeAdmin(String usuario) throws CaException {
+        return admonDAO.existeAdmin(usuario);
+    }
     //--------------------------------ClienteDAO--------------------------------
     public boolean buscarExisteCliente(String usuario, String password, String nickname) throws CaException {
         return clienteDAO.buscarExisteCliente(usuario, password, nickname);
