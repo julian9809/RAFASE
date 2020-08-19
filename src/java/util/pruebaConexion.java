@@ -28,21 +28,20 @@ public class pruebaConexion {
         //Insercion de direcciones
         DAOFacade facade = new DAOFacade();
         
-        facade.realizarConexion();
-        //facade.nombreUsuario(username);
-        //facade.passwordUsuario(password);
-        facade.realizarConexion();
-        
         //Conexion de las pruebas
         facade.cerrarConexion();
         facade.setearAdminDB();
         facade.realizarConexion();
         
+        //facade.nombreUsuario(username);
+        //facade.passwordUsuario(password);
+        facade.realizarConexion();
         
-        facade.actualizarEstadoPedido(22, facade.obtenerTotalPedido(22));
-        boolean recibido = facade.confirmarTajertaConBanco(Long.parseLong("123412341234"), 123, "08/25", 22);
-        System.out.println(recibido);
-        
+        /*
+        //Pago del pedido y simulación del banco
+        facade.actualizarEstadoPedido(pedido_id, facade.obtenerTotalPedido(22));
+        boolean recibido = facade.confirmarTajertaConBanco(numero de la tarjeta, cvv, fecha en String MM/YY, pedido_id);
+        */
     }
     
 }

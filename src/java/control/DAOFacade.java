@@ -174,6 +174,10 @@ public class DAOFacade {
         return pagoDAO.confirmarTajertaConBanco(numero_tarjeta, cvv, fecha_exp, pedido_id);
     }
     
+    public String obtenerSentenciaFactura(long pedido_id) throws CaException {
+        return pagoDAO.obtenerSentenciaFactura(pedido_id);
+    }
+    
     //---------------------------------PedidoDAO--------------------------------
     public void consultarPedido(String usuario, long usuario_id) throws CaException{
         pedidoDAO.consultarPedido(usuario, usuario_id);

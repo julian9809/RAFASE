@@ -34,6 +34,24 @@ public class PagoDAO {
         return 0;
     }
     
+    public String obtenerSentenciaFactura(long pedido_id) throws CaException {
+        try {
+            String strSQL = "SELECT PK_PAQUETERAFASE.FU_CREARFACTURA(" + pedido_id + ") FROM DUAL";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
+                ResultSet rs = prepStmt.executeQuery();
+                while (rs.next()) {
+                    return rs.getString(1);
+                }
+            }
+        } catch (SQLException e) {
+            throw new CaException("No pudo consultar el pedido\n " + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance().liberarConexion();
+        }
+        return null;
+    }
+    
     /**
      * Esto se ejecuta desde admin_db
      */
@@ -45,22 +63,32 @@ public class PagoDAO {
                 ResultSet rs = prepStmt.executeQuery();
                 while (rs.next()) {
                     if(rs.getString(1).equals("TRUE")){
-                        try {
-                            String strSQLDOS = "UPDATE PED SET ESTADO_PEDIDO = 'PA' WHERE ID_PEDIDO = ? AND ESTADO_PEDIDO = 'PP'";
-                            try (PreparedStatement prepStmtDOS = conexion.prepareStatement(strSQLDOS)) {
-                                prepStmtDOS.setLong(1, pedido_id);
-                            System.out.println("puteado");
-                                prepStmtDOS.executeUpdate();
+                        String strSQLDOS = "UPDATE PED SET ESTADO_PEDIDO = 'PA' WHERE ID_PEDIDO = ? AND ESTADO_PEDIDO = 'PP'";
+                        try (PreparedStatement prepStmtDOS = conexion.prepareStatement(strSQLDOS)) {
+                            prepStmtDOS.setLong(1, pedido_id);
+                            prepStmtDOS.executeUpdate();
+                            ServiceLocator.getInstance().liberarConexion();
+                            
+                            String strSQLTRES = obtenerSentenciaFactura(pedido_id);
+                            ServiceLocator.getInstance().tomarConexion();
+                            System.out.println(strSQLTRES);
+                            try (PreparedStatement prepStmtTRES = conexion.prepareStatement(strSQLTRES)) {
+                                prepStmtTRES.executeUpdate();
                             }
                             ServiceLocator.getInstance().commit();
-                        } catch (SQLException e) {
-                            throw new CaException("PedidoDAO", "No se pudo actualizar el estado del pedido\n" + e.getMessage());
-                        } finally {
-                            ServiceLocator.getInstance().liberarConexion();
                         }
+                        ServiceLocator.getInstance().commit();
+                        
+                        
                         return true;
                     }
                     else{
+                        String strSQLDOS = "UPDATE PED SET ESTADO_PEDIDO = 'RE' WHERE ID_PEDIDO = ? AND ESTADO_PEDIDO = 'PP'";
+                        try (PreparedStatement prepStmtDOS = conexion.prepareStatement(strSQLDOS)) {
+                            prepStmtDOS.setLong(1, pedido_id);
+                            prepStmtDOS.executeUpdate();
+                        }
+                        ServiceLocator.getInstance().commit();
                         return false;
                     }
                 }
@@ -72,4 +100,6 @@ public class PagoDAO {
         }
         return false;
     }
+    
+    
 }
