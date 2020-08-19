@@ -18,6 +18,7 @@ create public synonym usur for admin_db.usuario;
 create role adminRAFASE;
 grant create session to adminRAFASE;
 grant select on admon to adminRAFASE;
+grant select any sequence to adminRAFASE;
 grant select on categ to adminRAFASE;
 grant select on ciu to adminRAFASE;
 grant select on depe to adminRAFASE;

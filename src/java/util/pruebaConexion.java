@@ -7,6 +7,7 @@ package util;
 import control.DAOFacade;
 import java.sql.Date;
 import java.time.LocalDate;
+import modelo.Carrito;
 import modelo.Direccion;
 import modelo.TarjetaCredito;
 import modelo.Telefono;
@@ -29,6 +30,7 @@ public class pruebaConexion {
         DAOFacade facade = new DAOFacade();
         
         //Conexion de las pruebas
+        facade.realizarConexion();
         facade.cerrarConexion();
         facade.setearAdminDB();
         facade.realizarConexion();
@@ -37,6 +39,12 @@ public class pruebaConexion {
         //facade.passwordUsuario(password);
         facade.realizarConexion();
         
+        
+        Carrito carrito = facade.getCarrito();
+        facade.consultarCarrito("yami", 1);
+        
+        double total = facade.obtenerTotalPedido(carrito.getId_pedido_array().get(0));
+        System.out.println("total: "+total);
         /*
         //Pago del pedido y simulación del banco
         facade.actualizarEstadoPedido(pedido_id, facade.obtenerTotalPedido(22));
