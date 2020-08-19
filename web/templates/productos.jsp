@@ -337,13 +337,16 @@
                                     <td></td>
                                     <td>$<%= carrito.getPrecio_base_array().get(i) + (carrito.getPrecio_base_array().get(i) * carrito.getIva_array().get(i))%></td>
                                     <td>
-                                        <input type="number" value="<%= carrito.getCantidad_array().get(i)%>" aria-label="Search" class="form-control" style="width: 100px">
+                                        <input type="number" value="<%= carrito.getCantidad_array().get(i)%>" aria-label="Search" class="form-control" style="width: 100px" disabled>
                                     </td>
                                     <td class="font-weight-bold">$<%= carrito.getCantidad_array().get(i) * (carrito.getPrecio_base_array().get(i) + (carrito.getPrecio_base_array().get(i) * carrito.getIva_array().get(i)))%>
                                     </td>
                                     <td>
                                         <a type="button" class="btn btn-sm btn-danger btnRedondo" data-toggle="tooltip" data-placement="top" title="Remove item" href="../AgregarProducto?cantidadQuitar=<%= carrito.getCantidad_array().get(i)%>&id_producto=<%= carrito.getId_producto_array().get(i)%>&id_pedido=<%= carrito.getId_pedido_array().get(i)%>">
-                                            -
+                                            <span class="font-weight-bold">+</span>
+                                        </a>
+                                        <a type="button" class="btn btn-sm btn-danger btnRedondo" data-toggle="tooltip" data-placement="top" title="Remove item" href="../AgregarProducto?cantidadQuitar=<%= carrito.getCantidad_array().get(i)%>&id_producto=<%= carrito.getId_producto_array().get(i)%>&id_pedido=<%= carrito.getId_pedido_array().get(i)%>">
+                                            <span class="font-weight-bold">-</span>
                                         </a>
                                     </td>
                                 </tr>
