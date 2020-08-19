@@ -4,6 +4,7 @@
     Author     : julia
 --%>
 
+<%@page import="modelo.Cliente"%>
 <%@page import="modelo.Ciudad"%>
 <%@page import="modelo.InventarioRafase"%>
 <%@page import="modelo.Proveedor"%>
@@ -33,6 +34,7 @@
     Proveedor proveedor = facade.getProveedor();
     Ciudad ciu = facade.getCiudad();
     InventarioRafase inventarioRafase = facade.getInventario_rafase();
+    Cliente cli = facade.getCliente();
 
 %>
 <html lang="es">
@@ -205,7 +207,7 @@
                                     <tbody>
                                         <tr>
                                             <td>Valor total vendido</td>
-                                            <td><%= facade.obtenerValorTotalVentas() %></td>
+                                            <td><%= facade.obtenerValorTotalVentas()%></td>
                                         </tr>
                                         <tr>
                                             <td>Producto más vendido</td>
@@ -221,7 +223,7 @@
                                         </tr>
                                         <tr>
                                             <td>Pagos rechazados</td>
-                                            <td><%= facade.obtenerCantidadPagosRechazados() %></td>
+                                            <td><%= facade.obtenerCantidadPagosRechazados()%></td>
                                         </tr>
                                         <tr>
                                             <td>Tiempo promedio de entrega del pedido</td>
@@ -398,6 +400,7 @@
                 try {
                     facade.buscarAdministradores(usuario, contraseña);
                     facade.buscarProveedores(usuario, contraseña);
+                    facade.buscarDatosClientes();
                     facade.buscarCiudades(usuario, contraseña);
                 } catch (CaException e1) {
                     String error = e1.toString();
@@ -561,6 +564,40 @@
                 <div class="card">
                     <div class="card-header warning-color white-text">
                         Clientes
+                    </div>
+                    <div class="card-body">
+                        <table class="table  table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nickname</th>
+                                    <th scope="col">Primer nombre</th>
+                                    <th scope="col">Segundo nombre</th>
+                                    <th scope="col">Primer Apellido</th>
+                                    <th scope="col">Segundo Apellido</th>
+                                    <th scope="col">Fecha de nacimiento</th>
+                                    <th scope="col">Genero</th>
+                                    <th scope="col">Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%                                     
+                                    for (int i = 0; i < cli.getPrimer_nombre_array().size(); i++) {
+                                %>
+                                <tr>
+                                    <td scope="row"><%= i + 1 %></td>
+                                    <td><%= cli.getNickname_array().get(i) %></td> 
+                                    <td><%= cli.getPrimer_nombre_array().get(i) %></td>                         
+                                    <td><%= cli.getSegundo_nombre_array().get(i) %></td>
+                                    <td><%= cli.getPrimer_apellido_array().get(i) %></td>
+                                    <td><%= cli.getSegundo_apellido_array().get(i) %></td>
+                                    <td><%= cli.getFecha_nacimiento_array().get(i) %></td>  
+                                    <td><%= cli.getGenero_array().get(i) %></td>
+                                    <td><%= cli.getEmail_array().get(i) %></td>
+                                </tr>
+                                <% } //end for %>                                
+                            </tbody>                            
+                        </table>
                     </div>
                 </div>
             </div>

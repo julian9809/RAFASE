@@ -313,6 +313,30 @@ public class ClienteDAO {
         }
     }
     
+    public void buscarDatosClientes() throws CaException {
+        try {
+            String strSQL = "SELECT NICKNAME, PRIMER_NOMB, SEGUNDO_NOMB, PRIMER_APELL, SEGUNDO_APELL, FECH_NAC, GENERO, EMAIL FROM USUR";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
+                ResultSet rs = prepStmt.executeQuery();
+                while (rs.next()) {
+                    cliente.getNickname_array().add(rs.getString(1));
+                    cliente.getPrimer_nombre_array().add(rs.getString(2));
+                    cliente.getSegundo_nombre_array().add(rs.getString(3));
+                    cliente.getPrimer_apellido_array().add(rs.getString(4));
+                    cliente.getSegundo_apellido_array().add(rs.getString(5));
+                    cliente.getFecha_nacimiento_array().add(rs.getDate(6));
+                    cliente.getGenero_array().add(rs.getString(7));
+                    cliente.getEmail_array().add(rs.getString(8));
+                }
+            }
+        } catch (SQLException e) {
+            throw new CaException("ClienteDAO", "No se pudo realizar la busqueda" + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance().liberarConexion();
+        }
+    }
+    
     public long buscarIdCliente(String usuario, String password) throws CaException {
         long id_cliente=-1;
         try {
