@@ -68,8 +68,6 @@ _Ayudaron a levantar el proyecto desde sus inicios_
 * **Julian David Gonzalez** - *Trabajo en Front-End y Back-End* - *Diseño Base de Datos* - [julian98O9](https://github.com/julian9809)
 * **David Santiago Garces** - *Trabajo en Front-End y Back-End* - *Diseño Base de Datos* - *Diseño de Logotipo* - [SantiYami](https://github.com/SantiYami)
 * **Jhonathan Rojas** - *Trabajo en Back-End* - *Diseño Base de Datos* - [Papas338](https://github.com/Papas338)
-* **Daniel** - *Diseño Base de Datos* - [DmZayzor](https://github.com/DmZayzor)
-* **Mateo** - *Diseño Base de Datos* - [mateo](#mateo)
 
 También puedes mirar la lista de todos los [contribuyentes](https://github.com/julian9809/RAFASE/contributors) quíenes han participado en este proyecto. 
 

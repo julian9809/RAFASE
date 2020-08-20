@@ -1,5 +1,3 @@
-alter session set "_ORACLE_SCRIPT"=true;
-
 --ASIGNACION DE TABLESPACES
 
 create tablespace RAFASE_administrador datafile 'C:\oraclexe\app\oracle\oradata\XE\RAFASE_administrador.dbf' size 2M autoextend on;

@@ -6,4 +6,8 @@
 5. Correr secuencias.sql
 6. Correr Roles_Dos.sql
 7. Correr Vistas.sql
+8. Correr PaqueteRafaseHeader.sql y PaqueteRafaseBody.sql
+9. Correr TriggerGenerarEnvio.sql
+10. Correr llenadoTarjetas.sql
+11. Correr llenado.sql
 ## Si algo falla llorar
