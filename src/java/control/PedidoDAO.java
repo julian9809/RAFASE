@@ -325,13 +325,14 @@ public class PedidoDAO {
                     factura.getTipo_id_array().add(rs.getString(2));
                     factura.getId_pedido_array().add(rs.getLong(3));
                     factura.getCantidad_array().add(rs.getLong(4));
-                    factura.getPrecioProd_array().add(rs.getDouble(5));
-                    factura.getIva_array().add(rs.getDouble(6));
-                    factura.getPrecioConIva_array().add(rs.getDouble(7));
-                    factura.getIvaCompleto_array().add(rs.getDouble(8));
-                    factura.getPrecioSinIva_array().add(rs.getDouble(9));
-                    factura.getMetodoPago_array().add(rs.getString(10));
-                    factura.getId_cedula_array().add(rs.getLong(11));
+                    factura.getNombreProducto_array().add(rs.getString(5));
+                    factura.getPrecioProd_array().add(rs.getDouble(6));
+                    factura.getIva_array().add(rs.getDouble(7));
+                    factura.getPrecioConIva_array().add(rs.getDouble(8));
+                    factura.getIvaCompleto_array().add(rs.getDouble(9));
+                    factura.getPrecioSinIva_array().add(rs.getDouble(10));
+                    factura.getMetodoPago_array().add(rs.getString(11));
+                    factura.getId_cedula_array().add(rs.getLong(12));
                 }
             }
         } catch (SQLException e) {

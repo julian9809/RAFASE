@@ -17,6 +17,7 @@ public class factura {
     private String tipo_id;
     private long id_pedido;
     private long cantidad;
+    private String nombreProducto;
     private double precioProd;
     private double iva;
     private double precioConIva;
@@ -29,6 +30,7 @@ public class factura {
     private ArrayList<String> tipo_id_array = new ArrayList<>();
     private ArrayList<Long> id_pedido_array = new ArrayList<>();
     private ArrayList<Long> cantidad_array = new ArrayList<>();
+    private ArrayList<String> nombreProducto_array = new ArrayList<>();
     private ArrayList<Double> precioProd_array = new ArrayList<>();
     private ArrayList<Double> iva_array = new ArrayList<>();
     private ArrayList<Double> precioConIva_array = new ArrayList<>();
@@ -70,6 +72,14 @@ public class factura {
 
     public void setCantidad(long cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public String getNombreProducto() {
+        return nombreProducto;
+    }
+
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
     }
 
     public double getPrecioProd() {
@@ -160,6 +170,14 @@ public class factura {
         this.cantidad_array = cantidad_array;
     }
 
+    public ArrayList<String> getNombreProducto_array() {
+        return nombreProducto_array;
+    }
+
+    public void setNombreProducto_array(ArrayList<String> nombreProducto_array) {
+        this.nombreProducto_array = nombreProducto_array;
+    }
+    
     public ArrayList<Double> getPrecioProd_array() {
         return precioProd_array;
     }
