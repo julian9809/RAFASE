@@ -133,8 +133,12 @@
         %>
         <script type="text/javascript">
             alertify.alert("Error", "<%= "Error --> " + error%>", function () {
-                alertify.message('OK');
-            });
+                alertify.error('Acceso denegado');
+            }).set({onshow: null, onclose: function () {
+                    setTimeout(() => {
+                        window.location = 'index.jsp';
+                    }, 1000);
+                }});
         </script>
         <%
             }//End catch
@@ -347,12 +351,12 @@
                                     </td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                        <a type="button" class="btn btn-sm btn-success btnRedondo" data-toggle="tooltip" data-placement="top" title="Remove item" href="../AgregarProducto?cantidadQuitar=<%= carrito.getCantidad_array().get(i)+1 %>&id_producto=<%= carrito.getId_producto_array().get(i)%>&id_pedido=<%= carrito.getId_pedido_array().get(i)%>">
-                                            <i class="fas fa-plus"></i>
-                                        </a>
-                                        <a type="button" class="btn btn-sm btn-danger btnRedondo" data-toggle="tooltip" data-placement="top" title="Remove item" href="../AgregarProducto?cantidadQuitar=<%= carrito.getCantidad_array().get(i)-1 %>&id_producto=<%= carrito.getId_producto_array().get(i)%>&id_pedido=<%= carrito.getId_pedido_array().get(i)%>">
-                                            <i class="fas fa-minus"></i>
-                                        </a>
+                                            <a type="button" class="btn btn-sm btn-success btnRedondo" data-toggle="tooltip" data-placement="top" title="Remove item" href="../AgregarProducto?cantidadQuitar=<%= carrito.getCantidad_array().get(i) + 1%>&id_producto=<%= carrito.getId_producto_array().get(i)%>&id_pedido=<%= carrito.getId_pedido_array().get(i)%>">
+                                                <i class="fas fa-plus"></i>
+                                            </a>
+                                            <a type="button" class="btn btn-sm btn-danger btnRedondo" data-toggle="tooltip" data-placement="top" title="Remove item" href="../AgregarProducto?cantidadQuitar=<%= carrito.getCantidad_array().get(i) - 1%>&id_producto=<%= carrito.getId_producto_array().get(i)%>&id_pedido=<%= carrito.getId_pedido_array().get(i)%>">
+                                                <i class="fas fa-minus"></i>
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>
@@ -390,10 +394,14 @@
                         String error = e1.toString();
                         error = error.replaceAll("\n", "");
                     %>
-                    <script  type = "text/javascript">
-                        alertify.alert("Error", "<%= "Error-- > " + error%>", function () {
-                            alertify.message('OK');
-                        });
+                    <script type="text/javascript">
+                        alertify.alert("Error", "<%= "Error --> " + error%>", function () {
+                            alertify.error('Acceso denegado');
+                        }).set({onshow: null, onclose: function () {
+                                setTimeout(() => {
+                                    window.location = 'index.jsp';
+                                }, 1000);
+                            }});
                     </script>
                     <%
                         } finally {
