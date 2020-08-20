@@ -198,6 +198,10 @@ public class DAOFacade {
     public void confirmarEnvio() throws CaException {
         pagoDAO.confirmarEnvio();
     }
+    
+    public void descontarStock(long pedido_id) throws CaException {
+        pagoDAO.descontarStock(pedido_id);
+    }
     //---------------------------------PedidoDAO--------------------------------
     public void consultarPedido(long usuario_id, long ciudad_id) throws CaException{
         pedidoDAO.consultarPedido(usuario_id, ciudad_id);

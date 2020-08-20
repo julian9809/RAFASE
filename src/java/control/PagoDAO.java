@@ -142,4 +142,20 @@ public class PagoDAO {
             ServiceLocator.getInstance().liberarConexion();
         }
     }
+    
+    public void descontarStock(long pedido_id) throws CaException {
+        try {
+            String strSQL = "CALL PK_PAQUETERAFASE.PR_ACTUALIZARSTOCK(?)";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
+                prepStmt.setLong(1, pedido_id);
+                prepStmt.executeUpdate();
+            }
+            ServiceLocator.getInstance().commit();
+        } catch (SQLException e) {
+            throw new CaException("PedidoDAO", "No se pudo actualizar el estado del pedido\n" + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance().liberarConexion();
+        }
+    }
 }
