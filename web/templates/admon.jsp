@@ -38,10 +38,25 @@
     Cliente cli = facade.getCliente();
     DecimalFormat format = new DecimalFormat("#.##");
 
-    facade.obtenerProductosMasVendidos();
-    facade.obtenerProductosMenosVendidos();
-    facade.clientesConMasCompras();
-
+    try {
+        facade.obtenerProductosMasVendidos();
+        facade.obtenerProductosMenosVendidos();
+        facade.clientesConMasCompras();
+    } catch (CaException e1) {
+        String error = e1.toString();
+        error = error.replaceAll("\n", "");
+%>
+<script type="text/javascript">
+                alertify.alert("Error", "<%= "Error --> " + error%>", function () {
+                    alertify.error('Acceso denegado');
+                }).set({onshow: null, onclose: function () {
+                        setTimeout(() => {
+                            window.location = 'index.jsp';
+                        }, 1000);
+                    }});
+</script>
+<%
+                }//end catch            
 %>
 <html lang="es">
 
@@ -659,12 +674,12 @@
                 </div>
             </div>
             <!--Stock-->
-            
+
             <!--Sucursales-->
             <div class="container-fluid mt-5 py-lg-5" id="sucursales">
-            <%
-                for (int i = 0; i < ciu.getId_ciudad_array().size(); i++) {
-            %>            
+                <%
+                    for (int i = 0; i < ciu.getId_ciudad_array().size(); i++) {
+                %>            
                 <div class="card mt-5">
                     <!-- Card header -->
                     <div class="card-header info-color white-text">Nuestra sede en <%= ciu.getNombre_array().get(i)%></div>
@@ -684,7 +699,7 @@
 
                 <%
                     }//End for ciudades
-                %>
+%>
             </div>
             <!--Sucursales-->
         </main>
