@@ -57,6 +57,7 @@ public class Factura extends HttpServlet {
             HttpSession sesion = request.getSession();
             String usuario = sesion.getAttribute("usuario").toString();
             String password = sesion.getAttribute("contraseña").toString();
+            System.out.println("antes de id: cliente: ");
             Long id_cliente = facade.buscarIdCliente(usuario, password);
             System.out.println("usuario: " + usuario + " contraseña: " + password + "cedula: " + id_cliente);
 
@@ -65,7 +66,9 @@ public class Factura extends HttpServlet {
             facade.realizarConexion();
 
             factura fact = facade.getFactura();
+            System.out.println("antes buscar fact: ");
             facade.buscarFactura(Long.valueOf(id_factura));
+            System.out.println("despues fact: ");
 
             Cliente cli = facade.getCliente();
             facade.buscarDatosCliente(usuario, password, id_cliente);
@@ -80,11 +83,11 @@ public class Factura extends HttpServlet {
 
             documento.open();
 
-            Image cabecera = Image.getInstance("C:\\Users\\julia\\Documents\\Proyecto final BD2\\RAFASE\\web\\img\\Logo.png");
-            cabecera.setAlignment(Element.ALIGN_CENTER);
-            cabecera.scaleToFit(100, 100);
+            //Image cabecera = Image.getInstance("C:\\Users\\julia\\Documents\\Proyecto final BD2\\RAFASE\\web\\img\\Logo.png");
+            //cabecera.setAlignment(Element.ALIGN_CENTER);
+            //cabecera.scaleToFit(100, 100);
 
-            documento.add(cabecera);
+            //documento.add(cabecera);
 
             Font fontT = new Font(Font.FontFamily.TIMES_ROMAN, 16, Font.BOLD, BaseColor.BLACK);
 

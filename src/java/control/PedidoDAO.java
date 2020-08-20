@@ -324,8 +324,8 @@ public class PedidoDAO {
                     factura.getId_cedula_array().add(rs.getLong(1));
                     factura.getTipo_id_array().add(rs.getString(2));
                     factura.getId_pedido_array().add(rs.getLong(3));
-                    factura.getCantidad_array().add(rs.getLong(4));
-                    factura.getNombreProducto_array().add(rs.getString(5));
+                    factura.getNombreProducto_array().add(rs.getString(4));
+                    factura.getCantidad_array().add(rs.getLong(5));
                     factura.getPrecioProd_array().add(rs.getDouble(6));
                     factura.getIva_array().add(rs.getDouble(7));
                     factura.getPrecioConIva_array().add(rs.getDouble(8));
