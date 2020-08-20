@@ -83,11 +83,13 @@ public class Factura extends HttpServlet {
 
             documento.open();
 
-            //Image cabecera = Image.getInstance("C:\\Users\\julia\\Documents\\Proyecto final BD2\\RAFASE\\web\\img\\Logo.png");
-            //cabecera.setAlignment(Element.ALIGN_CENTER);
-            //cabecera.scaleToFit(100, 100);
+            String relativeWebPath = "img/Logo.png";
+            String absoluteDiskPath = getServletContext().getRealPath(relativeWebPath);
+            Image cabecera = Image.getInstance(absoluteDiskPath);
+            cabecera.setAlignment(Element.ALIGN_CENTER);
+            cabecera.scaleToFit(100, 100);
 
-            //documento.add(cabecera);
+            documento.add(cabecera);
 
             Font fontT = new Font(Font.FontFamily.TIMES_ROMAN, 16, Font.BOLD, BaseColor.BLACK);
 
@@ -159,11 +161,11 @@ public class Factura extends HttpServlet {
                 tabla.addCell(Cant);
                 tabla.addCell(Tot);
             }
-            
+
             PdfPCell Pro = new PdfPCell(new Paragraph(""));
             PdfPCell Iva2 = new PdfPCell(new Paragraph(""));
             PdfPCell Cant = new PdfPCell(new Paragraph("subtotal"));
-            PdfPCell Tot = new PdfPCell(new Paragraph(fact.getPrecioSinIva_array().get(0).toString()));            
+            PdfPCell Tot = new PdfPCell(new Paragraph(fact.getPrecioSinIva_array().get(0).toString()));
 
             tabla.addCell(Pro);
             tabla.addCell(Iva2);
@@ -171,9 +173,9 @@ public class Factura extends HttpServlet {
             tabla.addCell(Tot);
 
             documento.add(tabla);
-            
+
             documento.add(blanco);
-            
+
             Paragraph impuesto = new Paragraph();
             impuesto.add(new Phrase("Calculo total"));
             impuesto.setAlignment(Element.ALIGN_CENTER);
@@ -181,27 +183,27 @@ public class Factura extends HttpServlet {
             impuesto.add(new Phrase(Chunk.NEWLINE));
 
             documento.add(impuesto);
-            
-            PdfPTable tablaIva = new PdfPTable(2);            
+
+            PdfPTable tablaIva = new PdfPTable(2);
 
             PdfPCell Pro2 = new PdfPCell(new Paragraph("Subtotal"));
             PdfPCell Cant2 = new PdfPCell(new Paragraph(fact.getPrecioSinIva_array().get(0).toString()));
 
             tablaIva.addCell(Pro2);
             tablaIva.addCell(Cant2);
-            
+
             PdfPCell Pro3 = new PdfPCell(new Paragraph("Subtotal IVA"));
             PdfPCell Cant3 = new PdfPCell(new Paragraph(fact.getIvaCompleto_array().get(0).toString()));
 
             tablaIva.addCell(Pro3);
             tablaIva.addCell(Cant3);
-            
+
             PdfPCell Pro4 = new PdfPCell(new Paragraph("Total"));
             PdfPCell Cant4 = new PdfPCell(new Paragraph(fact.getPrecioConIva_array().get(0).toString()));
 
             tablaIva.addCell(Pro4);
             tablaIva.addCell(Cant4);
-            
+
             documento.add(tablaIva);
 
             documento.add(blanco);
