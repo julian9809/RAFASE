@@ -75,6 +75,10 @@ También puedes mirar la lista de todos los [contribuyentes](https://github.com/
 
 Este proyecto está bajo la Licencia (Aun no definida) - mira el archivo [LICENSE.md](LICENSE.md) para detalles
 
+## Youtube 🎥
+
+Puede encontrar un video mostrando el resultado final de la aplicación en el siguiente [enlace](https://youtu.be/DL5jCF2d03o)
+
 ## Expresiones de Gratitud 🎁
 
 * Comenta a otros sobre este proyecto 📢
