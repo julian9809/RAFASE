@@ -217,15 +217,15 @@
                                         </tr>
                                         <tr>
                                             <td>Producto más vendido</td>                                           
-                                            <td><%= adm.getNombreProductoMasVendidoArray().get(0) + " x" + adm.getCantidadProductoMasVendidoArray().get(0) %></td>
+                                            <td><%= adm.getNombreProductoMasVendidoArray().get(0) + " x" + adm.getCantidadProductoMasVendidoArray().get(0)%></td>
                                         </tr>
                                         <tr>
                                             <td>Producto menos vendido</td>
-                                            <td><%= adm.getNombreProductoMenosVendidoArray().get(0) + " x" + adm.getCantidadProductoMenosVendidoArray().get(0) %></td>
+                                            <td><%= adm.getNombreProductoMenosVendidoArray().get(0) + " x" + adm.getCantidadProductoMenosVendidoArray().get(0)%></td>
                                         </tr>
                                         <tr>
                                             <td>Cliente con mayor volumen de compras</td>
-                                            <td><%= adm.getPrimerNombreArray().get(0) + " " + adm.getPrimerApellidoArray().get(0) %></td>
+                                            <td><%= adm.getPrimerNombreArray().get(0) + " " + adm.getPrimerApellidoArray().get(0)%></td>
                                         </tr>
                                         <tr>
                                             <td>Pagos rechazados</td>
@@ -408,7 +408,7 @@
                     facade.buscarProveedores(usuario, contraseña);
                     facade.buscarDatosClientes();
                     facade.buscarCiudades(usuario, contraseña);
-                    
+
                 } catch (CaException e1) {
                     String error = e1.toString();
                     error = error.replaceAll("\n", "");
@@ -659,20 +659,21 @@
                 </div>
             </div>
             <!--Stock-->
-            <%
-                for (int i = 0; i < ciu.getId_ciudad_array().size(); i++) {
-            %>
+            
             <!--Sucursales-->
             <div class="container-fluid mt-5 py-lg-5" id="sucursales">
-                <div class="card">
+            <%
+                for (int i = 0; i < ciu.getId_ciudad_array().size(); i++) {
+            %>            
+                <div class="card mt-5">
                     <!-- Card header -->
-                    <div class="card-header info-color white-text">Nuestra sede en <%= ciu.getNombre_array().get(i) %></div>
+                    <div class="card-header info-color white-text">Nuestra sede en <%= ciu.getNombre_array().get(i)%></div>
 
                     <!--Card content-->
                     <div class="card-body">
                         <!--Google map-->
                         <div id="map-container-google-2" class="z-depth-1-half map-container" style="height: 500px">
-                            <iframe src="https://maps.google.com/maps?q=<%= ciu.getNombre_array().get(i) %>&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
+                            <iframe src="https://maps.google.com/maps?q=<%= ciu.getNombre_array().get(i)%>&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
                                     style="border:0" allowfullscreen></iframe>
                         </div>
 
@@ -680,12 +681,12 @@
 
                     </div>
                 </div>
+
+                <%
+                    }//End for ciudades
+                %>
             </div>
             <!--Sucursales-->
-            <%
-                }//End for ciudades
-            %>
-
         </main>
         <!--Main layout-->
 
