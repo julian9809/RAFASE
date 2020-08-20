@@ -150,9 +150,7 @@
                 <!-- Section heading -->
                 <h1 class="font-weight-bold mb-4 pb-2">Productos</h1>
                 <!-- Section description -->
-                <p class="grey-text w-responsive mx-auto mb-5">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ante nulla, sagittis et commodo ac, sollicitudin at purus. Quisque elementum diam eget luctus feugiat. Donec turpis dolor, pulvinar vitae luctus vitae, imperdiet id est. Aenean interdum sem sed sapien suscipit, sit amet aliquet diam blandit. Maecenas mollis, sem sed volutpat cursus, felis sem euismod magna, vel condimentum nulla quam a mauris. Mauris sit amet dapibus augue. Curabitur quam libero, feugiat sed efficitur a, porta ac elit. Nam at fringilla urna, non convallis elit. Donec sed nisi gravida, ullamcorper ex et, aliquam metus. Nulla at quam metus. Donec dictum ipsum tristique nisl posuere, at congue risus tincidunt.
-                </p>
+                
                 <!-- Grid row -->
                 <div class="row justify-content-center">
                     <div class="card-deck col-12 text-center">
