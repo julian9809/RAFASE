@@ -32,6 +32,7 @@ public class PedidoDAO {
         pedido = new Pedido();
         detalle_pedido = new DetallePedido();
         carrito = new Carrito();
+        factura = new factura();
     }
 
     public void consultarPedido(long usuario_id, long ciudad_id) throws CaException {
@@ -352,4 +353,8 @@ public class PedidoDAO {
         return carrito;
     }
 
+    public factura getFactura() {
+        return factura;
+    }
+    
 }

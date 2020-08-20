@@ -17,6 +17,7 @@ import modelo.Pedido;
 import modelo.Proveedor;
 import modelo.TarjetaCredito;
 import modelo.Telefono;
+import modelo.factura;
 import util.CaException;
 import util.ServiceLocator;
 
@@ -206,6 +207,10 @@ public class DAOFacade {
         pedidoDAO.buscarFacturas(usuario_id);
     }
     
+    public void buscarFactura(long usuario_id) throws CaException {
+        pedidoDAO.buscarFactura(usuario_id);
+    }
+    
     public long consultarIdPedido(long usuario_id, long ciudad_id) throws CaException {
         return pedidoDAO.consultarIdPedido(usuario_id, ciudad_id);
     }
@@ -308,6 +313,10 @@ public class DAOFacade {
     
     public Proveedor getProveedor(){
         return admonDAO.getProveedor();
+    }
+    
+    public factura getFactura(){
+        return pedidoDAO.getFactura();
     }
     
 }
