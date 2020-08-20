@@ -19,12 +19,14 @@ import util.CaException;
 import util.ServiceLocator;
 //imports modelo
 import modelo.Pedido;
+import modelo.factura;
 
 public class PedidoDAO {
 
     private Pedido pedido;
     private DetallePedido detalle_pedido;
     private Carrito carrito;
+    private factura factura;
 
     public PedidoDAO() {
         pedido = new Pedido();
@@ -53,7 +55,7 @@ public class PedidoDAO {
             ServiceLocator.getInstance().liberarConexion();
         }
     }
-    
+
     public void buscarFacturas(long usuario_id) throws CaException {
         try {
             String strSQL = "SELECT * FROM ped, usur WHERE ped.ID_CEDULA=usur.ID_CEDULA AND usur.ID_CEDULA= " + usuario_id + " AND ped.ESTADO_PEDIDO='PA'";
@@ -248,7 +250,7 @@ public class PedidoDAO {
             ServiceLocator.getInstance().liberarConexion();
         }
     }
-    
+
     public boolean verificarExistencia(double id_pedido, long id_producto) throws CaException {
         try {
             String strSQL = "SELECT COUNT(*) FROM depe WHERE ID_PEDIDO = " + id_pedido + " AND ID_PRODUCTO = " + id_producto;
@@ -291,8 +293,8 @@ public class PedidoDAO {
             ServiceLocator.getInstance().liberarConexion();
         }
     }
-    
-   public void actualizarEstadoPedido(long pedido_id, double total_pedido) throws CaException {
+
+    public void actualizarEstadoPedido(long pedido_id, double total_pedido) throws CaException {
         try {
             String strSQL = "UPDATE PED SET ESTADO_PEDIDO = 'PP', TOTAL_PEDIDO = ? WHERE ID_PEDIDO = ? AND ESTADO_PEDIDO = 'CA'";
             Connection conexion = ServiceLocator.getInstance().tomarConexion();
@@ -310,7 +312,34 @@ public class PedidoDAO {
             ServiceLocator.getInstance().liberarConexion();
         }
     }
-
+    
+    public void buscarFactura(long id_ciudad) throws CaException{
+        try {
+            String strSQL = "SELECT * from factura" + id_ciudad;
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
+                ResultSet rs = prepStmt.executeQuery();
+                while (rs.next()) {
+                    factura.getId_cedula_array().add(rs.getLong(1));
+                    factura.getTipo_id_array().add(rs.getString(2));
+                    factura.getId_pedido_array().add(rs.getLong(3));
+                    factura.getCantidad_array().add(rs.getLong(4));
+                    factura.getPrecioProd_array().add(rs.getDouble(5));
+                    factura.getIva_array().add(rs.getDouble(6));
+                    factura.getPrecioConIva_array().add(rs.getDouble(7));
+                    factura.getIvaCompleto_array().add(rs.getDouble(8));
+                    factura.getPrecioSinIva_array().add(rs.getDouble(9));
+                    factura.getMetodoPago_array().add(rs.getString(10));
+                    factura.getId_cedula_array().add(rs.getLong(11));
+                }
+            }
+        } catch (SQLException e) {
+            throw new CaException("No pudo recuperar el pedido al verificar existencias" + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance().liberarConexion();
+        }
+    }
+    
     public Pedido getPedido() {
         return pedido;
     }
