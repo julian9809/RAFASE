@@ -487,8 +487,10 @@
                             </div>
                         </div>
                         <!-------------------------------Facturas--------------------------------------->
-                        <div class="tab-pane fade in show active" id="histoFactu" role="tabpanel">
-                            
+                        <div class="tab-pane fade" id="histoFactu" role="tabpanel">
+                            <form action="../Factura" method="post">
+                                <button type="submit" class="btn-amber">Imprimir</button>
+                            </form>
                         </div>
                     </div>
                 </div>
