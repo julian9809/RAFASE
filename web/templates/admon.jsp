@@ -4,6 +4,7 @@
     Author     : julia
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="modelo.Cliente"%>
 <%@page import="modelo.Ciudad"%>
 <%@page import="modelo.InventarioRafase"%>
@@ -35,6 +36,11 @@
     Ciudad ciu = facade.getCiudad();
     InventarioRafase inventarioRafase = facade.getInventario_rafase();
     Cliente cli = facade.getCliente();
+    DecimalFormat format = new DecimalFormat("#.##");
+
+    facade.obtenerProductosMasVendidos();
+    facade.obtenerProductosMenosVendidos();
+    facade.clientesConMasCompras();
 
 %>
 <html lang="es">
@@ -207,19 +213,19 @@
                                     <tbody>
                                         <tr>
                                             <td>Valor total vendido</td>
-                                            <td><%= facade.obtenerValorTotalVentas()%></td>
+                                            <td><%= format.format(facade.obtenerValorTotalVentas())%></td>
                                         </tr>
                                         <tr>
-                                            <td>Producto más vendido</td>
-                                            <td>Cell 5</td>
+                                            <td>Producto más vendido</td>                                           
+                                            <td><%= adm.getNombreProductoMasVendidoArray().get(0) + " x" + adm.getCantidadProductoMasVendidoArray().get(0) %></td>
                                         </tr>
                                         <tr>
                                             <td>Producto menos vendido</td>
-                                            <td>Cell 8</td>
+                                            <td><%= adm.getNombreProductoMenosVendidoArray().get(0) + " x" + adm.getCantidadProductoMenosVendidoArray().get(0) %></td>
                                         </tr>
                                         <tr>
                                             <td>Cliente con mayor volumen de compras</td>
-                                            <td>Cell 8</td>
+                                            <td><%= adm.getPrimerNombreArray().get(0) + " " + adm.getPrimerApellidoArray().get(0) %></td>
                                         </tr>
                                         <tr>
                                             <td>Pagos rechazados</td>
@@ -227,7 +233,7 @@
                                         </tr>
                                         <tr>
                                             <td>Tiempo promedio de entrega del pedido</td>
-                                            <td>Cell 8</td>
+                                            <td class="text-muted">(Proximamente)</td>
                                         </tr>
                                     </tbody>
                                     <!-- Table body -->
@@ -585,15 +591,15 @@
                                     for (int i = 0; i < cli.getPrimer_nombre_array().size(); i++) {
                                 %>
                                 <tr>
-                                    <td scope="row"><%= i + 1 %></td>
-                                    <td><%= cli.getNickname_array().get(i) %></td> 
-                                    <td><%= cli.getPrimer_nombre_array().get(i) %></td>                         
-                                    <td><%= cli.getSegundo_nombre_array().get(i) %></td>
-                                    <td><%= cli.getPrimer_apellido_array().get(i) %></td>
-                                    <td><%= cli.getSegundo_apellido_array().get(i) %></td>
-                                    <td><%= cli.getFecha_nacimiento_array().get(i) %></td>  
-                                    <td><%= cli.getGenero_array().get(i) %></td>
-                                    <td><%= cli.getEmail_array().get(i) %></td>
+                                    <td scope="row"><%= i + 1%></td>
+                                    <td><%= cli.getNickname_array().get(i)%></td> 
+                                    <td><%= cli.getPrimer_nombre_array().get(i)%></td>                         
+                                    <td><%= cli.getSegundo_nombre_array().get(i)%></td>
+                                    <td><%= cli.getPrimer_apellido_array().get(i)%></td>
+                                    <td><%= cli.getSegundo_apellido_array().get(i)%></td>
+                                    <td><%= cli.getFecha_nacimiento_array().get(i)%></td>  
+                                    <td><%= cli.getGenero_array().get(i)%></td>
+                                    <td><%= cli.getEmail_array().get(i)%></td>
                                 </tr>
                                 <% } //end for %>                                
                             </tbody>                            

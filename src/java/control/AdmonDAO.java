@@ -131,7 +131,7 @@ public class AdmonDAO {
                 ResultSet rs = prepStmt.executeQuery();
                 while (rs.next()) {
                     admon.getCantidadProductoMasVendidoArray().add(rs.getLong(1));
-                    admon.getNombreProductoMasVendidoArray().add(rs.getString(1));
+                    admon.getNombreProductoMasVendidoArray().add(rs.getString(2));
                 }
             }
         } catch (SQLException e) {
@@ -149,7 +149,7 @@ public class AdmonDAO {
                 ResultSet rs = prepStmt.executeQuery();
                 while (rs.next()) {
                     admon.getCantidadProductoMenosVendidoArray().add(rs.getLong(1));
-                    admon.getNombreProductoMenosVendidoArray().add(rs.getString(1));
+                    admon.getNombreProductoMenosVendidoArray().add(rs.getString(2));
                 }
             }
         } catch (SQLException e) {
@@ -188,7 +188,7 @@ public class AdmonDAO {
                     admon.getSegundoNombreArray().add(rs.getString(2));
                     admon.getPrimerApellidoArray().add(rs.getString(3));
                     admon.getSegundoApellidoArray().add(rs.getString(4));
-                    admon.getCantidadComprasArray().add(rs.getLong(1));
+                    admon.getCantidadComprasArray().add(rs.getLong(5));
                 }
             }
         } catch (SQLException e) {
