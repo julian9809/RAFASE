@@ -161,6 +161,9 @@
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#mediosPago" role="tab">Medios de Pago</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#histoFactu" role="tab">Historico de facturas</a>
+                        </li>
                     </ul>
                 </div>
                 <!----------------------------------Datos personales------------------------------------------------->
@@ -482,6 +485,10 @@
                                     </form>
                                 </div>
                             </div>
+                        </div>
+                        <!-------------------------------Facturas--------------------------------------->
+                        <div class="tab-pane fade in show active" id="histoFactu" role="tabpanel">
+                            
                         </div>
                     </div>
                 </div>
