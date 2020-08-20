@@ -408,6 +408,7 @@
                     facade.buscarProveedores(usuario, contraseña);
                     facade.buscarDatosClientes();
                     facade.buscarCiudades(usuario, contraseña);
+                    
                 } catch (CaException e1) {
                     String error = e1.toString();
                     error = error.replaceAll("\n", "");
@@ -658,18 +659,20 @@
                 </div>
             </div>
             <!--Stock-->
-
+            <%
+                for (int i = 0; i < ciu.getId_ciudad_array().size(); i++) {
+            %>
             <!--Sucursales-->
             <div class="container-fluid mt-5 py-lg-5" id="sucursales">
                 <div class="card">
                     <!-- Card header -->
-                    <div class="card-header info-color white-text">Nuestra sede pricipal</div>
+                    <div class="card-header info-color white-text">Nuestra sede en <%= ciu.getNombre_array().get(i) %></div>
 
                     <!--Card content-->
                     <div class="card-body">
                         <!--Google map-->
                         <div id="map-container-google-2" class="z-depth-1-half map-container" style="height: 500px">
-                            <iframe src="https://maps.google.com/maps?q=bogota&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
+                            <iframe src="https://maps.google.com/maps?q=<%= ciu.getNombre_array().get(i) %>&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
                                     style="border:0" allowfullscreen></iframe>
                         </div>
 
@@ -679,7 +682,9 @@
                 </div>
             </div>
             <!--Sucursales-->
-
+            <%
+                }//End for ciudades
+            %>
 
         </main>
         <!--Main layout-->
