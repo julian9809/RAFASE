@@ -95,6 +95,7 @@ public class pagarPedido extends HttpServlet {
                 facade.actualizarEnvio(telefono, direccion, extras, nombreCompleto, tipoPago, ciudadEnv);
                 System.out.println("envio exito");
                 facade.confirmarEnvio();
+                facade.descontarStock(pedido_id);
                 facade.cerrarConexion();
                 facade.nombreUsuario(usuario);
                 facade.passwordUsuario(password);
