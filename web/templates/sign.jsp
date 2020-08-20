@@ -73,7 +73,7 @@
             <!--------------------------------FOOTER--------------------------------->
             <footer class="container mb-0">
                 <p class="mb-1 text-center"><a href="#">Privacidad</a> &middot; <a href="#">Términos y Condiciones</a></p>
-                <p class="text-muted text-center mb-0">&copy; 2020 RAFASE, Inc.&middot; <a href="#">Administrador</a></p>
+                <p class="text-muted text-center mb-0">&copy; 2020 RAFASE, Inc.&middot;</p>
             </footer>
         </form>
     </body>
