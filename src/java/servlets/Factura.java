@@ -52,23 +52,18 @@ public class Factura extends HttpServlet {
         OutputStream out = response.getOutputStream();
         try {
             String id_factura = request.getParameter("idPedido");
-            System.out.println("prueba: " + id_factura);
             DAOFacade facade = new DAOFacade();
             HttpSession sesion = request.getSession();
             String usuario = sesion.getAttribute("usuario").toString();
             String password = sesion.getAttribute("contraseña").toString();
-            System.out.println("antes de id: cliente: ");
             Long id_cliente = facade.buscarIdCliente(usuario, password);
-            System.out.println("usuario: " + usuario + " contraseña: " + password + "cedula: " + id_cliente);
 
             facade.cerrarConexion();
             facade.setearAdminDB();
             facade.realizarConexion();
 
             factura fact = facade.getFactura();
-            System.out.println("antes buscar fact: ");
             facade.buscarFactura(Long.valueOf(id_factura));
-            System.out.println("despues fact: ");
 
             Cliente cli = facade.getCliente();
             facade.buscarDatosCliente(usuario, password, id_cliente);
@@ -115,7 +110,7 @@ public class Factura extends HttpServlet {
             cedula.add(new Phrase(Chunk.NEWLINE));
 
             documento.add(cedula);
-
+            
             Paragraph cliente = new Paragraph();
             cliente.add(new Phrase("Cliente: " + cli.getPrimer_nombre_array().get(0) + " " + cli.getPrimer_apellido_array().get(0)));
             cliente.add(new Phrase(Chunk.NEWLINE));
