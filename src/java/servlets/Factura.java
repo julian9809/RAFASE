@@ -46,7 +46,9 @@ public class Factura extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/pdf");
         OutputStream out = response.getOutputStream();
-        try {            
+        try {
+
+            String id_factura = request.getParameter("idPedido");
 
             Document documento = new Document();
             PdfWriter.getInstance(documento, out);
@@ -65,13 +67,11 @@ public class Factura extends HttpServlet {
             titulo.add(new Phrase("Factura de compra", fontT));
             titulo.setAlignment(Element.ALIGN_CENTER);
             titulo.add(new Phrase(Chunk.NEWLINE));
-            titulo.add(new Phrase(Chunk.NEWLINE));
-            titulo.add(new Phrase(Chunk.NEWLINE));
 
             documento.add(titulo);
             
             Paragraph factura = new Paragraph();
-            factura.add(new Phrase("Factura No. "));
+            factura.add(new Phrase("Factura No. " + id_factura));
             factura.setAlignment(Element.ALIGN_CENTER);
             factura.add(new Phrase(Chunk.NEWLINE));
             factura.add(new Phrase(Chunk.NEWLINE));
