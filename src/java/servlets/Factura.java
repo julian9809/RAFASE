@@ -52,11 +52,13 @@ public class Factura extends HttpServlet {
         OutputStream out = response.getOutputStream();
         try {
             String id_factura = request.getParameter("idPedido");
+            System.out.println("prueba: " + id_factura);
             DAOFacade facade = new DAOFacade();
             HttpSession sesion = request.getSession();
             String usuario = sesion.getAttribute("usuario").toString();
             String password = sesion.getAttribute("contraseña").toString();
             Long id_cliente = facade.buscarIdCliente(usuario, password);
+            System.out.println("usuario: " + usuario + " contraseña: " + password + "cedula: " + id_cliente);
 
             facade.cerrarConexion();
             facade.setearAdminDB();
@@ -144,7 +146,7 @@ public class Factura extends HttpServlet {
             tabla.addCell(Total);
 
             for (int i = 0; i < fact.getId_pedido_array().size(); i++) {
-                PdfPCell Pro = new PdfPCell(new Paragraph("Producto generico"));
+                PdfPCell Pro = new PdfPCell(new Paragraph(fact.getNombreProducto_array().get(i)));
                 PdfPCell Iva2 = new PdfPCell(new Paragraph(fact.getIva_array().get(i).toString()));
                 PdfPCell Cant = new PdfPCell(new Paragraph(fact.getCantidad_array().get(i).toString()));
                 PdfPCell Tot = new PdfPCell(new Paragraph("" + fact.getPrecioProd_array().get(i) * fact.getCantidad_array().get(i)));
