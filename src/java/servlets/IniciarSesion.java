@@ -63,7 +63,7 @@ public class IniciarSesion extends HttpServlet {
                     facade.realizarConexion();
                 }
             } else {
-                if (facade.existeAdmin(username)) {
+                if (facade.existeAdmin(username, password)) {
                     facade.cerrarConexion();
                     facade.nombreUsuario(username);
                     facade.passwordUsuario(password);

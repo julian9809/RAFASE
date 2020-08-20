@@ -85,8 +85,8 @@ public class DAOFacade {
         admonDAO.insertarProveedor();
     }
     
-    public boolean existeAdmin(String usuario) throws CaException {
-        return admonDAO.existeAdmin(usuario);
+    public boolean existeAdmin(String usuario, String password) throws CaException {
+        return admonDAO.existeAdmin(usuario, password);
     }
     
     public double obtenerValorTotalVentas() throws CaException {
@@ -188,6 +188,10 @@ public class DAOFacade {
     
     public void actualizarEnvio(long telefono, String direccion, String direccionExtras, String nombreDestino, String metodo, String ciudad) throws CaException {
         pagoDAO.actualizarEnvio(telefono, direccion, direccionExtras, nombreDestino, metodo, ciudad);
+    }
+    
+    public void confirmarEnvio() throws CaException {
+        pagoDAO.confirmarEnvio();
     }
     //---------------------------------PedidoDAO--------------------------------
     public void consultarPedido(long usuario_id, long ciudad_id) throws CaException{

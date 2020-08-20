@@ -128,5 +128,18 @@ public class PagoDAO {
             ServiceLocator.getInstance().liberarConexion();
         }
     }
-    
+    public void confirmarEnvio() throws CaException {
+        try {
+            String strSQL = "UPDATE ENV SET ESTADO = 'E',FECHA_ENTREGA_REAL = SYSDATE + 2 WHERE ID_ENVIO = (SELECT MAX(ID_ENVIO) FROM ENV)";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
+                prepStmt.executeUpdate();
+            }
+            ServiceLocator.getInstance().commit();
+        } catch (SQLException e) {
+            throw new CaException("PedidoDAO", "No se pudo actualizar el estado del pedido\n" + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance().liberarConexion();
+        }
+    }
 }
