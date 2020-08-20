@@ -53,6 +53,29 @@ public class PedidoDAO {
             ServiceLocator.getInstance().liberarConexion();
         }
     }
+    
+    public void buscarFacturas(long usuario_id) throws CaException {
+        try {
+            String strSQL = "SELECT * FROM ped, usur WHERE ped.ID_CEDULA=usur.ID_CEDULA AND usur.ID_CEDULA= " + usuario_id + " AND ped.ESTADO_PEDIDO='PA'";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
+                ResultSet rs = prepStmt.executeQuery();
+                while (rs.next()) {
+                    pedido.getId_pedido_array().add(rs.getLong(1));
+                    pedido.getEstado_pedido_array().add(rs.getString(2));
+                    pedido.getFecha_pedido_array().add(rs.getDate(3));
+                    pedido.getTotal_pedido_array().add(rs.getDouble(4));
+                    pedido.getId_ciudad_array().add(rs.getLong(5));
+                    pedido.getId_cedula_array().add(rs.getLong(6));
+                    pedido.getTipo_id_array().add(rs.getString(7));
+                }
+            }
+        } catch (SQLException e) {
+            throw new CaException("No pudo consultar las facturas\n " + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance().liberarConexion();
+        }
+    }
 
     public long consultarIdPedido(long usuario_id, long ciudad_id) throws CaException {
         long id_pedido = -1;
