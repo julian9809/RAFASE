@@ -63,6 +63,26 @@ public class CiudadDAO {
         }
         return id_ciudad;
     }
+    
+    public String buscarNombreCiudad(long id_ciudad) throws CaException {
+        String nombreCiudad = "";
+        try {
+            String strSQL = "SELECT ciu.NOMBRE FROM ciu WHERE ciu.ID_CIUDAD = '"
+                    + id_ciudad + "'";
+            Connection conexion = ServiceLocator.getInstance().tomarConexion();
+            try (PreparedStatement prepStmt = conexion.prepareStatement(strSQL)) {
+                ResultSet rs = prepStmt.executeQuery();
+                while (rs.next()) {
+                    nombreCiudad = (String) rs.getString(1);
+                }
+            }
+        } catch (SQLException e) {
+            throw new CaException("ciudadDAO", " no se pudo conseguir ciudades: " + e.getMessage());
+        } finally {
+            ServiceLocator.getInstance().liberarConexion();
+        }
+        return nombreCiudad;
+    }
 
     public Ciudad getCiudad() {
         return ciudad;

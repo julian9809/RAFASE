@@ -72,6 +72,10 @@ public class DAOFacade {
     public long buscarIdCiudad(String usuario, String password, String nombre_ciudad) throws CaException {
         return ciudadDAO.buscarIdCiudad(usuario, password, nombre_ciudad);
     }
+    
+    public String buscarNombreCiudad(long id_ciudad) throws CaException {
+        return ciudadDAO.buscarNombreCiudad(id_ciudad);
+    }
     //--------------------------------AdmonDAO----------------------------------
     public void buscarAdministradores(String nickname, String userPassword) throws CaException {
         admonDAO.buscarAdministradores(nickname, userPassword);
@@ -196,6 +200,10 @@ public class DAOFacade {
     //---------------------------------PedidoDAO--------------------------------
     public void consultarPedido(long usuario_id, long ciudad_id) throws CaException{
         pedidoDAO.consultarPedido(usuario_id, ciudad_id);
+    }
+    
+    public void buscarFacturas(long usuario_id) throws CaException {
+        pedidoDAO.buscarFacturas(usuario_id);
     }
     
     public long consultarIdPedido(long usuario_id, long ciudad_id) throws CaException {

@@ -4,6 +4,7 @@
     Author     : david
 --%>
 
+<%@page import="modelo.Pedido"%>
 <%@page import="modelo.TarjetaCredito"%>
 <%@page import="modelo.Telefono"%>
 <%@page import="modelo.Cliente"%>
@@ -122,6 +123,7 @@
             TarjetaCredito tarCre = facade.getTarjetaCredito();
             Telefono tel = facade.getTelefono();
             Ciudad ciudades = facade.getCiudad();
+            Pedido factura = facade.getPedido();
 
             try {
                 long idCliente = facade.buscarIdCliente(usuario, contraseña);
@@ -133,13 +135,14 @@
                 facade.buscarTarjetaCredito(usuario, contraseña, idCliente);
                 facade.buscarDatosCliente(usuario, contraseña, idCliente);
                 facade.buscarTelefono(usuario, contraseña, idCliente);
+                facade.buscarFacturas(idCliente);
 
             } catch (Exception e1) {
                 String error = e1.toString();
                 error = error.replaceAll("\n", "");
         %>
         <script type="text/javascript">
-            alertify.alert("Error", "<%= "Error --> " + error %>", function () {
+            alertify.alert("Error", "<%= "Error --> " + error%>", function () {
                 alertify.message('OK');
             });
         </script>
@@ -166,9 +169,9 @@
                         </li>
                     </ul>
                 </div>
-                <!----------------------------------Datos personales------------------------------------------------->
                 <div class="card-body">
                     <div class="tab-content pt-4">
+                        <!----------------------------------Datos personales----------------------------------------->
                         <div class="tab-pane fade in show active" id="datosPersonales" role="tabpanel">
                             <div class="d-flex justify-content-center">
                                 <div class="col-lg-6 col-md-6">
@@ -191,13 +194,13 @@
                                                     <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getPrimer_apellido_array().get(j)%></td>
                                                     <% } else if (cli.getSegundo_nombre_array().get(j) == null) {%>
                                                         <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getPrimer_apellido_array().get(j) + " "
-                                                            + cli.getSegundo_apellido_array().get(j)%></td>
+                                                                + cli.getSegundo_apellido_array().get(j)%></td>
                                                         <% } else if (cli.getSegundo_apellido_array().get(j) == null) {%>
                                                         <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getSegundo_nombre_array().get(j) + " "
-                                                            + cli.getPrimer_apellido_array().get(j)%></td>
+                                                                + cli.getPrimer_apellido_array().get(j)%></td>
                                                         <% } else {%>
                                                         <td><%=cli.getPrimer_nombre_array().get(j) + " " + cli.getSegundo_nombre_array().get(j) + " "
-                                                            + cli.getPrimer_apellido_array().get(j) + " " + cli.getSegundo_apellido_array().get(j)%></td>
+                                                                + cli.getPrimer_apellido_array().get(j) + " " + cli.getSegundo_apellido_array().get(j)%></td>
                                                         <%} //end if %>
                                                 </tr>
                                                 <tr>
@@ -486,11 +489,60 @@
                                 </div>
                             </div>
                         </div>
-                        <!-------------------------------Facturas--------------------------------------->
+                        <!----------------------------------Facturas--------------------------------------------->
                         <div class="tab-pane fade" id="histoFactu" role="tabpanel">
-                            <form action="../Factura" method="post">
-                                <button type="submit" class="btn-amber">Imprimir</button>
-                            </form>
+                            <div class="d-flex justify-content-center">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="card">
+                                        <div class="card-header info-color white-text text-center">
+                                            Tus facturas
+                                        </div>                                        
+                                        <table class="table table-borderless text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th class="font-weight-bold">
+                                                        <p>Referencia factura</p>
+                                                    </th>
+                                                    <th class="font-weight-bold">
+                                                        <p>Ciudad de pedido</p>
+                                                    </th>
+                                                    <th class="font-weight-bold">
+                                                        <p>Fecha de pago</p>
+                                                    </th>
+                                                    <th class="font-weight-bold">
+                                                        <p>Monto</p>
+                                                    </th>
+                                                    <th class="font-weight-bold">
+                                                        <p>Imprimir</p>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <%
+                                                    for (int i = 0; i < factura.getId_pedido_array().size(); i++) {
+                                                %>
+                                                <tr>
+                                                    <td> <%= factura.getId_pedido_array().get(i)%> </td>
+                                                    <td> <%= facade.buscarNombreCiudad(factura.getId_ciudad_array().get(i))%>
+                                                    </td>
+                                                    <td> <%= factura.getFecha_pedido_array().get(i)%> </td>
+                                                    <td> <%= factura.getTotal_pedido_array().get(i)%> </td>
+                                                    <td>
+                                                        <form action="../Factura" method="post">
+                                                            <input value="<%= factura.getId_pedido_array().get(i)%>" id="idPedido" name="idPedido" hidden>
+                                                            <button type="submit" class="btn-amber">Imprimir</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                                <%
+                                                    }//End for
+%>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
