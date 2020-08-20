@@ -38,25 +38,6 @@
     Cliente cli = facade.getCliente();
     DecimalFormat format = new DecimalFormat("#.##");
 
-    try {
-        facade.obtenerProductosMasVendidos();
-        facade.obtenerProductosMenosVendidos();
-        facade.clientesConMasCompras();
-    } catch (CaException e1) {
-        String error = e1.toString();
-        error = error.replaceAll("\n", "");
-%>
-<script type="text/javascript">
-                alertify.alert("Error", "<%= "Error --> " + error%>", function () {
-                    alertify.error('Acceso denegado');
-                }).set({onshow: null, onclose: function () {
-                        setTimeout(() => {
-                            window.location = 'index.jsp';
-                        }, 1000);
-                    }});
-</script>
-<%
-                }//end catch            
 %>
 <html lang="es">
 
@@ -176,7 +157,36 @@
                 </div>
             </nav>
             <!-- Navbar -->
+            
 
+            <%
+
+                try {
+                    facade.buscarAdministradores(usuario, contraseña);
+                    facade.buscarProveedores(usuario, contraseña);
+                    facade.buscarDatosClientes();
+                    facade.buscarCiudades(usuario, contraseña);
+                    
+                    facade.obtenerProductosMasVendidos();
+                    facade.obtenerProductosMenosVendidos();
+                    facade.clientesConMasCompras();
+
+                } catch (CaException e1) {
+                    String error = e1.toString();
+                    error = error.replaceAll("\n", "");
+            %>
+            <script type="text/javascript">
+                alertify.alert("Error", "<%= "Error --> " + error%>", function () {
+                    alertify.error('Acceso denegado');
+                }).set({onshow: null, onclose: function () {
+                        setTimeout(() => {
+                            window.location = 'index.jsp';
+                        }, 1000);
+                    }});
+            </script>
+            <%
+                }//end catch            
+            %>
             <!-- Sidebar -->
             <div class="sidebar-fixed position-fixed">
 
@@ -415,32 +425,7 @@
                 <!--Grid row-->                
 
             </div>
-
-            <%
-
-                try {
-                    facade.buscarAdministradores(usuario, contraseña);
-                    facade.buscarProveedores(usuario, contraseña);
-                    facade.buscarDatosClientes();
-                    facade.buscarCiudades(usuario, contraseña);
-
-                } catch (CaException e1) {
-                    String error = e1.toString();
-                    error = error.replaceAll("\n", "");
-            %>
-            <script type="text/javascript">
-                alertify.alert("Error", "<%= "Error --> " + error%>", function () {
-                    alertify.error('Acceso denegado');
-                }).set({onshow: null, onclose: function () {
-                        setTimeout(() => {
-                            window.location = 'index.jsp';
-                        }, 1000);
-                    }});
-            </script>
-            <%
-                }//end catch            
-            %>
-
+                                        
             <!--Administrador-->
             <div class="container-fluid mt-5 py-lg-5" id="perfil">
                 <div class="card">
